@@ -33,7 +33,8 @@
 #include "lua_api_lens.h"
 #include "lua_api_sound.h"
 
-
+#include "ap_bridge.h"
+#include "ap_data.h"
 #include "post_inc.h"
 
 /**********************************************/
@@ -199,7 +200,65 @@ static int lua_Room_available(lua_State *L)
     }
     return 0;
 }
+// temp function for ap as we send/recieve items by id not name
+static int lua_Room_available_id(lua_State *L)
+{
+    struct PlayerRange player_range = luaL_checkPlayerRange(L, 1);
+    long rkind                      = lua_tointeger(L, 2);
+    TbBool can_be_available         = lua_tointeger(L, 3);
+    TbBool is_available             = lua_toboolean(L, 4);
 
+    for (PlayerNumber i = player_range.start_idx; i < player_range.end_idx; i++)
+    {
+        set_room_available(i,rkind,can_be_available,is_available);
+    }
+    return 0;
+}
+
+static int lua_ap_get_items(lua_State *L)
+{
+
+int item_count = g_ap_state.items_count;
+int *items = g_ap_state.items_recieved;
+
+lua_newtable(L);
+
+for (int i = 0; i < item_count; i++)
+{
+
+            lua_pushinteger(L, items[i]);
+            lua_rawseti(L, -2, i + 1);
+}
+
+    return 1; 
+}
+
+static int lua_ap_checked_locations(lua_State *L)
+{
+
+int location_count = g_ap_state.locations_count;
+int *locations = g_ap_state.checked_locations;
+
+lua_newtable(L);
+
+for (int i = 0; i < location_count; i++)
+{
+
+            lua_pushinteger(L, locations[i]);
+            lua_rawseti(L, -2, i + 1);
+}
+
+    return 1; 
+}
+
+// passes location id to archipelago
+static int lua_send_location(lua_State *L)
+{
+    int location_id          = lua_tointeger(L, 1);
+
+    ap_bridge_location_check(location_id);
+    return 0;
+}
 static int lua_Magic_available(lua_State *L)
 {
     struct PlayerRange player_range = luaL_checkPlayerRange(L, 1);
@@ -2618,6 +2677,11 @@ static const luaL_Reg global_methods[] = {
 //usecase specific functions
     {"PayForPower",                     lua_Pay_for_power},
 
+    //Archipelago Commands
+    {"SendLocation",                     lua_send_location},  
+    {"RoomAvailableById",                lua_Room_available_id}, 
+    {"GetAPItems",                       lua_ap_get_items}, 
+    {"GetAPCheckedLocations",            lua_ap_checked_locations}, 
 };
 /*
 static const luaL_Reg game_meta[] = {

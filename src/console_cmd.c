@@ -74,6 +74,7 @@
 #include "net_resync.h"
 #include "kjm_input.h"
 #include "timer.h"
+#include "ap_bridge.h"
 #include "post_inc.h"
 
 #ifdef __cplusplus
@@ -1756,6 +1757,33 @@ TbBool cmd_creature_add_health(PlayerNumber plyr_idx, char * args)
     }
     thing->health += atoi(pr1str);
     return true;
+}
+// for connecting to archipelago
+TbBool cmd_connect(PlayerNumber plyr_idx, char * args)
+{
+
+        char * pr1str = strsep_param_with_space(&args);
+        char * pr2str = strsep_param_with_space(&args);
+    if (pr1str == NULL) 
+    {
+        targeted_message_add(MsgType_Player, plyr_idx, plyr_idx, GUI_MESSAGES_DELAY, "require parameter 1");
+        return false;
+    }
+    if (pr2str == NULL) 
+    {
+        targeted_message_add(MsgType_Player, plyr_idx, plyr_idx, GUI_MESSAGES_DELAY, "require parameter 2");
+        return false;
+    }
+        ap_bridge_connect(pr1str, pr2str);
+        return true;
+}
+
+TbBool cmd_testloc(PlayerNumber plyr_idx, char * args)
+{
+        char * pr1str = strsep_param_with_space(&args);
+        int loc_id = atoi(pr1str);
+        ap_bridge_location_check(loc_id);
+        return true;
 }
 
 TbBool cmd_creature_sub_health(PlayerNumber plyr_idx, char * args)
