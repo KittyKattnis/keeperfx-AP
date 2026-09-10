@@ -33,7 +33,8 @@
 #include "lua_api_lens.h"
 #include "lua_api_sound.h"
 
-
+#include "ap_bridge.h"
+#include "ap_data.h"
 #include "post_inc.h"
 
 /**********************************************/
@@ -199,7 +200,153 @@ static int lua_Room_available(lua_State *L)
     }
     return 0;
 }
+// temp function for ap as we send/receive items by id not name
+static int lua_Room_available_id(lua_State *L)
+{
+    struct PlayerRange player_range = luaL_checkPlayerRange(L, 1);
+    long rkind                      = lua_tointeger(L, 2);
+    TbBool can_be_available         = lua_tointeger(L, 3);
+    TbBool is_available             = lua_toboolean(L, 4);
 
+    for (PlayerNumber i = player_range.start_idx; i < player_range.end_idx; i++)
+    {
+        set_room_available(i,rkind,can_be_available,is_available);
+    }
+    return 0;
+}
+
+static int lua_ap_get_items(lua_State *L)
+{
+    int item_count = g_ap_state.items_count;
+    int *items = g_ap_state.items_received;
+
+    lua_newtable(L);
+
+    for (int i = 0; i < item_count; i++)
+    {
+        lua_pushinteger(L, items[i]);
+        lua_rawseti(L, -2, i + 1);
+    }
+
+    return 1; 
+}
+
+static int lua_ap_checked_locations(lua_State *L)
+{
+    int location_count = g_ap_state.locations_count;
+    int *locations = g_ap_state.checked_locations;
+
+    lua_newtable(L);
+
+    for (int i = 0; i < location_count; i++)
+    {
+        lua_pushinteger(L, locations[i]);
+        lua_rawseti(L, -2, i + 1);
+    }
+
+    return 1; 
+}
+
+static int lua_ap_set_level_box_remain(lua_State *L)
+{
+    int boxes_remain = lua_tointeger(L, 1);
+
+    ap_update_current_lvl_box_remaining(boxes_remain);
+    return 0;
+}
+
+static int lua_ap_decrease_level_box_remain(lua_State *L)
+{
+    ap_decrease_current_lvl_box_remaining();
+    return 0;
+}
+
+// passes location id to archipelago
+static int lua_send_location(lua_State *L)
+{
+    int location_id = lua_tointeger(L, 1);
+
+    ap_bridge_location_check(location_id);
+    return 0;
+}
+
+static int lua_ap_bridge_scout_locations(lua_State *L)
+{
+    luaL_checktype(L, 1, LUA_TTABLE);
+
+    int count = (int)lua_objlen(L, 1);
+
+    int *locations = NULL;
+
+    if (count > 0)
+    {
+        locations = malloc(count * sizeof(*locations));
+
+        if (locations == NULL)
+            return luaL_error(L, "Failed to allocate location list");
+    }
+
+    for (int i = 0; i < count; i++)
+    {
+        lua_rawgeti(L, 1, i + 1);
+
+        if (!lua_isnumber(L, -1))
+        {
+            lua_pop(L, 1);
+            free(locations);
+            return luaL_error(L, "Location list contains a non-number");
+        }
+
+        locations[i] = (int)lua_tointeger(L, -1);
+
+        lua_pop(L, 1);
+    }
+
+    ap_bridge_scout_locations(locations, count);
+
+    free(locations);
+
+    return 0;
+}
+
+static int lua_ap_get_location_info(lua_State *L)
+{
+    long long location = luaL_checkinteger(L, 1);
+
+    const struct AP_LocationInfo *info =
+        ap_location_info_get(location);
+
+    if (info == NULL)
+    {
+        lua_pushnil(L);
+        return 1;
+    }
+
+    lua_newtable(L);
+
+    lua_pushinteger(L, info->item);
+    lua_setfield(L, -2, "item");
+
+    lua_pushinteger(L, info->location);
+    lua_setfield(L, -2, "location");
+
+    lua_pushinteger(L, info->player);
+    lua_setfield(L, -2, "player");
+
+    lua_pushinteger(L, info->flags);
+    lua_setfield(L, -2, "flags");
+
+    lua_pushstring(L, info->item_name);
+    lua_setfield(L, -2, "itemName");
+
+    lua_pushstring(L, info->location_name);
+    lua_setfield(L, -2, "locationName");
+
+    lua_pushstring(L, info->player_name);
+    lua_setfield(L, -2, "playerName");
+
+    return 1;
+}
 static int lua_Magic_available(lua_State *L)
 {
     struct PlayerRange player_range = luaL_checkPlayerRange(L, 1);
@@ -887,8 +1034,7 @@ static int lua_Display_variable(lua_State *L)
     game.script_variables[0].value_type = varib_type;
     game.script_variables[0].value_id = varib_id;
     game.script_variables[0].variable_target = target;
-    game.script_variables[0].variable_target_type = target_type;    
-    game.script_variables[0].is_active = true;
+    game.script_variables[0].variable_target_type = target_type;
 
     game.script_variables[0].include_icon = false;
     game.script_variables[0].icon_idx = -1;
@@ -900,6 +1046,7 @@ static int lua_Display_variable(lua_State *L)
 
     return 0;
 }
+
 
 
 static int lua_DISPLAY_VARIABLE_WITH_LABEL(lua_State *L)
@@ -936,9 +1083,13 @@ static int lua_Hide_variable(lua_State *L)
     PlayerNumber player   = luaL_checkPlayerSingle(L, 1);
     varib_id = -1;
     varib_type = -1;
-    const char* variable = luaL_checkstring(L, 2);
-    if(variable[0] != '\0'){
-        luaL_checkVariable(L, 1, &varib_id, &varib_type);
+    const char* variable;
+    if (lua_isstring(L, 2))
+    {
+        variable = luaL_checkstring(L, 2);
+        if(variable[0] != '\0'){
+            luaL_checkVariable(L, 1, &varib_id, &varib_type);
+        }
     }
 
     if(varib_id > -1 && varib_type > -1)
@@ -2652,6 +2803,16 @@ static const luaL_Reg global_methods[] = {
 //usecase specific functions
     {"PayForPower",                     lua_Pay_for_power},
 
+    //Archipelago Commands
+    {"SendLocation",                     lua_send_location},  
+    {"RoomAvailableById",                lua_Room_available_id}, 
+    {"GetAPItems",                       lua_ap_get_items}, 
+    {"GetAPCheckedLocations",            lua_ap_checked_locations}, 
+    {"GetAPLocationInfo",                lua_ap_get_location_info},
+    {"APScoutLocations",                 lua_ap_bridge_scout_locations},    
+    {"SetAPLvlBoxRemain",                lua_ap_set_level_box_remain},      
+    {"DecAPLvlBoxRemain",                lua_ap_decrease_level_box_remain},
+    
 };
 /*
 static const luaL_Reg game_meta[] = {

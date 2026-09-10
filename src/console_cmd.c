@@ -72,9 +72,9 @@
 #include <math.h>
 #include "lua_base.h"
 #include "net_resync.h"
-#include "net_game.h"
 #include "kjm_input.h"
 #include "timer.h"
+#include "ap_bridge.h"
 #include "post_inc.h"
 
 #ifdef __cplusplus
@@ -945,6 +945,7 @@ TbBool cmd_player_flag(PlayerNumber plyr_idx, char * args)
     return true;
 }
 
+
 TbBool cmd_comp_me(PlayerNumber plyr_idx, char * args)
 {
     if (game.easter_eggs_enabled == false) {
@@ -1761,6 +1762,33 @@ TbBool cmd_creature_add_health(PlayerNumber plyr_idx, char * args)
     }
     thing->health += atoi(pr1str);
     return true;
+}
+// for connecting to archipelago
+TbBool cmd_connect(PlayerNumber plyr_idx, char * args)
+{
+    char * ip_address = strsep_param_with_space(&args);
+    char * slot_name = strsep_param_with_space(&args);
+    char * password = strsep_param_with_space(&args);
+    if (ip_address == NULL) 
+    {
+        targeted_message_add(MsgType_Player, plyr_idx, plyr_idx, GUI_MESSAGES_DELAY, "server ip required");
+        return false;
+    }
+    if (slot_name == NULL) 
+    {
+        targeted_message_add(MsgType_Player, plyr_idx, plyr_idx, GUI_MESSAGES_DELAY, "slot name required");
+        return false;
+    }
+    ap_bridge_connect(ip_address, slot_name, password);
+    return true;
+}
+
+TbBool cmd_testloc(PlayerNumber plyr_idx, char * args)
+{
+        char * pr1str = strsep_param_with_space(&args);
+        int loc_id = atoi(pr1str);
+        ap_bridge_location_check(loc_id);
+        return true;
 }
 
 TbBool cmd_creature_sub_health(PlayerNumber plyr_idx, char * args)
@@ -2860,7 +2888,9 @@ static const struct ConsoleCommand console_commands[] = {
     { "cheat.menu", cmd_cheat_menu, NULL },
     { "creature.chicken", cmd_chicken_creature, NULL },
     { "dbc", cmd_dbc, NULL },
-    { "resync", cmd_resync, NULL }
+    { "resync", cmd_resync, NULL },
+    { "connect", cmd_connect, NULL },
+    { "testloc", cmd_testloc, NULL },
 };
 static const int console_command_count = sizeof(console_commands) / sizeof(*console_commands);
 

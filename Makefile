@@ -121,6 +121,7 @@ LINKLIB = -mwindows \
 	-L"deps/libcurl/lib" -lcurl -lwldap32 -lcrypt32 -lsecur32 -liphlpapi \
 	-L"deps/spng" -lspng \
 	-L"deps/centijson" -ljson \
+	-L"deps/ap" \
 	-L"deps/zlib" -lminizip -lz \
 	-lwinmm -lmingw32 -limagehlp -lws2_32 -ldbghelp -lbcrypt -lole32 -luuid
 INCS = \
@@ -137,7 +138,8 @@ INCS = \
 	-isystem"deps/luajit/include" \
 	-isystem"deps/miniupnpc/include" \
 	-isystem"deps/libnatpmp/include" \
-	-isystem"deps/libcurl/include"
+	-isystem"deps/libcurl/include" \
+	-I"deps/ap"
 STDOBJS   := $(subst obj/,$(OBJDIR)/std/,$(OBJS))
 HVLOGOBJS := $(subst obj/,$(OBJDIR)/hvlog/,$(OBJS))
 STD_MAIN_OBJ := $(subst obj/,$(OBJDIR)/std/,$(MAIN_OBJ))
@@ -199,6 +201,9 @@ CXXFLAGS = $(CXXFLAGS_NODEP) $(DEPFLAGS)
 CFLAGS_NODEP = $(COMMONFLAGS) $(DEFFLAGS) -std=gnu11 -Werror=implicit -DCURL_STATICLIB
 CFLAGS = $(CFLAGS_NODEP) $(DEPFLAGS)
 LDFLAGS = $(LINKLIB) $(DBGFLAGS) $(LINKFLAGS) -Wl,--no-print-map-discarded
+CXXFLAGS += -I"deps/ap" -I"deps/ap/ixwebsocket" -I"deps/ap/json" 
+LDFLAGS += deps/ap/libAPCpp.a -lws2_32
+
 include version.mk
 VER_STRING = $(VER_MAJOR).$(VER_MINOR).$(VER_RELEASE).$(BUILD_NUMBER) $(PACKAGE_SUFFIX)
 ifeq ($(filter -j% --jobserver%,$(MAKEFLAGS)),)
