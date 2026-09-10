@@ -332,7 +332,7 @@ function IncreaseStartingGold()
       end
     end
     local startingGold = 2500 + (startinggoldcount * 1250)
-    print("Starting gold " .. startinggoldcount .. "(Starting gold " .. startingGold .. ") Unlocked")
+    print("Starting gold " .. startinggoldcount .. " (Starting gold " .. startingGold .. ") Unlocked")
     StartMoney(PLAYER0, startingGold)
 end
 

@@ -56,23 +56,26 @@ function BoxLocations.SpawnBoxes(level_id)
         if not SentLocations.Has(id) then -- If it ISN'T in sent_locations , we've not sent it.
             -- get info for specific location so we can check name and player
             local info = GetAPLocationInfo(id)
-            if info ~= nil then
-               print("Location ID: " .. info.location)
-               print("Item ID: " .. info.item)
-               print("Player ID: " .. info.player)
-               print("Flags: " .. info.flags)
-               Game.APBox[id] = AddObjectToLevel("SPECBOX_CUSTOM", (id % 100)+100, id, "PLAYER_NEUTRAL", 0) -- Action Points are limited to 256, so each Archipelago action point on a level is 101+
-               local info = GetAPLocationInfo(id)
-               SetBoxTooltip(id, info.itemName .. " for " .. info.playerName) --getting an error sometimes: Error: [0] CheckLua: Lua error in OnGameStart: ./campgns/keeporig_archipelago/box_locations.lua:55: attempt to index local 'info' (a nil value)
+            if info == nil then
+                QuickMessage("Could not call GetAPLocationInfo on mapBoxId " .. id, "ARCHIPELAGO_ICON")
+                print("Could not call GetAPLocationInfo on mapBoxId " .. id)
+            else
+               print("Location ID: " .. info.location .. ", Item ID: " .. info.item .. ", Player ID: " .. info.player .. ", Flags: " .. info.flags)
+               -- Action Points are limited to 256, same with specialboxes. So each Archipelago action point on a level is 101+ and holds box with ID 101+, representing location X01+.
+               local boxID = (id % 100) + 100
+               Game.APBox[id] = AddObjectToLevel("SPECBOX_CUSTOM", boxID, boxID, "PLAYER_NEUTRAL", 0)
+               SetBoxTooltip(boxID, info.itemName .. " for " .. info.playerName) --getting an error sometimes: Error: [0] CheckLua: Lua error in OnGameStart: ./campgns/keeporig_archipelago/box_locations.lua:55: attempt to index local 'info' (a nil value)
                -- if it's useful or progression, show it off as such.
-               if (info.flags % 1) ~= 0 or (info.flags % 2) ~= 0 then
+               --progressions is flags & 1, useful is flags & 2, trap is flags & 4, so if it has either of the last two bits sets (is useful or progression), mark it (i.e. if it's 1,2 or 3 modulo 4)
+               --if (info.flags % 4) ~= 0 then
+               if (info.flags % 2) ~= 0 then --although maybe just progression is better?
                    Game.APBox[id].anim_sprite = "ARCHIPELAGOITEMUSEFUL"
                    --Game.APBox[id].map_icon = "ARCHIPELAGO_USEFUL_SMALL" -- This isn't possible sadly
                end
+               if not first then message = message .. ", " end
+               message = message .. id
+               first = false
             end
-            if not first then message = message .. ", " end
-            message = message .. id
-            first = false
         end
     end
     if not first then message = message .. "." end
@@ -97,7 +100,7 @@ function BoxLocations.ActivateBoxes(level_id)
         end
         local found = SentLocations.Count(mapBoxIDs)
         local total = #mapBoxIDs
-        SetAPLvlBoxRemain(total)
+        SetAPLvlBoxRemain(total - found)
         QuickMessage("Boxes Found: " .. found .. "/" .. total .. ".", "ARCHIPELAGO_ICON")
         --if a level is completed, send location 10000+level_id.
         --if 10000+level_id was sent, add a tick
@@ -110,38 +113,34 @@ function BoxLocations.ActivateBoxes(level_id)
         elseif SentLocations.Has(level_id+10000) then
             RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN)")
         end
-        local message = ""
+        local message = "" -- not sent
         local first = true
-        local message2 = ""
-        local first2 = true
+        local message2 = "" -- sent
         for _, id in pairs(mapBoxIDs) do -- For each of the boxIDs we assign to this level
+            local boxID = (id % 100) + 100
             if SentLocations.Has(id) then
-                if not first2 then message2 = message2 .. ", " end
+                if message2 ~= "" then message2 = message2 .. ", " end
                 message2 = message2 .. id
-                first2 = false
-            end
-            if not SentLocations.Has(id) then -- If it ISN'T in sent_locations , we've not sent it.
+                RegisterSpecialActivatedEvent(function()
+                    QuickMessage("Check already sent!", "ARCHIPELAGO_ICON") -- just in case we can't get removal on game load working.
+                end, boxID)
+            else -- If it ISN'T in sent_locations , we've not sent it.
                 if not first then message = message .. ", " end
                 message = message .. id
                 first = false
                 RegisterSpecialActivatedEvent(function()
                     found = found + 1
                     DecAPLvlBoxRemain()
-                    -- get info for specific location so we can check name and player
                     local info = GetAPLocationInfo(id)
                     QuickMessage("Box " .. info.itemName .. " for " .. info.playerName .. " Activated.", "ARCHIPELAGO_ICON")
                     QuickMessage("Boxes Found: " .. found.. "/" .. total .. ".", "ARCHIPELAGO_ICON")
                     if message2 ~= "" then
-                        QuickMessage("Boxes Sent: " .. message2 .. ", " .. id .. ".", "ARCHIPELAGO_ICON")
-                    else
-                        QuickMessage("Boxes Sent: " .. id .. ".","ARCHIPELAGO_ICON")
+                        message2 = message2 .. ", "
                     end
+                    message2 = message2 .. id
+                    QuickMessage("Boxes Sent: " .. message2 .. ".", "ARCHIPELAGO_ICON")
                     Game.APBox[id] = nil
-                end, id)
-            else
-                RegisterSpecialActivatedEvent(function()
-                    QuickMessage("Check already sent!", "ARCHIPELAGO_ICON") -- just in case we can't get removal on game load working.
-                end, id)
+                end, boxID)
             end
         end
         if not first then
@@ -177,14 +176,13 @@ function BoxLocations.DeleteBoxes(level_id)
     local first = true
     for _, id in pairs(mapBoxIDs) do -- For each of the boxIDs we assign to this level
         if Game.APBox[id] then
-            Game.APBox[id]: delete()
+            Game.APBox[id]: delete() -- can have the error Error: [639] CheckLua: Lua error in OnGameLoad: ./campgns/keeporig_archipelago/box_locations.lua:182: calling 'delete' on bad self (Failed to resolve thing). So we need to add "if it exists but isn't the proper thing somehow, don't do anything"
             Game.APBox[id] = nil
-            --QuickMessage("Box " .. id .. " Deleted.", "ARCHIPELAGO_ICON")
             if not first then message = message .. ", " end
             message = message .. id
             first = false
-        else
-            --SentLocations.Add(id) -- Don't know if this is okay: if we can't find a box, we hope that means it's already been sent.
+        --else
+            --print("APBox for id " .. id .. "missing")
         end
     end
     if not first then message = message .. "." end

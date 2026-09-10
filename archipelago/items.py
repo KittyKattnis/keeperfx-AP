@@ -146,10 +146,10 @@ LEVELS = {
     KeeperLevelName.LEVEL_020: KeeperItem(KeeperLevel.LEVEL_020, ItemClassification.progression), #"Level 20 Unlocked"
     KeeperLevelName.LEVEL_100: KeeperItem(KeeperLevel.LEVEL_100, ItemClassification.progression), #"Level 100 Unlocked"
     KeeperLevelName.LEVEL_101: KeeperItem(KeeperLevel.LEVEL_101, ItemClassification.progression), #"Level 101 Unlocked"
-    KeeperLevelName.LEVEL_102: KeeperItem(KeeperLevel.LEVEL_103, ItemClassification.progression), #"Level 102 Unlocked"
-    KeeperLevelName.LEVEL_103: KeeperItem(KeeperLevel.LEVEL_104, ItemClassification.progression), #"Level 103 Unlocked"
-    KeeperLevelName.LEVEL_104: KeeperItem(KeeperLevel.LEVEL_105, ItemClassification.progression), #"Level 104 Unlocked"
-    KeeperLevelName.LEVEL_105: KeeperItem(KeeperLevel.LEVEL_106, ItemClassification.progression), #"Level 105 Unlocked"
+    KeeperLevelName.LEVEL_102: KeeperItem(KeeperLevel.LEVEL_102, ItemClassification.progression), #"Level 102 Unlocked"
+    KeeperLevelName.LEVEL_103: KeeperItem(KeeperLevel.LEVEL_103, ItemClassification.progression), #"Level 103 Unlocked"
+    KeeperLevelName.LEVEL_104: KeeperItem(KeeperLevel.LEVEL_104, ItemClassification.progression), #"Level 104 Unlocked"
+    KeeperLevelName.LEVEL_105: KeeperItem(KeeperLevel.LEVEL_105, ItemClassification.progression), #"Level 105 Unlocked"
 }
 
 RECIPES = {
