@@ -233,12 +233,19 @@ populate_item_dict(KeeperRecipeName, KeeperRecipe)
 populate_item_dict(KeeperPowerName, KeeperPower)
 populate_item_dict(KeeperProgressiveName, KeeperProgressive)
 
+
 def create_all_items(world):
     item_pool = []
 
+    precollected_names = [item.name for item in world.multiworld.precollected_items[world.player]]
+
     for item_name in ITEM_NAME_TO_ID.keys():
-        item = world.create_item(item_name)
-        item_pool.append(item)
+        if item_name in precollected_names:
+            precollected_names.remove(item_name)
+            
+        else:
+            item = world.create_item(item_name)
+            item_pool.append(item)
 
     total_locations = len(world.multiworld.get_unfilled_locations(world.player))
     missing_items_count = total_locations - len(item_pool)
