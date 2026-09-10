@@ -1,4 +1,4 @@
-local SentLocations = {}
+SentLocations = {}
 --local saveFile = "AP_sent_locations_save.lua"
 
 -- This should be the local table we write to when finding checks. Need to find a way to read and write to this.
@@ -13,19 +13,21 @@ local SentLocations = {}
 --       then OR with Game.SentLocation.
 --     On game load, OR Game.SentLocations with AP python table and write to saveFile
 
-function SentLocations.Add(id)
-    SentLocations[id] = true
-end
+--function SentLocations.Add(id)
+--    SentLocations[id] = true
+--end
 
 function SentLocations.Has(id)
-    local sentLocations = GetAPCheckedLocations() or nil
-    if sentLocations == nil then
-        return false
+    local sentLocations = GetAPCheckedLocations() or {}
+    for _, sentid in pairs(sentLocations) do
+        if sentid == id then
+            return true
+        end
     end
-    return sentLocations[id] ~= nil -- Return the result of does ID exist in sentLocations ?
+    return false
 end
 
-function SentLocations.CountFound(mapBoxIDs)
+function SentLocations.Count(mapBoxIDs)
     local found = 0
     if mapBoxIDs then
         for _, id in pairs(mapBoxIDs) do

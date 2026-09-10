@@ -85,13 +85,13 @@ function BoxLocations.ActivateBoxes(level_id)
         local total = BoxLocations.Total()
         for level_id, location_ids in pairs(BoxLocations) do
             if type(level_id) == "number" then
-                found = found + SentLocations.CountFound(location_ids)
+                found = found + SentLocations.Count(location_ids)
             end
         end
         QuickMessage("Total Boxes Found: " .. found .. "/" .. total .. ".", "ARCHIPELAGO_ICON")
     else
         local mapBoxIDs = BoxLocations[level_id]
-        local found = SentLocations.CountFound(mapBoxIDs)
+        local found = SentLocations.Count(mapBoxIDs)
         local total = 0
         if(mapBoxIDs) then
             total = #mapBoxIDs
@@ -110,7 +110,9 @@ function BoxLocations.ActivateBoxes(level_id)
                 RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN)")
             end
             if not mapBoxIDs then
-                QuickMessage("mapBoxIDs table not loaded!")
+                if level_id ~= 1000 then
+                    QuickMessage("mapBoxIDs table not loaded!")
+                end
                 return
             end
         if(mapBoxIDs) then
@@ -173,7 +175,7 @@ function BoxLocations.DeleteBoxes(level_id)
             message = message .. id
             first = false
         else
-            SentLocations.Add(id) -- Don't know if this is okay: if we can't find a box, we hope that means it's already been sent.
+            --SentLocations.Add(id) -- Don't know if this is okay: if we can't find a box, we hope that means it's already been sent.
         end
     end
     if not first then message = message .. "." end

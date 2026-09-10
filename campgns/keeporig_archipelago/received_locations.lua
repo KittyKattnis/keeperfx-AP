@@ -304,9 +304,9 @@ function IncreaseLevelCap()
     end
     local maxLevel = (levelcapcount + 3) % 10 --SET_CREATURE_MAX_LEVEL command uses 0 to mean "10 and growup"
     if levelcapcount == 7 then
-      print("Level cap " .. levelcapcount .. "(Max level 10+) Unlocked")
+      print("Level cap " .. levelcapcount .. " (Max level 10+) Unlocked")
     else
-      print("Level cap " .. levelcapcount .. "(Max level " .. maxLevel .. ") Unlocked")
+      print("Level cap " .. levelcapcount .. " (Max level " .. maxLevel .. ") Unlocked")
     end
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,ANY_CREATURE," .. maxLevel .. ")")
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,IMP," .. maxLevel .. ")")
@@ -320,7 +320,7 @@ function IncreaseCreatureLimit()
       end
     end
     local creatureLimit = 10 + (creaturelimitcount * 5)
-    print("Creature limit " .. creaturelimitcount .. "(Max creatures " .. creatureLimit .. ") Unlocked")
+    print("Creature limit " .. creaturelimitcount .. " (Max creatures " .. creatureLimit .. ") Unlocked")
     MaxCreatures(PLAYER0, creatureLimit)
 end
 
