@@ -45,7 +45,9 @@ end
 function BoxLocations.SpawnBoxes(level_id)
     local mapBoxIDs = BoxLocations[level_id]
     if not mapBoxIDs then
-        QuickMessage("mapBoxIDs table not loaded!")
+        if level_id ~= 1000 then
+            QuickMessage("mapBoxIDs table not loaded!")
+        end
         return
     end
     local message = "Boxes Added: "

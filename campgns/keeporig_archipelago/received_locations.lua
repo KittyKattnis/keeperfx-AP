@@ -208,7 +208,15 @@ ChecksTable = {
 --    --Spammed with taunts
 --    --player colours are shuffled around
 
-
+function ChecksTable.Total()
+    local total = 0
+    for key, _ in pairs(ChecksTable) do
+        if type(key) == "number" then
+            total = total + 1
+        end
+    end
+    return total
+end
 
 -- I think we need to split this between "stuff that stays active" (creatures/rooms/spells/trapdoors/recipes/progressives) and "one time effects" (level unlocks?/filler stuff/traps)
 
@@ -239,7 +247,9 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
       --    UnlockTrap(itemid)
       else
             print("Unknown item ID " .. itemid)
+            return
       end
+      ReceivedLocationsTable.Add(itemid)
 end
 
 -- Might need to split these up or something, do we want to send the print message every time?

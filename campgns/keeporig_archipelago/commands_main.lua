@@ -35,6 +35,7 @@ function OnItemReceived(itemid)
       -- only need to do this when new items are received. Need to check setting message number to 100 is ok.
       -- Also if you receive items while outside a level and then join, will it send all of the new ones when you go into a level?
       ReceivedLocations.ReceivedItemCheck(itemid)
+      QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")
 end
 
 function ActivateItems()
@@ -42,6 +43,7 @@ function ActivateItems()
       for index, itemid in pairs(receivedItems) do
             ReceivedLocations.ReceivedItemCheck(itemid)
       end
+      QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")
 end
 
 return CommandsMain
