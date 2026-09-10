@@ -208,7 +208,15 @@ ChecksTable = {
 --    --Spammed with taunts
 --    --player colours are shuffled around
 
-
+function ChecksTable.Total()
+    local total = 0
+    for key, _ in pairs(ChecksTable) do
+        if type(key) == "number" then
+            total = total + 1
+        end
+    end
+    return total
+end
 
 -- I think we need to split this between "stuff that stays active" (creatures/rooms/spells/trapdoors/recipes/progressives) and "one time effects" (level unlocks?/filler stuff/traps)
 
@@ -239,7 +247,9 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
       --    UnlockTrap(itemid)
       else
             print("Unknown item ID " .. itemid)
+            return
       end
+      ReceivedLocationsTable.Add(itemid)
 end
 
 -- Might need to split these up or something, do we want to send the print message every time?
@@ -294,9 +304,9 @@ function IncreaseLevelCap()
     end
     local maxLevel = (levelcapcount + 3) % 10 --SET_CREATURE_MAX_LEVEL command uses 0 to mean "10 and growup"
     if levelcapcount == 7 then
-      print("Level cap " .. levelcapcount .. "(Max level 10+) Unlocked")
+      print("Level cap " .. levelcapcount .. " (Max level 10+) Unlocked")
     else
-      print("Level cap " .. levelcapcount .. "(Max level " .. maxLevel .. ") Unlocked")
+      print("Level cap " .. levelcapcount .. " (Max level " .. maxLevel .. ") Unlocked")
     end
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,ANY_CREATURE," .. maxLevel .. ")")
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,IMP," .. maxLevel .. ")")
@@ -310,7 +320,7 @@ function IncreaseCreatureLimit()
       end
     end
     local creatureLimit = 10 + (creaturelimitcount * 5)
-    print("Creature limit " .. creaturelimitcount .. "(Max creatures " .. creatureLimit .. ") Unlocked")
+    print("Creature limit " .. creaturelimitcount .. " (Max creatures " .. creatureLimit .. ") Unlocked")
     MaxCreatures(PLAYER0, creatureLimit)
 end
 

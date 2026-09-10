@@ -21,12 +21,22 @@ function Setup()
 end
 
 function SetupTriggers()
-    RegisterSpecialActivatedEvent(function (eventData)
-      local activated_box = eventData.SpecialBoxId
-      print(activated_box)
-      SendLocation(activated_box)
+      RegisterSpecialActivatedEvent(function (eventData)
+            local activated_box = eventData.SpecialBoxId
+            print(activated_box)
+            SendLocation(activated_box)
+            SentLocations.Add(activated_box)
+            print("=== SentLocations ===")
+            for key, value in pairs(SentLocations) do
+                  print(tostring(key) .. " = " .. tostring(value))
+            end
+            print("=== GetAPCheckedLocations ===")
+            local checked = GetAPCheckedLocations() or {}
+            for index, id in pairs(checked) do
+                  print(tostring(index) .. " = " .. tostring(id))
+            end
       end)
-      RegisterOnConditionEvent(function() SendLocation(10000+Map.map_number) end, function() return (PLAYER0.victory_state == 1) end)
+    RegisterOnConditionEvent(function() SendLocation(10000+Map.map_number) end, function() return (PLAYER0.victory_state == 1) end)
 end
 
 function OnItemReceived(itemid)
@@ -35,13 +45,15 @@ function OnItemReceived(itemid)
       -- only need to do this when new items are received. Need to check setting message number to 100 is ok.
       -- Also if you receive items while outside a level and then join, will it send all of the new ones when you go into a level?
       ReceivedLocations.ReceivedItemCheck(itemid)
+      QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")
 end
 
 function ActivateItems()
       local receivedItems = GetAPItems()
-      for index, itemid in ipairs(receivedItems) do
+      for index, itemid in pairs(receivedItems) do
             ReceivedLocations.ReceivedItemCheck(itemid)
       end
+      QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")
 end
 
 function print_r(t, indent)
