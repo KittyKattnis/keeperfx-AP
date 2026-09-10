@@ -238,10 +238,9 @@ static int lua_ap_checked_locations(lua_State *L)
 
     lua_newtable(L);
 
-    for (int i = 0; i < location_count; i++)
-    {
-        lua_pushinteger(L, locations[i]);
-        lua_rawseti(L, -2, i + 1);
+    for (int i = 0; i < location_count; i++) {
+        lua_pushboolean(L, true); 
+        lua_rawseti(L, -2, locations[i]);
     }
 
     return 1; 
