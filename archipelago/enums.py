@@ -246,7 +246,6 @@ class KeeperLevel(IntEnum):
         LEVEL_103 = 524
         LEVEL_104 = 525
         LEVEL_105 = 526
-        LEVEL_106 = 527
 
 class KeeperRecipeName(StrEnum):
         RECIPE_CHEAPER_IMPS = "Cheaper Imps Recipe Unlocked"

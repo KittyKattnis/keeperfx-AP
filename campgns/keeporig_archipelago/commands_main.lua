@@ -22,14 +22,9 @@ end
 
 function SetupTriggers()
       RegisterSpecialActivatedEvent(function (eventData)
-            local activated_box = eventData.SpecialBoxId
-            print(activated_box)
+            local activated_box = (eventData.SpecialBoxId % 100) + (Map.map_number*100) --SpecialBoxId currently capped to 256 so this is a workaround.
+            print("Activated Box No.: " .. activated_box)
             SendLocation(activated_box)
-            SentLocations.Add(activated_box)
-            print("=== SentLocations ===")
-            for key, value in pairs(SentLocations) do
-                  print(tostring(key) .. " = " .. tostring(value))
-            end
             print("=== GetAPCheckedLocations ===")
             local checked = GetAPCheckedLocations() or {}
             for index, id in pairs(checked) do
