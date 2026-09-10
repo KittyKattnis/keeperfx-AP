@@ -262,7 +262,7 @@ function UnlockCreature(itemid)
 end
 function UnlockRoom(itemid)
       print("Room " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
-      RoomAvailable("PLAYER0",ChecksTable[itemid].internal_name,2,true)
+      RoomAvailable("PLAYER0",ChecksTable[itemid].internal_name,2,false)
 end
 function UnlockTrap(itemid)
       print("Trap " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")

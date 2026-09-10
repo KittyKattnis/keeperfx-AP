@@ -12,13 +12,16 @@ REM it under the terms of the GNU General Public License as published by
 REM the Free Software Foundation; either version 2 of the License, or
 REM (at your option) any later version.
 REM ****************************************************************************
+LEVEL_VERSION(1)
+
+REM Randomizer changes (besides the obvious): None
 
 REM "These Imps have all turned rogue and therefore must die."
 DISPLAY_OBJECTIVE(140,PLAYER0)
 
-START_MONEY(PLAYER0,1200)
+REM START_MONEY(PLAYER0,1200)
 
-MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,1)
+REM MAGIC_AVAILABLE(ALL_PLAYERS,POWER_LIGHTNING,1,1)
 
 SET_TIMER(PLAYER0,TIMER0)
 BONUS_LEVEL_TIME(6600)

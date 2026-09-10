@@ -14,6 +14,8 @@ REM    (at your option) any later version.
 REM ****************************************************************************
 LEVEL_VERSION(1)
 
+REM Randomizer changes (besides the obvious): Doesn't require having training room or demonspawn to progress the level.
+
 REM New rooms for the player:
 REM   TRAINING - when basic 3 are built
 REM New creatures for the player:
@@ -111,15 +113,15 @@ IF(PLAYER0,FLAG0 < 1)
 	ENDIF
 	REM Alternatively, allow to pass further when player gets all rooms in any size, if it takes too long
 	IF(PLAYER0,GAME_TURN > 10000)
-		IF(PLAYER0,LAIR >= 0)
-			IF(PLAYER0,TREASURE >= 0)
-				IF(PLAYER0,GARDEN >= 0)
+		REM IF(PLAYER0,LAIR >= 0)
+			REM IF(PLAYER0,TREASURE >= 0)
+				REM IF(PLAYER0,GARDEN >= 0)
 					IF(PLAYER0,ENTRANCE > 0)
 						SET_FLAG(PLAYER0,FLAG1,1)
 					ENDIF
-				ENDIF
-			ENDIF
-		ENDIF
+				REM ENDIF
+			REM ENDIF
+		REM ENDIF
 	ENDIF
 ENDIF
 

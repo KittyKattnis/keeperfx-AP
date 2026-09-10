@@ -12,9 +12,11 @@ REM it under the terms of the GNU General Public License as published by
 REM the Free Software Foundation; either version 2 of the License, or
 REM (at your option) any later version.
 REM ****************************************************************************
-
-START_MONEY(PLAYER0,0)
 LEVEL_VERSION(1)
+
+REM Randomizer changes (besides the obvious): None
+
+REM START_MONEY(PLAYER0,0)
 RUN_AFTER_VICTORY(1)
 
 CREATE_PARTY(ONE)
