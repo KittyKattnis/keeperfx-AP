@@ -110,31 +110,32 @@ function BoxLocations.ActivateBoxes(level_id)
         elseif SentLocations.Has(level_id+10000) then
             RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN)")
         end
-        local message = "Boxes Prepped: "
+        local message = ""
         local first = true
+        local message2 = ""
+        local first2 = true
         for _, id in pairs(mapBoxIDs) do -- For each of the boxIDs we assign to this level
+            if SentLocations.Has(id) then
+                if not first2 then message2 = message2 .. ", " end
+                message2 = message2 .. id
+                first2 = false
+            end
             if not SentLocations.Has(id) then -- If it ISN'T in sent_locations , we've not sent it.
                 if not first then message = message .. ", " end
                 message = message .. id
                 first = false
-                RegisterSpecialActivatedEvent(function()           
+                RegisterSpecialActivatedEvent(function()
                     found = found + 1
                     DecAPLvlBoxRemain()
                     -- get info for specific location so we can check name and player
                     local info = GetAPLocationInfo(id)
                     QuickMessage("Box " .. info.itemName .. " for " .. info.playerName .. " Activated.", "ARCHIPELAGO_ICON")
                     QuickMessage("Boxes Found: " .. found.. "/" .. total .. ".", "ARCHIPELAGO_ICON")
-                    local message2 = "Sent Locations: "
-                    local first2 = true
-                    for _, id2 in pairs(mapBoxIDs) do
-                        if SentLocations.Has(id2) then
-                            if not first2 then message2 = message2 .. ", " end
-                            message2 = message2 .. id2
-                            first2 = false
-                        end
+                    if message2 ~= "" then
+                        QuickMessage("Boxes Sent: " .. message2 .. ", " .. id .. ".", "ARCHIPELAGO_ICON")
+                    else
+                        QuickMessage("Boxes Sent: " .. id .. ".","ARCHIPELAGO_ICON")
                     end
-                    if not first2 then message2 = message2 .. "." end
-                    QuickMessage(message2, "ARCHIPELAGO_ICON")
                     Game.APBox[id] = nil
                 end, id)
             else
@@ -144,12 +145,28 @@ function BoxLocations.ActivateBoxes(level_id)
             end
         end
         if not first then
-            QuickMessage(message .. ".", "ARCHIPELAGO_ICON")
+            QuickMessage("Boxes Prepped: " .. message .. ".", "ARCHIPELAGO_ICON")
         else
             QuickMessage("No new boxes prepped.", "ARCHIPELAGO_ICON")
         end
     end
 end
+
+function BoxLocations.SentList(level_id)
+    local mapBoxIDs = BoxLocations[level_id]
+    local message = "Sent Locations: "
+    local first = true
+    for _, id in pairs(mapBoxIDs) do
+        if SentLocations.Has(id) then
+            if not first then message = message .. ", " end
+            message = message .. id
+            first = false
+        end
+    end
+    if not first then message = message .. "." end
+    QuickMessage(message, "ARCHIPELAGO_ICON")
+end
+
 
 function BoxLocations.DeleteBoxes(level_id)
     local mapBoxIDs = BoxLocations[level_id]

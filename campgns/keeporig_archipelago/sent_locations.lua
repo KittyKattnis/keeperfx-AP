@@ -13,18 +13,13 @@ SentLocations = {}
 --       then OR with Game.SentLocation.
 --     On game load, OR Game.SentLocations with AP python table and write to saveFile
 
---function SentLocations.Add(id)
---    SentLocations[id] = true
---end
+function SentLocations.Add(id)
+    SentLocations[id] = true
+end
 
 function SentLocations.Has(id)
     local sentLocations = GetAPCheckedLocations() or {}
-    for _, sentid in pairs(sentLocations) do
-        if sentid == id then
-            return true
-        end
-    end
-    return false
+    return sentLocations[id] ~= nil -- True if it's got an assigned value. Otherwise, false because it's not yet put into that table.
 end
 
 function SentLocations.Count(mapBoxIDs)
