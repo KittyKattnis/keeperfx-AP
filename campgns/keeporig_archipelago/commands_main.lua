@@ -44,4 +44,23 @@ function ActivateItems()
       end
 end
 
+function print_r(t, indent)
+    indent = indent or 0
+    local spacing = string.rep("  ", indent)
+    
+    if type(t) == "table" then
+        print(spacing .. "{")
+        for k, v in pairs(t) do
+            if type(v) == "table" then
+                print_r(v, indent + 1)
+            else
+                print(spacing .. "  " .. tostring(k) .. " => " .. tostring(v))
+            end
+        end
+        print(spacing .. "}")
+    else
+        print(t)
+    end
+end
+
 return CommandsMain
