@@ -262,15 +262,11 @@ function UnlockCreature(itemid)
 end
 function UnlockRoom(itemid)
       print("Room " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
-<<<<<<< Updated upstream
-      RoomAvailable("PLAYER0",ChecksTable[itemid].internal_name,2,false)
-=======
       if itemid >= 101 and itemid <= 105 then
             RoomAvailable("PLAYER0", ChecksTable[itemid].internal_name,2,true) -- auto-unlock starting 5 rooms
       else
             RoomAvailable("PLAYER0",ChecksTable[itemid].internal_name,2,false) -- rest need to be researched
       end
->>>>>>> Stashed changes
 end
 function UnlockTrap(itemid)
       print("Trap " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
