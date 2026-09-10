@@ -14,7 +14,7 @@ REM (at your option) any later version.
 REM ****************************************************************************
 LEVEL_VERSION(1)
 
-REM Randomizer changes (besides the obvious): Only lose if you can't make more Imps.
+REM Randomizer changes (besides the obvious): Only lose if you can't make more Imps. Changed TOTAL_IMPS to IMP.
 
 REM "You have entered this realm to gain a creature for your further efforts. You got the creature from start, so you must only keep it safe. And the only way to make this place safe is to kill every hero in the realm."
 DISPLAY_OBJECTIVE(179,PLAYER0)
@@ -32,7 +32,7 @@ ENDIF
 
 REM No point in losing the level if you can make more via the randomizer.
 IF_AVAILABLE(PLAYER0,POWER_IMP == 0)
-	IF(PLAYER0,TOTAL_IMPS == 0)
+	IF(PLAYER0,IMP == 0)
 		LOSE_GAME
 	ENDIF
 ENDIF
