@@ -143,6 +143,7 @@ struct StartupParameters {
     char config_file[CMDLN_MAXLEN+1];
     GameTurn pause_at_gameturn;
     unsigned char startup_flags;
+    TbBool skip_heart_zoom;
 #ifdef FUNCTESTING
     unsigned char functest_flags;
     char functest_name[FTEST_MAX_NAME_LENGTH];
@@ -227,7 +228,7 @@ short zoom_to_next_annoyed_creature(void);
 TbBool LbIsFrozenOrPaused(void); // from bflib_inputctrl.cpp
 
 void update_local_mouse_light(void);
-void update_mouse_light(struct PlayerInfo *player);
+void update_mouse_light(NetUserId user);
 void delete_all_structures(void);
 void clear_map(void);
 void clear_game(void);

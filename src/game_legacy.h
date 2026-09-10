@@ -232,6 +232,7 @@ struct Game {
     char active_lens_type;
     unsigned char applied_lens_type;
     struct PlayerInfo players[PLAYERS_COUNT];
+    struct UserState user_states[MAX_NET_USERS];
     struct Column columns_data[COLUMNS_COUNT];
     unsigned short slabset_num;
     struct SlabSet slabset[SLABSET_COUNT];
@@ -276,7 +277,6 @@ struct Game {
     uint32_t ceiling_search_dist;
     uint32_t ceiling_step;
     short col_static_entries[18];
-    //unsigned char level_file_number; // merged with level_number to get maps > 255
     short loaded_level_number;
     short texture_animation[TEXTURE_BLOCKS_ANIM_FRAMES*TEXTURE_BLOCKS_ANIM_COUNT];
     unsigned char texture_id;

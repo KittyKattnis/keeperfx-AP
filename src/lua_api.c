@@ -238,10 +238,9 @@ static int lua_ap_checked_locations(lua_State *L)
 
     lua_newtable(L);
 
-    for (int i = 0; i < location_count; i++)
-    {
-        lua_pushinteger(L, locations[i]);
-        lua_rawseti(L, -2, i + 1);
+    for (int i = 0; i < location_count; i++) {
+        lua_pushboolean(L, true); 
+        lua_rawseti(L, -2, locations[i]);
     }
 
     return 1; 
@@ -534,6 +533,11 @@ static int lua_Set_next_level(lua_State *L)
     }
 
     intralvl.next_level = lvnum;
+    if (is_bonus_level(game.loaded_level_number) || is_extra_level(game.loaded_level_number))
+    {
+        // Allow bonus levels to advance the campaign
+        set_continue_level_number(intralvl.next_level);
+    }
     return 0;
 }
 
@@ -1043,6 +1047,7 @@ static int lua_Display_variable(lua_State *L)
 }
 
 
+
 static int lua_DISPLAY_VARIABLE_WITH_LABEL(lua_State *L)
 {
     PlayerNumber player   = luaL_checkPlayerSingle(L, 1);
@@ -1059,7 +1064,8 @@ static int lua_DISPLAY_VARIABLE_WITH_LABEL(lua_State *L)
     game.script_variables[0].variable_player = player;
     game.script_variables[0].value_type = varib_type;
     game.script_variables[0].value_id = varib_id;
-    game.script_variables[0].include_icon = true;
+    game.script_variables[0].include_icon = true;    
+    game.script_variables[0].is_active = true;
     game.script_variables[0].icon_idx = id;
     if (game.active_script_var_count < DISPLAY_VARIABLES_LIMIT) {
         game.active_script_var_count++;
@@ -1073,7 +1079,7 @@ static int lua_DISPLAY_VARIABLE_WITH_LABEL(lua_State *L)
 static int lua_Hide_variable(lua_State *L)
 {    
     int32_t varib_id, varib_type;
-    PlayerNumber player   = luaL_checkPlayerSingle(L, 1);
+    PlayerNumber player   = luaL_optPlayerSingle(L, 1);
     varib_id = -1;
     varib_type = -1;
     const char* variable;
@@ -1089,7 +1095,8 @@ static int lua_Hide_variable(lua_State *L)
     {
         for (int i = 0; i < DISPLAY_VARIABLES_LIMIT; i++)
         {
-            if(game.script_variables[i].value_id == varib_id && game.script_variables[i].value_type == varib_type && game.script_variables[i].variable_player == player){
+            if(game.script_variables[i].value_id == varib_id && game.script_variables[i].value_type == varib_type 
+                && (game.script_variables[i].variable_player == player || player == PLAYER_NEUTRAL)){
                 for (int j = i; j < game.active_script_var_count - 1; j++)
                 {
                     game.script_variables[j] = game.script_variables[j+1];
