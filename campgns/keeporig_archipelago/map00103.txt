@@ -12,13 +12,16 @@ REM it under the terms of the GNU General Public License as published by
 REM the Free Software Foundation; either version 2 of the License, or
 REM (at your option) any later version.
 REM ****************************************************************************
+LEVEL_VERSION(1)
 
-START_MONEY(PLAYER0,12000)
+REM Randomizer changes (besides the obvious): None
 
-MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,1)
-MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DESTROY_WALLS,1,1)
-MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,1)
-MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,1)
+REM START_MONEY(PLAYER0,12000)
+
+REM MAGIC_AVAILABLE(ALL_PLAYERS,POWER_HEAL_CREATURE,1,1)
+REM MAGIC_AVAILABLE(ALL_PLAYERS,POWER_DESTROY_WALLS,1,1)
+REM MAGIC_AVAILABLE(ALL_PLAYERS,POWER_CONCEAL,1,1)
+REM MAGIC_AVAILABLE(ALL_PLAYERS,POWER_PROTECT,1,1)
 
 REM "This region of the underworld will test your ability to traverse the network of caverns. Indeed, time is your enemy here. Defeat it and you will find where a legendary warrior is imprisoned. That warrior will serve you well in the future."
 DISPLAY_OBJECTIVE(153,PLAYER0)
