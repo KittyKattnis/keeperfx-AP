@@ -260,6 +260,15 @@ static int lua_ap_decrease_level_box_remain(lua_State *L)
     return 0;
 }
 
+static int lua_ap_send_message(lua_State *L)
+{
+    const char* message   = lua_tostring(L,  1);
+    ap_bridge_send_message(message);
+    return 0;
+}
+
+
+
 // passes location id to archipelago
 static int lua_send_location(lua_State *L)
 {
@@ -2812,6 +2821,7 @@ static const luaL_Reg global_methods[] = {
     {"APScoutLocations",                 lua_ap_bridge_scout_locations},    
     {"SetAPLvlBoxRemain",                lua_ap_set_level_box_remain},      
     {"DecAPLvlBoxRemain",                lua_ap_decrease_level_box_remain},
+    {"SendAPMessage",                    lua_ap_send_message}
     
 };
 /*

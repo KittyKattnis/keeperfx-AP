@@ -20,6 +20,7 @@ void ap_bridge_location_check(int id);
 void ap_bridge_scout_locations(const int *locations, int count);
 bool ap_bridge_connection_status(void);
 void ap_bridge_refresh_missing(void);
+void ap_bridge_send_message(const char* msg);
 void ap_process_sacrifice_recipe(struct SacrificeRecipe *sac);
 
 #ifdef __cplusplus

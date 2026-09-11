@@ -51,6 +51,10 @@ function ActivateItems()
       QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")
 end
 
+function OnChatMsg(plyr_idx, msg)
+      SendAPMessage(msg)
+end
+
 function print_r(t, indent)
     indent = indent or 0
     local spacing = string.rep("  ", indent)
