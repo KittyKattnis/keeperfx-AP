@@ -106,11 +106,11 @@ function BoxLocations.ActivateBoxes(level_id)
         --if 10000+level_id was sent, add a tick
         --if all checks found in level, add a star
         --if both, both!
-        if found == total and SentLocations.Has(level_id + 10000) then
+        if found == total and SentLocations.Has((level_id % 79) + 10000) then
             RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICKSTAR_ENSIGN)")
         elseif found == total then
             RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",STAR_ENSIGN)")
-        elseif SentLocations.Has(level_id+10000) then
+        elseif SentLocations.Has((level_id % 79)+10000) then
             RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN)")
         end
         local message = "" -- not sent
@@ -129,7 +129,7 @@ function BoxLocations.ActivateBoxes(level_id)
                 message = message .. id
                 first = false
                 RegisterSpecialActivatedEvent(function()
-                    found = found + 1
+                    found = found + 1 --game can crash if box activated while found is unset i.e. when loading saved game.
                     DecAPLvlBoxRemain()
                     local info = GetAPLocationInfo(id)
                     QuickMessage("Box " .. info.itemName .. " for " .. info.playerName .. " Activated.", "ARCHIPELAGO_ICON")
