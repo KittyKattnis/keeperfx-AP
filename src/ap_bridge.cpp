@@ -27,7 +27,7 @@ void ap_chat_message(AP_ChatMessage msg);
 void ap_send_message(std::string msg);
 void ap_print(std::string text);
 void ap_command_result(std::string text);
-void set_quick_information_default(int32_t msg_id, short icon_idx, const char* msg_text);
+void set_quick_information_default(short icon_idx, const char* msg_text);
 
 void RedirectStdoutToFile() {
     FILE* fp;
@@ -164,12 +164,12 @@ void ap_hint_message(AP_HintMessage msg)
     std::string status = msg.checked ? "Checked" : "Unchecked";
     std::string combined = msg.item + " " + msg.location + " " + status;
     // message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), combined.c_str());    
-    set_quick_information_default(100, get_icon_id("ARCHIPELAGO_ICON"),combined.c_str());
+    set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),combined.c_str());
 }
 
 void ap_command_result(std::string text)
 {
-    set_quick_information_default(100, get_icon_id("ARCHIPELAGO_ICON"),text.c_str());
+    set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),text.c_str());
     // message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), text.c_str());
 }
 
@@ -180,7 +180,7 @@ void ap_print(std::string text)
 
 void ap_server_chat_message(AP_ServerChatMessage msg)
 {    
-    set_quick_information_default(100, get_icon_id("ARCHIPELAGO_ICON"),msg.message.c_str());
+    set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),msg.message.c_str());
     // message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), msg.message.c_str());
 }
 
@@ -219,8 +219,9 @@ return itemType;
 }
 
 
-void set_quick_information_default(int32_t msg_id, short icon_idx, const char* msg_text)
+void set_quick_information_default(short icon_idx, const char* msg_text)
 {    
+    int msg_id = rand() % QUICK_MESSAGES_COUNT;
     if (strlen(msg_text) >= MESSAGE_TEXT_LEN)
     {
         SCRPTWRNLOG("Information TEXT too long; truncating to %d characters", MESSAGE_TEXT_LEN - 1);
