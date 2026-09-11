@@ -161,8 +161,8 @@ void ap_location_info_callback(std::vector<AP_NetworkItem> locations)
 
 void ap_hint_message(AP_HintMessage msg)
 {  
-    std::string status = msg.checked ? "Checked" : "Unchecked";
-    std::string combined = "Send Player - " + msg.sendPlayer + ", Receiver Player - " + msg.recvPlayer + ", Item - " +msg.item + ", Location - " + msg.location + ", Checked? - " + status;
+    std::string status = msg.checked ? "Checked" : "Unchecked";    
+    std::string combined = msg.recvPlayer + "'s " +msg.item + " is in " + msg.sendPlayer + "'s "+ msg.location + ". it is " + status;
     set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),combined.c_str());
 }
 
