@@ -31,7 +31,7 @@ function SetupTriggers()
                   print(tostring(index) .. " = " .. tostring(id))
             end
       end)
-    RegisterOnConditionEvent(function() SendLocation(10000+Map.map_number) end, function() return (PLAYER0.victory_state == 1) end)
+    RegisterOnConditionEvent(function() SendLocation(10000+(Map.map_number % 79)) end, function() return (PLAYER0.victory_state == 1) end)
 end
 
 function OnItemReceived(itemid)
