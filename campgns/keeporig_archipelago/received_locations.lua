@@ -278,8 +278,8 @@ function UnlockDoor(itemid)
 end
 function UnlockSpell(itemid)
       print("Spell " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
-      if itemid >= 401 and itemid <= 404 then
-            MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,true) -- auto-unlock hand, slap, possession and create imp
+      if (itemid >= 401 and itemid <= 404) or (Map.map_number >= 100 and Map.map_number <= 105) then
+            MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,true) -- auto-unlock hand, slap, possession and create imp on all levels, and also unlock spells on bonus levels as a treat.
       else
             MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,false) -- rest need to be researched
       end

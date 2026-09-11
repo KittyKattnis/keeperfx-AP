@@ -106,12 +106,13 @@ function BoxLocations.ActivateBoxes(level_id)
         --if 10000+level_id was sent, add a tick
         --if all checks found in level, add a star
         --if both, both!
+        --maybe run something that automatically updated every level, not just the current one
         if found == total and SentLocations.Has((level_id % 79) + 10000) then
-            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICKSTAR_ENSIGN)")
+            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICKSTAR_ENSIGN_" .. level_id .. ")")
         elseif found == total then
-            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",STAR_ENSIGN)")
+            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",STAR_ENSIGN_" .. level_id .. ")")
         elseif SentLocations.Has((level_id % 79)+10000) then
-            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN)")
+            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN_" .. level_id .. ")")
         end
         local message = "" -- not sent
         local first = true
