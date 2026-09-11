@@ -22,7 +22,7 @@ end
 
 function SetupTriggers()
       RegisterSpecialActivatedEvent(function (eventData)
-            local activated_box = (eventData.SpecialBoxId % 100) + (Map.map_number*100) --SpecialBoxId currently capped to 256 so this is a workaround.
+            local activated_box = (eventData.SpecialBoxId % 100) + ((Map.map_number % 79)*100) --SpecialBoxId currently capped to 256 so this is a workaround. % 79 is a stupid workaround to map 100-105 to 21-26
             print("Activated Box No.: " .. activated_box)
             SendLocation(activated_box)
             print("=== GetAPCheckedLocations ===")
