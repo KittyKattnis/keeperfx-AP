@@ -49,20 +49,20 @@ class KeeperCreature(IntEnum):
 #        (others?)" = 19
 
 class KeeperRoomName(StrEnum):
-        TREASURE = "Treasure Room Researchable"
-        LAIR = "Lair Researchable"
-        GARDEN = "Hatchery Researchable"
-        TRAINING = "Training Room Researchable"
-        RESEARCH = "Library Researchable"
-        BRIDGE = "Bridge Researchable"
-        GUARD_POST = "Guard Post Researchable"
-        WORKSHOP = "Workshop Researchable" #fine to allow trap/door creation if you somehow get one
-        PRISON = "Prison (+make skel) Researchable" #i.e. if you get one in a map you can't make Skeletons until you unlock this
-        TORTURE = "Tort Cham (+make ghost) Researchable" #i.e. if you get one in a map you can't make Ghosts until you unlock this
-        BARRACKS = "Barracks Researchable"
-        TEMPLE = "Temple (see recipes) Researchable" #fine to allow recipes if you somehow get one
-        GRAVEYARD = "Graveyard (+make Vamps) Researchable" #i.e. if you get one in a map you can't make Vampires until you unlock this
-        SCAVENGER = "Scavenger Room Researchable"
+        TREASURE = "Treasure Room"
+        LAIR = "Lair"
+        GARDEN = "Hatchery"
+        TRAINING = "Training Room"
+        RESEARCH = "Library"
+        BRIDGE = "Bridge"
+        GUARD_POST = "Guard Post"
+        WORKSHOP = "Workshop" #fine to allow trap/door creation if you somehow get one
+        PRISON = "Prison" #i.e. if you get one in a map you can't make Skeletons until you unlock this
+        TORTURE = "Torture Chamber" #i.e. if you get one in a map you can't make Ghosts until you unlock this
+        BARRACKS = "Barracks"
+        TEMPLE = "Temple" #fine to allow recipes if you somehow get one
+        GRAVEYARD = "Graveyard" #i.e. if you get one in a map you can't make Vampires until you unlock this
+        SCAVENGER = "Scavenger Room"
 
 class KeeperRoom(IntEnum):
         TREASURE = 101
@@ -119,28 +119,28 @@ class KeeperDoor(IntEnum):
 #        MIDAS = 306
 
 class KeeperPowerName(StrEnum):
-        POWER_HAND = "Hand of Evil Researchable"
-        POWER_SLAP = "Slap Researchable"
-        POWER_POSSESS = "Possession Researchable"
-        POWER_IMP = "Create Imp Researchable"
-        POWER_SIGHT = "Sight of Evil Researchable"
-        POWER_SPEED = "Speed Monster Researchable"
-        POWER_OBEY = "Must Obey Researchable"
-        POWER_CALL_TO_ARMS = "CTA Researchable"
-        POWER_CONCEAL = "Conceal Researchable"
-        POWER_HOLD_AUDIENCE = "Hold Audience Researchable"
-        POWER_CAVE_IN = "Cave-In Researchable"
-        POWER_HEAL_CREATURE = "Heal Researchable"
-        POWER_LIGHTNING = "Lightning Strike Researchable"
-        POWER_PROTECT = "Protect Monster Researchable"
-        POWER_CHICKEN = "Chicken Researchable"
-        POWER_DISEASE = "Disease Researchable"
-        POWER_ARMAGEDDON = "Armageddon Researchable"
-        POWER_DESTROY_WALLS = "Destroy Walls Researchable"
-#        POWER_TIME_BOMB" = "Time Bomb Researchable"
-#        POWER_SLOW = "Slow Researchable"
-#        POWER_FREEZE = "Freeze Researchable"
-#        POWER_REBOUND = "Rebound Researchable"
+        POWER_HAND = "Hand of Evil"
+        POWER_SLAP = "Slap"
+        POWER_POSSESS = "Possession"
+        POWER_IMP = "Create Imp"
+        POWER_SIGHT = "Sight of Evil"
+        POWER_SPEED = "Speed Monster"
+        POWER_OBEY = "Must Obey"
+        POWER_CALL_TO_ARMS = "CTA"
+        POWER_CONCEAL = "Conceal"
+        POWER_HOLD_AUDIENCE = "Hold Audience"
+        POWER_CAVE_IN = "Cave-In"
+        POWER_HEAL_CREATURE = "Heal"
+        POWER_LIGHTNING = "Lightning Strike"
+        POWER_PROTECT = "Protect Monster"
+        POWER_CHICKEN = "Chicken"
+        POWER_DISEASE = "Disease"
+        POWER_ARMAGEDDON = "Armageddon"
+        POWER_DESTROY_WALLS = "Destroy Walls"
+#        POWER_TIME_BOMB" = "Time Bomb"
+#        POWER_SLOW = "Slow"
+#        POWER_FREEZE = "Freeze"
+#        POWER_REBOUND = "Rebound"
 #        POWER_FLIGHT = "Flight Researchable"
 #        POWER_VISION = "Vision Researchable"
 #        POWER_TUNNELLER = "Recruit Tunneller Researchable"

@@ -51,11 +51,12 @@ def create_all_regions(world: DungeonKeeperWorld) -> None:
     secret4 = Region("Secret 4", world.player, world.multiworld)
     secret5 = Region("Secret 5", world.player, world.multiworld)
     secret6 = Region("Secret 6", world.player, world.multiworld)
+    temple = Region("Temple", world.player, world.multiworld)
 
 
 
     # Let's put all these regions in a list.
-    regions = [overworld, eversmile, cosyton, waterdreamwarm, flowerhat, lushmeadow, snuggledell, wishvale, tickle, moonbrushwood, nevergrim, hearth, elfsdance, buffyoak, sleepiburgh, woodlyrhyme, tulipscent, mirthshire, blaiseend, mistle, skybirdtrill, secret1, secret2, secret3, secret4, secret5, secret6]
+    regions = [overworld, eversmile, cosyton, waterdreamwarm, flowerhat, lushmeadow, snuggledell, wishvale, tickle, moonbrushwood, nevergrim, hearth, elfsdance, buffyoak, sleepiburgh, woodlyrhyme, tulipscent, mirthshire, blaiseend, mistle, skybirdtrill, secret1, secret2, secret3, secret4, secret5, secret6, temple]
 
     # Some regions may only exist if the player enables certain options.
     # In our case, the Hammer locks the top middle chest in its own room if the hammer option is enabled.
@@ -97,7 +98,7 @@ def connect_regions(world: DungeonKeeperWorld) -> None:
     secret4 = world.get_region("Secret 4")
     secret5 = world.get_region("Secret 5")
     secret6 = world.get_region("Secret 6")
-
+    temple = world.get_region("Temple")
     # Okay, now we can get connecting. For this, we need to create Entrances.
     # Entrances are inherently one-way, but crucially, AP assumes you can always return to the origin region.
     # One way to create an Entrance is by calling the Entrance constructor.
@@ -127,6 +128,7 @@ def connect_regions(world: DungeonKeeperWorld) -> None:
     overworld.connect(secret4, "Overworld to Secret 4", lambda state: state.has("Secret 4 Unlocked", world.player))
     overworld.connect(secret5, "Overworld to Secret 5", lambda state: state.has("Secret 5 Unlocked", world.player)) 
     overworld.connect(secret6, "Overworld to Secret 6", lambda state: state.has("Secret 6 Unlocked", world.player))
+    overworld.connect(temple, "Overworld to Temple", lambda state: state.has("Temple", world.player))
 
     # You can then connect the Entrance to the target region.
 
