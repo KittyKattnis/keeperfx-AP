@@ -258,11 +258,15 @@ end
 function UnlockCreature(itemid)
       print("Creature " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
       CreatureAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,0)
-      AddCreatureToPool(ChecksTable[itemid].internal_name,10) -- want every creature available everywhere we've unlocked it!
+      AddCreatureToPool(ChecksTable[itemid].internal_name,10) -- want every creature available everywhere we've unlocked it! Fine to just be added on top of level's pool I think.
 end
 function UnlockRoom(itemid)
       print("Room " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
-      RoomAvailable("PLAYER0",ChecksTable[itemid].internal_name,2,true)
+      if itemid >= 101 and itemid <= 105 then
+            RoomAvailable("PLAYER0", ChecksTable[itemid].internal_name,2,true) -- auto-unlock starting 5 rooms
+      else
+            RoomAvailable("PLAYER0",ChecksTable[itemid].internal_name,2,false) -- rest need to be researched
+      end
 end
 function UnlockTrap(itemid)
       print("Trap " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
@@ -274,7 +278,11 @@ function UnlockDoor(itemid)
 end
 function UnlockSpell(itemid)
       print("Spell " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
-      MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,0)
+      if (itemid >= 401 and itemid <= 404) or (Map.map_number >= 100 and Map.map_number <= 105) then
+            MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,true) -- auto-unlock hand, slap, possession and create imp on all levels, and also unlock spells on bonus levels as a treat.
+      else
+            MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,false) -- rest need to be researched
+      end
 end
 function UnlockLevel(itemid)
       print("Level " .. itemid .. " (Map " .. ChecksTable[itemid].name .. ") Unlocked")

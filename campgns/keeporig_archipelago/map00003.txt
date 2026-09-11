@@ -14,6 +14,8 @@ REM    (at your option) any later version.
 REM ****************************************************************************
 LEVEL_VERSION(1)
 
+REM Randomizer changes (besides the obvious): uncoupled the tutorial requirements for you to make certain rooms.
+
 REM New rooms for the player:
 REM   RESEARCH - when four basic rooms are built
 REM New creatures for the player:

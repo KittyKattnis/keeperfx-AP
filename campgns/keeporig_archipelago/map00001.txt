@@ -14,6 +14,8 @@ REM    (at your option) any later version.
 REM ****************************************************************************
 LEVEL_VERSION(1)
 
+REM Randomizer changes (besides the obvious): removed a little bit here and there. Still requires placing the basic 3 rooms to progress the level so it might be worth changing that if for some reason you don't have them.
+
 REM New rooms for the player:
 REM   TREASURE - at start
 REM   LAIR - after treasury is filled with gold
