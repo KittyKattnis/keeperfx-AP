@@ -162,15 +162,13 @@ void ap_location_info_callback(std::vector<AP_NetworkItem> locations)
 void ap_hint_message(AP_HintMessage msg)
 {  
     std::string status = msg.checked ? "Checked" : "Unchecked";
-    std::string combined = msg.item + " " + msg.location + " " + status;
-    // message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), combined.c_str());    
+    std::string combined = "Send Player - " + msg.sendPlayer + ", Receiver Player - " + msg.recvPlayer + ", Item - " +msg.item + ", Location - " + msg.location + ", Checked? - " + status;
     set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),combined.c_str());
 }
 
 void ap_command_result(std::string text)
 {
     set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),text.c_str());
-    // message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), text.c_str());
 }
 
 void ap_print(std::string text)
@@ -179,14 +177,13 @@ void ap_print(std::string text)
 }
 
 void ap_server_chat_message(AP_ServerChatMessage msg)
-{    
-    set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),msg.message.c_str());
-    // message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), msg.message.c_str());
+{       
+    message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), msg.message.c_str());
 }
 
 void ap_chat_message(AP_ChatMessage msg)
 {
-    // message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), msg.message.c_str());
+    message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), msg.message.c_str());
 }
 
 void ap_send_message(std::string msg)
