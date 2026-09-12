@@ -2777,6 +2777,27 @@ struct ConsoleCommand {
     void (* param_auto_completion)(PlayerNumber, char *, size_t);
 };
 
+static const struct NamedCommand ap_commands[] = {
+    {"help", 1},
+    {"license", 2},
+    {"options", 3},
+    {"players", 4},
+    {"status", 5},
+    {"countdown", 6},
+    {"alias", 7},
+    {"admin", 8},
+    {"remaining", 9},
+    {"missing", 10},
+    {"checked", 11},
+    {"hint", 12},
+    {"hint", 13},
+    {"hint_location", 14},
+    {"collect", 15},
+    {"release", 16},
+    {"getitem", 17}
+};
+static const int ap_commands_count = sizeof(ap_commands) / sizeof(*ap_commands);
+
 static const struct ConsoleCommand console_commands[] = {
     { "stats", cmd_stats, NULL },
     { "fps", cmd_fps_turn, NULL },
@@ -3175,6 +3196,15 @@ void cmd_auto_completion(PlayerNumber plyr_idx, char *cmd_str, size_t cmd_size)
     }
 }
 
+static TbBool is_ap_command(const char * command)
+{
+    for (int i = 0; i < ap_commands_count; ++i) {
+        if (strcasecmp(command, ap_commands[i].name) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 
 TbBool cmd_exec(PlayerNumber plyr_idx, char * args)
@@ -3198,7 +3228,8 @@ TbBool cmd_exec(PlayerNumber plyr_idx, char * args)
         }
     }
     if (game.easter_eggs_enabled == true) {
-        targeted_message_add(MsgType_Player, plyr_idx, plyr_idx, GUI_MESSAGES_DELAY, "unsupported command");
+        if(!is_ap_command(command))
+            targeted_message_add(MsgType_Player, plyr_idx, plyr_idx, GUI_MESSAGES_DELAY, "unsupported command");
     }
     return false;
 }

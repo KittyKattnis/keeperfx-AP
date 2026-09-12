@@ -14,10 +14,20 @@
 #include "frontend.h"
 #include "game_legacy.h"
 #include "config_rules.h"
+#include "gui_msgs.h"
+#include "custom_sprites.h"
+#include "keeperfx.hpp"
 #include "post_inc.h"
 
 
 void ap_location_info_callback(std::vector<AP_NetworkItem> locations);
+void ap_hint_message(AP_HintMessage msg);
+void ap_server_chat_message(AP_ServerChatMessage msg);
+void ap_chat_message(AP_ChatMessage msg);
+void ap_send_message(std::string msg);
+void ap_print(std::string text);
+void ap_command_result(std::string text);
+void set_quick_information_default(short icon_idx, const char* msg_text);
 
 void RedirectStdoutToFile() {
     FILE* fp;
@@ -48,6 +58,11 @@ RedirectStdoutToFile();
     AP_SetLocationInfoCallback(ap_location_info_callback);    
     AP_SetRoomUpdateCallback(ap_room_update);
     AP_SetSlotConnectedCallback(ap_slot_connected);
+    AP_SetChatMessageCallback(ap_chat_message);
+    AP_SetServerChatCallback(ap_server_chat_message);
+    AP_SetHintCallback(ap_hint_message);
+    AP_SetPrintCallback(ap_print);
+    AP_SetCmdResultCallback(ap_command_result);
     ap_location_info_init();    
     ap_state_init(&g_ap_state);
     AP_Start();
@@ -144,6 +159,38 @@ void ap_location_info_callback(std::vector<AP_NetworkItem> locations)
     }
 }
 
+void ap_hint_message(AP_HintMessage msg)
+{  
+    std::string status = msg.checked ? "Checked" : "Unchecked";    
+    std::string combined = msg.recvPlayer + "'s " +msg.item + " is in " + msg.sendPlayer + "'s "+ msg.location + ". it is " + status;
+    set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),combined.c_str());
+}
+
+void ap_command_result(std::string text)
+{
+    set_quick_information_default(get_icon_id("ARCHIPELAGO_ICON"),text.c_str());
+}
+
+void ap_print(std::string text)
+{
+    //message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), text.c_str());
+}
+
+void ap_server_chat_message(AP_ServerChatMessage msg)
+{       
+    message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), msg.message.c_str());
+}
+
+void ap_chat_message(AP_ChatMessage msg)
+{
+    message_add(MsgType_Custom, get_icon_id("ARCHIPELAGO_ICON"), msg.message.c_str());
+}
+
+void ap_send_message(std::string msg)
+{
+    AP_Say(msg);
+}
+
 void ap_bridge_scout_locations(const int *locations, int count)
 {
     std::set<int64_t> location_set;
@@ -166,6 +213,23 @@ int digits = log10(id);
 int itemType = (id / pow(10, digits));
 
 return itemType;
+}
+
+
+void set_quick_information_default(short icon_idx, const char* msg_text)
+{    
+    int msg_id = rand() % QUICK_MESSAGES_COUNT;
+    if (strlen(msg_text) >= MESSAGE_TEXT_LEN)
+    {
+        SCRPTWRNLOG("Information TEXT too long; truncating to %d characters", MESSAGE_TEXT_LEN - 1);
+    }
+    if ((game.quick_messages[msg_id][0] != '\0') && (strcmp(game.quick_messages[msg_id], msg_text) != 0))
+    {
+        SCRPTWRNLOG("Quick Message no %d overwritten by different text", msg_id);
+    }
+    snprintf(game.quick_messages[msg_id], MESSAGE_TEXT_LEN, "%s", msg_text);
+
+    set_quick_information_with_icon(msg_id, 0, 0, 0, 0,icon_idx);
 }
 
 // Functions below are run through the C compiler so that lua/console can call them
@@ -193,6 +257,11 @@ bool ap_bridge_connection_status(void)
 void ap_bridge_refresh_missing(void)
 {
     ap_refresh_missing();
+}
+
+void ap_bridge_send_message(const char* msg)
+{
+    ap_send_message(msg);
 }
 
 void ap_process_sacrifice_recipe(struct SacrificeRecipe *sac)
