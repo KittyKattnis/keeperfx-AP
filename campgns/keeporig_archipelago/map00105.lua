@@ -12,6 +12,7 @@ ReceivedLocations = require("received_locations")
 --will get called when the game starts
 function OnGameStart()
 	CommandsMain.MainSetup()
+      IncreaseStartingGold()
 end
 
 --will get called when the game is loaded from the Save/Load menu

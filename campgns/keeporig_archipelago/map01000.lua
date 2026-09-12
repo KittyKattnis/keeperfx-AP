@@ -12,6 +12,7 @@ ReceivedLocations = require("received_locations")
 --will get called when the game starts
 function OnGameStart()
 	CommandsMain.MainSetup()
+      IncreaseStartingGold()
     RegisterTimerEvent(function ()
         QuickInformation(99,"Welcome to KeeperAP!\nWoo!")
         QuickObjective("Welcome to KeeperAP!\nWoo!")
