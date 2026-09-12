@@ -45,19 +45,22 @@ def create_all_regions(world: DungeonKeeperWorld) -> None:
     blaiseend = Region("Blaise End", world.player, world.multiworld)
     mistle = Region("Mistle", world.player, world.multiworld)
     skybirdtrill = Region("Skybird Trill", world.player, world.multiworld)
-    secret1 = Region("Secret 1", world.player, world.multiworld)
-    secret2 = Region("Secret 2", world.player, world.multiworld)
-    secret3 = Region("Secret 3", world.player, world.multiworld)
-    secret4 = Region("Secret 4", world.player, world.multiworld)
-    secret5 = Region("Secret 5", world.player, world.multiworld)
-    secret6 = Region("Secret 6", world.player, world.multiworld)
     temple = Region("Temple", world.player, world.multiworld)
+    if world.options.secret_levels:
+        secret1 = Region("Secret 1", world.player, world.multiworld)
+        secret2 = Region("Secret 2", world.player, world.multiworld)
+        secret3 = Region("Secret 3", world.player, world.multiworld)
+        secret4 = Region("Secret 4", world.player, world.multiworld)
+        secret5 = Region("Secret 5", world.player, world.multiworld)
+        secret6 = Region("Secret 6", world.player, world.multiworld)
+
 
 
 
     # Let's put all these regions in a list.
-    regions = [overworld, eversmile, cosyton, waterdreamwarm, flowerhat, lushmeadow, snuggledell, wishvale, tickle, moonbrushwood, nevergrim, hearth, elfsdance, buffyoak, sleepiburgh, woodlyrhyme, tulipscent, mirthshire, blaiseend, mistle, skybirdtrill, secret1, secret2, secret3, secret4, secret5, secret6, temple]
-
+    regions = [overworld, eversmile, cosyton, waterdreamwarm, flowerhat, lushmeadow, snuggledell, wishvale, tickle, moonbrushwood, nevergrim, hearth, elfsdance, buffyoak, sleepiburgh, woodlyrhyme, tulipscent, mirthshire, blaiseend, mistle, skybirdtrill, temple]
+    if world.options.secret_levels:
+        regions += [secret1, secret2, secret3, secret4, secret5, secret6]
     # Some regions may only exist if the player enables certain options.
     # In our case, the Hammer locks the top middle chest in its own room if the hammer option is enabled.
 
@@ -92,12 +95,8 @@ def connect_regions(world: DungeonKeeperWorld) -> None:
     blaiseend = world.get_region("Blaise End")
     mistle = world.get_region("Mistle")
     skybirdtrill = world.get_region("Skybird Trill")
-    secret1 = world.get_region("Secret 1")
-    secret2 = world.get_region("Secret 2")
-    secret3 = world.get_region("Secret 3")
-    secret4 = world.get_region("Secret 4")
-    secret5 = world.get_region("Secret 5")
-    secret6 = world.get_region("Secret 6")
+
+
     temple = world.get_region("Temple")
     # Okay, now we can get connecting. For this, we need to create Entrances.
     # Entrances are inherently one-way, but crucially, AP assumes you can always return to the origin region.
@@ -122,13 +121,22 @@ def connect_regions(world: DungeonKeeperWorld) -> None:
     overworld.connect(blaiseend, "Overworld to Blaise End", lambda state: state.has("Level 18 Unlocked", world.player))
     overworld.connect(mistle, "Overworld to Mistle", lambda state: state.has("Level 19 Unlocked", world.player))
     overworld.connect(skybirdtrill, "Overworld to Skybird Trill", lambda state: state.has("Level 20 Unlocked", world.player))
-    overworld.connect(secret1, "Overworld to Secret 1", lambda state: state.has("Secret 1 Unlocked", world.player))
-    overworld.connect(secret2, "Overworld to Secret 2", lambda state: state.has("Secret 2 Unlocked", world.player))
-    overworld.connect(secret3, "Overworld to Secret 3", lambda state: state.has("Secret 3 Unlocked", world.player))
-    overworld.connect(secret4, "Overworld to Secret 4", lambda state: state.has("Secret 4 Unlocked", world.player))
-    overworld.connect(secret5, "Overworld to Secret 5", lambda state: state.has("Secret 5 Unlocked", world.player)) 
-    overworld.connect(secret6, "Overworld to Secret 6", lambda state: state.has("Secret 6 Unlocked", world.player))
+
     overworld.connect(temple, "Overworld to Temple", lambda state: state.has("Temple", world.player))
+
+    if world.options.secret_levels:
+        secret1 = world.get_region("Secret 1")
+        secret2 = world.get_region("Secret 2")
+        secret3 = world.get_region("Secret 3")
+        secret4 = world.get_region("Secret 4")
+        secret5 = world.get_region("Secret 5")
+        secret6 = world.get_region("Secret 6")
+        overworld.connect(secret1, "Overworld to Secret 1", lambda state: state.has("Secret 1 Unlocked", world.player))
+        overworld.connect(secret2, "Overworld to Secret 2", lambda state: state.has("Secret 2 Unlocked", world.player))
+        overworld.connect(secret3, "Overworld to Secret 3", lambda state: state.has("Secret 3 Unlocked", world.player))
+        overworld.connect(secret4, "Overworld to Secret 4", lambda state: state.has("Secret 4 Unlocked", world.player))
+        overworld.connect(secret5, "Overworld to Secret 5", lambda state: state.has("Secret 5 Unlocked", world.player)) 
+        overworld.connect(secret6, "Overworld to Secret 6", lambda state: state.has("Secret 6 Unlocked", world.player))        
 
     # You can then connect the Entrance to the target region.
 

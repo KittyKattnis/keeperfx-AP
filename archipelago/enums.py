@@ -212,12 +212,7 @@ class KeeperLevelName(StrEnum):
         LEVEL_018 = "Level 18 Unlocked"
         LEVEL_019 = "Level 19 Unlocked"
         LEVEL_020 = "Level 20 Unlocked"
-        LEVEL_100 = "Secret 1 Unlocked"
-        LEVEL_101 = "Secret 2 Unlocked"
-        LEVEL_102 = "Secret 3 Unlocked"
-        LEVEL_103 = "Secret 4 Unlocked"
-        LEVEL_104 = "Secret 5 Unlocked"
-        LEVEL_105 = "Secret 6 Unlocked"
+
 
 class KeeperLevel(IntEnum):
         LEVEL_001 = 501
@@ -240,12 +235,24 @@ class KeeperLevel(IntEnum):
         LEVEL_018 = 518
         LEVEL_019 = 519
         LEVEL_020 = 520
+
+
+class KeeperSecretLevel(IntEnum):
         LEVEL_100 = 521
         LEVEL_101 = 522
         LEVEL_102 = 523
         LEVEL_103 = 524
         LEVEL_104 = 525
         LEVEL_105 = 526
+
+
+class KeeperSecretLevelName(StrEnum):   
+        LEVEL_100 = "Secret 1 Unlocked"
+        LEVEL_101 = "Secret 2 Unlocked"
+        LEVEL_102 = "Secret 3 Unlocked"
+        LEVEL_103 = "Secret 4 Unlocked"
+        LEVEL_104 = "Secret 5 Unlocked"
+        LEVEL_105 = "Secret 6 Unlocked"     
 
 class KeeperRecipeName(StrEnum):
         RECIPE_CHEAPER_IMPS = "Cheaper Imps Recipe Unlocked"

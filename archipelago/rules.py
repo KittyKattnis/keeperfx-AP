@@ -3,13 +3,17 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import TYPE_CHECKING, Literal
 
+from .items import CREATURES, ROOMS, SPELLS, LEVELS
+from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
+
 from rule_builder.rules import (Rule, CanReachEntrance, CanReachLocation, Has, HasAll, HasAny, HasFromListUnique, HasGroupUnique,
-                                OptionFilter, True_)
+                                OptionFilter, True_, HasFromList)
 
 if TYPE_CHECKING:
     from .world import DungeonKeeperWorld
 
-
+def get_val(key):
+    return key.value if hasattr(key, "value") else str(key)
 
 
 def set_all_rules(world: DungeonKeeperWorld) -> None:
@@ -71,8 +75,10 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     location_rules["Secret 4 Next to Boulder"] = Has("Bridge")
     location_rules["Secret 5 Goal Area"] = Has("Bridge")
 
+#Scaling requirements for difficult levels
 
-
+    location_rules["Level 20 Beaten"] = HasFromListUnique(*[f"{key}" for key in CREATURES], 
+                                 count=9).resolve(world)
 
     location_rules["Blaise End Central Portal"] = Has("Destroy Walls")
 

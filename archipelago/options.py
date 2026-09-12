@@ -1,13 +1,17 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from Options import OptionGroup, ItemDict
+from Options import OptionGroup, ItemDict, Toggle
 from worlds.AutoWorld import PerGameCommonOptions
 from .items import CREATURES, ROOMS, SPELLS, LEVELS
 from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
 
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
+
+class secret_levels(Toggle):
+    """Choose if you want secret levels to be available in the game."""
+    display_name = "Secret Levels"
 
 class StartingLevels(ItemDict):
     """Levels available at the start of the game."""
@@ -60,6 +64,7 @@ class StartingRooms(ItemDict):
 
 @dataclass
 class DungeonKeeperOptions(PerGameCommonOptions):
+    secret_levels: secret_levels
     starting_levels: StartingLevels
     starting_spells: StartingSpells
     starting_rooms: StartingRooms

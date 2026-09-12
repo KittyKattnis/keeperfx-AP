@@ -6,7 +6,7 @@
 
 from typing import NamedTuple, Optional
 from BaseClasses import Item, ItemClassification
-from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName
+from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName
 
 
 class DungeonKeeperItem(Item):
@@ -144,13 +144,19 @@ LEVELS = {
     KeeperLevelName.LEVEL_018: KeeperItem(KeeperLevel.LEVEL_018, ItemClassification.progression), #"Level 18 Unlocked"
     KeeperLevelName.LEVEL_019: KeeperItem(KeeperLevel.LEVEL_019, ItemClassification.progression), #"Level 19 Unlocked"
     KeeperLevelName.LEVEL_020: KeeperItem(KeeperLevel.LEVEL_020, ItemClassification.progression), #"Level 20 Unlocked"
-    KeeperLevelName.LEVEL_100: KeeperItem(KeeperLevel.LEVEL_100, ItemClassification.progression), #"Level 100 Unlocked"
-    KeeperLevelName.LEVEL_101: KeeperItem(KeeperLevel.LEVEL_101, ItemClassification.progression), #"Level 101 Unlocked"
-    KeeperLevelName.LEVEL_102: KeeperItem(KeeperLevel.LEVEL_102, ItemClassification.progression), #"Level 102 Unlocked"
-    KeeperLevelName.LEVEL_103: KeeperItem(KeeperLevel.LEVEL_103, ItemClassification.progression), #"Level 103 Unlocked"
-    KeeperLevelName.LEVEL_104: KeeperItem(KeeperLevel.LEVEL_104, ItemClassification.progression), #"Level 104 Unlocked"
-    KeeperLevelName.LEVEL_105: KeeperItem(KeeperLevel.LEVEL_105, ItemClassification.progression), #"Level 105 Unlocked"
+
 }
+
+SECRET_LEVELS = {
+    KeeperSecretLevelName.LEVEL_100: KeeperItem(KeeperSecretLevel.LEVEL_100, ItemClassification.progression), #"Level 100 Unlocked"
+    KeeperSecretLevelName.LEVEL_101: KeeperItem(KeeperSecretLevel.LEVEL_101, ItemClassification.progression), #"Level 101 Unlocked"
+    KeeperSecretLevelName.LEVEL_102: KeeperItem(KeeperSecretLevel.LEVEL_102, ItemClassification.progression), #"Level 102 Unlocked"
+    KeeperSecretLevelName.LEVEL_103: KeeperItem(KeeperSecretLevel.LEVEL_103, ItemClassification.progression), #"Level 103 Unlocked"
+    KeeperSecretLevelName.LEVEL_104: KeeperItem(KeeperSecretLevel.LEVEL_104, ItemClassification.progression), #"Level 104 Unlocked"
+    KeeperSecretLevelName.LEVEL_105: KeeperItem(KeeperSecretLevel.LEVEL_105, ItemClassification.progression), #"Level 105 Unlocked"
+    }
+
+
 
 RECIPES = {
     KeeperRecipeName.RECIPE_CHEAPER_IMPS: KeeperItem(KeeperRecipe.RECIPE_CHEAPER_IMPS, ItemClassification.useful), #"Cheaper Imps"
@@ -238,6 +244,10 @@ def create_all_items(world):
     item_pool = []
 
     precollected_names = [item.name for item in world.multiworld.precollected_items[world.player]]
+
+    if world.options.secret_levels:
+        populate_item_dict(KeeperSecretLevelName, KeeperSecretLevel)
+        LEVELS += SECRET_LEVELS
 
     for item_name in ITEM_NAME_TO_ID.keys():
         if item_name in precollected_names:
