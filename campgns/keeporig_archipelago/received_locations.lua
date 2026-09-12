@@ -280,9 +280,11 @@ function UnlockSpell(itemid)
       print("Spell " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
       if (itemid >= 401 and itemid <= 404) or (Map.map_number >= 100 and Map.map_number <= 105) then
             MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,true) -- auto-unlock hand, slap, possession and create imp on all levels, and also unlock spells on bonus levels as a treat.
-      else
+      elseif PLAYER0.available("PLAYER0", ChecksTable[itemid].internal_name) == 0 then -- if you already have it, don't do anything because already unlocked.
             MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,false) -- rest need to be researched
       end
+      --will do something for cruelty mode down the line - if you control it and haven't unlocked it, set it to false,false (means you can't use spells you have the spellbook for but haven't unlocked)
+      --THEN, see if there is a way to check if you control *the spellbook for that spell*, and if so, either DESTROY IT, or, if you have the spellbook but it was sent to false,false, and you then unlock it, set it to true,true
 end
 function UnlockLevel(itemid)
       print("Level " .. itemid .. " (Map " .. ChecksTable[itemid].name .. ") Unlocked")
