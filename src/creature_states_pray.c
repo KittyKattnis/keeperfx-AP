@@ -42,6 +42,7 @@
 #include "power_hand.h"
 #include "gui_soundmsgs.h"
 #include "game_legacy.h"
+#include "ap_bridge.h"
 #include "post_inc.h"
 
 #ifdef __cplusplus
@@ -613,6 +614,7 @@ long process_sacrifice_award(struct Coord3d *pos, ThingModel model, PlayerNumber
       // Check if the complete sacrifice condition is met
       if (sacrifice_victim_conditions_met(dungeon, sac))
       {
+        ap_process_sacrifice_recipe(sac);
         SYNCDBG(6,"Sacrifice recipe %d condition met, action %d for player %d",(int)(sac-&game.conf.rules[0].sacrifices.sacrifice_recipes[0]),(int)sac->action,(int)plyr_idx);
         CrtrExpLevel exp_level = creature_sacrifice_average_exp_level(dungeon, sac);
         switch (sac->action)

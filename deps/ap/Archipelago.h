@@ -125,7 +125,7 @@ void AP_SetDataPackageChangedCallback(std::function<void()> f_datapkg);
 void AP_SetPrintCallback(std::function<void(std::string)> f_print);
 void AP_SetPrintJSONCallback(std::function<void(std::string)> f_printjson);
 void AP_SetRetrievedCallback(std::function<void(std::string)> f_retrieved);
-
+void AP_SetCmdResultCallback(std::function<void(std::string)> f_cmdresult);
 /* Game Management Functions */
 
 // Sends LocationCheck for given index
@@ -388,3 +388,7 @@ void AP_UseGiftAutoReject(bool enable);
 
 // Enabled the gifting api functions, should be configured before AP_Start get called, defaults to off
 void AP_SetGiftingSupported(bool);
+
+void AP_SetChatMessageCallback(std::function<void(AP_ChatMessage)> f_chatmsgrecv);
+void AP_SetServerChatCallback(std::function<void(AP_ServerChatMessage)> f_chat);
+void AP_SetHintCallback(std::function<void(AP_HintMessage)> f_hint);

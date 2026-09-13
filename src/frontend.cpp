@@ -195,7 +195,7 @@ struct GuiButtonInit frontend_archipelago_buttons[] = {
   
   { LbBtnT_NormalBtn,  BID_DEFAULT, 0, 0, frontend_start_new_game,NULL,frontend_over_button,     3, 999, 275, 999, 275, 371, 46, frontend_draw_large_menu_button,  0, GUIStr_Empty,  0,       {2},            0, maintain_arch_connected },
   { LbBtnT_NormalBtn,  BID_DEFAULT, 0, 0, frontend_load_continue_game,NULL,frontend_over_button, 0, 999, 315, 999, 315, 371, 46, frontend_draw_large_menu_button,  0, GUIStr_Empty,  0,       {8},            0, arch_frontend_continue_game_maintain },
-  { LbBtnT_NormalBtn,  BID_DEFAULT, 0, 0, frontend_change_state,NULL, frontend_over_button,     18,999, 355, 999, 355, 371, 46, frontend_draw_large_menu_button,  0, GUIStr_Empty,  0,        {3},            0, arch_frontend_main_menu_load_game_maintain },
+  { LbBtnT_NormalBtn,  BID_DEFAULT, 0, 0, frontend_change_state,NULL, frontend_over_button,     2,999, 355, 999, 355, 371, 46, frontend_draw_large_menu_button,  0, GUIStr_Empty,  0,        {3},            0, arch_frontend_main_menu_load_game_maintain },
   { LbBtnT_NormalBtn,  BID_DEFAULT, 0, 0, frontend_change_state,NULL, frontend_over_button,      27,999, 395, 999, 395, 371, 46, frontend_draw_large_menu_button,  0, GUIStr_Empty,  0,       {97},           0, NULL },
   { LbBtnT_NormalBtn,  BID_DEFAULT, 0, 0, frontend_change_state,NULL, frontend_over_button,      9, 999, 435, 999, 435, 371, 46, frontend_draw_large_menu_button,  0, GUIStr_Empty,  0,       {5},            0, NULL },
   {-1,  BID_DEFAULT, 0, 0, NULL,               NULL,        NULL,                 0,   0,   0,   0,   0,   0,  0, NULL,                             0, GUIStr_Empty,  0,       {0},            0, NULL },
