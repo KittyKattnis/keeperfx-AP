@@ -11,7 +11,7 @@ function Setup()
       QuickMessage("Map: " .. Map.map_number .. " (" .. Map.map_name .. ").", "ARCHIPELAGO_ICON")
       IncreaseLevelCap()
       IncreaseCreatureLimit()
-      IncreaseStartingGold()
+      --IncreaseStartingGold() --Calling this each save and reload keeps adding gold to the player oops.
       HideVariable()    
       DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_MESSAGE")
       ActivateItems()
