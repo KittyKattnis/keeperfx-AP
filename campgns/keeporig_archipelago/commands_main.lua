@@ -12,12 +12,14 @@ function Setup()
       IncreaseLevelCap()
       IncreaseCreatureLimit()
       --IncreaseStartingGold() --Calling this each save and reload keeps adding gold to the player oops.
-      HideVariable()    
+      HideVariable()
       DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_MESSAGE")
       ActivateItems()
       BoxLocations.DeleteBoxes(Map.map_number)
       BoxLocations.SpawnBoxes(Map.map_number)
       BoxLocations.ActivateBoxes(Map.map_number)
+      BoxLocations.IsLevelComplete(Map.map_number)
+      BoxLocations.UpdateEnsigns()
 end
 
 function SetupTriggers()
@@ -30,8 +32,9 @@ function SetupTriggers()
             for index, id in pairs(checked) do
                   print(tostring(index) .. " = " .. tostring(id))
             end
+            BoxLocations.UpdateEnsigns()
       end)
-    RegisterOnConditionEvent(function() SendLocation(10000+(Map.map_number % 79)) end, function() return (PLAYER0.victory_state == 1) end)
+    RegisterOnConditionEvent(function() print("Level " .. Map.map_number .. " Complete!") SendLocation(10000+(Map.map_number % 79)) end, function() return (PLAYER0.victory_state == 1) end)
 end
 
 function OnItemReceived(itemid)
