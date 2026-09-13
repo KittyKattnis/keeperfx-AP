@@ -1,5 +1,5 @@
 [common]
-ThingsCount = 148
+ThingsCount = 150
 
 [thing0]
 ThingType = "Object"
@@ -1564,6 +1564,27 @@ SubtileY = [34, 128]
 SubtileZ = [3, 0]
 
 [thing142]
+ThingType = "Object"
+Subtype = 133
+Ownership = 5
+ParentTile = 65535
+CustomBox = 0
+Orientation = 0
+SubtileX = [100, 128]
+SubtileY = [37, 128]
+SubtileZ = [1, 0]
+
+[thing143]
+ThingType = "Object"
+Subtype = 132
+Ownership = 0
+ParentTile = 65535
+Orientation = 0
+SubtileX = [103, 128]
+SubtileY = [37, 128]
+SubtileZ = [1, 0]
+
+[thing144]
 ThingType = "EffectGen"
 Subtype = 1
 Ownership = 5
@@ -1574,7 +1595,7 @@ SubtileX = [184, 128]
 SubtileY = [46, 128]
 SubtileZ = [0, 0]
 
-[thing143]
+[thing145]
 ThingType = "EffectGen"
 Subtype = 1
 Ownership = 5
@@ -1585,7 +1606,7 @@ SubtileX = [184, 128]
 SubtileY = [49, 128]
 SubtileZ = [0, 0]
 
-[thing144]
+[thing146]
 ThingType = "EffectGen"
 Subtype = 1
 Ownership = 5
@@ -1596,7 +1617,7 @@ SubtileX = [252, 128]
 SubtileY = [45, 128]
 SubtileZ = [0, 0]
 
-[thing145]
+[thing147]
 ThingType = "EffectGen"
 Subtype = 1
 Ownership = 5
@@ -1607,7 +1628,7 @@ SubtileX = [150, 128]
 SubtileY = [70, 128]
 SubtileZ = [0, 0]
 
-[thing146]
+[thing148]
 ThingType = "EffectGen"
 Subtype = 1
 Ownership = 5
@@ -1618,7 +1639,7 @@ SubtileX = [151, 128]
 SubtileY = [33, 128]
 SubtileZ = [0, 0]
 
-[thing147]
+[thing149]
 ThingType = "EffectGen"
 Subtype = 1
 Ownership = 5
