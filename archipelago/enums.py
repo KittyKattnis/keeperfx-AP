@@ -23,8 +23,7 @@ class KeeperCreatureName(StrEnum):
         HELL_HOUND = "Attract Hound"
         HORNY = "Attract Horned Reaper" #not usually attracted from Portal but I think that's fine and adds variety
         VAMPIRE = "Attract Vampire" #not usually attracted from Portal but I think that's fine and adds variety
-#       DRUID = "Attract Druid"
-#       MAIDEN = "Attract Maiden"
+
 #       OTHERS = "Attract (others?)"
 
 class KeeperCreature(IntEnum):
@@ -47,6 +46,14 @@ class KeeperCreature(IntEnum):
 #        DRUID = 17
 #        MAIDEN = 18
 #        (others?)" = 19
+
+class KeeperFXCreatureName(StrEnum):
+        DRUID = "Attract Druid"
+        MAIDEN = "Attract Maiden"
+
+class KeeperFXCreature(IntEnum):
+        DRUID = 17
+        MAIDEN = 18        
 
 class KeeperRoomName(StrEnum):
         TREASURE = "Treasure Room"
@@ -87,9 +94,7 @@ class KeeperTrapName(StrEnum):
         LAVA = "Lava Trap Manufacturable"
         BOULDER = "Boulder Trap Manufacturable"
         WORD_OF_POWER = "WOP Trap Manufacturable"
-#        TNT = "Demolition Trap Manufacturable"
-#        SENTRY" = "Sentry Trap Manufacturable"
-#        BALLISTA" = "Ballista Trap Manufacturable"
+
 
 class KeeperTrap(IntEnum):
         ALARM = 201
@@ -98,25 +103,40 @@ class KeeperTrap(IntEnum):
         LAVA = 204
         BOULDER = 205
         WORD_OF_POWER = 206
-#        TNT = 207
-#        SENTRY = 208
-#        BALLISTA = 209
+
 
 class KeeperDoorName(StrEnum):
         WOOD = "Wooden Door Manufacturable"
         BRACED = "Braced Door Manufacturable"
         STEEL = "Iron Door Manufacturable"
         MAGIC = "Magic Door Manufacturable"
-#        SECRET = "Secret Door Manufacturable"
-#        MIDAS = "Midas Door Manufacturable"
+
 
 class KeeperDoor(IntEnum):     
         WOOD = 301
         BRACED = 302
         STEEL = 303
         MAGIC = 304
-#        SECRET = 305
-#        MIDAS = 306
+
+
+class KeeperFXDoorName(StrEnum):
+        SECRET = "Secret Door Manufacturable"
+        MIDAS = "Midas Door Manufacturable"
+
+class KeeperFXDoor(IntEnum):               
+       SECRET = 305
+       MIDAS = 306   
+
+class KeeperFXTrapName(StrEnum):
+        TNT = "Demolition Trap Manufacturable"
+        SENTRY = "Sentry Trap Manufacturable"
+        BALLISTA = "Ballista Trap Manufacturable"
+
+class KeeperFXTrap(IntEnum):
+        TNT = 207
+        SENTRY = 208
+        BALLISTA = 209
+
 
 class KeeperPowerName(StrEnum):
         POWER_HAND = "Hand of Evil"
@@ -175,6 +195,27 @@ class KeeperPower(IntEnum):
 #        POWER_TUNNELLER = 425
 #        POWER_CLEANSE = 426 #not made yet
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE POWER_PICKUP_GOLD POWER_PICKUP_FOOD
+
+class KeeperFXPowerName(StrEnum):
+        POWER_TIME_BOMB = "Time Bomb"
+        POWER_SLOW = "Slow"
+        POWER_FREEZE = "Freeze"
+        POWER_REBOUND = "Rebound"
+        POWER_FLIGHT = "Flight Researchable"
+        POWER_VISION = "Vision Researchable"
+        POWER_TUNNELLER = "Recruit Tunneller Researchable"
+        POWER_CLEANSE = "Cleanse Researchable"
+
+class KeeperFXPower(IntEnum):   
+        POWER_TIME_BOMB = 419
+        POWER_SLOW = 420
+        POWER_FREEZE = 421
+        POWER_REBOUND = 422
+        POWER_FLIGHT = 423
+        POWER_VISION = 424
+        POWER_TUNNELLER = 425
+   
+
 
 class KeeperLevelName(StrEnum):
 #    #Levels

@@ -13,6 +13,24 @@ class secret_levels(Toggle):
     """Choose if you want secret levels to be available in the game."""
     display_name = "Secret Levels"
 
+class KeeperFXCreatures(Toggle):
+    """Choose if you want KeeperFX Creatures to be available in the game."""
+    display_name = "KeeperFX Creatures"
+
+class KeeperFXSpells(Toggle):
+    """Choose if you want KeeperFX Spells to be available in the game."""
+    display_name = "KeeperFX Spells"
+
+class KeeperFXTraps(Toggle):
+    """Choose if you want KeeperFX Traps to be available in the game."""
+    display_name = "KeeperFX Traps"
+
+class KeeperFXDoors(Toggle):
+    """Choose if you want KeeperFX Doors to be available in the game."""
+    display_name = "KeeperFX Doors"
+
+
+
 class StartingLevels(ItemDict):
     """Levels available at the start of the game."""
     display_name = "Starting Levels"
@@ -69,8 +87,18 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     starting_spells: StartingSpells
     starting_rooms: StartingRooms
     starting_creatures: StartingCreatures
+    KeeperFXCreatures: KeeperFXCreatures
+    KeeperFXDoors: KeeperFXDoors
+    KeeperFXSpells: KeeperFXSpells
+    KeeperFXTraps: KeeperFXTraps
 
 option_groups = [
+    OptionGroup("KeeperFX Additions", [
+        KeeperFXCreatures,
+        KeeperFXSpells,
+        KeeperFXDoors,
+        KeeperFXTraps,
+    ]),    
     OptionGroup("Starting Items", [
         StartingLevels,
         StartingSpells,
