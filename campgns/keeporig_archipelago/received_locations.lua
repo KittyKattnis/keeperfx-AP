@@ -5,6 +5,13 @@ local ReceivedLocationsTable = require "received_locations_table"
 
 ReceivedLocations = {}
 
+-- Need to tidy this up more:
+-- * Introduce the bonus checks and find a way to only include those checks if associated option is only
+-- * potentially add extra argument for additional detail e.g. room slab name for rooms, spellbook/crate name for spells/traps.
+-- * correct progressives so they work properly - need to be single items that are added multiple timers
+-- * filler and APTraps
+-- * additional progressives: hand size, imp limit
+-- * consider making additional traps/doors, spells.
 -- Every check must have a unique integer ID associated with it.
 ChecksTable = {
 --CREATURES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    

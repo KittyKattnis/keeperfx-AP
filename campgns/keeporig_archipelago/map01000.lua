@@ -26,6 +26,7 @@ end
 
 function Startup()
     ConcealMapRect(PLAYER0, 187, 328, 24, 24)
+    RevealMapRect(PLAYER0,34,100,3,3)
     ZoomToLocation(PLAYER0, 50)
     RunDKScriptCommand("COMPUTER_PLAYER(PLAYER6,ROAMING)")
     RunDKScriptCommand("ALLY_PLAYERS(PLAYER0, PLAYER6, 3)")
