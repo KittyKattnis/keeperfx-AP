@@ -86,11 +86,13 @@ void ap_room_update()
 }
 
 void ap_refresh_missing()
-{
-    AP_SendLocationScouts(AP_GetMissingLocations(),0);
+{    
+    AP_SendLocationScouts(AP_GetCheckedLocations(),0);
     for (int64_t loc : AP_GetCheckedLocations()) {
         ap_state_update_locations(&g_ap_state, (int)loc);
     }
+    
+    AP_SendLocationScouts(AP_GetMissingLocations(),0);
     ap_missing_init(&g_ap_state);
     for (int64_t loc : AP_GetMissingLocations()) {
         ap_state_update_missing_locations(&g_ap_state, (int)loc);
