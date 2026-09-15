@@ -92,6 +92,9 @@ function LevelStatus()
             level_actual = level + 79
         end
         RevealMapRect(PLAYER0, level_subtile_x + nudge_amount, level_subtile_y + 3, 21, 16)
+        RegisterTimerEvent(function ()
+            RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41," .. level_subtile_x + nudge_amount .. "," .. level_subtile_y .. "," .. level_actual .. ")")
+        end, 17, true)
         if not ReceivedLocationsTable.Has(level + 500) then
             AddObjectToLevelAtPos("SPINNING_KEY_DUMMY", level_subtile_x + nudge_amount, level_subtile_y, 0)
             --add tooltip "Level level locked"
@@ -232,32 +235,76 @@ function ItemStatus()
             end
         end
     end
-    for itemid=701, 800 do
-        if ChecksTable[itemid] then
-            local item_subtile_x = 310
-            local item_subtile_y = 28 + 6*(itemid % 100)
-            --AddObjectToLevelAtPos("SPELLBOOK_IMP",item_subtile_x,item_subtile_y,1,"PLAYER_NEUTRAL",0)
-
-            --once this is changed to work properly (1 item multiple times?):
-            -- for each copy of that item in the received pool, for i from 1 to n, place a green potion at subtile 316 + i (first one is always green representing starting value)
-                --level Cap
-                --portal limit
-                --start gold
-                --starting imps?
-                --progressive starting unlocks (i.e. if it's 1 you have bridge and SOE, 2 you have guard post and speed etc.)
-                --progressive starting traps
-
-                --would be cool to continuously spawn the effect for selling (to display values onscreen)
-
-            --if ReceivedLocationsTable.Has(itemid) then
-            --    AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
-            --    AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
-            --end
-            --if SentLocations.Has(11000+(itemid % 100)) then --check this is the id we will use for having done a recipe
-            --    AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
-            --end
+    --progressives
+    local levelcapcount = 0
+    local creaturelimitcount = 0
+    local startinggoldcount = 0
+    for itemid = 701, 707 do
+        if ReceivedLocationsTable.Has(itemid) then
+            levelcapcount = levelcapcount + 1
         end
     end
+    for id = 711, 716 do
+        if ReceivedLocationsTable.Has(id) then
+            creaturelimitcount = creaturelimitcount + 1
+        end
+    end
+    for id = 721, 726 do
+        if ReceivedLocationsTable.Has(id) then
+            startinggoldcount = startinggoldcount + 1
+        end
+    end
+    RegisterTimerEvent(function ()
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,34," .. levelcapcount + 3 .. ")")
+    end, 17, true)
+    for i = 0, 8 do
+        if i <= levelcapcount then
+            AddObjectToLevelAtPos("POTION_GREEN",316+3*i,34,1,"PLAYER_NEUTRAL",0)
+        else
+            AddObjectToLevelAtPos("POTION_RED",316+3*i,34,1,"PLAYER_NEUTRAL",0)
+        end
+    end
+    RegisterTimerEvent(function ()
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,40," .. 10 + 5*creaturelimitcount .. ")")
+    end, 17, true)
+    for i = 0, 6 do
+        if i <= creaturelimitcount then
+            AddObjectToLevelAtPos("POTION_GREEN",316+3*i,40,1,"PLAYER_NEUTRAL",0)
+        else
+            AddObjectToLevelAtPos("POTION_RED",316+3*i,40,1,"PLAYER_NEUTRAL",0)
+        end
+    end
+    RegisterTimerEvent(function ()
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,46," .. 2500 + 1250*startinggoldcount .. ")")
+    end, 17, true)
+    for i = 0, 6 do
+        if i <= startinggoldcount then
+            AddObjectToLevelAtPos("POTION_GREEN",316+3*i,46,1,"PLAYER_NEUTRAL",0)
+        else
+            AddObjectToLevelAtPos("POTION_RED",316+3*i,46,1,"PLAYER_NEUTRAL",0)
+        end
+    end
+
+        --once this is changed to work properly (1 item multiple times?):
+        -- for each copy of that item in the received pool, for i from 1 to n, place a green potion at subtile 316 + i (first one is always green representing starting value)
+            --level Cap
+            --portal limit
+            --start gold
+            --starting imps?
+            --progressive starting unlocks (i.e. if it's 1 you have bridge and SOE, 2 you have guard post and speed etc.)
+            --progressive starting traps
+
+            --would be cool to continuously spawn the effect for selling (to display values onscreen)
+
+        --if ReceivedLocationsTable.Has(itemid) then
+        --    AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
+        --    AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
+        --end
+        --if SentLocations.Has(11000+(itemid % 100)) then --check this is the id we will use for having done a recipe
+        --    AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
+        --end
+
+
 end
 
 

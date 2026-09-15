@@ -1,0 +1,9 @@
+# KeeperFX Effects Configuration file version 1.0.
+# Contains Effects, EffectGenerators and EffectElements.
+
+# Effects.
+
+[effectElement41]
+Name = "EFFECTELEMENT_PRICE"
+MoveType = 1
+Lifespan = [16,16]
