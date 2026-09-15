@@ -35,6 +35,8 @@ ChecksTable = {
      --[17] = {id=17,  internal_name="DRUID",               name="Druid",                        string="1042",      text="Attract Druid"},
      --[18] = {id=18,  internal_name="MAIDEN",              name="Maiden",                       string="1045",      text="Attract Maiden"},
      --[19] = {id=19,  internal_name="",                    name="(others?)",                    string="",          text="Attract (others?)"},
+     -- also consider allowing imps through portal. Not sure how they work (they don't contribute towards portal limit, but can they come through when you reach your limit?)
+     -- could be a fun alternative to having create imp
 -- ROOMS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     [101] = {id=101, internal_name="TREASURE",            name="Treasure Room",                string="599",       text="Treasure Room Researchable"},           --unlocked from start in default settings
     [102] = {id=102, internal_name="LAIR",                name="Lair",                         string="609",       text="Lair Researchable"},                    --unlocked from start in default settings
@@ -314,7 +316,7 @@ function UnlockProgressive(itemid)
       elseif itemid >= 711 and itemid <= 716 then
             IncreaseCreatureLimit()
       elseif itemid >= 721 and itemid <= 726 then
-            IncreaseStartingGold()
+            --IncreaseStartingGold() -- only ever run this on level start.
       end
 end
 

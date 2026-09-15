@@ -159,11 +159,13 @@ function ItemStatus()
                 item_subtile_y = 112
             end
             local item_pos = {stl_x = item_subtile_x, stl_y = item_subtile_y}
+            RunDKScriptCommand("SET_CREATURE_CONFIGURATION(" .. ChecksTable[itemid].internal_name .. ",HungerRate,0)")
             AddCreatureToLevel("PLAYER6",ChecksTable[itemid].internal_name,item_pos,1,0,"INITIALIZE")
             if ReceivedLocationsTable.Has(itemid) then
                 AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x, item_subtile_y+6, 0)
                 AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x, item_subtile_y+12, 0)
             end
+            --be needlessly extra and replace prison with that creature sleeping or something idk
         end
     end
     --Rooms
@@ -214,7 +216,55 @@ function ItemStatus()
             end
         end
     end
+    --501 is Levels
+    --recipes
+    for itemid=601, 700 do
+        if ChecksTable[itemid] then
+            local item_subtile_x = 34
+            local item_subtile_y = 28 + 6*(itemid % 100)
+            --AddObjectToLevelAtPos("SPELLBOOK_IMP",item_subtile_x,item_subtile_y,1,"PLAYER_NEUTRAL",0)
+            if ReceivedLocationsTable.Has(itemid) then
+                AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
+                AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
+            end
+            if SentLocations.Has(11000+(itemid % 100)) then --check this is the id we will use for having done a recipe
+                AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
+            end
+        end
+    end
+    for itemid=701, 800 do
+        if ChecksTable[itemid] then
+            local item_subtile_x = 310
+            local item_subtile_y = 28 + 6*(itemid % 100)
+            --AddObjectToLevelAtPos("SPELLBOOK_IMP",item_subtile_x,item_subtile_y,1,"PLAYER_NEUTRAL",0)
+
+            --once this is changed to work properly (1 item multiple times?):
+            -- for each copy of that item in the received pool, for i from 1 to n, place a green potion at subtile 316 + i (first one is always green representing starting value)
+                --level Cap
+                --portal limit
+                --start gold
+                --starting imps?
+                --progressive starting unlocks (i.e. if it's 1 you have bridge and SOE, 2 you have guard post and speed etc.)
+                --progressive starting traps
+
+                --would be cool to continuously spawn the effect for selling (to display values onscreen)
+
+            --if ReceivedLocationsTable.Has(itemid) then
+            --    AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
+            --    AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
+            --end
+            --if SentLocations.Has(11000+(itemid % 100)) then --check this is the id we will use for having done a recipe
+            --    AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
+            --end
+        end
+    end
 end
+
+
+--600 is Recipes
+--700 is progressives
+
+
 
 --for creatures, rooms etc etc:
 --creature should go in the prison i guess
