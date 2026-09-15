@@ -182,14 +182,14 @@ ROOMS = {
     109: Check(
         id=109,
         internal_name="PRISON", #i.e. if you get one in a map you can't make Skeletons until you unlock this
-        name="Prison (+make skel)",
-        text="Prison (+make skel) Researchable",
+        name="Prison",
+        text="Prison Researchable",
     ),
     110: Check(
         id=110,
         internal_name="TORTURE", #i.e. if you get one in a map you can't make Ghosts until you unlock this
-        name="Tort Cham (+make ghost)",
-        text="Tort Cham (+make ghost) Researchable",
+        name="Torture Chamber",
+        text="Torture Chamber Researchable",
     ),
     111: Check(
         id=111,
@@ -200,14 +200,14 @@ ROOMS = {
     112: Check(
         id=112,
         internal_name="TEMPLE", #fine to allow recipes if you somehow get one
-        name="Temple (see recipes)",
-        text="Temple (see recipes) Researchable",
+        name="Temple",
+        text="Temple Researchable",
     ),
     113: Check(
         id=113,
         internal_name="GRAVEYARD", #i.e. if you get one in a map you can't make Vampires until you unlock this
-        name="Graveyard (+make Vamps)",
-        text="Graveyard (+make Vamps) Researchable",
+        name="Graveyard",
+        text="Graveyard Researchable",
     ),
     114: Check(
         id=114,
@@ -251,8 +251,8 @@ TRAPS = {
     206: Check(
         id=206,
         internal_name="WORD_OF_POWER",
-        name="WOP Trap",
-        text="WOP Trap Manufacturable",
+        name="Word of Power Trap",
+        text="Word of Power Trap Manufacturable",
 #    ),
 #    207: Check(
 #        id=207,
@@ -359,8 +359,8 @@ SPELLS = {
     408: Check(
         id=408,
         internal_name="POWER_CALL_TO_ARMS",
-        name="CTA",
-        text="CTA Researchable",
+        name="Call to Arms",
+        text="Call to Arms Researchable",
     ),
     409: Check(
         id=409,

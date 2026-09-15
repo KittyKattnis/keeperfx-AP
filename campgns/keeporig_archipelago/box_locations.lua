@@ -1,4 +1,3 @@
---MapID = require("map_ids")
 SentLocations = require("sent_locations")
 
 local BoxLocations = {
@@ -102,24 +101,12 @@ function BoxLocations.ActivateBoxes(level_id)
         local total = #mapBoxIDs
         SetAPLvlBoxRemain(total - found)
         QuickMessage("Boxes Found: " .. found .. "/" .. total .. ".", "ARCHIPELAGO_ICON")
-        --if a level is completed, send location 10000+level_id.
-        --if 10000+level_id was sent, add a tick
-        --if all checks found in level, add a star
-        --if both, both!
-        --maybe run something that automatically updated every level, not just the current one
-        if found == total and SentLocations.Has((level_id % 79) + 10000) then
-            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICKSTAR_ENSIGN_" .. level_id .. ")")
-        elseif found == total then
-            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",STAR_ENSIGN_" .. level_id .. ")")
-        elseif SentLocations.Has((level_id % 79)+10000) then
-            RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN_" .. level_id .. ")")
-        end
         local message = "" -- not sent
         local first = true
         local message2 = "" -- sent
         for _, id in pairs(mapBoxIDs) do -- For each of the boxIDs we assign to this level
             local boxID = (id % 100) + 100
-            if SentLocations.Has(id) then
+            if SentLocations.Has(id) then --this shouldn't happen, but just in case!
                 if message2 ~= "" then message2 = message2 .. ", " end
                 message2 = message2 .. id
                 RegisterSpecialActivatedEvent(function()
@@ -140,6 +127,7 @@ function BoxLocations.ActivateBoxes(level_id)
                     end
                     message2 = message2 .. id
                     QuickMessage("Boxes Sent: " .. message2 .. ".", "ARCHIPELAGO_ICON")
+                    --See SetupTriggers() in commands_main for activation firing.
                     Game.APBox[id] = nil
                 end, boxID)
             end
@@ -188,6 +176,30 @@ function BoxLocations.DeleteBoxes(level_id)
     end
     if not first then message = message .. "." end
     QuickMessage(message, "ARCHIPELAGO_ICON")
+end
+
+function BoxLocations.IsLevelComplete(level_id)
+    if SentLocations.Has(10000+(level_id % 79)) then
+        QuickMessage("Level Complete!", "ARCHIPELAGO_ICON")
+    end
+end
+
+--if a level is completed, send location 10000+level_id.
+--run this at map start, load and item activation.
+function BoxLocations.UpdateEnsigns()
+    for level_id, mapBoxIDs in pairs(BoxLocations) do
+        if type(level_id) == "number" then
+            local found = SentLocations.Count(mapBoxIDs)
+            local total = #mapBoxIDs
+            if found == total and SentLocations.Has((level_id % 79) + 10000) then
+                RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICKSTAR_ENSIGN_" .. level_id .. ")") --if both, both!
+            elseif found == total then
+                RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",STAR_ENSIGN_" .. level_id .. ")") --if all checks found in level, add a star
+            elseif SentLocations.Has((level_id % 79) + 10000) then
+                RunDKScriptCommand("SET_LEVEL_ENSIGN(" .. level_id .. ",TICK_ENSIGN_" .. level_id .. ")") --if 10000+level_id was sent, add a tick
+            end
+        end
+    end
 end
 
 return BoxLocations

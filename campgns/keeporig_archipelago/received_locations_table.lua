@@ -1,7 +1,5 @@
 ReceivedLocationsTable = {}
 
--- This should be the local table taking in info from AP. Need to find a way to read and write to this.
-
 function ReceivedLocationsTable.Add(id)
     ReceivedLocationsTable[id] = true
 end

@@ -249,8 +249,6 @@ CHECKS.update(LEVELS)
 CHECKS.update(RECIPES)
 CHECKS.update(PROGRESSIVES)
 
-#can now use CHECKS[101].# to get TREASURE
-
 
 ITEM_NAME_TO_ID = {}
 

@@ -6,6 +6,11 @@ from worlds.AutoWorld import PerGameCommonOptions
 from .items import CREATURES, ROOMS, SPELLS, LEVELS
 from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
 
+#to do:
+# various options on and off e.g. temple recipes yes/find/no, bonus levels yes/no, FX exclusive creatures/spells/traps/doors yes/no, cruelty mode yes/no, creature type evil/good/both
+# numbers of each progressive maybe
+# starting player colour maybe idk
+
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
 
