@@ -13,7 +13,7 @@ function Setup()
       IncreaseCreatureLimit()
       --IncreaseStartingGold() --Calling this each save and reload keeps adding gold to the player oops.
       HideVariable()
-      DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_MESSAGE")
+      DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_SMALL")
       ActivateItems()
       BoxLocations.DeleteBoxes(Map.map_number)
       BoxLocations.SpawnBoxes(Map.map_number)
@@ -37,9 +37,12 @@ function SetupTriggers()
     RegisterOnConditionEvent(function() print("Level " .. Map.map_number .. " Complete!") SendLocation(10000+(Map.map_number % 79)) end, function() return (PLAYER0.victory_state == 1) end)
 end
 
+Game.APBoxMessage = 1
+
 function OnItemReceived(itemid)
       print("Received item " .. itemid)
-      RunDKScriptCommand("QUICK_INFORMATION(100,\"AP Item Received:\n" .. ChecksTable[itemid].text .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
+      RunDKScriptCommand("QUICK_INFORMATION(" .. Game.APBoxMessage .. ",\"AP Item Received:\n" .. ChecksTable[itemid].text .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
+      Game.APBoxMessage = Game.APBoxMessage + 1
       -- only need to do this when new items are received. Need to check setting message number to 100 is ok.
       -- Also if you receive items while outside a level and then join, will it send all of the new ones when you go into a level?
       ReceivedLocations.ReceivedItemCheck(itemid)
@@ -57,7 +60,6 @@ end
 function print_r(t, indent)
     indent = indent or 0
     local spacing = string.rep("  ", indent)
-    
     if type(t) == "table" then
         print(spacing .. "{")
         for k, v in pairs(t) do

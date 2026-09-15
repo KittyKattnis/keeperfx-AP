@@ -12,7 +12,7 @@ class DungeonKeeperWebWorld(WebWorld):
 
     # Your game pages will have a visual theme (affecting e.g. the background image).
     # You can choose between dirt, grass, grassFlowers, ice, jungle, ocean, partyTime, and stone.
-    theme = "grassFlowers"
+    theme = "stone"
 
     # A WebWorld can have any number of tutorials, but should always have at least an English setup guide.
     # Many WebWorlds just have one setup guide, but some have multiple, e.g. for different languages.

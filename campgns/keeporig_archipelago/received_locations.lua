@@ -46,11 +46,11 @@ ChecksTable = {
     [106] = {id=106, internal_name="BRIDGE",              name="Bridge",                       string="610",       text="Bridge Researchable"},
     [107] = {id=107, internal_name="GUARD_POST",          name="Guard Post",                   string="611",       text="Guard Post Researchable"},
     [108] = {id=108, internal_name="WORKSHOP",            name="Workshop",                     string="605",       text="Workshop Researchable"},                --fine to allow trap/door creation if you somehow get one
-    [109] = {id=109, internal_name="PRISON",              name="Prison (+make skel)",          string="601",       text="Prison (+make skel) Researchable"},     --i.e. if you get one in a map you can't make Skeletons until you unlock this
-    [110] = {id=110, internal_name="TORTURE",             name="Tort Cham (+make ghost)",      string="602",       text="Tort Cham (+make ghost) Researchable"}, --i.e. if you get one in a map you can't make Ghosts until you unlock this
+    [109] = {id=109, internal_name="PRISON",              name="Prison",                       string="601",       text="Prison Researchable"},     --i.e. if you get one in a map you can't make Skeletons until you unlock this
+    [110] = {id=110, internal_name="TORTURE",             name="Torture Chamber",              string="602",       text="Torture Chamber Researchable"}, --i.e. if you get one in a map you can't make Ghosts until you unlock this
     [111] = {id=111, internal_name="BARRACKS",            name="Barracks",                     string="607",       text="Barracks Researchable"},
-    [112] = {id=112, internal_name="TEMPLE",              name="Temple (see recipes)",         string="612",       text="Temple (see recipes) Researchable"},    --fine to allow recipes if you somehow get one
-    [113] = {id=113, internal_name="GRAVEYARD",           name="Graveyard (+make Vamps)",      string="606",       text="Graveyard (+make Vamps) Researchable"}, --i.e. if you get one in a map you can't make Vampires until you unlock this
+    [112] = {id=112, internal_name="TEMPLE",              name="Temple",                       string="612",       text="Temple Researchable"},    --fine to allow recipes if you somehow get one
+    [113] = {id=113, internal_name="GRAVEYARD",           name="Graveyard",                    string="606",       text="Graveyard Researchable"}, --i.e. if you get one in a map you can't make Vampires until you unlock this
     [114] = {id=114, internal_name="SCAVENGER",           name="Scavenger Room",               string="613",       text="Scavenger Room Researchable"},
 -- TRAPS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     [201] = {id=201, internal_name="ALARM",               name="Alarm Trap",                   string="579",       text="Alarm Trap Manufacturable"},
@@ -58,7 +58,7 @@ ChecksTable = {
     [203] = {id=203, internal_name="LIGHTNING",           name="Lightning Trap",               string="581",       text="Lightning Trap Manufacturable"},
     [204] = {id=204, internal_name="LAVA",                name="Lava Trap",                    string="583",       text="Lava Trap Manufacturable"},
     [205] = {id=205, internal_name="BOULDER",             name="Boulder Tap",                  string="578",       text="Boulder Tap Manufacturable"},
-    [206] = {id=206, internal_name="WORD_OF_POWER",       name="WOP Trap",                     string="582",       text="WOP Trap Manufacturable"},
+    [206] = {id=206, internal_name="WORD_OF_POWER",       name="Word of Power Trap",           string="582",       text="Word of Power Trap Manufacturable"},
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     --[207] = {id=207, internal_name="TNT",                 name="Demolition Trap",              string="1036",      text="Demolition Trap Manufacturable"},
     --[208] = {id=208, internal_name="SENTRY",              name="Sentry Trap",                  string="984",       text="Sentry Trap Manufacturable"},
@@ -79,7 +79,7 @@ ChecksTable = {
     [405] = {id=405, internal_name="POWER_SIGHT",         name="Sight of Evil",                string="632",       text="Sight of Evil Researchable"},
     [406] = {id=406, internal_name="POWER_SPEED",         name="Speed Monster",                string="637",       text="Speed Monster Researchable"},
     [407] = {id=407, internal_name="POWER_OBEY",          name="Must Obey",                    string="636",       text="Must Obey Researchable"},
-    [408] = {id=408, internal_name="POWER_CALL_TO_ARMS",  name="CTA",                          string="633",       text="CTA Researchable"},
+    [408] = {id=408, internal_name="POWER_CALL_TO_ARMS",  name="Call to Arms",                 string="633",       text="Call to Arms Researchable"},
     [409] = {id=409, internal_name="POWER_CONCEAL",       name="Conceal",                      string="639",       text="Conceal Researchable"},
     [410] = {id=410, internal_name="POWER_HOLD_AUDIENCE", name="Hold Audience",                string="634",       text="Hold Audience Researchable"},
     [411] = {id=411, internal_name="POWER_CAVE_IN",       name="Cave-In",                      string="635",       text="Cave-In Researchable"},
@@ -173,13 +173,13 @@ ChecksTable = {
 --  [6XX] = {id=6XX, internal_name="",                    name="Spider easter egg",            string="",       text="Spider easter egg Recipe Unlocked"}, --default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 -- PROGRESSIVES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- these work differently, see below.
-    [701] = {id=701, internal_name="4",                    name="Progressive Level Cap 1",      string="",       text="Progressive Level Cap 1 Unlocked"},      --Increase max creature level by 1 (starts max level 3): 4
-    [702] = {id=702, internal_name="5",                    name="Progressive Level Cap 2",      string="",       text="Progressive Level Cap 2 Unlocked"},      --5
-    [703] = {id=703, internal_name="6",                    name="Progressive Level Cap 3",      string="",       text="Progressive Level Cap 3 Unlocked"},      --6
-    [704] = {id=704, internal_name="7",                    name="Progressive Level Cap 4",      string="",       text="Progressive Level Cap 4 Unlocked"},      --7
-    [705] = {id=705, internal_name="8",                    name="Progressive Level Cap 5",      string="",       text="Progressive Level Cap 5 Unlocked"},      --8
-    [706] = {id=706, internal_name="9",                    name="Progressive Level Cap 6",      string="",       text="Progressive Level Cap 6 Unlocked"},      --9
-    [707] = {id=707, internal_name="0",                    name="Progressive Level Cap 7",      string="",       text="Progressive Level Cap 7 Unlocked"},      --10 and growup
+    [701] = {id=701, internal_name="4",                   name="Progressive Level Cap 1",      string="",       text="Progressive Level Cap 1 Unlocked"},      --Increase max creature level by 1 (starts max level 3): 4
+    [702] = {id=702, internal_name="5",                   name="Progressive Level Cap 2",      string="",       text="Progressive Level Cap 2 Unlocked"},      --5
+    [703] = {id=703, internal_name="6",                   name="Progressive Level Cap 3",      string="",       text="Progressive Level Cap 3 Unlocked"},      --6
+    [704] = {id=704, internal_name="7",                   name="Progressive Level Cap 4",      string="",       text="Progressive Level Cap 4 Unlocked"},      --7
+    [705] = {id=705, internal_name="8",                   name="Progressive Level Cap 5",      string="",       text="Progressive Level Cap 5 Unlocked"},      --8
+    [706] = {id=706, internal_name="9",                   name="Progressive Level Cap 6",      string="",       text="Progressive Level Cap 6 Unlocked"},      --9
+    [707] = {id=707, internal_name="0",                   name="Progressive Level Cap 7",      string="",       text="Progressive Level Cap 7 Unlocked"},      --10 and growup
     [711] = {id=711, internal_name="",                    name="Progressive Creature Limit 1", string="",       text="Progressive Creature Limit 1 Unlocked"}, --Increase creature limit by 5 (starts at max 10): 15
     [712] = {id=712, internal_name="",                    name="Progressive Creature Limit 2", string="",       text="Progressive Creature Limit 2 Unlocked"}, --20
     [713] = {id=713, internal_name="",                    name="Progressive Creature Limit 3", string="",       text="Progressive Creature Limit 3 Unlocked"}, --25
