@@ -8,17 +8,17 @@ function ReceivedLocationsTable.Has(id)
     return ReceivedLocationsTable[id] == true
 end
 
-function ReceivedLocationsTable.Count(checks)
-    local count = 0
-    if checks then
-        for _, iteminfo in pairs(checks) do
-            if ReceivedLocationsTable.Has(iteminfo.id) then
-                count = count + 1
-            end
-        end
-    end
-    return count
-end
+--function ReceivedLocationsTable.Count(checks)
+--    local count = 0
+--    if checks then
+--        for _, iteminfo in pairs(checks) do
+--            if ReceivedLocationsTable.Has(iteminfo.id) then
+--                count = count + 1
+--            end
+--        end
+--    end
+--    return count
+--end
 
 function ReceivedLocationsTable.Total()
     local count = 0
