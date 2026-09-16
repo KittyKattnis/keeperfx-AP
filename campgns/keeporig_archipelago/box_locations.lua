@@ -140,22 +140,6 @@ function BoxLocations.ActivateBoxes(level_id)
     end
 end
 
-function BoxLocations.SentList(level_id)
-    local mapBoxIDs = BoxLocations[level_id]
-    local message = "Sent Locations: "
-    local first = true
-    for _, id in pairs(mapBoxIDs) do
-        if SentLocations.Has(id) then
-            if not first then message = message .. ", " end
-            message = message .. id
-            first = false
-        end
-    end
-    if not first then message = message .. "." end
-    QuickMessage(message, "ARCHIPELAGO_ICON")
-end
-
-
 function BoxLocations.DeleteBoxes(level_id)
     local mapBoxIDs = BoxLocations[level_id]
     if not mapBoxIDs then

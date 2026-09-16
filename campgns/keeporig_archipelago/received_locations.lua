@@ -369,18 +369,6 @@ function CheckForMiscUnlocks()
                   end
             end
       end
-      --for itemid = 108,108 do
-      --      if ReceivedLocationsTable.Has(itemid) then
-      --            QuickMessage("B.", "ARCHIPELAGO_ICON")
-      --            if PLAYER0.WORKSHOP > 0 then
-      --                  QuickMessage("C.", "ARCHIPELAGO_ICON")
-      --                  RoomAvailable("PLAYER0","WORKSHOP",1,true)
-      --            end
-      --      else
-      --      QuickMessage("Not B.", "ARCHIPELAGO_ICON")
-      --      end
-      --end
-
       for itemid = 101, 200 do -- for all rooms
             if ReceivedLocationsTable.Has(itemid) then -- if player has unlocked this room (is researchable)
                   if PLAYER0[ChecksTable[itemid].internal_name] > 0 then -- and owns it on map start
