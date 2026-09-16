@@ -361,4 +361,34 @@ function IncreaseStartingGold()
     StartMoney(PLAYER0, startingGold)
 end
 
+function CheckForMiscUnlocks()
+      for itemid = 401, 403 do -- if you are playing where you don't have hand, slap or possession available from start...
+            if not ReceivedLocationsTable.Has(itemid) then
+                  if PLAYER0.available("PLAYER0", ChecksTable[itemid].internal_name) == 0 then -- and don't own them (not sure how you could have the spellbooks!)
+                        MagicAvailable("PLAYER0",ChecksTable[itemid].internal_name,false,false) -- then disable them (they are always on by default otherwise)
+                  end
+            end
+      end
+      --for itemid = 108,108 do
+      --      if ReceivedLocationsTable.Has(itemid) then
+      --            QuickMessage("B.", "ARCHIPELAGO_ICON")
+      --            if PLAYER0.WORKSHOP > 0 then
+      --                  QuickMessage("C.", "ARCHIPELAGO_ICON")
+      --                  RoomAvailable("PLAYER0","WORKSHOP",1,true)
+      --            end
+      --      else
+      --      QuickMessage("Not B.", "ARCHIPELAGO_ICON")
+      --      end
+      --end
+
+      for itemid = 101, 200 do -- for all rooms
+            if ReceivedLocationsTable.Has(itemid) then -- if player has unlocked this room (is researchable)
+                  if PLAYER0[ChecksTable[itemid].internal_name] > 0 then -- and owns it on map start
+                  --101-105, 108, 114
+                        RoomAvailable("PLAYER0",ChecksTable[itemid].internal_name,2,true) -- then it's available.
+                  end
+            end
+      end
+end
+
 return ReceivedLocations

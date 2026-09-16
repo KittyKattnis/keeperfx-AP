@@ -13,7 +13,7 @@ function Setup()
       IncreaseCreatureLimit()
       --IncreaseStartingGold() --Calling this each save and reload keeps adding gold to the player oops.
       HideVariable()
-      DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_SMALL")
+      DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_BIG")
       ActivateItems()
       BoxLocations.DeleteBoxes(Map.map_number)
       BoxLocations.SpawnBoxes(Map.map_number)
@@ -34,7 +34,7 @@ function SetupTriggers()
             end
             BoxLocations.UpdateEnsigns()
       end)
-    RegisterOnConditionEvent(function() print("Level " .. Map.map_number .. " Complete!") SendLocation(10000+(Map.map_number % 79)) end, function() return (PLAYER0.victory_state == 1) end)
+    RegisterOnConditionEvent(function() print("Level " .. Map.map_number .. " Complete!") SendLocation(10000+(Map.map_number % 79)) BoxLocations.UpdateEnsigns() BoxLocations.IsLevelComplete(Map.map_number) end, function() return (PLAYER0.victory_state == 1) end)
 end
 
 Game.APBoxMessage = 1
@@ -54,6 +54,7 @@ function ActivateItems()
       for index, itemid in pairs(receivedItems) do
             ReceivedLocations.ReceivedItemCheck(itemid)
       end
+      CheckForMiscUnlocks()
       QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")
 end
 

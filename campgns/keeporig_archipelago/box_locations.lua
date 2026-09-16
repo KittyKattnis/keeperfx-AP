@@ -117,11 +117,11 @@ function BoxLocations.ActivateBoxes(level_id)
                 message = message .. id
                 first = false
                 RegisterSpecialActivatedEvent(function()
-                    found = found + 1 --game can crash if box activated while found is unset i.e. when loading saved game.
+                    --found = found + 1 --game can crash if box activated while found is unset i.e. when loading saved game.
                     DecAPLvlBoxRemain()
                     local info = GetAPLocationInfo(id)
                     QuickMessage("Box " .. info.itemName .. " for " .. info.playerName .. " Activated.", "ARCHIPELAGO_ICON")
-                    QuickMessage("Boxes Found: " .. found.. "/" .. total .. ".", "ARCHIPELAGO_ICON")
+                    --QuickMessage("Boxes Found: " .. found.. "/" .. total .. ".", "ARCHIPELAGO_ICON")
                     if message2 ~= "" then
                         message2 = message2 .. ", "
                     end
