@@ -87,6 +87,9 @@ struct TbSpriteSheet * map_font = NULL;
 struct TbSpriteSheet * map_hand = NULL;
 long map_sound_fade;
 unsigned char *map_screen;
+
+static unsigned char netfont_palette_remap[PALETTE_COLORS];
+static unsigned char netfont_source_palette[PALETTE_SIZE];
 /******************************************************************************/
 #ifdef __cplusplus
 }
