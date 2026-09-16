@@ -1,2 +1,0 @@
-#order of the campaigns, campaigns not in the list will be at the bottom alphabetically
-keeporig_archipelago.cfg

@@ -20,7 +20,6 @@ empty =
 space = $(empty) $(empty)
 PKG_NAME = pkg/keeperfx-$(subst $(space),_,$(subst .,_,$(VER_STRING)))-patch.7z
 PKG_CAMPAIGN_FILES = \
-	$(patsubst %,pkg/campgns/campgn_order.txt,$(CAMPAIGNS)) \
 	$(patsubst %,pkg/campgns/%.cfg,$(CAMPAIGNS)) \
 	$(patsubst %,pkg/%,$(foreach campaign,$(CAMPAIGNS),$(wildcard campgns/$(campaign)/*.txt))) \
 	$(patsubst %,pkg/%,$(foreach campaign,$(CAMPAIGNS),$(wildcard campgns/$(campaign)_crtr/*.cfg))) \
