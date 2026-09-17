@@ -32,7 +32,7 @@ function Startup()
     RunDKScriptCommand("COMPUTER_PLAYER(PLAYER6,ROAMING)")
     RunDKScriptCommand("ALLY_PLAYERS(PLAYER0, PLAYER6, 3)")
     RunDKScriptCommand("SET_GAME_RULE(AlliesShareVision,1)")
-    PLAYER6.colour = "RED"
+    PLAYER6.colour = PLAYER0.colour
     Game.FlatAPBox = {}
     RegisterTimerEvent(function ()
         QuickInformation(99,"Welcome to KeeperAP!\nWoo!")
