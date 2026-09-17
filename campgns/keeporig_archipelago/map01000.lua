@@ -27,6 +27,7 @@ end
 function Startup()
     ConcealMapRect(PLAYER0, 187, 328, 24, 24)
     RevealMapRect(PLAYER0,34,100,3,3)
+    RevealMapRect(PLAYER0,328,40,27,15)
     ZoomToLocation(PLAYER0, 50)
     RunDKScriptCommand("COMPUTER_PLAYER(PLAYER6,ROAMING)")
     RunDKScriptCommand("ALLY_PLAYERS(PLAYER0, PLAYER6, 3)")
@@ -36,7 +37,12 @@ function Startup()
     RegisterTimerEvent(function ()
         QuickInformation(99,"Welcome to KeeperAP!\nWoo!")
         QuickObjective("Welcome to KeeperAP!\nWoo!")
+        --todo: add actual info here.
     end, 20, false)
+    --chicken blood
+    RegisterTimerEvent(function ()
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(7,34,76,0)")
+    end, 17, true)
 end
 
 function SlabToCentreSubtile(slab_coord)
