@@ -187,3 +187,41 @@ ENG = "Kill chickens"
 #_SPA = 
 #_SWE = 
 #_UKR = 
+
+[RECIPE_MAKE_ANGRY]
+ENG = "All creatures angry"
+#_CHI = 
+#_CHT = 
+#_CZE = 
+#_DUT = 
+#_FRE = 
+#_GER = 
+#_ITA = 
+#_JPN = 
+#_KOR = 
+#_LAT = 
+#_POL = 
+#_POR = 
+#_RUS = 
+#_SPA = 
+#_SWE = 
+#_UKR = 
+
+[RECIPE_DISEASE]
+ENG = "Disease your creatures"
+#_CHI = 
+#_CHT = 
+#_CZE = 
+#_DUT = 
+#_FRE = 
+#_GER = 
+#_ITA = 
+#_JPN = 
+#_KOR = 
+#_LAT = 
+#_POL = 
+#_POR = 
+#_RUS = 
+#_SPA = 
+#_SWE = 
+#_UKR =
