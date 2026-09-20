@@ -18,7 +18,7 @@ void ap_state_init(struct APState* ap)
     for (int i = 0; i < AP_LOCATION_NO; i++) {
         ap->checked_locations[i] = 0;
         ap->missing_locations[i] = 0; 
-        ap->items_received[i] = 0;
+        memset(&ap->items_received[i], 0, sizeof(ap->items_received[i]));
     }
 }
 
@@ -31,22 +31,25 @@ void ap_missing_init(struct APState* ap)
     }
 }
 
-void ap_state_update_items(struct APState* ap, int itemid)
+void ap_state_update_items(struct APState* ap, long long item,
+    long long location, int player, int flags, int index)
 {
-    int item_count = ap->items_count;
+    if (!ap)
+        return;
 
-    for (int i = 0; i < item_count ; i++)
-    {
-        if (itemid == ap->items_received[i])
-        {
-            return;
-        }
-        
-    }
+    if (ap->items_count >= AP_RECEIVED_ITEM_NO)
+        return;
 
-    ap->items_received[item_count] = itemid;
+    struct AP_ReceivedItem *received =
+        &ap->items_received[ap->items_count];
+
+    received->item = item;
+    received->location = location;
+    received->player = player;
+    received->flags = flags;
+    received->index = index;
+
     ap->items_count++;
-    
 }
 
 void ap_state_update_locations(struct APState* ap, int locationid)
