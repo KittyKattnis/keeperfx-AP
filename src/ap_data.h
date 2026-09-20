@@ -9,14 +9,23 @@ extern "C" {
 #endif
 
 #define AP_LOCATION_NO 166
+#define AP_RECEIVED_ITEM_NO 512
 extern struct APState g_ap_state;
 
+struct AP_ReceivedItem
+{
+    long long item;
+    long long location;
+    int player;
+    int flags;
+    int index;
+};
 struct APState
 {
     bool connected;
     int checked_locations[AP_LOCATION_NO];
     int missing_locations[AP_LOCATION_NO];
-    int items_received[AP_LOCATION_NO];   
+    struct AP_ReceivedItem items_received[AP_RECEIVED_ITEM_NO];   
     int items_count;
     int locations_count;
     int missing_locations_count;
@@ -35,7 +44,7 @@ struct AP_LocationInfo
 };
 
 void ap_state_init(struct APState* ap);
-void ap_state_update_items(struct APState* ap, int itemid);
+void ap_state_update_items(struct APState* ap, long long item, long long location, int player, int flags, int index);
 void ap_state_update_locations(struct APState* ap, int locationid);
 void ap_state_update_missing_locations(struct APState* ap, int locationid);
 bool ap_location_is_missing(struct APState* ap, int locationid);
