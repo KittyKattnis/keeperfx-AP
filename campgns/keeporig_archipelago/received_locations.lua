@@ -59,7 +59,7 @@ ChecksTable = {
     [303] = {id=303, internal_name="STEEL",               name="Iron Door",                    string="592",       text="Iron Door Manufacturable"},
     [304] = {id=304, internal_name="MAGIC",               name="Magic Door",                   string="593",       text="Magic Door Manufacturable"},
 --SPELLS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    [401] = {id=401, internal_name="POWER_HAND",          name="Hand of Evil",                 string="961",       text="Hand of Evil Researchable"},     --unlocked from start in default settings
+    --[401] = {id=401, internal_name="POWER_HAND",          name="Hand of Evil",                 string="961",       text="Hand of Evil Researchable"},     --unlocked from start in default settings
     [402] = {id=402, internal_name="POWER_SLAP",          name="Slap",                         string="962",       text="Slap Researchable"},             --unlocked from start in default settings
     [403] = {id=403, internal_name="POWER_POSSESS",       name="Possess Creature",             string="630",       text="Possess Creature Researchable"}, --unlocked from start in default settings
     [404] = {id=404, internal_name="POWER_IMP",           name="Create Imp",                   string="631",       text="Create Imp Researchable"},          --unlocked from start in default settings
@@ -197,6 +197,16 @@ FXRecipesTable = {
     [621] = {id=621, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze creatures",             string="",       text="Freeze creatures Recipe Unlocked"},
     [622] = {id=622, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow creatures",               string="",       text="Slow creatures Recipe Unlocked"},
 }
+SplitHandPowerTable = {
+    [427] = {id=427, internal_name="POWER_PICKUP_CREATURE",                           name="Pick Up Creature",             string="961",    text="Pick Up Creature Researchable"},
+    [428] = {id=428, internal_name="POWER_PICKUP_GOLD",                               name="Pick Up Gold",                 string="961",    text="Pick Up Gold Researchable"},
+    [429] = {id=429, internal_name="POWER_PICKUP_FOOD",                               name="Pick Up Food",                 string="961",    text="Pick Up Food Researchable"},
+    [430] = {id=430, internal_name="POWER_PICKUP_OBJECT",                             name="Pick Up Object",               string="961",    text="Pick Up Object Researchable"},
+}
+
+HeroesTable = {
+      [801] = {}
+}
 
 local IncludeBonusLevels = true
 local IncludeRecipes = true
@@ -207,6 +217,7 @@ local IncludeFXDoors = false
 local IncludeFXSpells = false
 local IncludeFXRecipes = false
 local IncludeImpsInPool = false
+local SplitHandPower = false
 
 if IncludeBonusLevels then
     for id, check in pairs(BonusLevelsTable) do
@@ -252,6 +263,17 @@ if IncludeImpsInPool then
       ChecksTable[100]  = {id=100,   internal_name="IMP",                 name="Imp",                          string="259",       text="Attract Imp"} -- also consider allowing imps through portal. Not sure how they work (they don't contribute towards portal limit, but can they come through when you reach your limit?)
      -- could be a fun alternative to having create imp
 end
+
+if SplitHandPower then
+    for id, check in pairs(SplitHandPowerTable) do
+        ChecksTable[id] = check
+    end
+else
+      ChecksTable[401] = {id=401, internal_name="POWER_HAND",          name="Hand of Evil",                 string="961",       text="Hand of Evil Researchable"}     --unlocked from start in default settings
+end
+
+
+
 
 --if _ then
 --    for id, check in pairs(_) do
