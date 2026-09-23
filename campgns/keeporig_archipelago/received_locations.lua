@@ -205,7 +205,18 @@ SplitHandPowerTable = {
 }
 
 HeroesTable = {
-      [801] = {}
+    [801]  = {id=801,   internal_name="THIEF",                                        name="Thief",                        string="",       text="Attract Thief"},           --unlocked from start in default hero settings
+    [802]  = {id=802,   internal_name="BARBARIAN",                                    name="Barbarian",                    string="",       text="Attract Barbarian"},       --unlocked from start in default hero settings
+    [803]  = {id=803,   internal_name="GIANT",                                        name="Giant",                        string="",       text="Attract Giant"},
+    [804]  = {id=804,   internal_name="WIZARD",                                       name="Wizard",                       string="",       text="Attract Wizard"},          --unlocked from start in default hero settings
+    [805]  = {id=805,   internal_name="FAIRY",                                        name="Fairy",                        string="",       text="Attract Fairy"},
+    [806]  = {id=806,   internal_name="ARCHER",                                       name="Archer",                       string="",       text="Attract Archer"},
+    [807]  = {id=807,   internal_name="DWARFA",                                       name="Mountain Dwarf",               string="",       text="Attract Mountain Dwarf"},
+    [808]  = {id=808,   internal_name="MONK",                                         name="Monk",                         string="",       text="Attract Monk"},
+    [809]  = {id=809,   internal_name="SAMURAI",                                      name="Samurai",                      string="",       text="Attract Samurai"},
+    [810]  = {id=810,   internal_name="WITCH",                                        name="Priestess",                    string="",       text="Attract Priestess"},
+    [811]  = {id=811,   internal_name="KNIGHT",                                       name="Knight",                       string="",       text="Attract Knight"},
+    [812]  = {id=812,   internal_name="AVATAR",                                       name="Avatar",                       string="",       text="Attract Avatar"},
 }
 
 local IncludeBonusLevels = true
@@ -218,6 +229,9 @@ local IncludeFXSpells = false
 local IncludeFXRecipes = false
 local IncludeImpsInPool = false
 local SplitHandPower = false
+local IncludeHeroes = false
+local IncludeTunnellersInPool = false
+local IncludeFXHeroes = false
 
 if IncludeBonusLevels then
     for id, check in pairs(BonusLevelsTable) do
@@ -272,8 +286,17 @@ else
       ChecksTable[401] = {id=401, internal_name="POWER_HAND",          name="Hand of Evil",                 string="961",       text="Hand of Evil Researchable"}     --unlocked from start in default settings
 end
 
-
-
+if IncludeHeroes then
+    for id, check in pairs(HeroesTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeTunnellersInPool then
+      ChecksTable[813]  = {id=813,   internal_name="TUNNELLER",                                      name="Tunneller",                    string="",       text="Attract Tunneller"}
+end
+if IncludeFXHeroes then
+      ChecksTable[814]  = {id=814,   internal_name="TIME_MAGE",                                      name="Time Mage",                    string="",       text="Attract Time Mage"}
+end
 
 --if _ then
 --    for id, check in pairs(_) do
