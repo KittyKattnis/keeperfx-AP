@@ -56,20 +56,20 @@ class KeeperFXCreature(IntEnum):
         MAIDEN = 18        
 
 class KeeperRoomName(StrEnum):
-        TREASURE = "Treasure Room"
-        LAIR = "Lair"
-        GARDEN = "Hatchery"
-        TRAINING = "Training Room"
-        RESEARCH = "Library"
-        BRIDGE = "Bridge"
-        GUARD_POST = "Guard Post"
-        WORKSHOP = "Workshop" #fine to allow trap/door creation if you somehow get one
-        PRISON = "Prison" #i.e. if you get one in a map you can't make Skeletons until you unlock this
-        TORTURE = "Torture Chamber" #i.e. if you get one in a map you can't make Ghosts until you unlock this
-        BARRACKS = "Barracks"
-        TEMPLE = "Temple" #fine to allow recipes if you somehow get one
-        GRAVEYARD = "Graveyard" #i.e. if you get one in a map you can't make Vampires until you unlock this
-        SCAVENGER = "Scavenger Room"
+        TREASURE = "Treasure Room Researchable"
+        LAIR = "Lair Researchable"
+        GARDEN = "Hatchery Researchable"
+        TRAINING = "Training Room Researchable"
+        RESEARCH = "Library Researchable"
+        BRIDGE = "Bridge Researchable"
+        GUARD_POST = "Guard Post Researchable"
+        WORKSHOP = "Workshop Researchable" #fine to allow trap/door creation if you somehow get one
+        PRISON = "Prison Researchable" #i.e. if you get one in a map you can't make Skeletons until you unlock this
+        TORTURE = "Torture Chamber Researchable" #i.e. if you get one in a map you can't make Ghosts until you unlock this
+        BARRACKS = "Barracks Researchable"
+        TEMPLE = "Temple Researchable" #fine to allow recipes if you somehow get one
+        GRAVEYARD = "Graveyard Researchable" #i.e. if you get one in a map you can't make Vampires until you unlock this
+        SCAVENGER = "Scavenger Room Researchable" #fine to allow scavenger room if you somehow get one
 
 class KeeperRoom(IntEnum):
         TREASURE = 101
@@ -350,53 +350,21 @@ class KeeperRecipe(IntEnum):
 #       RECIPE_SLOW = 625
 
 class KeeperProgressiveName(StrEnum):
-        PROGRESSIVE_LEVEL_CAP_1 = "Progressive Level Cap 1 Unlocked" #Increase max creature level by 1 (starts max level 3): 4
-        PROGRESSIVE_LEVEL_CAP_2 = "Progressive Level Cap 2 Unlocked" #5
-        PROGRESSIVE_LEVEL_CAP_3 = "Progressive Level Cap 3 Unlocked" #6
-        PROGRESSIVE_LEVEL_CAP_4 = "Progressive Level Cap 4 Unlocked" #7
-        PROGRESSIVE_LEVEL_CAP_5 = "Progressive Level Cap 5 Unlocked" #8
-        PROGRESSIVE_LEVEL_CAP_6 = "Progressive Level Cap 6 Unlocked" #9
-        PROGRESSIVE_LEVEL_CAP_7 = "Progressive Level Cap 7 Unlocked" #10 and growup
+        PROGRESSIVE_LEVEL_CAP = "Progressive Level Cap" #Increase max creature level by 1 (starts max level 3): 4
 
-        PROGRESSIVE_CREATURE_LIMIT_1 = "Progressive Creature Limit 1 Unlocked" #Increase creature limit by 5 (starts at max 10): 15
-        PROGRESSIVE_CREATURE_LIMIT_2 = "Progressive Creature Limit 2 Unlocked" #20
-        PROGRESSIVE_CREATURE_LIMIT_3 = "Progressive Creature Limit 3 Unlocked" #25
-        PROGRESSIVE_CREATURE_LIMIT_4 = "Progressive Creature Limit 4 Unlocked" #30
-        PROGRESSIVE_CREATURE_LIMIT_5 = "Progressive Creature Limit 5 Unlocked" #35
-        PROGRESSIVE_CREATURE_LIMIT_6 = "Progressive Creature Limit 6 Unlocked" #40
+        PROGRESSIVE_CREATURE_LIMIT = "Progressive Creature Limit" #Increase creature limit by 5 (starts at max 10): 15
 
-        PROGRESSIVE_STARTING_GOLD_1 = "Progressive Starting Gold 1 Unlocked" #Increase starting gold by 1250 (starts at 2500): 3750
-        PROGRESSIVE_STARTING_GOLD_2 = "Progressive Starting Gold 2 Unlocked" #5000
-        PROGRESSIVE_STARTING_GOLD_3 = "Progressive Starting Gold 3 Unlocked" #6250
-        PROGRESSIVE_STARTING_GOLD_4 = "Progressive Starting Gold 4 Unlocked" #7500
-        PROGRESSIVE_STARTING_GOLD_5 = "Progressive Starting Gold 5 Unlocked" #8750
-        PROGRESSIVE_STARTING_GOLD_6 = "Progressive Starting Gold 6 Unlocked" #10000
+        PROGRESSIVE_STARTING_GOLD = "Progressive Starting Gold" #Increase starting gold by 1250 (starts at 2500): 3750
 
 #    #Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)),
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
 
 class KeeperProgressive(IntEnum):
-        PROGRESSIVE_LEVEL_CAP_1 = 701 #Increase max creature level by 1 (starts max level 3): 4
-        PROGRESSIVE_LEVEL_CAP_2 = 702 #5
-        PROGRESSIVE_LEVEL_CAP_3 = 703 #6
-        PROGRESSIVE_LEVEL_CAP_4 = 704 #7
-        PROGRESSIVE_LEVEL_CAP_5 = 705 #8
-        PROGRESSIVE_LEVEL_CAP_6 = 706 #9
-        PROGRESSIVE_LEVEL_CAP_7 = 707 #10 and growup
+        PROGRESSIVE_LEVEL_CAP = 701 #Increase max creature level by 1 (starts max level 3): 4
 
-        PROGRESSIVE_CREATURE_LIMIT_1 = 711 #Increase creature limit by 5 (starts at max 10): 15
-        PROGRESSIVE_CREATURE_LIMIT_2 = 712 #20
-        PROGRESSIVE_CREATURE_LIMIT_3 = 713 #25
-        PROGRESSIVE_CREATURE_LIMIT_4 = 714 #30
-        PROGRESSIVE_CREATURE_LIMIT_5 = 715 #35
-        PROGRESSIVE_CREATURE_LIMIT_6 = 716 #40
+        PROGRESSIVE_CREATURE_LIMIT = 702 #Increase creature limit by 5 (starts at max 10): 15
 
-        PROGRESSIVE_STARTING_GOLD_1 = 721 #Increase starting gold by 1250 (starts at 2500): 3750
-        PROGRESSIVE_STARTING_GOLD_2 = 722 #5000
-        PROGRESSIVE_STARTING_GOLD_3 = 723 #6250
-        PROGRESSIVE_STARTING_GOLD_4 = 724 #7500
-        PROGRESSIVE_STARTING_GOLD_5 = 725 #8750
-        PROGRESSIVE_STARTING_GOLD_6 = 726 #10000
+        PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500): 3750
 #    #---------------------------------------------------------
 #    #Filler
 #    #okay I feel like a lot of the stuff in this game could be considered filler, like you could beat the whole game without using traps or doors, or half the rooms or spells or creatures, but yeah

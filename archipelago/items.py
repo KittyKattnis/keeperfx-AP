@@ -17,6 +17,12 @@ class KeeperItem(NamedTuple):
     classification: Optional[ItemClassification] = ItemClassification.filler
     amount: Optional[int] = 1
 
+PROGRESSIVE_COUNTS = {
+    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value: 6,
+    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT.value: 5, 
+    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD.value: 4, 
+}    
+
 CREATURES = {
 	KeeperCreatureName.FLY: KeeperItem(KeeperCreature.FLY, ItemClassification.progression), #"FLY", #unlocked from start in default settings
 	KeeperCreatureName.BUG: KeeperItem(KeeperCreature.BUG, ItemClassification.progression), #"BUG", #unlocked from start in default settings
@@ -187,25 +193,9 @@ RECIPES = {
 }
 
 PROGRESSIVES = {
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP_1: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP_1, ItemClassification.useful), #"Progressive Level Cap 1" #Increase max creature level by 1 (starts max level 3): 4
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP_2: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP_2, ItemClassification.useful), #"Progressive Level Cap 2" #5
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP_3: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP_3, ItemClassification.useful), #"Progressive Level Cap 3" #6
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP_4: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP_4, ItemClassification.useful), #"Progressive Level Cap 4" #7
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP_5: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP_5, ItemClassification.useful), #"Progressive Level Cap 5" #8
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP_6: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP_6, ItemClassification.useful), #"Progressive Level Cap 6" #9
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP_7: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP_7, ItemClassification.useful), #"Progressive Level Cap 7" #10 and growup
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT_1: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT_1, ItemClassification.useful), #"Progressive Creature Limit 1", #Increase creature limit by 5 (starts at max 10): 15
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT_2: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT_2, ItemClassification.useful), #"Progressive Creature Limit 2", #20
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT_3: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT_3, ItemClassification.useful), #"Progressive Creature Limit 3", #25
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT_4: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT_4, ItemClassification.useful), #"Progressive Creature Limit 4", #30
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT_5: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT_5, ItemClassification.useful), #"Progressive Creature Limit 5", #35
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT_6: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT_6, ItemClassification.useful), #"Progressive Creature Limit 6", #40
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD_1: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD_1, ItemClassification.useful), #"Progressive Starting Gold 1" #Increase starting gold by 1250 (starts at 2500): 3750
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD_2: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD_2, ItemClassification.useful), #"Progressive Starting Gold 2" #5000
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD_3: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD_3, ItemClassification.useful), #"Progressive Starting Gold 3" #6250
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD_4: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD_4, ItemClassification.useful), #"Progressive Starting Gold 4" #7500
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD_5: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD_5, ItemClassification.useful), #"Progressive Starting Gold 5" #8750
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD_6: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD_6, ItemClassification.useful), #"Progressive Starting Gold 6" #10000
+    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP, ItemClassification.useful), 
+    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT, ItemClassification.useful), #"Progressive Creature Limit 1", #Increase creature limit by 5 (starts at max 10): 15
+    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD, ItemClassification.useful), #"Progressive Starting Gold 1" #Increase starting gold by 1250 (starts at 2500): 3750
 #    #Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)),
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
 }
@@ -292,12 +282,15 @@ def create_all_items(world):
 
 
     for item_name in ITEM_NAME_TO_ID.keys():
-        if item_name in precollected_names:
-            precollected_names.remove(item_name)
-            
-        else:
-            item = world.create_item(item_name)
-            item_pool.append(item)
+
+        amount_to_create = PROGRESSIVE_COUNTS.get(item_name, 1)
+
+        for _ in range(amount_to_create):
+            if item_name in precollected_names:
+                precollected_names.remove(item_name)
+            else:
+                item = world.create_item(item_name)
+                item_pool.append(item)
 
     total_locations = len(world.multiworld.get_unfilled_locations(world.player))
     missing_items_count = total_locations - len(item_pool)
