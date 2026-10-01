@@ -122,7 +122,7 @@ def connect_regions(world: DungeonKeeperWorld) -> None:
     overworld.connect(mistle, "Overworld to Mistle", lambda state: state.has("Level 19 Unlocked", world.player))
     overworld.connect(skybirdtrill, "Overworld to Skybird Trill", lambda state: state.has("Level 20 Unlocked", world.player))
 
-    overworld.connect(temple, "Overworld to Temple", lambda state: state.has("Temple", world.player))
+    overworld.connect(temple, "Overworld to Temple", lambda state: state.has_all({"Temple Researchable", "Library Researchable"}, world.player))
 
     if world.options.secret_levels:
         secret1 = world.get_region("Secret 1")

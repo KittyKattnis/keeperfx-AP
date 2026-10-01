@@ -86,8 +86,8 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
 # temple recipes
     location_rules["Recipe Cheaper Imps"] = Has("Create Imp")
-    location_rules["Recipe Complete Manufacturing"] = Has("Workshop") & HasAny("Level 20 Unlocked", "Attract Beetle")
-    location_rules["Recipe Complete Research"] = Has("Library") & HasAny("Level 20 Unlocked", "Level 10 Unlocked", "Attract Fly")
+    location_rules["Recipe Complete Manufacturing"] = Has("Workshop Researchable") & HasAny("Level 20 Unlocked", "Attract Beetle")
+    location_rules["Recipe Complete Research"] = Has("Library Researchable") & HasAny("Level 20 Unlocked", "Level 10 Unlocked", "Attract Fly")
     location_rules["Recipe Bile Demon"] = HasAny("Attract Spider", "Level 4 Unlocked", "Level 5 Unlocked", "Level 18 Unlocked")
     location_rules["Recipe Warlock"] = HasAll("Attract Spider", "Attract Fly") | HasAll("Attract Fly", "Level 4 Unlocked") | HasAll("Attract Fly", "Level 5 Unlocked") | HasAll("Attract Fly", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 10 Unlocked") | HasAll("Attract Spider", "Level 20 Unlocked")
     location_rules["Recipe Mistress"] = HasAll("Attract Beetle", "Attract Spider") | HasAll("Attract Spider", "Level 10 Unlocked") | HasAll("Attract Spider", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Beetle", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")
