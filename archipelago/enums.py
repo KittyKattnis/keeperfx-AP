@@ -204,7 +204,6 @@ class KeeperFXPowerName(StrEnum):
         POWER_FLIGHT = "Flight Researchable"
         POWER_VISION = "Vision Researchable"
         POWER_TUNNELLER = "Recruit Tunneller Researchable"
-        POWER_CLEANSE = "Cleanse Researchable"
 
 class KeeperFXPower(IntEnum):   
         POWER_TIME_BOMB = 419
