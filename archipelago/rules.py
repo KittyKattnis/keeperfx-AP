@@ -79,6 +79,42 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
     location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls Researchable", "Library Researchable") #If FX traps are on, could be this OR workshop and TNT trap
 
+#Scaling requirements for difficult levels
+
+    location_rules["Level 20 Beaten"] = HasFromListUnique(*[f"{key}" for key in CREATURES], 
+                                 count=9).resolve(world)
+
+# temple recipes
+    location_rules["Recipe Cheaper Imps"] = Has("Create Imp")
+    location_rules["Recipe Complete Manufacturing"] = Has("Workshop") & HasAny("Level 20 Unlocked", "Attract Beetle")
+    location_rules["Recipe Complete Research"] = Has("Library") & HasAny("Level 20 Unlocked", "Level 10 Unlocked", "Attract Fly")
+    location_rules["Recipe Bile Demon"] = HasAny("Attract Spider", "Level 4 Unlocked", "Level 5 Unlocked", "Level 18 Unlocked")
+    location_rules["Recipe Warlock"] = HasAll("Attract Spider", "Attract Fly") | HasAll("Attract Fly", "Level 4 Unlocked") | HasAll("Attract Fly", "Level 5 Unlocked") | HasAll("Attract Fly", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 10 Unlocked") | HasAll("Attract Spider", "Level 20 Unlocked")
+    location_rules["Recipe Mistress"] = HasAll("Attract Beetle", "Attract Spider") | HasAll("Attract Spider", "Level 10 Unlocked") | HasAll("Attract Spider", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Beetle", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")
+    location_rules["Recipe Horned Reaper"] = HasAll("Attract Mistress", "Attract Bile Demon", "Attract Troll") | Has("Level 9 Unlocked")
+    location_rules["Recipe Make Angry"] = Has("Attract Horned Reaper") | CanReachLocation("Recipe Horned Reaper")
+    location_rules["Recipe Kill Chickens"] = HasAny("Attract Ghost", "Level 6 Unlocked", "Level 15 Unlocked", "Level 19 Unlocked", "Torture Chamber") & Has("Hatchery")
+    location_rules["Recipe Disease Creatures"] = HasAny("Attract Vampire", "Graveyard", "Level 12 Unlocked", "Level 19 Unlocked")
+    location_rules["Recipe Chicken Creatures"] = HasAny("Attract Bile Demon", "Level 4 Unlocked", "Level 5 Unlocked","Level 9 Unlocked", "Level 11 Unlocked", "Level 18 Unlocked") | CanReachLocation("Recipe Bile Demon")
+    location_rules["Recipe Tentacle"] = HasAll("Attract Troll", "Attract Spider") | HasAll("Attract Troll", "Level 4 Unlocked") | HasAll("Attract Troll", "Level 5 Unlocked") | HasAll("Attract Troll", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 9 Unlocked") | HasAll("Attract Spider", "Level 11 Unlocked")
+    location_rules["Recipe Hellhound"] = HasAll("Attract Dragon", "Attract Fly") | Has("Level 10 Unlocked") | HasAll("Attract Dragon", "Level 20 Unlocked") | HasAll("Attract Fly", "Level 10 Unlocked") | HasAll("Attract Fly", "Level 13 Unlocked") | HasAll("Attract Fly", "Level 18 Unlocked")
+    location_rules["Recipe Speed"] = Has("Attract Fly") & HasAny("Level 8 Unlocked", "Attract Hellhound")
+    location_rules["Recipe Conceal"] = HasAll("Attract Troll", "Attract Fly") | HasAll("Attract Troll", "Level 10 Unlocked") | HasAll("Attract Troll", "Level 20 Unlocked") | HasAll("Attract Fly", "Level 9 Unlocked") | HasAll("Attract Fly", "Level 11 Unlocked") | HasAll("Attract Fly", "Level 14 Unlocked")
+    location_rules["Recipe Heal"] = HasAll("Attract Orc", "Attract Spider") | HasAll("Attract Orc", "Level 4 Unlocked") | HasAll("Attract Orc", "Level 5 Unlocked") | HasAll("Attract Orc", "Level 18 Unlocked")
+    location_rules["Recipe Rebound"] = HasAll("Attract Mistress", "Attract Beetle") | HasAll("Attract Mistress", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Beetle", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 6 Unlocked") | HasAll("Attract Beetle", "Level 9 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")
+    location_rules["Recipe Protect"] = HasAll("Attract Bile Demon", "Attract Beetle") | HasAll("Attract Bile Demon", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Bile Demon", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 9 Unlocked") | HasAll("Attract Beetle", "Level 11 Unlocked") | HasAll("Attract Beetle", "Level 15 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")   
+    location_rules["Recipe Flight"] = HasAll("Attract Demon Spawn", "Attract Fly") | HasAll("Attract Demon Spawn", "Level 10 Unlocked") | HasAll("Attract Demon Spawn", "Level 10 Unlocked") | HasAll("Attract Fly", "Level 8 Unlocked") | HasAll("Attract Fly", "Level 11 Unlocked")
+    location_rules["Recipe Freeze"] = HasAll("Attract Vampire", "Attract Spider") | HasAll("Attract Vampire", "Level 4 Unlocked") | HasAll("Attract Vampire", "Level 5 Unlocked") | HasAll("Attract Vampire", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 12 Unlocked") | HasAll("Attract Spider", "Level 19 Unlocked")
+    location_rules["Recipe Slow"] = HasAll("Attract Vampire", "Attract Demon Spawn") | HasAll("Attract Vampire", "Level 8 Unlocked") | HasAll("Attract Vampire", "Level 12 Unlocked") | HasAll("Attract Demon Spawn", "Level 12 Unlocked") | HasAll("Attract Demon Spawn", "Level 19 Unlocked")
+
+    for location_name, rule_logic in location_rules.items():
+        try:
+            location_obj = world.get_location(location_name)
+            
+            world.set_rule(location_obj, rule_logic)
+            
+        except KeyError:
+            print(f"Warning: Could not find location '{location_name}' to apply rules.")
 
 
     set_completion_condition(world)
