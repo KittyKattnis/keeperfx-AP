@@ -87,7 +87,7 @@ static unsigned char added_icon_frame_count[GUI_PANEL_SPRITES_NEW];
 static int num_added_sprite = 0;
 static int num_added_icons = 0;
 
-#define MAX_CUSTOM_ENSIGNS 64
+#define MAX_CUSTOM_ENSIGNS 256
 
 struct CustomEnsignData
 {

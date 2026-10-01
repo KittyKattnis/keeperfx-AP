@@ -21,6 +21,7 @@
 
 
 void ap_location_info_callback(std::vector<AP_NetworkItem> locations);
+void ap_receive(AP_NetworkItem,bool);
 void ap_hint_message(AP_HintMessage msg);
 void ap_server_chat_message(AP_ServerChatMessage msg);
 void ap_chat_message(AP_ChatMessage msg);
@@ -99,34 +100,14 @@ void ap_refresh_missing()
     }
 }
 
-void ap_receive(int id, bool notify)
+void ap_receive(AP_NetworkItem item,bool notify)
 {
     if(game.game_kind == GKind_LocalGame)
     {
-        lua_on_item_received(id);
+        lua_on_item_received(item.item);
     }
-    ap_state_update_items(&g_ap_state, id);
 
- //   pre lua version testing code   
- //   TbBool available = 1;
- //   long roomid = id % 100;    
-
-
- //   switch (ap_getitem_type(id))
- //   {
- //   case 1: // Rooms
- //       set_room_available(0, roomid, available, available);
- //       update_room_tab_to_config();
- //       break;  
-
- //   case 2: // Spells
-       // set_power_available(1, spellid, 1, 1);
- //       break;  
-
- //  default:
- //      break;
- //  }
-
+    ap_state_update_items(&g_ap_state, item.item, item.location, item.player, item.flags, item.index);
 }
 
 void ap_send(int id)

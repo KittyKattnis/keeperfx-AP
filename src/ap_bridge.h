@@ -6,7 +6,6 @@ void ap_socketconnected();
 void ap_slot_connected();
 void ap_room_update();
 void ap_refresh_missing();
-void ap_receive(int id, bool notify);
 void ap_send(int id);
 void ap_clear();
 bool ap_connection_status();

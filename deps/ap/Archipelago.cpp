@@ -88,7 +88,7 @@ int pending_status = -1;
 
 // Callback function pointers
 std::function<void()> resetItemValues = nullptr;
-std::function<void(int64_t,bool)> getitemfunc = nullptr;
+std::function<void(AP_NetworkItem,bool)> getitemfunc = nullptr;
 std::function<void(int64_t)> checklocfunc = nullptr;
 std::function<void(std::vector<AP_NetworkItem>)> locinfofunc = nullptr;
 std::function<void(std::string, std::string)> recvdeath = nullptr;
@@ -624,7 +624,7 @@ void AP_SetItemClearCallback(std::function<void()> f_itemclr) {
     resetItemValues = f_itemclr;
 }
 
-void AP_SetItemRecvCallback(std::function<void(int64_t,bool)> f_itemrecv) {
+void AP_SetItemRecvCallback(std::function<void(AP_NetworkItem,bool notify)> f_itemrecv) {
     getitemfunc = f_itemrecv;
 }
 
@@ -1338,7 +1338,7 @@ bool parse_response(std::string msg, std::string &request) {
                 item.locationName = getLocationName(sender.game, item.location);
                 item.playerName = sender.alias;
                 notify = (item_idx == 0 && last_item_idx <= j && multiworld) || item_idx != 0;
-                if (getitemfunc) getitemfunc(item.item, notify);
+                if (getitemfunc) getitemfunc(item, notify);
                 received.push_back(item);
                 if (queueitemrecvmsg && notify) {
                     AP_ItemRecvMessage* msg = new AP_ItemRecvMessage;

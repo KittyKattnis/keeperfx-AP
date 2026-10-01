@@ -50,9 +50,26 @@ function OnItemReceived(itemid)
 end
 
 function ActivateItems()
+      -- now returns full AP_NetworkItem!
       local receivedItems = GetAPItems()
-      for index, itemid in pairs(receivedItems) do
+      -- get the last processed index, stored in intralvl data so persists between levels and saves
+      local lastProcessed = GetAPLastProcessedItemIndex()
+      for _, apitem in pairs(receivedItems) do
+            local itemid = apitem.item
+            local index = apitem.index
+            local flags = apitem.flags
+            local sender = apitem.player
+            local location = apitem.location
+            -- process all items that need to be unclocked on each level, i.e. rooms/creatures/spells etc
             ReceivedLocations.ReceivedItemCheck(itemid)
+            if apitem.index > lastProcessed then
+                  UnlockProgressive(itemid)
+                  lastProcessed = index
+                  -- NEW LOGIC HERE TO HANDLE ONLY SINGLE SHOT ACTIVATIONS! (fillers, traps, "progressives"?)
+            end
+      end
+      if lastProcessed ~= GetAPLastProcessedItemIndex() then
+            SetAPLastProcessedItemIndex(lastProcessed)
       end
       CheckForMiscUnlocks()
       QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")

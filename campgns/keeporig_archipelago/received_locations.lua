@@ -253,8 +253,8 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
             UnlockLevel(itemid)
       elseif itemid > 600 and itemid <= 700 then
             UnlockRecipe(itemid)
-      elseif itemid > 700 and itemid <= 800 then
-          UnlockProgressive(itemid)
+      -- elseif itemid > 700 and itemid <= 800 then
+      --     UnlockProgressive(itemid)
       --don't think these work this way.
       --elseif itemid > 800 and itemid <= 900 then
       --    UnlockFiller(itemid)
