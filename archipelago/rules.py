@@ -3,8 +3,9 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import TYPE_CHECKING, Literal
 
-from .items import CREATURES, ROOMS, SPELLS, LEVELS
-from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
+
+from .items import CREATURES, ROOMS, SPELLS, LEVELS, KEEPERFX_CREATURES
+from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName, KeeperFXCreatureName, KeeperFXCreature
 
 from rule_builder.rules import (Rule, CanReachEntrance, CanReachLocation, Has, HasAll, HasAny, HasFromListUnique, HasGroupUnique,
                                 OptionFilter, True_, HasFromList)
@@ -81,8 +82,15 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
 #Scaling requirements for difficult levels
 
-    location_rules["Level 20 Beaten"] = HasFromListUnique(*[f"{key}" for key in CREATURES], 
-                                 count=9).resolve(world)
+    if world.options.KeeperFXCreatures:
+        all_creatures = list(CREATURES) + list(KEEPERFX_CREATURES)
+        location_rules["Level 20 Beaten"] = HasFromListUnique(*[f"{key}" for key in all_creatures], 
+        count=15
+        ).resolve(world)
+
+    else:    
+        location_rules["Level 20 Beaten"] = HasFromListUnique(*[f"{key}" for key in CREATURES], 
+        count=9).resolve(world)
 
 # temple recipes
     location_rules["Recipe Cheaper Imps"] = Has("Create Imp")

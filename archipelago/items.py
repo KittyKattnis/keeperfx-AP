@@ -203,8 +203,8 @@ PROGRESSIVES = {
 # KEEPERFX ADDITIONS
 
 KEEPERFX_CREATURES = {
-KeeperFXCreatureName.DRUID: KeeperItem(KeeperFXCreature.DRUID, ItemClassification.useful),
-KeeperFXCreatureName.MAIDEN: KeeperItem(KeeperFXCreature.MAIDEN, ItemClassification.useful),
+KeeperFXCreatureName.DRUID: KeeperItem(KeeperFXCreature.DRUID, ItemClassification.progression),
+KeeperFXCreatureName.MAIDEN: KeeperItem(KeeperFXCreature.MAIDEN, ItemClassification.progression),
 }
 
 KEEPERFX_SPELLS = {
