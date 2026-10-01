@@ -31,12 +31,6 @@ ChecksTable = {
      [14] = {id=14,  internal_name="HELL_HOUND",          name="Hound",                        string="270",       text="Attract Hound"},
      [15] = {id=15,  internal_name="HORNY",               name="Horned Reaper",                string="267",       text="Attract Horned Reaper"}, --not usually attracted from Portal but I think that's fine and adds variety
      [16] = {id=16,  internal_name="VAMPIRE",             name="Vampire",                      string="274",       text="Attract Vampire"},       --not usually attracted from Portal but I think that's fine and adds variety
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     --[17] = {id=17,  internal_name="DRUID",               name="Druid",                        string="1042",      text="Attract Druid"},
-     --[18] = {id=18,  internal_name="MAIDEN",              name="Maiden",                       string="1045",      text="Attract Maiden"},
-     --[19] = {id=19,  internal_name="",                    name="(others?)",                    string="",          text="Attract (others?)"},
-     -- also consider allowing imps through portal. Not sure how they work (they don't contribute towards portal limit, but can they come through when you reach your limit?)
-     -- could be a fun alternative to having create imp
 -- ROOMS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     [101] = {id=101, internal_name="TREASURE",            name="Treasure Room",                string="599",       text="Treasure Room Researchable"},           --unlocked from start in default settings
     [102] = {id=102, internal_name="LAIR",                name="Lair",                         string="609",       text="Lair Researchable"},                    --unlocked from start in default settings
@@ -59,20 +53,13 @@ ChecksTable = {
     [204] = {id=204, internal_name="LAVA",                name="Lava Trap",                    string="583",       text="Lava Trap Manufacturable"},
     [205] = {id=205, internal_name="BOULDER",             name="Boulder Tap",                  string="578",       text="Boulder Tap Manufacturable"},
     [206] = {id=206, internal_name="WORD_OF_POWER",       name="Word of Power Trap",           string="582",       text="Word of Power Trap Manufacturable"},
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --[207] = {id=207, internal_name="TNT",                 name="Demolition Trap",              string="1036",      text="Demolition Trap Manufacturable"},
-    --[208] = {id=208, internal_name="SENTRY",              name="Sentry Trap",                  string="984",       text="Sentry Trap Manufacturable"},
-    --[209] = {id=209, internal_name="BALLISTA",            name="Ballista Trap",                string="1039",      text="Ballista Trap Manufacturable"},
 -- DOORS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     [301] = {id=301, internal_name="WOOD",                name="Wooden Door",                  string="590",       text="Wooden Door Manufacturable"},
     [302] = {id=302, internal_name="BRACED",              name="Braced Door",                  string="591",       text="Braced Door Manufacturable"},
     [303] = {id=303, internal_name="STEEL",               name="Iron Door",                    string="592",       text="Iron Door Manufacturable"},
     [304] = {id=304, internal_name="MAGIC",               name="Magic Door",                   string="593",       text="Magic Door Manufacturable"},
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --[305] = {id=305, internal_name="SECRET",              name="Secret Door",                  string="935",       text="Secret Door Manufacturable"},
-    --[306] = {id=306, internal_name="MIDAS",               name="Midas Door",                   string="1076",      text="Midas Door Manufacturable"},
 --SPELLS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    [401] = {id=401, internal_name="POWER_HAND",          name="Hand of Evil",                 string="961",       text="Hand of Evil Researchable"},     --unlocked from start in default settings
+    --[401] = {id=401, internal_name="POWER_HAND",          name="Hand of Evil",                 string="961",       text="Hand of Evil Researchable"},     --unlocked from start in default settings
     [402] = {id=402, internal_name="POWER_SLAP",          name="Slap",                         string="962",       text="Slap Researchable"},             --unlocked from start in default settings
     [403] = {id=403, internal_name="POWER_POSSESS",       name="Possess Creature",             string="630",       text="Possess Creature Researchable"}, --unlocked from start in default settings
     [404] = {id=404, internal_name="POWER_IMP",           name="Create Imp",                   string="631",       text="Create Imp Researchable"},          --unlocked from start in default settings
@@ -90,16 +77,6 @@ ChecksTable = {
     [416] = {id=416, internal_name="POWER_DISEASE",       name="Disease",                      string="642",       text="Disease Researchable"},
     [417] = {id=417, internal_name="POWER_ARMAGEDDON",    name="Armageddon",                   string="646",       text="Armageddon Researchable"},
     [418] = {id=418, internal_name="POWER_DESTROY_WALLS", name="Destroy Walls",                string="643",       text="Destroy Walls Researchable"},
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --[419] = {id=419, internal_name="POWER_TIME_BOMB",     name="Time Bomb",                    string="645",       text="Time Bomb Researchable"},
-    --[420] = {id=420, internal_name="POWER_SLOW",          name="Slow",                         string="1055",      text="Slow Researchable"},
-    --[421] = {id=421, internal_name="POWER_FREEZE",        name="Freeze",                       string="1054",      text="Freeze Researchable"},
-    --[422] = {id=422, internal_name="POWER_REBOUND",       name="Rebound",                      string="1053",      text="Rebound Researchable"},
-    --[423] = {id=423, internal_name="POWER_FLIGHT",        name="Flight",                       string="1056",      text="Flight Researchable"},
-    --[424] = {id=424, internal_name="POWER_VISION",        name="Vision",                       string="1058",      text="Vision Researchable"},
-    --[425] = {id=425, internal_name="POWER_TUNNELLER",     name="Recruit Tunneller",            string="1072",      text="Recruit Tunneller Researchable"},
-    --[426] = {id=426, internal_name="POWER_CLEANSE",       name="Cleanse",                      string="",          text="Cleanse Researchable"},          --not made yet
---  could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 -- LEVELS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --    --Levels
 --    --Three of these should be unlocked by default.
@@ -136,41 +113,6 @@ ChecksTable = {
     [518] = {id=518, internal_name="",                    name="18",                           string="219",       text="Level 18 Unlocked"},
     [519] = {id=519, internal_name="",                    name="19",                           string="220",       text="Level 19 Unlocked"},
     [520] = {id=520, internal_name="",                    name="20",                           string="221",       text="Level 20 Unlocked"},
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    [521] = {id=521, internal_name="",                    name="100",                          string="430",       text="Level 100 Unlocked"}, --string is just "Bonus"
-    [522] = {id=522, internal_name="",                    name="101",                          string="430",       text="Level 101 Unlocked"}, --string is just "Bonus"
-    [523] = {id=523, internal_name="",                    name="102",                          string="430",       text="Level 102 Unlocked"}, --string is just "Bonus"
-    [524] = {id=524, internal_name="",                    name="103",                          string="430",       text="Level 103 Unlocked"}, --string is just "Bonus"
-    [525] = {id=525, internal_name="",                    name="104",                          string="430",       text="Level 104 Unlocked"}, --string is just "Bonus"
-    [526] = {id=526, internal_name="",                    name="105",                          string="430",       text="Level 105 Unlocked"}, --string is just "Bonus"
--- RECIPES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    [601] = {id=601, internal_name="PosUniqFunc,CHEAPER_IMPS,IMP",                    name="Cheaper Imps",                 string="",       text="Cheaper Imps Recipe Unlocked"},
-    [602] = {id=602, internal_name="PosUniqFunc,COMPLETE_MANUFACTR,BUG,BUG",          name="Complete Manufacturing",       string="",       text="Complete Manufacturing Recipe Unlocked"},
-    [603] = {id=603, internal_name="PosUniqFunc,COMPLETE_RESEARCH,FLY,FLY",           name="Complete Research",            string="",       text="Complete Research Recipe Unlocked"},
-    [604] = {id=604, internal_name="MkCreature,BILE_DEMON,SPIDER,SPIDER,SPIDER",      name="Bile Demon",                   string="",       text="Bile Demon Recipe Unlocked"},
-    [605] = {id=605, internal_name="MkCreature,SORCEROR,FLY,SPIDER",                  name="Warlock",                      string="",       text="Warlock Recipe Unlocked"},
-    [606] = {id=606, internal_name="MkCreature,DARK_MISTRESS,BUG,SPIDER",             name="Mistress",                     string="",       text="Mistress Recipe Unlocked"},
-    [607] = {id=607, internal_name="MkCreature,HORNY,TROLL,BILE_DEMON,DARK_MISTRESS", name="Horned Reaper",                string="",       text="Horned Reaper Recipe Unlocked"},
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    --[608] = {id=608, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die",             string="",       text="All chickens die Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    --[609] = {id=609, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    --[610] = {id=610, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    --[611] = {id=611, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    --[612] = {id=612, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good skeleton",                string="",       text="Good skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    --[613] = {id=613, internal_name="MkCreature,TENTACLE,TROLL,SPIDER",                name="Tentacle",                     string="",       text="Tentacle Recipe Unlocked"},
-    --[614] = {id=614, internal_name="MkCreature,HELL_HOUND,DRAGON,FLY",                name="Hound",                        string="",       text="Hound Recipe Unlocked"},
-    --[615] = {id=615, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed creatures",              string="",       text="Speed creatures Recipe Unlocked"},
-    --[616] = {id=616, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal creatures",            string="",       text="Conceal creatures Recipe Unlocked"},
-    --[617] = {id=617, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal creatures",               string="",       text="Heal creatures Recipe Unlocked"},
-    --[618] = {id=618, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound creatures",            string="",       text="Rebound creatures Recipe Unlocked"},
-    --[619] = {id=619, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect creatures",            string="",       text="Protect creatures Recipe Unlocked"},
-    --[620] = {id=620, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight creatures",             string="",       text="Flight creatures Recipe Unlocked"},
-    --[621] = {id=621, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze creatures",             string="",       text="Freeze creatures Recipe Unlocked"},
-    --[622] = {id=622, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow creatures",               string="",       text="Slow creatures Recipe Unlocked"},
--- Can't do these ones, they're hardcoded.
---  [6XX] = {id=6XX, internal_name="",                    name="Wishing Well",                 string="",       text="Wishing Well Recipe Unlocked"}, --default, might be hardcoded, would probably be stupid to include
---  [6XX] = {id=6XX, internal_name="",                    name="All chickens die 2",           string="",       text="All chickens die 2 Recipe Unlocked"}, -default, unlock would probably be stupid to include outside of a Templesanity
---  [6XX] = {id=6XX, internal_name="",                    name="Spider easter egg",            string="",       text="Spider easter egg Recipe Unlocked"}, --default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 -- PROGRESSIVES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- these work differently, see below.
     [701] = {id=701, internal_name="4",                   name="Progressive Level Cap 1",      string="",       text="Progressive Level Cap 1 Unlocked"},      --Increase max creature level by 1 (starts max level 3): 4
@@ -193,6 +135,189 @@ ChecksTable = {
     [725] = {id=725, internal_name="",                    name="Progressive Starting Gold 5",  string="",       text="Progressive Starting Gold 5 Unlocked"},  --8750
     [726] = {id=726, internal_name="",                    name="Progressive Starting Gold 6",  string="",       text="Progressive Starting Gold 6 Unlocked"},  --10000
 }
+
+BonusLevelsTable = {
+    [521] = {id=521, internal_name="",                    name="100",                          string="430",       text="Level 100 Unlocked"}, --string is just "Bonus"
+    [522] = {id=522, internal_name="",                    name="101",                          string="430",       text="Level 101 Unlocked"}, --string is just "Bonus"
+    [523] = {id=523, internal_name="",                    name="102",                          string="430",       text="Level 102 Unlocked"}, --string is just "Bonus"
+    [524] = {id=524, internal_name="",                    name="103",                          string="430",       text="Level 103 Unlocked"}, --string is just "Bonus"
+    [525] = {id=525, internal_name="",                    name="104",                          string="430",       text="Level 104 Unlocked"}, --string is just "Bonus"
+    [526] = {id=526, internal_name="",                    name="105",                          string="430",       text="Level 105 Unlocked"}, --string is just "Bonus"
+}
+RecipesTable = {
+-- RECIPES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    [601] = {id=601, internal_name="PosUniqFunc,CHEAPER_IMPS,IMP",                    name="Cheaper Imps",                 string="",       text="Cheaper Imps Recipe Unlocked"},
+    [602] = {id=602, internal_name="PosUniqFunc,COMPLETE_MANUFACTR,BUG,BUG",          name="Complete Manufacturing",       string="",       text="Complete Manufacturing Recipe Unlocked"},
+    [603] = {id=603, internal_name="PosUniqFunc,COMPLETE_RESEARCH,FLY,FLY",           name="Complete Research",            string="",       text="Complete Research Recipe Unlocked"},
+    [604] = {id=604, internal_name="MkCreature,BILE_DEMON,SPIDER,SPIDER,SPIDER",      name="Bile Demon",                   string="",       text="Bile Demon Recipe Unlocked"},
+    [605] = {id=605, internal_name="MkCreature,SORCEROR,FLY,SPIDER",                  name="Warlock",                      string="",       text="Warlock Recipe Unlocked"},
+    [606] = {id=606, internal_name="MkCreature,DARK_MISTRESS,BUG,SPIDER",             name="Mistress",                     string="",       text="Mistress Recipe Unlocked"},
+    [607] = {id=607, internal_name="MkCreature,HORNY,TROLL,BILE_DEMON,DARK_MISTRESS", name="Horned Reaper",                string="",       text="Horned Reaper Recipe Unlocked"},
+}
+NegativeRecipesTable = {
+    [608] = {id=608, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die",             string="",       text="All chickens die Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [609] = {id=609, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [610] = {id=610, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [611] = {id=611, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+}
+
+FXCreaturesTable = {
+     [17] = {id=17,  internal_name="DRUID",               name="Druid",                        string="1042",      text="Attract Druid"},
+     [18] = {id=18,  internal_name="MAIDEN",              name="Maiden",                       string="1045",      text="Attract Maiden"},
+}
+FXTrapsTable = {
+    [207] = {id=207, internal_name="TNT",                 name="Demolition Trap",              string="1036",      text="Demolition Trap Manufacturable"},
+    [208] = {id=208, internal_name="SENTRY",              name="Sentry Trap",                  string="984",       text="Sentry Trap Manufacturable"},
+    [209] = {id=209, internal_name="BALLISTA",            name="Ballista Trap",                string="1039",      text="Ballista Trap Manufacturable"},
+}
+FXDoorsTable = {
+    [305] = {id=305, internal_name="SECRET",              name="Secret Door",                  string="935",       text="Secret Door Manufacturable"},
+    [306] = {id=306, internal_name="MIDAS",               name="Midas Door",                   string="1076",      text="Midas Door Manufacturable"},
+}
+FXSpellsTable = {
+    [419] = {id=419, internal_name="POWER_TIME_BOMB",     name="Time Bomb",                    string="645",       text="Time Bomb Researchable"},
+    [420] = {id=420, internal_name="POWER_SLOW",          name="Slow",                         string="1055",      text="Slow Researchable"},
+    [421] = {id=421, internal_name="POWER_FREEZE",        name="Freeze",                       string="1054",      text="Freeze Researchable"},
+    [422] = {id=422, internal_name="POWER_REBOUND",       name="Rebound",                      string="1053",      text="Rebound Researchable"},
+    [423] = {id=423, internal_name="POWER_FLIGHT",        name="Flight",                       string="1056",      text="Flight Researchable"},
+    [424] = {id=424, internal_name="POWER_VISION",        name="Vision",                       string="1058",      text="Vision Researchable"},
+    [425] = {id=425, internal_name="POWER_TUNNELLER",     name="Recruit Tunneller",            string="1072",      text="Recruit Tunneller Researchable"},
+    [426] = {id=426, internal_name="POWER_CLEANSE",       name="Cleanse",                      string="",          text="Cleanse Researchable"},          --not made yet
+}
+FXRecipesTable = {
+    [612] = {id=612, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good skeleton",                string="",       text="Good skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [613] = {id=613, internal_name="MkCreature,TENTACLE,TROLL,SPIDER",                name="Tentacle",                     string="",       text="Tentacle Recipe Unlocked"},
+    [614] = {id=614, internal_name="MkCreature,HELL_HOUND,DRAGON,FLY",                name="Hound",                        string="",       text="Hound Recipe Unlocked"},
+    [615] = {id=615, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed creatures",              string="",       text="Speed creatures Recipe Unlocked"},
+    [616] = {id=616, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal creatures",            string="",       text="Conceal creatures Recipe Unlocked"},
+    [617] = {id=617, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal creatures",               string="",       text="Heal creatures Recipe Unlocked"},
+    [618] = {id=618, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound creatures",            string="",       text="Rebound creatures Recipe Unlocked"},
+    [619] = {id=619, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect creatures",            string="",       text="Protect creatures Recipe Unlocked"},
+    [620] = {id=620, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight creatures",             string="",       text="Flight creatures Recipe Unlocked"},
+    [621] = {id=621, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze creatures",             string="",       text="Freeze creatures Recipe Unlocked"},
+    [622] = {id=622, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow creatures",               string="",       text="Slow creatures Recipe Unlocked"},
+}
+SplitHandPowerTable = {
+    [427] = {id=427, internal_name="POWER_PICKUP_CREATURE",                           name="Pick Up Creature",             string="961",    text="Pick Up Creature Researchable"},
+    [428] = {id=428, internal_name="POWER_PICKUP_GOLD",                               name="Pick Up Gold",                 string="961",    text="Pick Up Gold Researchable"},
+    [429] = {id=429, internal_name="POWER_PICKUP_FOOD",                               name="Pick Up Food",                 string="961",    text="Pick Up Food Researchable"},
+    [430] = {id=430, internal_name="POWER_PICKUP_OBJECT",                             name="Pick Up Object",               string="961",    text="Pick Up Object Researchable"},
+}
+
+HeroesTable = {
+    [801]  = {id=801,   internal_name="THIEF",                                        name="Thief",                        string="",       text="Attract Thief"},           --unlocked from start in default hero settings
+    [802]  = {id=802,   internal_name="BARBARIAN",                                    name="Barbarian",                    string="",       text="Attract Barbarian"},       --unlocked from start in default hero settings
+    [803]  = {id=803,   internal_name="GIANT",                                        name="Giant",                        string="",       text="Attract Giant"},
+    [804]  = {id=804,   internal_name="WIZARD",                                       name="Wizard",                       string="",       text="Attract Wizard"},          --unlocked from start in default hero settings
+    [805]  = {id=805,   internal_name="FAIRY",                                        name="Fairy",                        string="",       text="Attract Fairy"},
+    [806]  = {id=806,   internal_name="ARCHER",                                       name="Archer",                       string="",       text="Attract Archer"},
+    [807]  = {id=807,   internal_name="DWARFA",                                       name="Mountain Dwarf",               string="",       text="Attract Mountain Dwarf"},
+    [808]  = {id=808,   internal_name="MONK",                                         name="Monk",                         string="",       text="Attract Monk"},
+    [809]  = {id=809,   internal_name="SAMURAI",                                      name="Samurai",                      string="",       text="Attract Samurai"},
+    [810]  = {id=810,   internal_name="WITCH",                                        name="Priestess",                    string="",       text="Attract Priestess"},
+    [811]  = {id=811,   internal_name="KNIGHT",                                       name="Knight",                       string="",       text="Attract Knight"},
+    [812]  = {id=812,   internal_name="AVATAR",                                       name="Avatar",                       string="",       text="Attract Avatar"},
+}
+
+local IncludeBonusLevels = true
+local IncludeRecipes = true
+local IncludeNegativeRecipes = false
+local IncludeFXCreatures = false
+local IncludeFXTraps = false
+local IncludeFXDoors = false
+local IncludeFXSpells = false
+local IncludeFXRecipes = false
+local IncludeImpsInPool = false
+local SplitHandPower = false
+local IncludeHeroes = false
+local IncludeTunnellersInPool = false
+local IncludeFXHeroes = false
+
+if IncludeBonusLevels then
+    for id, check in pairs(BonusLevelsTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeRecipes then
+    for id, check in pairs(RecipesTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeNegativeRecipes then
+    for id, check in pairs(NegativeRecipesTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeFXCreatures then
+    for id, check in pairs(FXCreaturesTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeFXTraps then
+    for id, check in pairs(FXTrapsTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeFXDoors then
+    for id, check in pairs(FXDoorsTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeFXSpells then
+    for id, check in pairs(FXSpellsTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeFXRecipes then
+    for id, check in pairs(FXRecipesTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeImpsInPool then
+      ChecksTable[100]  = {id=100,   internal_name="IMP",                 name="Imp",                          string="259",       text="Attract Imp"} -- also consider allowing imps through portal. Not sure how they work (they don't contribute towards portal limit, but can they come through when you reach your limit?)
+     -- could be a fun alternative to having create imp
+end
+
+if SplitHandPower then
+    for id, check in pairs(SplitHandPowerTable) do
+        ChecksTable[id] = check
+    end
+else
+      ChecksTable[401] = {id=401, internal_name="POWER_HAND",          name="Hand of Evil",                 string="961",       text="Hand of Evil Researchable"}     --unlocked from start in default settings
+end
+
+if IncludeHeroes then
+    for id, check in pairs(HeroesTable) do
+        ChecksTable[id] = check
+    end
+end
+if IncludeTunnellersInPool then
+      ChecksTable[813]  = {id=813,   internal_name="TUNNELLER",                                      name="Tunneller",                    string="",       text="Attract Tunneller"}
+end
+if IncludeFXHeroes then
+      ChecksTable[814]  = {id=814,   internal_name="TIME_MAGE",                                      name="Time Mage",                    string="",       text="Attract Time Mage"}
+end
+
+--if _ then
+--    for id, check in pairs(_) do
+--        ChecksTable[id] = check
+--    end
+--end
+
+
+--FXChecksTable = {
+--CREATURES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+-- TRAPS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- DOORS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--SPELLS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--  could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
+-- RECIPES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Can't do these ones, they're hardcoded.
+--  [6XX] = {id=6XX, internal_name="",                    name="Wishing Well",                 string="",       text="Wishing Well Recipe Unlocked"}, --default, might be hardcoded, would probably be stupid to include
+--  [6XX] = {id=6XX, internal_name="",                    name="All chickens die 2",           string="",       text="All chickens die 2 Recipe Unlocked"}, -default, unlock would probably be stupid to include outside of a Templesanity
+--  [6XX] = {id=6XX, internal_name="",                    name="Spider easter egg",            string="",       text="Spider easter egg Recipe Unlocked"}, --default, hardcoded easter egg and not really a recipe, would probably be stupid to include
+--}
+
 --    --Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)},
 --    --progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
 
