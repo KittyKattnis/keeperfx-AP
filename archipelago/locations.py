@@ -198,6 +198,28 @@ LOCATION_NAME_TO_ID = {
 
     #-----------------------------------------------------
 
+    "Recipe Cheaper Imps":11001,
+    "Recipe Complete Manufacturing":11002,
+    "Recipe Complete Research":11003,
+    "Recipe Bile Demon":11004,
+    "Recipe Warlock":11005,
+    "Recipe Mistress":11006,
+    "Recipe Horned Reaper":11007,
+    "Recipe Make Angry":11008,
+    "Recipe Kill Chickens":11009,
+    "Recipe Disease Creatures":11010,
+    "Recipe Chicken Creatures":11011,
+    "Recipe Tentacle":11012,
+    "Recipe Hellhound":11013,
+    "Recipe Speed":11014,
+    "Recipe Conceal":11015,
+    "Recipe Heal":11016,
+    "Recipe Rebound":11017,
+    "Recipe Protect":11018,
+    "Recipe Flight":11019,
+    "Recipe Freeze":11020,
+    "Recipe Slow":11021,
+
     #Other checks you can do anywhere
 
     #First times:
@@ -273,6 +295,7 @@ def create_regular_locations(world: DungeonKeeperWorld) -> None:
     blaiseend = world.get_region("Blaise End")
     mistle = world.get_region("Mistle")
     skybirdtrill = world.get_region("Skybird Trill")
+    temple = world.get_region("Temple")
 
     # You can then add them to the region.
 
@@ -381,6 +404,19 @@ def create_regular_locations(world: DungeonKeeperWorld) -> None:
     )
     skybirdtrill.add_locations(skybirdtrill_locations, DungeonKeeperLocation)
 
+    if world.options.secret_levels:
+        create_secret_locations(world)
+
+    temple = world.get_region("Temple")
+    temple_locations = get_location_names_with_ids(
+         ["Recipe Cheaper Imps", "Recipe Complete Manufacturing", "Recipe Complete Research", "Recipe Bile Demon",
+         "Recipe Warlock", "Recipe Mistress", "Recipe Horned Reaper", "Recipe Make Angry", "Recipe Kill Chickens", "Recipe Disease Creatures", "Recipe Chicken Creatures",
+         "Recipe Tentacle", "Recipe Hellhound", "Recipe Speed", "Recipe Conceal", "Recipe Heal", "Recipe Rebound", "Recipe Protect", "Recipe Flight", "Recipe Freeze", "Recipe Slow"]
+    )
+    temple.add_locations(temple_locations, DungeonKeeperLocation)
+    
+def create_secret_locations(world: DungeonKeeperWorld) -> None:
+        
     secret1 = world.get_region("Secret 1")
     secret1_locations = get_location_names_with_ids(
         ["Secret 1 Archer Room", "Secret 1 Samurai Room", "Secret 1 Near Hatchery", "Secret 1 Prison Corridor", 
@@ -420,8 +456,6 @@ def create_regular_locations(world: DungeonKeeperWorld) -> None:
          "Secret 6 Centre Gold", "Secret 6 NE Reward Moon", "Secret 6 Blue Library", "Secret 6 Green Library", "Secret 6 Yellow Library", "Level 105 Beaten"]
     )
     secret6.add_locations(secret6_locations, DungeonKeeperLocation)
-    
-
     # Locations may be in different regions depending on the player's options.
     # In our case, the hammer option puts the Top Middle Chest into its own room called Top Middle Room.
 

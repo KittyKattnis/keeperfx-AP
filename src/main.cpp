@@ -1293,6 +1293,7 @@ void set_general_information_with_icon(int32_t msg_id, PlayerNumber plyr_idx, Tb
         event->icon_idx = icon_idx;
 }
 
+
 void set_quick_information_with_icon(int32_t msg_id, PlayerNumber plyr_idx, TbMapLocation target, MapSubtlCoord x, MapSubtlCoord y, short icon_idx)
 {
     struct PlayerInfo *player = get_player(plyr_idx);

@@ -6,7 +6,7 @@
 
 from typing import NamedTuple, Optional
 from BaseClasses import Item, ItemClassification
-from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName
+from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName
 
 
 class DungeonKeeperItem(Item):
@@ -144,13 +144,19 @@ LEVELS = {
     KeeperLevelName.LEVEL_018: KeeperItem(KeeperLevel.LEVEL_018, ItemClassification.progression), #"Level 18 Unlocked"
     KeeperLevelName.LEVEL_019: KeeperItem(KeeperLevel.LEVEL_019, ItemClassification.progression), #"Level 19 Unlocked"
     KeeperLevelName.LEVEL_020: KeeperItem(KeeperLevel.LEVEL_020, ItemClassification.progression), #"Level 20 Unlocked"
-    KeeperLevelName.LEVEL_100: KeeperItem(KeeperLevel.LEVEL_100, ItemClassification.progression), #"Level 100 Unlocked"
-    KeeperLevelName.LEVEL_101: KeeperItem(KeeperLevel.LEVEL_101, ItemClassification.progression), #"Level 101 Unlocked"
-    KeeperLevelName.LEVEL_102: KeeperItem(KeeperLevel.LEVEL_102, ItemClassification.progression), #"Level 102 Unlocked"
-    KeeperLevelName.LEVEL_103: KeeperItem(KeeperLevel.LEVEL_103, ItemClassification.progression), #"Level 103 Unlocked"
-    KeeperLevelName.LEVEL_104: KeeperItem(KeeperLevel.LEVEL_104, ItemClassification.progression), #"Level 104 Unlocked"
-    KeeperLevelName.LEVEL_105: KeeperItem(KeeperLevel.LEVEL_105, ItemClassification.progression), #"Level 105 Unlocked"
+
 }
+
+SECRET_LEVELS = {
+    KeeperSecretLevelName.LEVEL_100: KeeperItem(KeeperSecretLevel.LEVEL_100, ItemClassification.progression), #"Level 100 Unlocked"
+    KeeperSecretLevelName.LEVEL_101: KeeperItem(KeeperSecretLevel.LEVEL_101, ItemClassification.progression), #"Level 101 Unlocked"
+    KeeperSecretLevelName.LEVEL_102: KeeperItem(KeeperSecretLevel.LEVEL_102, ItemClassification.progression), #"Level 102 Unlocked"
+    KeeperSecretLevelName.LEVEL_103: KeeperItem(KeeperSecretLevel.LEVEL_103, ItemClassification.progression), #"Level 103 Unlocked"
+    KeeperSecretLevelName.LEVEL_104: KeeperItem(KeeperSecretLevel.LEVEL_104, ItemClassification.progression), #"Level 104 Unlocked"
+    KeeperSecretLevelName.LEVEL_105: KeeperItem(KeeperSecretLevel.LEVEL_105, ItemClassification.progression), #"Level 105 Unlocked"
+    }
+
+
 
 RECIPES = {
     KeeperRecipeName.RECIPE_CHEAPER_IMPS: KeeperItem(KeeperRecipe.RECIPE_CHEAPER_IMPS, ItemClassification.useful), #"Cheaper Imps"
@@ -204,6 +210,35 @@ PROGRESSIVES = {
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
 }
 
+# KEEPERFX ADDITIONS
+
+KEEPERFX_CREATURES = {
+KeeperFXCreatureName.DRUID: KeeperItem(KeeperFXCreature.DRUID, ItemClassification.useful),
+KeeperFXCreatureName.MAIDEN: KeeperItem(KeeperFXCreature.MAIDEN, ItemClassification.useful),
+}
+
+KEEPERFX_SPELLS = {
+KeeperFXPowerName.POWER_TIME_BOMB: KeeperItem(KeeperFXPower.POWER_TIME_BOMB, ItemClassification.useful),
+KeeperFXPowerName.POWER_SLOW: KeeperItem(KeeperFXPower.POWER_SLOW, ItemClassification.useful),
+KeeperFXPowerName.POWER_FREEZE: KeeperItem(KeeperFXPower.POWER_FREEZE, ItemClassification.useful),
+KeeperFXPowerName.POWER_REBOUND: KeeperItem(KeeperFXPower.POWER_REBOUND, ItemClassification.useful),
+KeeperFXPowerName.POWER_FLIGHT: KeeperItem(KeeperFXPower.POWER_FLIGHT, ItemClassification.useful),
+KeeperFXPowerName.POWER_VISION: KeeperItem(KeeperFXPower.POWER_VISION, ItemClassification.useful),
+KeeperFXPowerName.POWER_TUNNELLER: KeeperItem(KeeperFXPower.POWER_TUNNELLER, ItemClassification.useful),
+}
+
+KEEPERFX_TRAPS = {
+KeeperFXTrapName.TNT: KeeperItem(KeeperFXTrap.TNT, ItemClassification.useful),
+KeeperFXTrapName.SENTRY: KeeperItem(KeeperFXTrap.SENTRY, ItemClassification.useful),
+KeeperFXTrapName.BALLISTA: KeeperItem(KeeperFXTrap.BALLISTA, ItemClassification.useful),
+}
+
+
+KEEPERFX_DOORS = {
+KeeperFXDoorName.SECRET: KeeperItem(KeeperFXDoor.SECRET, ItemClassification.useful),
+KeeperFXDoorName.MIDAS: KeeperItem(KeeperFXDoor.MIDAS, ItemClassification.useful),
+}
+
 CHECKS = {}
 CHECKS.update(CREATURES)
 CHECKS.update(ROOMS)
@@ -231,12 +266,38 @@ populate_item_dict(KeeperRecipeName, KeeperRecipe)
 populate_item_dict(KeeperPowerName, KeeperPower)
 populate_item_dict(KeeperProgressiveName, KeeperProgressive)
 
+
 def create_all_items(world):
     item_pool = []
 
+    precollected_names = [item.name for item in world.multiworld.precollected_items[world.player]]
+
+    if world.options.secret_levels:
+        populate_item_dict(KeeperSecretLevelName, KeeperSecretLevel)
+
+    if world.options.KeeperFXCreatures:
+        populate_item_dict(KeeperFXCreatureName, KeeperFXCreature)
+
+
+    if world.options.KeeperFXSpells:
+        populate_item_dict(KeeperFXPowerName, KeeperFXPower)
+
+
+    if world.options.KeeperFXTraps:
+        populate_item_dict(KeeperFXTrapName, KeeperFXTrap)
+
+
+    if world.options.KeeperFXDoors:
+        populate_item_dict(KeeperFXDoorName, KeeperFXDoor)
+
+
     for item_name in ITEM_NAME_TO_ID.keys():
-        item = world.create_item(item_name)
-        item_pool.append(item)
+        if item_name in precollected_names:
+            precollected_names.remove(item_name)
+            
+        else:
+            item = world.create_item(item_name)
+            item_pool.append(item)
 
     total_locations = len(world.multiworld.get_unfilled_locations(world.player))
     missing_items_count = total_locations - len(item_pool)
@@ -261,6 +322,11 @@ all_category_dicts = {
     **RECIPES,
     **SPELLS,
     **PROGRESSIVES,
+    **KEEPERFX_CREATURES,
+    **KEEPERFX_DOORS,
+    **KEEPERFX_SPELLS,
+    **KEEPERFX_TRAPS,
+    **SECRET_LEVELS,
 }
 
 item_table = {enum_key.value: item_data for enum_key, item_data in all_category_dicts.items()}

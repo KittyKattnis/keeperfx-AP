@@ -3,13 +3,17 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import TYPE_CHECKING, Literal
 
-from rule_builder.rules import (Rule, CanReachEntrance, Has, HasAll, HasAny, HasFromListUnique, HasGroupUnique,
-                                OptionFilter, True_)
+from .items import CREATURES, ROOMS, SPELLS, LEVELS
+from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
+
+from rule_builder.rules import (Rule, CanReachEntrance, CanReachLocation, Has, HasAll, HasAny, HasFromListUnique, HasGroupUnique,
+                                OptionFilter, True_, HasFromList)
 
 if TYPE_CHECKING:
     from .world import DungeonKeeperWorld
 
-
+def get_val(key):
+    return key.value if hasattr(key, "value") else str(key)
 
 
 def set_all_rules(world: DungeonKeeperWorld) -> None:

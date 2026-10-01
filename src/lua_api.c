@@ -215,16 +215,44 @@ static int lua_Room_available_id(lua_State *L)
     return 0;
 }
 
+static int lua_ap_get_last_processed_item_index(lua_State *L)
+{
+    lua_pushinteger(L, intralvl.ap_last_processed_item_index);
+    return 1;
+}
+
+static int lua_ap_set_last_processed_item_index(lua_State *L)
+{
+    intralvl.ap_last_processed_item_index = luaL_checkinteger(L, 1);
+    return 0;
+}
+
 static int lua_ap_get_items(lua_State *L)
 {
     int item_count = g_ap_state.items_count;
-    int *items = g_ap_state.items_received;
+    struct AP_ReceivedItem *items = g_ap_state.items_received;
 
     lua_newtable(L);
 
     for (int i = 0; i < item_count; i++)
     {
-        lua_pushinteger(L, items[i]);
+        lua_newtable(L);
+
+        lua_pushinteger(L, items[i].item);
+        lua_setfield(L, -2, "item");
+
+        lua_pushinteger(L, items[i].location);
+        lua_setfield(L, -2, "location");
+
+        lua_pushinteger(L, items[i].player);
+        lua_setfield(L, -2, "player");
+
+        lua_pushinteger(L, items[i].flags);
+        lua_setfield(L, -2, "flags");
+
+        lua_pushinteger(L, items[i].index);
+        lua_setfield(L, -2, "index");
+
         lua_rawseti(L, -2, i + 1);
     }
 
@@ -259,6 +287,15 @@ static int lua_ap_decrease_level_box_remain(lua_State *L)
     ap_decrease_current_lvl_box_remaining();
     return 0;
 }
+
+static int lua_ap_send_message(lua_State *L)
+{
+    const char* message   = lua_tostring(L,  1);
+    ap_bridge_send_message(message);
+    return 0;
+}
+
+
 
 // passes location id to archipelago
 static int lua_send_location(lua_State *L)
@@ -2812,6 +2849,9 @@ static const luaL_Reg global_methods[] = {
     {"APScoutLocations",                 lua_ap_bridge_scout_locations},    
     {"SetAPLvlBoxRemain",                lua_ap_set_level_box_remain},      
     {"DecAPLvlBoxRemain",                lua_ap_decrease_level_box_remain},
+    {"SendAPMessage",                    lua_ap_send_message},
+    {"GetAPLastProcessedItemIndex",      lua_ap_get_last_processed_item_index},
+    {"SetAPLastProcessedItemIndex",      lua_ap_set_last_processed_item_index}
     
 };
 /*

@@ -88,7 +88,7 @@ int pending_status = -1;
 
 // Callback function pointers
 std::function<void()> resetItemValues = nullptr;
-std::function<void(int64_t,bool)> getitemfunc = nullptr;
+std::function<void(AP_NetworkItem,bool)> getitemfunc = nullptr;
 std::function<void(int64_t)> checklocfunc = nullptr;
 std::function<void(std::vector<AP_NetworkItem>)> locinfofunc = nullptr;
 std::function<void(std::string, std::string)> recvdeath = nullptr;
@@ -107,8 +107,11 @@ std::function<void()> datapkgfunc = nullptr;
 std::function<void(std::string)> printfunc = nullptr;
 std::function<void(std::string)> printjsonfunc = nullptr;
 std::function<void(std::string)> retrievedfunc = nullptr;
+std::function<void(std::string)> cmdresultfunc = nullptr;
 std::function<void(std::string, std::string)> stored_data_notifyfunc = nullptr;
-
+std::function<void(AP_ChatMessage)> chatmsgfunc = nullptr;
+std::function<void(AP_ServerChatMessage)> serverchatfunc = nullptr;
+std::function<void(AP_HintMessage)> hintfunc = nullptr;
 // Serverdata Management
 std::map<std::string,AP_DataType> map_serverdata_typemanage;
 AP_GetServerDataRequest resync_serverdata_request;
@@ -372,6 +375,10 @@ void AP_Shutdown() {
     printfunc = nullptr;
     printjsonfunc = nullptr;
     retrievedfunc = nullptr;
+    cmdresultfunc = nullptr;
+    chatmsgfunc = nullptr;
+    serverchatfunc = nullptr;
+    hintfunc = nullptr;
     stored_data_notifyfunc = nullptr;
     recvdeath = nullptr;
     setreplyfunc = nullptr;
@@ -617,7 +624,7 @@ void AP_SetItemClearCallback(std::function<void()> f_itemclr) {
     resetItemValues = f_itemclr;
 }
 
-void AP_SetItemRecvCallback(std::function<void(int64_t,bool)> f_itemrecv) {
+void AP_SetItemRecvCallback(std::function<void(AP_NetworkItem,bool notify)> f_itemrecv) {
     getitemfunc = f_itemrecv;
 }
 
@@ -629,6 +636,10 @@ void AP_SetLocationCheckedCallback(std::function<void(int64_t)> f_locrecv) {
 void AP_SetLocationInfoCallback(std::function<void(std::vector<AP_NetworkItem>)> f_locinfrecv) {
     locinfofunc = f_locinfrecv;
 }
+
+void AP_SetChatMessageCallback(std::function<void(AP_ChatMessage)> f_chatmsgrecv) { chatmsgfunc = f_chatmsgrecv; }
+void AP_SetServerChatCallback(std::function<void(AP_ServerChatMessage)> f_chat) { serverchatfunc = f_chat; };
+void AP_SetHintCallback(std::function<void(AP_HintMessage)> f_hint) { hintfunc = f_hint; };
 
 void AP_SetSocketConnectedCallback(std::function<void()> f_connected) { socketconnectedfunc = f_connected; }
 void AP_SetSocketDisconnectedCallback(std::function<void()> f_disconnected) { socketdisconnectedfunc = f_disconnected; }
@@ -643,6 +654,7 @@ void AP_SetDataPackageChangedCallback(std::function<void()> f_datapkg) { datapkg
 void AP_SetPrintCallback(std::function<void(std::string)> f_print) { printfunc = f_print; }
 void AP_SetPrintJSONCallback(std::function<void(std::string)> f_printjson) { printjsonfunc = f_printjson; }
 void AP_SetRetrievedCallback(std::function<void(std::string)> f_retrieved) { retrievedfunc = f_retrieved; }
+void AP_SetCmdResultCallback(std::function<void(std::string)> f_cmdresult) { cmdresultfunc = f_cmdresult; }
 
 void AP_SetServerDataNotifyCallback(std::function<void(std::string, std::string)> f_notify) { stored_data_notifyfunc = f_notify; }
 bool AP_GetStoredServerData(std::string key, std::string* value) {
@@ -1238,6 +1250,7 @@ bool parse_response(std::string msg, std::string &request) {
                 msg->checked = root[i]["found"].asBool();
                 msg->text = std::string("Item ") + msg->item + std::string(" from ") + msg->sendPlayer + std::string(" to ") + msg->recvPlayer + std::string(" at ") + msg->location + std::string((msg->checked ? " (Checked)" : " (Unchecked)"));
                 messageQueue.push_back(msg);
+                if(hintfunc) hintfunc(*msg);
             } else if (printType == "Countdown") {
                 AP_CountdownMessage* msg = new AP_CountdownMessage;
                 msg->type = AP_MessageType::Countdown;
@@ -1256,12 +1269,24 @@ bool parse_response(std::string msg, std::string &request) {
                 msg->message = root[i]["message"].asString();
                 msg->text = msg->player + ": " + msg->message;
                 messageQueue.push_back(msg);
+                if(chatmsgfunc) chatmsgfunc(*msg);
             } else if (printType == "ServerChat") {
                 AP_ServerChatMessage* msg = new AP_ServerChatMessage;
                 msg->type = AP_MessageType::ServerChat;
                 msg->message = root[i]["message"].asString();
                 msg->text = "[Server]: " + msg->message;
                 messageQueue.push_back(msg);
+                if(serverchatfunc) serverchatfunc(*msg);
+            } else if (printType == "CommandResult") {
+                std::string text = "";
+                for (auto itr : root[i]["data"]) {
+                    if (itr.get("type","").asString() == "player_id") {
+                        text += getPlayer(0, itr["text"].asInt()).alias;
+                    } else if (itr.get("text","") != "") {
+                        text += itr["text"].asString();
+                    }
+                }
+                if(cmdresultfunc) cmdresultfunc(text);
             } else {
                 AP_Message* msg = new AP_Message;
                 msg->text = "";
@@ -1313,7 +1338,7 @@ bool parse_response(std::string msg, std::string &request) {
                 item.locationName = getLocationName(sender.game, item.location);
                 item.playerName = sender.alias;
                 notify = (item_idx == 0 && last_item_idx <= j && multiworld) || item_idx != 0;
-                if (getitemfunc) getitemfunc(item.item, notify);
+                if (getitemfunc) getitemfunc(item, notify);
                 received.push_back(item);
                 if (queueitemrecvmsg && notify) {
                     AP_ItemRecvMessage* msg = new AP_ItemRecvMessage;

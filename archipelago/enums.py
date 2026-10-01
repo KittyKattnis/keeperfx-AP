@@ -23,8 +23,7 @@ class KeeperCreatureName(StrEnum):
         HELL_HOUND = "Attract Hound"
         HORNY = "Attract Horned Reaper" #not usually attracted from Portal but I think that's fine and adds variety
         VAMPIRE = "Attract Vampire" #not usually attracted from Portal but I think that's fine and adds variety
-#       DRUID = "Attract Druid"
-#       MAIDEN = "Attract Maiden"
+
 #       OTHERS = "Attract (others?)"
 
 class KeeperCreature(IntEnum):
@@ -48,21 +47,29 @@ class KeeperCreature(IntEnum):
 #        MAIDEN = 18
 #        (others?)" = 19
 
+class KeeperFXCreatureName(StrEnum):
+        DRUID = "Attract Druid"
+        MAIDEN = "Attract Maiden"
+
+class KeeperFXCreature(IntEnum):
+        DRUID = 17
+        MAIDEN = 18        
+
 class KeeperRoomName(StrEnum):
-        TREASURE = "Treasure Room Researchable"
-        LAIR = "Lair Researchable"
-        GARDEN = "Hatchery Researchable"
-        TRAINING = "Training Room Researchable"
-        RESEARCH = "Library Researchable"
-        BRIDGE = "Bridge Researchable"
-        GUARD_POST = "Guard Post Researchable"
-        WORKSHOP = "Workshop Researchable" #fine to allow trap/door creation if you somehow get one
-        PRISON = "Prison (+make skel) Researchable" #i.e. if you get one in a map you can't make Skeletons until you unlock this
-        TORTURE = "Tort Cham (+make ghost) Researchable" #i.e. if you get one in a map you can't make Ghosts until you unlock this
-        BARRACKS = "Barracks Researchable"
-        TEMPLE = "Temple (see recipes) Researchable" #fine to allow recipes if you somehow get one
-        GRAVEYARD = "Graveyard (+make Vamps) Researchable" #i.e. if you get one in a map you can't make Vampires until you unlock this
-        SCAVENGER = "Scavenger Room Researchable"
+        TREASURE = "Treasure Room"
+        LAIR = "Lair"
+        GARDEN = "Hatchery"
+        TRAINING = "Training Room"
+        RESEARCH = "Library"
+        BRIDGE = "Bridge"
+        GUARD_POST = "Guard Post"
+        WORKSHOP = "Workshop" #fine to allow trap/door creation if you somehow get one
+        PRISON = "Prison" #i.e. if you get one in a map you can't make Skeletons until you unlock this
+        TORTURE = "Torture Chamber" #i.e. if you get one in a map you can't make Ghosts until you unlock this
+        BARRACKS = "Barracks"
+        TEMPLE = "Temple" #fine to allow recipes if you somehow get one
+        GRAVEYARD = "Graveyard" #i.e. if you get one in a map you can't make Vampires until you unlock this
+        SCAVENGER = "Scavenger Room"
 
 class KeeperRoom(IntEnum):
         TREASURE = 101
@@ -87,9 +94,7 @@ class KeeperTrapName(StrEnum):
         LAVA = "Lava Trap Manufacturable"
         BOULDER = "Boulder Trap Manufacturable"
         WORD_OF_POWER = "WOP Trap Manufacturable"
-#        TNT = "Demolition Trap Manufacturable"
-#        SENTRY" = "Sentry Trap Manufacturable"
-#        BALLISTA" = "Ballista Trap Manufacturable"
+
 
 class KeeperTrap(IntEnum):
         ALARM = 201
@@ -98,49 +103,64 @@ class KeeperTrap(IntEnum):
         LAVA = 204
         BOULDER = 205
         WORD_OF_POWER = 206
-#        TNT = 207
-#        SENTRY = 208
-#        BALLISTA = 209
+
 
 class KeeperDoorName(StrEnum):
         WOOD = "Wooden Door Manufacturable"
         BRACED = "Braced Door Manufacturable"
         STEEL = "Iron Door Manufacturable"
         MAGIC = "Magic Door Manufacturable"
-#        SECRET = "Secret Door Manufacturable"
-#        MIDAS = "Midas Door Manufacturable"
+
 
 class KeeperDoor(IntEnum):     
         WOOD = 301
         BRACED = 302
         STEEL = 303
         MAGIC = 304
-#        SECRET = 305
-#        MIDAS = 306
+
+
+class KeeperFXDoorName(StrEnum):
+        SECRET = "Secret Door Manufacturable"
+        MIDAS = "Midas Door Manufacturable"
+
+class KeeperFXDoor(IntEnum):               
+       SECRET = 305
+       MIDAS = 306   
+
+class KeeperFXTrapName(StrEnum):
+        TNT = "Demolition Trap Manufacturable"
+        SENTRY = "Sentry Trap Manufacturable"
+        BALLISTA = "Ballista Trap Manufacturable"
+
+class KeeperFXTrap(IntEnum):
+        TNT = 207
+        SENTRY = 208
+        BALLISTA = 209
+
 
 class KeeperPowerName(StrEnum):
-        POWER_HAND = "Hand of Evil Researchable"
-        POWER_SLAP = "Slap Researchable"
-        POWER_POSSESS = "Possession Researchable"
-        POWER_IMP = "Create Imp Researchable"
-        POWER_SIGHT = "Sight of Evil Researchable"
-        POWER_SPEED = "Speed Monster Researchable"
-        POWER_OBEY = "Must Obey Researchable"
-        POWER_CALL_TO_ARMS = "CTA Researchable"
-        POWER_CONCEAL = "Conceal Researchable"
-        POWER_HOLD_AUDIENCE = "Hold Audience Researchable"
-        POWER_CAVE_IN = "Cave-In Researchable"
-        POWER_HEAL_CREATURE = "Heal Researchable"
-        POWER_LIGHTNING = "Lightning Strike Researchable"
-        POWER_PROTECT = "Protect Monster Researchable"
-        POWER_CHICKEN = "Chicken Researchable"
-        POWER_DISEASE = "Disease Researchable"
-        POWER_ARMAGEDDON = "Armageddon Researchable"
-        POWER_DESTROY_WALLS = "Destroy Walls Researchable"
-#        POWER_TIME_BOMB" = "Time Bomb Researchable"
-#        POWER_SLOW = "Slow Researchable"
-#        POWER_FREEZE = "Freeze Researchable"
-#        POWER_REBOUND = "Rebound Researchable"
+        POWER_HAND = "Hand of Evil"
+        POWER_SLAP = "Slap"
+        POWER_POSSESS = "Possession"
+        POWER_IMP = "Create Imp"
+        POWER_SIGHT = "Sight of Evil"
+        POWER_SPEED = "Speed Monster"
+        POWER_OBEY = "Must Obey"
+        POWER_CALL_TO_ARMS = "CTA"
+        POWER_CONCEAL = "Conceal"
+        POWER_HOLD_AUDIENCE = "Hold Audience"
+        POWER_CAVE_IN = "Cave-In"
+        POWER_HEAL_CREATURE = "Heal"
+        POWER_LIGHTNING = "Lightning Strike"
+        POWER_PROTECT = "Protect Monster"
+        POWER_CHICKEN = "Chicken"
+        POWER_DISEASE = "Disease"
+        POWER_ARMAGEDDON = "Armageddon"
+        POWER_DESTROY_WALLS = "Destroy Walls"
+#        POWER_TIME_BOMB" = "Time Bomb"
+#        POWER_SLOW = "Slow"
+#        POWER_FREEZE = "Freeze"
+#        POWER_REBOUND = "Rebound"
 #        POWER_FLIGHT = "Flight Researchable"
 #        POWER_VISION = "Vision Researchable"
 #        POWER_TUNNELLER = "Recruit Tunneller Researchable"
@@ -175,6 +195,27 @@ class KeeperPower(IntEnum):
 #        POWER_TUNNELLER = 425
 #        POWER_CLEANSE = 426 #not made yet
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE POWER_PICKUP_GOLD POWER_PICKUP_FOOD
+
+class KeeperFXPowerName(StrEnum):
+        POWER_TIME_BOMB = "Time Bomb"
+        POWER_SLOW = "Slow"
+        POWER_FREEZE = "Freeze"
+        POWER_REBOUND = "Rebound"
+        POWER_FLIGHT = "Flight Researchable"
+        POWER_VISION = "Vision Researchable"
+        POWER_TUNNELLER = "Recruit Tunneller Researchable"
+        POWER_CLEANSE = "Cleanse Researchable"
+
+class KeeperFXPower(IntEnum):   
+        POWER_TIME_BOMB = 419
+        POWER_SLOW = 420
+        POWER_FREEZE = 421
+        POWER_REBOUND = 422
+        POWER_FLIGHT = 423
+        POWER_VISION = 424
+        POWER_TUNNELLER = 425
+   
+
 
 class KeeperLevelName(StrEnum):
 #    #Levels
@@ -212,12 +253,7 @@ class KeeperLevelName(StrEnum):
         LEVEL_018 = "Level 18 Unlocked"
         LEVEL_019 = "Level 19 Unlocked"
         LEVEL_020 = "Level 20 Unlocked"
-        LEVEL_100 = "Secret 1 Unlocked"
-        LEVEL_101 = "Secret 2 Unlocked"
-        LEVEL_102 = "Secret 3 Unlocked"
-        LEVEL_103 = "Secret 4 Unlocked"
-        LEVEL_104 = "Secret 5 Unlocked"
-        LEVEL_105 = "Secret 6 Unlocked"
+
 
 class KeeperLevel(IntEnum):
         LEVEL_001 = 501
@@ -240,12 +276,24 @@ class KeeperLevel(IntEnum):
         LEVEL_018 = 518
         LEVEL_019 = 519
         LEVEL_020 = 520
+
+
+class KeeperSecretLevel(IntEnum):
         LEVEL_100 = 521
         LEVEL_101 = 522
         LEVEL_102 = 523
         LEVEL_103 = 524
         LEVEL_104 = 525
         LEVEL_105 = 526
+
+
+class KeeperSecretLevelName(StrEnum):   
+        LEVEL_100 = "Secret 1 Unlocked"
+        LEVEL_101 = "Secret 2 Unlocked"
+        LEVEL_102 = "Secret 3 Unlocked"
+        LEVEL_103 = "Secret 4 Unlocked"
+        LEVEL_104 = "Secret 5 Unlocked"
+        LEVEL_105 = "Secret 6 Unlocked"     
 
 class KeeperRecipeName(StrEnum):
         RECIPE_CHEAPER_IMPS = "Cheaper Imps Recipe Unlocked"

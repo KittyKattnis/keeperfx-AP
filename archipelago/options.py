@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from Options import OptionGroup, ItemDict
+from Options import OptionGroup, ItemDict, Toggle
 from worlds.AutoWorld import PerGameCommonOptions
 from .items import CREATURES, ROOMS, SPELLS, LEVELS
 from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
@@ -13,6 +13,28 @@ from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreat
 
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
+
+class secret_levels(Toggle):
+    """Choose if you want secret levels to be available in the game."""
+    display_name = "Secret Levels"
+
+class KeeperFXCreatures(Toggle):
+    """Choose if you want KeeperFX Creatures to be available in the game."""
+    display_name = "KeeperFX Creatures"
+
+class KeeperFXSpells(Toggle):
+    """Choose if you want KeeperFX Spells to be available in the game."""
+    display_name = "KeeperFX Spells"
+
+class KeeperFXTraps(Toggle):
+    """Choose if you want KeeperFX Traps to be available in the game."""
+    display_name = "KeeperFX Traps"
+
+class KeeperFXDoors(Toggle):
+    """Choose if you want KeeperFX Doors to be available in the game."""
+    display_name = "KeeperFX Doors"
+
+
 
 class StartingLevels(ItemDict):
     """Levels available at the start of the game."""
@@ -65,12 +87,23 @@ class StartingRooms(ItemDict):
 
 @dataclass
 class DungeonKeeperOptions(PerGameCommonOptions):
+    secret_levels: secret_levels
     starting_levels: StartingLevels
     starting_spells: StartingSpells
     starting_rooms: StartingRooms
     starting_creatures: StartingCreatures
+    KeeperFXCreatures: KeeperFXCreatures
+    KeeperFXDoors: KeeperFXDoors
+    KeeperFXSpells: KeeperFXSpells
+    KeeperFXTraps: KeeperFXTraps
 
 option_groups = [
+    OptionGroup("KeeperFX Additions", [
+        KeeperFXCreatures,
+        KeeperFXSpells,
+        KeeperFXDoors,
+        KeeperFXTraps,
+    ]),    
     OptionGroup("Starting Items", [
         StartingLevels,
         StartingSpells,

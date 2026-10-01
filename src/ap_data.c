@@ -14,29 +14,42 @@ void ap_state_init(struct APState* ap)
 
     ap->items_count = 0;
     ap->locations_count = 0;
+    ap->missing_locations_count = 0;
     for (int i = 0; i < AP_LOCATION_NO; i++) {
         ap->checked_locations[i] = 0;
         ap->missing_locations[i] = 0; 
-        ap->items_received[i] = 0;
+        memset(&ap->items_received[i], 0, sizeof(ap->items_received[i]));
     }
 }
 
-void ap_state_update_items(struct APState* ap, int itemid)
+void ap_missing_init(struct APState* ap)
 {
-    int item_count = ap->items_count;
-
-    for (int i = 0; i < item_count ; i++)
-    {
-        if (itemid == ap->items_received[i])
-        {
-            return;
-        }
-        
+    if (!ap) return;
+    ap->missing_locations_count = 0;
+    for (int i = 0; i < AP_LOCATION_NO; i++) {
+        ap->missing_locations[i] = 0; 
     }
+}
 
-    ap->items_received[item_count] = itemid;
+void ap_state_update_items(struct APState* ap, long long item,
+    long long location, int player, int flags, int index)
+{
+    if (!ap)
+        return;
+
+    if (ap->items_count >= AP_RECEIVED_ITEM_NO)
+        return;
+
+    struct AP_ReceivedItem *received =
+        &ap->items_received[ap->items_count];
+
+    received->item = item;
+    received->location = location;
+    received->player = player;
+    received->flags = flags;
+    received->index = index;
+
     ap->items_count++;
-    
 }
 
 void ap_state_update_locations(struct APState* ap, int locationid)
@@ -54,6 +67,35 @@ void ap_state_update_locations(struct APState* ap, int locationid)
     ap->checked_locations[location_count] = locationid;
     ap->locations_count++;
     
+}
+
+void ap_state_update_missing_locations(struct APState* ap, int locationid)
+{
+    int missing_locations_count = ap->missing_locations_count;
+
+    for (int i = 0; i < missing_locations_count ; i++)
+    {
+        if (locationid == ap->missing_locations[i])
+        {
+            return;
+        }        
+    }
+
+    ap->missing_locations[missing_locations_count] = locationid;
+    ap->missing_locations_count++;
+    
+}
+
+bool ap_location_is_missing(struct APState* ap, int locationid)
+{
+    for (int i = 0; i < ap->missing_locations_count ; i++)
+    {
+        if (locationid == ap->missing_locations[i])
+        {
+            return true;
+        }        
+    }
+    return false;
 }
 
 void ap_location_info_init(void)
@@ -119,6 +161,17 @@ const struct AP_LocationInfo *ap_location_info_get(long long location)
     for (int i = 0; i < ap_location_info_count; i++)
     {
         if (ap_location_info[i].location == location)
+            return &ap_location_info[i];
+    }
+
+    return NULL;
+}
+
+const struct AP_LocationInfo *ap_location_info_get_by_name(const char* itm_name)
+{
+    for (int i = 0; i < ap_location_info_count; i++)
+    {
+        if (strcmp(ap_location_info[i].item_name,itm_name) == 0)
             return &ap_location_info[i];
     }
 
