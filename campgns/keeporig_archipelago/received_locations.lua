@@ -207,12 +207,12 @@ HeroesTable = {
 
 local IncludeBonusLevels = true
 local IncludeRecipes = true
-local IncludeNegativeRecipes = false
-local IncludeFXCreatures = false
-local IncludeFXTraps = false
-local IncludeFXDoors = false
-local IncludeFXSpells = false
-local IncludeFXRecipes = false
+local IncludeNegativeRecipes = true
+local IncludeFXCreatures = true
+local IncludeFXTraps = true
+local IncludeFXDoors = true
+local IncludeFXSpells = true
+local IncludeFXRecipes = true
 local IncludeImpsInPool = false
 local SplitHandPower = false
 local IncludeHeroes = false
@@ -364,8 +364,8 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
             UnlockLevel(itemid)
       elseif itemid > 600 and itemid <= 700 then
             UnlockRecipe(itemid)
-      --elseif itemid > 700 and itemid <= 800 then --I think this is handled in commands_main.ActivateItems
-            --UnlockProgressive(itemid)
+      elseif itemid > 700 and itemid <= 800 then
+            UnlockProgressive(itemid)
       --don't think these work this way.
       --elseif itemid > 800 and itemid <= 900 then
       --    UnlockFiller(itemid)
