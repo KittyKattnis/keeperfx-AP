@@ -51,20 +51,20 @@ class KeeperFXCreature(IntEnum):
         MAIDEN = 18        
 
 class KeeperRoomName(StrEnum):
-        TREASURE = "Treasure Room Researchable"
-        LAIR = "Lair Researchable"
-        GARDEN = "Hatchery Researchable"
-        TRAINING = "Training Room Researchable"
-        RESEARCH = "Library Researchable"
-        BRIDGE = "Bridge Researchable"
-        GUARD_POST = "Guard Post Researchable"
-        WORKSHOP = "Workshop Researchable" #fine to allow trap/door creation if you somehow get one
-        PRISON = "Prison Researchable" #i.e. if you get one in a map you can't make Skeletons until you unlock this
-        TORTURE = "Torture Chamber Researchable" #i.e. if you get one in a map you can't make Ghosts until you unlock this
-        BARRACKS = "Barracks Researchable"
-        TEMPLE = "Temple Researchable" #fine to allow recipes if you somehow get one
-        GRAVEYARD = "Graveyard Researchable" #i.e. if you get one in a map you can't make Vampires until you unlock this
-        SCAVENGER = "Scavenger Room Researchable" #fine to allow scavenger room if you somehow get one
+        TREASURE = "Treasure Room"
+        LAIR = "Lair"
+        GARDEN = "Hatchery"
+        TRAINING = "Training Room"
+        RESEARCH = "Library"
+        BRIDGE = "Bridge"
+        GUARD_POST = "Guard Post"
+        WORKSHOP = "Workshop" #fine to allow trap/door creation if you somehow get one
+        PRISON = "Prison" #i.e. if you get one in a map you can't make Skeletons until you unlock this
+        TORTURE = "Torture Chambe" #i.e. if you get one in a map you can't make Ghosts until you unlock this
+        BARRACKS = "Barracks"
+        TEMPLE = "Temple" #fine to allow recipes if you somehow get one
+        GRAVEYARD = "Graveyard" #i.e. if you get one in a map you can't make Vampires until you unlock this
+        SCAVENGER = "Scavenger Room" #fine to allow scavenger room if you somehow get one
 
 class KeeperRoom(IntEnum):
         TREASURE = 101
@@ -88,7 +88,7 @@ class KeeperTrapName(StrEnum):
         LIGHTNING = "Lightning Trap Manufacturable"
         LAVA = "Lava Trap Manufacturable"
         BOULDER = "Boulder Trap Manufacturable"
-        WORD_OF_POWER = "WOP Trap Manufacturable"
+        WORD_OF_POWER = "Word of Power Trap Manufacturable"
 
 class KeeperTrap(IntEnum):
         ALARM = 201
@@ -129,24 +129,24 @@ class KeeperFXTrap(IntEnum):
         BALLISTA = 209
 
 class KeeperPowerName(StrEnum):
-        POWER_HAND = "Hand of Evil Researchable"
-        POWER_SLAP = "Slap Researchable"
-        POWER_POSSESS = "Possession Researchable"
-        POWER_IMP = "Create Imp Researchable"
-        POWER_SIGHT = "Sight of Evil Researchable"
-        POWER_SPEED = "Speed Monster Researchable"
-        POWER_OBEY = "Must Obey Researchable"
-        POWER_CALL_TO_ARMS = "CTA Researchable"
-        POWER_CONCEAL = "Conceal Researchable"
-        POWER_HOLD_AUDIENCE = "Hold Audience Researchable"
-        POWER_CAVE_IN = "Cave-In Researchable"
-        POWER_HEAL_CREATURE = "Heal Researchable"
-        POWER_LIGHTNING = "Lightning Strike Researchable"
-        POWER_PROTECT = "Protect Monster Researchable"
-        POWER_CHICKEN = "Chicken Researchable"
-        POWER_DISEASE = "Disease Researchable"
-        POWER_ARMAGEDDON = "Armageddon Researchable"
-        POWER_DESTROY_WALLS = "Destroy Walls Researchable"
+        POWER_HAND = "Hand of Evil"
+        POWER_SLAP = "Slap"
+        POWER_POSSESS = "Possession"
+        POWER_IMP = "Create Imp"
+        POWER_SIGHT = "Sight of Evil"
+        POWER_SPEED = "Speed Monster"
+        POWER_OBEY = "Must Obey"
+        POWER_CALL_TO_ARMS = "Call to Arms"
+        POWER_CONCEAL = "Conceal"
+        POWER_HOLD_AUDIENCE = "Hold Audience"
+        POWER_CAVE_IN = "Cave-In"
+        POWER_HEAL_CREATURE = "Heal"
+        POWER_LIGHTNING = "Lightning Strike"
+        POWER_PROTECT = "Protect Monster"
+        POWER_CHICKEN = "Chicken"
+        POWER_DISEASE = "Disease"
+        POWER_ARMAGEDDON = "Armageddon"
+        POWER_DESTROY_WALLS = "Destroy Walls"
 
 class KeeperPower(IntEnum):
         POWER_HAND = 401
@@ -169,14 +169,14 @@ class KeeperPower(IntEnum):
         POWER_DESTROY_WALLS = 418
 
 class KeeperFXPowerName(StrEnum):
-        POWER_TIME_BOMB = "Time Bomb Researchable"
-        POWER_SLOW = "Slow Researchable"
-        POWER_FREEZE = "Freeze Researchable"
-        POWER_REBOUND = "Rebound Researchable"
-        POWER_FLIGHT = "Flight Researchable"
-        POWER_VISION = "Vision Researchable"
-        POWER_TUNNELLER = "Recruit Tunneller Researchable"
-#        POWER_CLEANSE = "Cleanse Researchable"
+        POWER_TIME_BOMB = "Time Bomb"
+        POWER_SLOW = "Slow"
+        POWER_FREEZE = "Freeze"
+        POWER_REBOUND = "Rebound"
+        POWER_FLIGHT = "Flight"
+        POWER_VISION = "Vision"
+        POWER_TUNNELLER = "Recruit Tunneller"
+#        POWER_CLEANSE = "Cleanse"
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperFXPower(IntEnum):   
@@ -206,26 +206,26 @@ class KeeperLevelName(StrEnum):
 #   #Not sure:
 #       100: Sphere 2/3? not sure, doable with extreme care in possession, or still pretty handily with a cap of level 7. If you have certain spells and rooms you can cheese it way earlier.
 #       102: not sure, requires a way to kill imps en masse, e.g. cave-in, a transferred creature, placeable boulder traps
-        LEVEL_001 = "Level 1 Unlocked"
-        LEVEL_002 = "Level 2 Unlocked"
-        LEVEL_003 = "Level 3 Unlocked"
-        LEVEL_004 = "Level 4 Unlocked"
-        LEVEL_005 = "Level 5 Unlocked"
-        LEVEL_006 = "Level 6 Unlocked"
-        LEVEL_007 = "Level 7 Unlocked"
-        LEVEL_008 = "Level 8 Unlocked"
-        LEVEL_009 = "Level 9 Unlocked"
-        LEVEL_010 = "Level 10 Unlocked"
-        LEVEL_011 = "Level 11 Unlocked"
-        LEVEL_012 = "Level 12 Unlocked"
-        LEVEL_013 = "Level 13 Unlocked"
-        LEVEL_014 = "Level 14 Unlocked"
-        LEVEL_015 = "Level 15 Unlocked"
-        LEVEL_016 = "Level 16 Unlocked"
-        LEVEL_017 = "Level 17 Unlocked"
-        LEVEL_018 = "Level 18 Unlocked"
-        LEVEL_019 = "Level 19 Unlocked"
-        LEVEL_020 = "Level 20 Unlocked"
+        LEVEL_001 = "Level 1"
+        LEVEL_002 = "Level 2"
+        LEVEL_003 = "Level 3"
+        LEVEL_004 = "Level 4"
+        LEVEL_005 = "Level 5"
+        LEVEL_006 = "Level 6"
+        LEVEL_007 = "Level 7"
+        LEVEL_008 = "Level 8"
+        LEVEL_009 = "Level 9"
+        LEVEL_010 = "Level 10"
+        LEVEL_011 = "Level 11"
+        LEVEL_012 = "Level 12"
+        LEVEL_013 = "Level 13"
+        LEVEL_014 = "Level 14"
+        LEVEL_015 = "Level 15"
+        LEVEL_016 = "Level 16"
+        LEVEL_017 = "Level 17"
+        LEVEL_018 = "Level 18"
+        LEVEL_019 = "Level 19"
+        LEVEL_020 = "Level 20"
 
 class KeeperLevel(IntEnum):
         LEVEL_001 = 501
@@ -258,22 +258,22 @@ class KeeperSecretLevel(IntEnum):
         LEVEL_105 = 526
 
 class KeeperSecretLevelName(StrEnum):   
-        LEVEL_100 = "Secret 1 Unlocked"
-        LEVEL_101 = "Secret 2 Unlocked"
-        LEVEL_102 = "Secret 3 Unlocked"
-        LEVEL_103 = "Secret 4 Unlocked"
-        LEVEL_104 = "Secret 5 Unlocked"
-        LEVEL_105 = "Secret 6 Unlocked"     
+        LEVEL_100 = "Secret 1"
+        LEVEL_101 = "Secret 2"
+        LEVEL_102 = "Secret 3"
+        LEVEL_103 = "Secret 4"
+        LEVEL_104 = "Secret 5"
+        LEVEL_105 = "Secret 6"     
 
 class KeeperRecipeName(StrEnum):
-        RECIPE_CHEAPER_IMPS = "Cheaper Imps Recipe Unlocked"
-        RECIPE_COMPLETE_MANUFACTURING = "Complete Manufacturing Recipe Unlocked"
-        RECIPE_COMPLETE_RESEARCH = "Complete Research Recipe Unlocked"
-        RECIPE_BILE_DEMON = "Bile Demon Recipe Unlocked"
-        RECIPE_SORCEROR = "Warlock Recipe Unlocked"
-        RECIPE_DARK_MISTRESS = "Mistress Recipe Unlocked"
-        RECIPE_HORNY = "Horned Reaper Recipe Unlocked"
-#       RECIPE_SPIDER_EASTER_EGG = "Spider easter egg Recipe Unlocked" #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
+        RECIPE_CHEAPER_IMPS = "Cheaper Imps Recipe"
+        RECIPE_COMPLETE_MANUFACTURING = "Complete Manufacturing Recipe"
+        RECIPE_COMPLETE_RESEARCH = "Complete Research Recipe"
+        RECIPE_BILE_DEMON = "Bile Demon Recipe"
+        RECIPE_SORCEROR = "Warlock Recipe"
+        RECIPE_DARK_MISTRESS = "Mistress Recipe"
+        RECIPE_HORNY = "Horned Reaper Recipe"
+#       RECIPE_SPIDER_EASTER_EGG = "Spider easter egg Recipe" #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 
 class KeeperRecipe(IntEnum):
         RECIPE_CHEAPER_IMPS = 601
@@ -286,12 +286,12 @@ class KeeperRecipe(IntEnum):
 #       RECIPE_SPIDER_EASTER_EGG = 614 #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 
 class NegativeRecipeName(StrEnum):
-#       RECIPE_WISHING_WELL = "Wishing Well Recipe Unlocked" #default, might be hardcoded, would probably be stupid to include
-       RECIPE_KILL_CHICKENS_1 = "All chickens die 1 Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_DISEASE = "Disease creatures Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_ANGRY = "All creatures angry Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_CHICKEN = "Chicken creatures Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
+#       RECIPE_WISHING_WELL = "Wishing Well Recipe" #default, might be hardcoded, would probably be stupid to include
+       RECIPE_KILL_CHICKENS_1 = "All chickens die 1 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_DISEASE = "Disease creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_ANGRY = "All creatures angry Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_CHICKEN = "Chicken creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
 
 class NegativeRecipe(StrEnum):
 #       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
@@ -302,17 +302,17 @@ class NegativeRecipe(StrEnum):
        RECIPE_CHICKEN = 613 #default, unlock would probably be stupid to include outside of a Templesanity
 
 class KeeperFXRecipeName(StrEnum):
-       RECIPE_GOOD_SKELETON = "Good skeleton Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_TENTACLE = "Tentacle Recipe Unlocked"
-       RECIPE_HOUND = "Hound Recipe Unlocked"
-       RECIPE_SPEED = "Speed creatures Recipe Unlocked"
-       RECIPE_CONCEAL = "Conceal creatures Recipe Unlocked"
-       RECIPE_HEAL = "Heal creatures Recipe Unlocked"
-       RECIPE_REBOUND = "Rebound creatures Recipe Unlocked"
-       RECIPE_PROTECT = "Protect creatures Recipe Unlocked"
-       RECIPE_FLIGHT = "Flight creatures Recipe Unlocked"
-       RECIPE_FREEZE = "Freeze creatures Recipe Unlocked"
-       RECIPE_SLOW = "Slow creatures Recipe Unlocked"
+       RECIPE_GOOD_SKELETON = "Good skeleton Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_TENTACLE = "Tentacle Recipe"
+       RECIPE_HOUND = "Hound Recipe"
+       RECIPE_SPEED = "Speed creatures Recipe"
+       RECIPE_CONCEAL = "Conceal creatures Recipe"
+       RECIPE_HEAL = "Heal creatures Recipe"
+       RECIPE_REBOUND = "Rebound creatures Recipe"
+       RECIPE_PROTECT = "Protect creatures Recipe"
+       RECIPE_FLIGHT = "Flight creatures Recipe"
+       RECIPE_FREEZE = "Freeze creatures Recipe"
+       RECIPE_SLOW = "Slow creatures Recipe"
 
 class KeeperFXRecipe(StrEnum):
        RECIPE_GOOD_SKELETON = 615 #default, unlock would probably be stupid to include outside of a Templesanity
