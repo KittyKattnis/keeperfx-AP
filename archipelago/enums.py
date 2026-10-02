@@ -129,24 +129,24 @@ class KeeperFXTrap(IntEnum):
         BALLISTA = 209
 
 class KeeperPowerName(StrEnum):
-        POWER_HAND = "Hand of Evil"
-        POWER_SLAP = "Slap"
-        POWER_POSSESS = "Possession"
-        POWER_IMP = "Create Imp"
-        POWER_SIGHT = "Sight of Evil"
-        POWER_SPEED = "Speed Monster"
-        POWER_OBEY = "Must Obey"
-        POWER_CALL_TO_ARMS = "CTA"
-        POWER_CONCEAL = "Conceal"
-        POWER_HOLD_AUDIENCE = "Hold Audience"
-        POWER_CAVE_IN = "Cave-In"
-        POWER_HEAL_CREATURE = "Heal"
-        POWER_LIGHTNING = "Lightning Strike"
-        POWER_PROTECT = "Protect Monster"
-        POWER_CHICKEN = "Chicken"
-        POWER_DISEASE = "Disease"
-        POWER_ARMAGEDDON = "Armageddon"
-        POWER_DESTROY_WALLS = "Destroy Walls"
+        POWER_HAND = "Hand of Evil Researchable"
+        POWER_SLAP = "Slap Researchable"
+        POWER_POSSESS = "Possession Researchable"
+        POWER_IMP = "Create Imp Researchable"
+        POWER_SIGHT = "Sight of Evil Researchable"
+        POWER_SPEED = "Speed Monster Researchable"
+        POWER_OBEY = "Must Obey Researchable"
+        POWER_CALL_TO_ARMS = "CTA Researchable"
+        POWER_CONCEAL = "Conceal Researchable"
+        POWER_HOLD_AUDIENCE = "Hold Audience Researchable"
+        POWER_CAVE_IN = "Cave-In Researchable"
+        POWER_HEAL_CREATURE = "Heal Researchable"
+        POWER_LIGHTNING = "Lightning Strike Researchable"
+        POWER_PROTECT = "Protect Monster Researchable"
+        POWER_CHICKEN = "Chicken Researchable"
+        POWER_DISEASE = "Disease Researchable"
+        POWER_ARMAGEDDON = "Armageddon Researchable"
+        POWER_DESTROY_WALLS = "Destroy Walls Researchable"
 
 class KeeperPower(IntEnum):
         POWER_HAND = 401
@@ -169,10 +169,10 @@ class KeeperPower(IntEnum):
         POWER_DESTROY_WALLS = 418
 
 class KeeperFXPowerName(StrEnum):
-        POWER_TIME_BOMB = "Time Bomb"
-        POWER_SLOW = "Slow"
-        POWER_FREEZE = "Freeze"
-        POWER_REBOUND = "Rebound"
+        POWER_TIME_BOMB = "Time Bomb Researchable"
+        POWER_SLOW = "Slow Researchable"
+        POWER_FREEZE = "Freeze Researchable"
+        POWER_REBOUND = "Rebound Researchable"
         POWER_FLIGHT = "Flight Researchable"
         POWER_VISION = "Vision Researchable"
         POWER_TUNNELLER = "Recruit Tunneller Researchable"

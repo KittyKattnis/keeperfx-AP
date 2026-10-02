@@ -77,7 +77,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
 
 
-    location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls", "Library Researchable") #If FX traps are on, could be this OR workshop and TNT trap
+    location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls Researchable", "Library Researchable") #If FX traps are on, could be this OR workshop and TNT trap
 
 #Scaling requirements for difficult levels
 
@@ -85,7 +85,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
                                  count=9).resolve(world)
 
 # temple recipes
-    location_rules["Recipe Cheaper Imps"] = Has("Create Imp")
+    location_rules["Recipe Cheaper Imps"] = Has("Create Imp Researchable")
     location_rules["Recipe Complete Manufacturing"] = Has("Workshop Researchable") & HasAny("Level 20 Unlocked", "Attract Beetle")
     location_rules["Recipe Complete Research"] = Has("Library Researchable") & HasAny("Level 20 Unlocked", "Level 10 Unlocked", "Attract Fly")
     location_rules["Recipe Bile Demon"] = HasAny("Attract Spider", "Level 4 Unlocked", "Level 5 Unlocked", "Level 18 Unlocked")

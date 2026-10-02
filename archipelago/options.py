@@ -45,6 +45,8 @@ class KeeperFXRecipes(Toggle):
 
 # starting player colour
 
+# toggles for certain types of progressives (i.e. if off, you just set it to default values)
+
 
 class StartingLevels(ItemDict):
     """Levels available at the start of the game."""
