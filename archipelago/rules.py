@@ -75,9 +75,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     location_rules["Secret 4 Next to Boulder"] = HasAll("Bridge Researchable", "Library Researchable")
     location_rules["Secret 5 Goal Area"] = HasAll("Bridge Researchable", "Library Researchable")
 
-
-
-    location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls Researchable", "Library Researchable") #If FX traps are on, could be this OR workshop and TNT trap
+    location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls Researchable", "Library Researchable") | HasAll("Demolition Trap Manufacturable", "Workshop Researchable")
 
 #Scaling requirements for difficult levels
 
