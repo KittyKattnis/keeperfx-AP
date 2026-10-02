@@ -6,7 +6,7 @@
 
 from typing import NamedTuple, Optional
 from BaseClasses import Item, ItemClassification
-from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName
+from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName
 
 
 class DungeonKeeperItem(Item):
@@ -18,9 +18,9 @@ class KeeperItem(NamedTuple):
     amount: Optional[int] = 1
 
 PROGRESSIVE_COUNTS = {
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value: 6,
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT.value: 5, 
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD.value: 4, 
+    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value: 7,
+    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT.value: 6, 
+    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD.value: 6, 
 }    
 
 CREATURES = {
@@ -40,9 +40,6 @@ CREATURES = {
 	KeeperCreatureName.HELL_HOUND: KeeperItem(KeeperCreature.HELL_HOUND, ItemClassification.progression), #"HELL_HOUND",
 	KeeperCreatureName.HORNY: KeeperItem(KeeperCreature.HORNY, ItemClassification.progression), #"HORNY", #not usually attracted from Portal but I think that's fine and adds variety
 	KeeperCreatureName.VAMPIRE: KeeperItem(KeeperCreature.VAMPIRE, ItemClassification.progression), #"VAMPIRE", #not usually attracted from Portal but I think that's fine and adds variety
-#	KeeperCreatureName.DRUID: KeeperItem(KeeperCreature.DRUID, ItemClassification.Helpful), #"DRUID",
-#	KeeperCreatureName.MAIDEN: KeeperItem(KeeperCreature.MAIDEN, ItemClassification.Helpful), #"MAIDEN",
-#	KeeperCreatureName.OTHERS: KeeperItem(KeeperCreature.OTHERS, ItemClassification.Helpful), #"Others?",
 }
 
 ROOMS = {
@@ -69,9 +66,6 @@ TRAPS = {
 	KeeperTrapName.LAVA: KeeperItem(KeeperTrap.LAVA, ItemClassification.useful), #"LAVA",
 	KeeperTrapName.BOULDER: KeeperItem(KeeperTrap.BOULDER, ItemClassification.useful), #"BOULDER",
 	KeeperTrapName.WORD_OF_POWER: KeeperItem(KeeperTrap.WORD_OF_POWER, ItemClassification.useful), #"WORD_OF_POWER",
-#	KeeperTrapName.TNT: KeeperItem(KeeperTrap.TNT, ItemClassification.useful), #"TNT",
-#	KeeperTrapName.SENTRY: KeeperItem(KeeperTrap.SENTRY, ItemClassification.useful), #"SENTRY",
-#	KeeperTrapName.BALLISTA: KeeperItem(KeeperTrap.BALLISTA, ItemClassification.useful), #"BALLISTA",
 }
 
 DOORS = {
@@ -79,8 +73,6 @@ DOORS = {
 	KeeperDoorName.BRACED: KeeperItem(KeeperDoor.BRACED, ItemClassification.useful), #"BRACED",
 	KeeperDoorName.STEEL: KeeperItem(KeeperDoor.STEEL, ItemClassification.useful), #"STEEL",
 	KeeperDoorName.MAGIC: KeeperItem(KeeperDoor.MAGIC, ItemClassification.useful), #"MAGIC",
-#	KeeperDoorName.SECRET: KeeperItem(KeeperDoor.SECRET, ItemClassification.useful), #"SECRET",
-#	KeeperDoorName.MIDAS: KeeperItem(KeeperDoor.MIDAS, ItemClassification.useful), #"MIDAS",
 }
 
 SPELLS = {
@@ -102,15 +94,6 @@ SPELLS = {
     KeeperPowerName.POWER_DISEASE: KeeperItem(KeeperPower.POWER_DISEASE, ItemClassification.useful), #"POWER_DISEASE",
     KeeperPowerName.POWER_ARMAGEDDON: KeeperItem(KeeperPower.POWER_ARMAGEDDON, ItemClassification.useful), #"POWER_ARMAGEDDON",
     KeeperPowerName.POWER_DESTROY_WALLS: KeeperItem(KeeperPower.POWER_DESTROY_WALLS, ItemClassification.progression), #"POWER_DESTROY_WALLS",
-#    KeeperPowerName.POWER_TIME_BOMB: KeeperItem(KeeperPower.POWER_TIME_BOMB, ItemClassification.Useful), #"POWER_TIME_BOMB",
-#    KeeperPowerName.POWER_SLOW: KeeperItem(KeeperPower.POWER_SLOW, ItemClassification.Useful), #"POWER_SLOW",
-#    KeeperPowerName.POWER_FREEZE: KeeperItem(KeeperPower.POWER_FREEZE, ItemClassification.Useful), #"POWER_FREEZE",
-#    KeeperPowerName.POWER_REBOUND: KeeperItem(KeeperPower.POWER_REBOUND, ItemClassification.Useful), #"POWER_REBOUND",
-#    KeeperPowerName.POWER_FLIGHT: KeeperItem(KeeperPower.POWER_FLIGHT, ItemClassification.Useful), #"POWER_FLIGHT",
-#    KeeperPowerName.POWER_VISION: KeeperItem(KeeperPower.POWER_VISION, ItemClassification.Useful), #"POWER_VISION",
-#    KeeperPowerName.POWER_TUNNELLER: KeeperItem(KeeperPower.POWER_TUNNELLER, ItemClassification.Useful), #"POWER_TUNNELLER",
-#    KeeperPowerName.POWER_CLEANSE: KeeperItem(KeeperPower.POWER_CLEANSE, ItemClassification.Useful), #"POWER_CLEANSE", #not made yet
-#   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 }
 
 #    #Levels
@@ -150,7 +133,6 @@ LEVELS = {
     KeeperLevelName.LEVEL_018: KeeperItem(KeeperLevel.LEVEL_018, ItemClassification.progression), #"Level 18 Unlocked"
     KeeperLevelName.LEVEL_019: KeeperItem(KeeperLevel.LEVEL_019, ItemClassification.progression), #"Level 19 Unlocked"
     KeeperLevelName.LEVEL_020: KeeperItem(KeeperLevel.LEVEL_020, ItemClassification.progression), #"Level 20 Unlocked"
-
 }
 
 SECRET_LEVELS = {
@@ -162,8 +144,6 @@ SECRET_LEVELS = {
     KeeperSecretLevelName.LEVEL_105: KeeperItem(KeeperSecretLevel.LEVEL_105, ItemClassification.progression), #"Level 105 Unlocked"
     }
 
-
-
 RECIPES = {
     KeeperRecipeName.RECIPE_CHEAPER_IMPS: KeeperItem(KeeperRecipe.RECIPE_CHEAPER_IMPS, ItemClassification.useful), #"Cheaper Imps"
     KeeperRecipeName.RECIPE_COMPLETE_MANUFACTURING: KeeperItem(KeeperRecipe.RECIPE_COMPLETE_MANUFACTURING, ItemClassification.useful), #"Complete Manufacturing"
@@ -172,24 +152,7 @@ RECIPES = {
     KeeperRecipeName.RECIPE_SORCEROR: KeeperItem(KeeperRecipe.RECIPE_SORCEROR, ItemClassification.useful), #"Warlock"
     KeeperRecipeName.RECIPE_DARK_MISTRESS: KeeperItem(KeeperRecipe.RECIPE_DARK_MISTRESS, ItemClassification.useful), #"Mistress"
     KeeperRecipeName.RECIPE_HORNY: KeeperItem(KeeperRecipe.RECIPE_HORNY, ItemClassification.useful), #"Horned Reaper"
-#    KeeperRecipeName.RECIPE_WISHING_WELL: KeeperItem(KeeperRecipe.RECIPE_WISHING_WELL, ItemClassification.useful), #"Wishing Well" #default, might be hardcoded, would probably be stupid to include
-#    KeeperRecipeName.RECIPE_KILL_CHICKENS_1: KeeperItem(KeeperRecipe.RECIPE_KILL_CHICKENS_1, ItemClassification.useful), #"All chickens die 1", #default, unlock would probably be stupid to include outside of a Templesanity
-#    KeeperRecipeName.RECIPE_KILL_CHICKENS_2: KeeperItem(KeeperRecipe.RECIPE_KILL_CHICKENS_2, ItemClassification.useful), #"All chickens die 2", #default, unlock would probably be stupid to include outside of a Templesanity
-#    KeeperRecipeName.RECIPE_DISEASE: KeeperItem(KeeperRecipe.RECIPE_DISEASE, ItemClassification.useful), #"Disease creatures", #default, unlock would probably be stupid to include outside of a Templesanity
-#    KeeperRecipeName.RECIPE_ANGRY: KeeperItem(KeeperRecipe.RECIPE_ANGRY, ItemClassification.useful), #"All creatures angry", #default, unlock would probably be stupid to include outside of a Templesanity
-#    KeeperRecipeName.RECIPE_CHICKEN: KeeperItem(KeeperRecipe.RECIPE_CHICKEN, ItemClassification.useful), #"Chicken creatures", #default, unlock would probably be stupid to include outside of a Templesanity
 #    KeeperRecipeName.RECIPE_SPIDER_EASTER_EGG: KeeperItem(KeeperRecipe.RECIPE_SPIDER_EASTER_EGG, ItemClassification.useful), #"Spider easter egg", #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
-#    KeeperRecipeName.RECIPE_GOOD_SKELETON: KeeperItem(KeeperRecipe.RECIPE_GOOD_SKELETON, ItemClassification.useful), #"Good skeleton", #default, unlock would probably be stupid to include outside of a Templesanity
-#    KeeperRecipeName.RECIPE_TENTACLE: KeeperItem(KeeperRecipe.RECIPE_TENTACLE, ItemClassification.useful), #"Tentacle",
-#    KeeperRecipeName.RECIPE_HOUND: KeeperItem(KeeperRecipe.RECIPE_HOUND, ItemClassification.useful), #"Hound",
-#    KeeperRecipeName.RECIPE_SPEED: KeeperItem(KeeperRecipe.RECIPE_SPEED, ItemClassification.Helpful), #"Speed creatures",
-#    KeeperRecipeName.RECIPE_CONCEAL: KeeperItem(KeeperRecipe.RECIPE_CONCEAL, ItemClassification.Helpful), #"Conceal creatures", #"Conceal creatures Recipe Unlocked",
-#    KeeperRecipeName.RECIPE_HEAL: KeeperItem(KeeperRecipe.RECIPE_HEAL, ItemClassification.Helpful), #"Heal creatures", #"Heal creatures Recipe Unlocked",
-#    KeeperRecipeName.RECIPE_REBOUND: KeeperItem(KeeperRecipe.RECIPE_REBOUND, ItemClassification.Helpful), #"Rebound creatures", #"Rebound creatures Recipe Unlocked",
-#    KeeperRecipeName.RECIPE_PROTECT: KeeperItem(KeeperRecipe.RECIPE_PROTECT, ItemClassification.Helpful), #"Protect creatures", #"Protect creatures Recipe Unlocked",
-#    KeeperRecipeName.RECIPE_FLIGHT: KeeperItem(KeeperRecipe.RECIPE_FLIGHT, ItemClassification.Helpful), #"Flight creatures", #"Flight creatures Recipe Unlocked",
-#    KeeperRecipeName.RECIPE_FREEZE: KeeperItem(KeeperRecipe.RECIPE_FREEZE, ItemClassification.Helpful), #"Freeze creatures", #"Freeze creatures Recipe Unlocked",
-#    KeeperRecipeName.RECIPE_SLOW: KeeperItem(KeeperRecipe.RECIPE_SLOW, ItemClassification.Helpful), #"Slow creatures", #"Slow creatures Recipe Unlocked",
 }
 
 PROGRESSIVES = {
@@ -203,30 +166,54 @@ PROGRESSIVES = {
 # KEEPERFX ADDITIONS
 
 KEEPERFX_CREATURES = {
-KeeperFXCreatureName.DRUID: KeeperItem(KeeperFXCreature.DRUID, ItemClassification.useful),
-KeeperFXCreatureName.MAIDEN: KeeperItem(KeeperFXCreature.MAIDEN, ItemClassification.useful),
+    KeeperFXCreatureName.DRUID: KeeperItem(KeeperFXCreature.DRUID, ItemClassification.useful),
+    KeeperFXCreatureName.MAIDEN: KeeperItem(KeeperFXCreature.MAIDEN, ItemClassification.useful),
 }
 
 KEEPERFX_SPELLS = {
-KeeperFXPowerName.POWER_TIME_BOMB: KeeperItem(KeeperFXPower.POWER_TIME_BOMB, ItemClassification.useful),
-KeeperFXPowerName.POWER_SLOW: KeeperItem(KeeperFXPower.POWER_SLOW, ItemClassification.useful),
-KeeperFXPowerName.POWER_FREEZE: KeeperItem(KeeperFXPower.POWER_FREEZE, ItemClassification.useful),
-KeeperFXPowerName.POWER_REBOUND: KeeperItem(KeeperFXPower.POWER_REBOUND, ItemClassification.useful),
-KeeperFXPowerName.POWER_FLIGHT: KeeperItem(KeeperFXPower.POWER_FLIGHT, ItemClassification.useful),
-KeeperFXPowerName.POWER_VISION: KeeperItem(KeeperFXPower.POWER_VISION, ItemClassification.useful),
-KeeperFXPowerName.POWER_TUNNELLER: KeeperItem(KeeperFXPower.POWER_TUNNELLER, ItemClassification.useful),
+    KeeperFXPowerName.POWER_TIME_BOMB: KeeperItem(KeeperFXPower.POWER_TIME_BOMB, ItemClassification.useful),
+    KeeperFXPowerName.POWER_SLOW: KeeperItem(KeeperFXPower.POWER_SLOW, ItemClassification.useful),
+    KeeperFXPowerName.POWER_FREEZE: KeeperItem(KeeperFXPower.POWER_FREEZE, ItemClassification.useful),
+    KeeperFXPowerName.POWER_REBOUND: KeeperItem(KeeperFXPower.POWER_REBOUND, ItemClassification.useful),
+    KeeperFXPowerName.POWER_FLIGHT: KeeperItem(KeeperFXPower.POWER_FLIGHT, ItemClassification.useful),
+    KeeperFXPowerName.POWER_VISION: KeeperItem(KeeperFXPower.POWER_VISION, ItemClassification.useful),
+    KeeperFXPowerName.POWER_TUNNELLER: KeeperItem(KeeperFXPower.POWER_TUNNELLER, ItemClassification.useful),
+#    KeeperFXPowerName.POWER_CLEANSE: KeeperItem(KeeperFXPower.POWER_CLEANSE, ItemClassification.Useful), #"POWER_CLEANSE", #not made yet
+#   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 }
 
 KEEPERFX_TRAPS = {
-KeeperFXTrapName.TNT: KeeperItem(KeeperFXTrap.TNT, ItemClassification.useful),
-KeeperFXTrapName.SENTRY: KeeperItem(KeeperFXTrap.SENTRY, ItemClassification.useful),
-KeeperFXTrapName.BALLISTA: KeeperItem(KeeperFXTrap.BALLISTA, ItemClassification.useful),
+    KeeperFXTrapName.TNT: KeeperItem(KeeperFXTrap.TNT, ItemClassification.useful),
+    KeeperFXTrapName.SENTRY: KeeperItem(KeeperFXTrap.SENTRY, ItemClassification.useful),
+    KeeperFXTrapName.BALLISTA: KeeperItem(KeeperFXTrap.BALLISTA, ItemClassification.useful),
 }
 
-
 KEEPERFX_DOORS = {
-KeeperFXDoorName.SECRET: KeeperItem(KeeperFXDoor.SECRET, ItemClassification.useful),
-KeeperFXDoorName.MIDAS: KeeperItem(KeeperFXDoor.MIDAS, ItemClassification.useful),
+    KeeperFXDoorName.SECRET: KeeperItem(KeeperFXDoor.SECRET, ItemClassification.useful),
+    KeeperFXDoorName.MIDAS: KeeperItem(KeeperFXDoor.MIDAS, ItemClassification.useful),
+}
+
+NEGATIVE_RECIPES = {
+#    KeeperRecipeName.RECIPE_WISHING_WELL: KeeperItem(KeeperRecipe.RECIPE_WISHING_WELL, ItemClassification.useful), #"Wishing Well" #default, might be hardcoded, would probably be stupid to include
+    NegativeRecipeName.RECIPE_KILL_CHICKENS_1: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_1, ItemClassification.useful), #"All chickens die 1", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_KILL_CHICKENS_2: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_2, ItemClassification.useful), #"All chickens die 2", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_DISEASE: KeeperItem(NegativeRecipe.RECIPE_DISEASE, ItemClassification.useful), #"Disease creatures", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_ANGRY: KeeperItem(NegativeRecipe.RECIPE_ANGRY, ItemClassification.useful), #"All creatures angry", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_CHICKEN: KeeperItem(NegativeRecipe.RECIPE_CHICKEN, ItemClassification.useful), #"Chicken creatures", #default, unlock would probably be stupid to include outside of a Templesanity
+}
+
+KEEPERFX_RECIPES = {
+    KeeperFXRecipeName.RECIPE_GOOD_SKELETON: KeeperItem(KeeperFXRecipe.RECIPE_GOOD_SKELETON, ItemClassification.useful), #"Good skeleton", #default, unlock would probably be stupid to include outside of a Templesanity
+    KeeperFXRecipeName.RECIPE_TENTACLE: KeeperItem(KeeperFXRecipe.RECIPE_TENTACLE, ItemClassification.useful), #"Tentacle",
+    KeeperFXRecipeName.RECIPE_HOUND: KeeperItem(KeeperFXRecipe.RECIPE_HOUND, ItemClassification.useful), #"Hound",
+    KeeperFXRecipeName.RECIPE_SPEED: KeeperItem(KeeperFXRecipe.RECIPE_SPEED, ItemClassification.Helpful), #"Speed creatures",
+    KeeperFXRecipeName.RECIPE_CONCEAL: KeeperItem(KeeperFXRecipe.RECIPE_CONCEAL, ItemClassification.Helpful), #"Conceal creatures", #"Conceal creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_HEAL: KeeperItem(KeeperFXRecipe.RECIPE_HEAL, ItemClassification.Helpful), #"Heal creatures", #"Heal creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_REBOUND: KeeperItem(KeeperFXRecipe.RECIPE_REBOUND, ItemClassification.Helpful), #"Rebound creatures", #"Rebound creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_PROTECT: KeeperItem(KeeperFXRecipe.RECIPE_PROTECT, ItemClassification.Helpful), #"Protect creatures", #"Protect creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_FLIGHT: KeeperItem(KeeperFXRecipe.RECIPE_FLIGHT, ItemClassification.Helpful), #"Flight creatures", #"Flight creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_FREEZE: KeeperItem(KeeperFXRecipe.RECIPE_FREEZE, ItemClassification.Helpful), #"Freeze creatures", #"Freeze creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_SLOW: KeeperItem(KeeperFXRecipe.RECIPE_SLOW, ItemClassification.Helpful), #"Slow creatures", #"Slow creatures Recipe Unlocked",
 }
 
 CHECKS = {}
@@ -238,7 +225,6 @@ CHECKS.update(DOORS)
 CHECKS.update(LEVELS)
 CHECKS.update(RECIPES)
 CHECKS.update(PROGRESSIVES)
-
 
 ITEM_NAME_TO_ID = {}
 
@@ -256,7 +242,6 @@ populate_item_dict(KeeperRecipeName, KeeperRecipe)
 populate_item_dict(KeeperPowerName, KeeperPower)
 populate_item_dict(KeeperProgressiveName, KeeperProgressive)
 
-
 def create_all_items(world):
     item_pool = []
 
@@ -268,18 +253,22 @@ def create_all_items(world):
     if world.options.KeeperFXCreatures:
         populate_item_dict(KeeperFXCreatureName, KeeperFXCreature)
 
-
     if world.options.KeeperFXSpells:
         populate_item_dict(KeeperFXPowerName, KeeperFXPower)
-
 
     if world.options.KeeperFXTraps:
         populate_item_dict(KeeperFXTrapName, KeeperFXTrap)
 
-
     if world.options.KeeperFXDoors:
         populate_item_dict(KeeperFXDoorName, KeeperFXDoor)
 
+    if world.options.NegativeRecipes:
+        populate_item_dict(NegativeRecipeName, NegativeRecipe)
+
+    if world.options.KeeperFXRecipes:
+        populate_item_dict(KeeperFXRecipeName, KeeperFXRecipe)
+
+    #to do - adding heroes to pool
 
     for item_name in ITEM_NAME_TO_ID.keys():
 
@@ -320,11 +309,11 @@ all_category_dicts = {
     **KEEPERFX_SPELLS,
     **KEEPERFX_TRAPS,
     **SECRET_LEVELS,
+    **NEGATIVE_RECIPES,
+    **KEEPERFX_RECIPES,
 }
 
 item_table = {enum_key.value: item_data for enum_key, item_data in all_category_dicts.items()}
-
-#can now use CHECKS[101].# to get TREASURE
 
 #    #---------------------------------------------------------
 #    #Filler
