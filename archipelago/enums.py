@@ -334,15 +334,19 @@ class KeeperProgressiveName(StrEnum):
 
         PROGRESSIVE_STARTING_GOLD = "Progressive Starting Gold" #Increase starting gold by 1250 (starts at 2500)
 
+        PROGRESSIVE_PORTAL_SPEED = "Progressive Portal Speed" #Increases Portal speed (decreases wait) by 125 (starts at 750)
+
 #    #Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)),
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
 #       progressive hand size (e.g. start with hand size of 4 (default 8), up to 16)
 class KeeperProgressive(IntEnum):
-        PROGRESSIVE_LEVEL_CAP = 701 #Increase max creature level by 1 (starts max level 3): 4
+        PROGRESSIVE_LEVEL_CAP = 701 #Increase max creature level by 1 (starts max level 3)
 
-        PROGRESSIVE_CREATURE_LIMIT = 702 #Increase creature limit by 5 (starts at max 10): 15
+        PROGRESSIVE_CREATURE_LIMIT = 702 #Increase creature limit by 5 (starts at max 10)
 
-        PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500): 3750
+        PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500)
+
+        PROGRESSIVE_PORTAL_SPEED = 704 #Increases Portal speed (decreases wait) by 125 (starts at 750)
 #    #---------------------------------------------------------
 #    #Filler
 #    #okay I feel like a lot of the stuff in this game could be considered filler, like you could beat the whole game without using traps or doors, or half the rooms or spells or creatures, but yeah

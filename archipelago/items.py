@@ -18,9 +18,10 @@ class KeeperItem(NamedTuple):
     amount: Optional[int] = 1
 
 PROGRESSIVE_COUNTS = {
-    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value: 7,
+    KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value: 8,
     KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT.value: 6, 
-    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD.value: 6, 
+    KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD.value: 6,
+    KeeperProgressiveName.PROGRESSIVE_PORTAL_SPEED.value: 4,
 }    
 
 CREATURES = {
@@ -159,6 +160,7 @@ PROGRESSIVES = {
     KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP: KeeperItem(KeeperProgressive.PROGRESSIVE_LEVEL_CAP, ItemClassification.useful), 
     KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT: KeeperItem(KeeperProgressive.PROGRESSIVE_CREATURE_LIMIT, ItemClassification.useful), #"Progressive Creature Limit 1", #Increase creature limit by 5 (starts at max 10): 15
     KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD: KeeperItem(KeeperProgressive.PROGRESSIVE_STARTING_GOLD, ItemClassification.useful), #"Progressive Starting Gold 1" #Increase starting gold by 1250 (starts at 2500): 3750
+    KeeperProgressiveName.PROGRESSIVE_PORTAL_SPEED: KeeperItem(KeeperProgressive.PROGRESSIVE_PORTAL_SPEED, ItemClassification.useful), #"Progressive Starting Gold 1" #Increase starting gold by 1250 (starts at 2500): 3750
 #    #Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)),
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
 }

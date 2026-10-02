@@ -1,30 +1,22 @@
 ReceivedLocationsTable = {}
 
 function ReceivedLocationsTable.Add(id)
-    ReceivedLocationsTable[id] = true
+    ReceivedLocationsTable[id] = (ReceivedLocationsTable[id] or 0) + 1
 end
 
 function ReceivedLocationsTable.Has(id)
-    return ReceivedLocationsTable[id] == true
+    return ReceivedLocationsTable[id] ~= nil
 end
 
---function ReceivedLocationsTable.Count(checks)
---    local count = 0
---    if checks then
---        for _, iteminfo in pairs(checks) do
---            if ReceivedLocationsTable.Has(iteminfo.id) then
---                count = count + 1
---            end
---        end
---    end
---    return count
---end
+function ReceivedLocationsTable.Count(id)
+    return ReceivedLocationsTable[id] or 0
+end
 
 function ReceivedLocationsTable.Total()
     local count = 0
     for key, value in pairs(ReceivedLocationsTable) do
-        if type(key) == "number" and type(value) == "boolean" then
-            count = count + 1
+        if type(key) == "number" and type(value) == "number" then
+            count = count + value
         end
     end
     return count
