@@ -438,9 +438,11 @@ function IncreaseLevelCap()
     local maxLevel = levelcapcount + 3
     if maxLevel > 10 then maxLevel = 0 end --SET_CREATURE_MAX_LEVEL command uses 0 to mean "10 and growup"
     if ReceivedLocationsTable.Count(701) == 8 then --when you get the 8th unlock, let player know growup is available
-      print("Level cap increased! Creature growup unlocked")
+      --print("Level cap increased! Creature growup unlocked")
+      print("Progressive Level Cap " .. levelcapcount .. " (Creature growup) Unlocked")
     elseif ReceivedLocationsTable.Count(701) < 8 then
-      print("Level cap increased! Max creature level " .. maxLevel .. " unlocked")
+      --print("Level cap increased! Max creature level " .. maxLevel .. " unlocked")
+      print("Progressive Level Cap " .. levelcapcount .. " (max level " .. maxLevel.. ") Unlocked")
     end
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,ANY_CREATURE," .. maxLevel .. ")")
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,IMP," .. maxLevel .. ")")
