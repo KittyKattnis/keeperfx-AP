@@ -242,26 +242,12 @@ function ItemStatus()
         end
     end
     --progressives
-    local levelcapcount = 0
-    local creaturelimitcount = 0
-    local startinggoldcount = 0
-    for itemid = 701, 707 do
-        if ReceivedLocationsTable.Has(itemid) then
-            levelcapcount = levelcapcount + 1
-        end
-    end
-    for id = 711, 716 do
-        if ReceivedLocationsTable.Has(id) then
-            creaturelimitcount = creaturelimitcount + 1
-        end
-    end
-    for id = 721, 726 do
-        if ReceivedLocationsTable.Has(id) then
-            startinggoldcount = startinggoldcount + 1
-        end
-    end
+
+    local levelcapcount = ReceivedLocationsTable.Count(701)
+    local creaturelimitcount = ReceivedLocationsTable.Count(702)
+    local startinggoldcount = ReceivedLocationsTable.Count(703)
     RegisterTimerEvent(function ()
-        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,34," .. levelcapcount + 3 .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,34," .. math.min(levelcapcount + 3,11) .. ")")
     end, 17, true)
     for i = 0, 8 do
         if i <= levelcapcount then

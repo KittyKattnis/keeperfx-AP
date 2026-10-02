@@ -70,14 +70,12 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     location_rules["Mistle Central Water 1"] = Has("Bridge Researchable") #Have Library from beginning on non-cruelty mode
     location_rules["Mistle Central Water 2"] = Has("Bridge Researchable") #Have Library from beginning on non-cruelty mode
     location_rules["Secret 2 In Water"] = Has("Bridge Researchable") #Have Library from beginning on non-cruelty mode
-    location_rules["Secret 5 Lava Platform"] = HasAll("Bridge Researchable", "Library Researchable")
+    location_rules["Secret 4 Lava Pool"] = HasAll("Bridge Researchable", "Library Researchable")
     location_rules["Secret 4 Next to Witch"] = HasAll("Bridge Researchable", "Library Researchable")
     location_rules["Secret 4 Next to Boulder"] = HasAll("Bridge Researchable", "Library Researchable")
     location_rules["Secret 5 Goal Area"] = HasAll("Bridge Researchable", "Library Researchable")
 
-
-
-    location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls", "Library Researchable") #If FX traps are on, could be this OR workshop and TNT trap
+    location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls Researchable", "Library Researchable") | HasAll("Demolition Trap Manufacturable", "Workshop Researchable")
 
 #Scaling requirements for difficult levels
 
@@ -85,7 +83,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
                                  count=9).resolve(world)
 
 # temple recipes
-    location_rules["Recipe Cheaper Imps"] = Has("Create Imp")
+    location_rules["Recipe Cheaper Imps"] = Has("Create Imp Researchable")
     location_rules["Recipe Complete Manufacturing"] = Has("Workshop Researchable") & HasAny("Level 20 Unlocked", "Attract Beetle")
     location_rules["Recipe Complete Research"] = Has("Library Researchable") & HasAny("Level 20 Unlocked", "Level 10 Unlocked", "Attract Fly")
     location_rules["Recipe Bile Demon"] = HasAny("Attract Spider", "Level 4 Unlocked", "Level 5 Unlocked", "Level 18 Unlocked")
@@ -93,8 +91,8 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     location_rules["Recipe Mistress"] = HasAll("Attract Beetle", "Attract Spider") | HasAll("Attract Spider", "Level 10 Unlocked") | HasAll("Attract Spider", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Beetle", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")
     location_rules["Recipe Horned Reaper"] = HasAll("Attract Mistress", "Attract Bile Demon", "Attract Troll") | Has("Level 9 Unlocked")
     location_rules["Recipe Make Angry"] = Has("Attract Horned Reaper") | CanReachLocation("Recipe Horned Reaper")
-    location_rules["Recipe Kill Chickens"] = HasAny("Attract Ghost", "Level 6 Unlocked", "Level 15 Unlocked", "Level 19 Unlocked", "Torture Chamber") & Has("Hatchery Researchable")
-    location_rules["Recipe Disease Creatures"] = HasAny("Attract Vampire", "Graveyard", "Level 12 Unlocked", "Level 19 Unlocked")
+    location_rules["Recipe Kill Chickens"] = HasAny("Attract Ghost", "Level 6 Unlocked", "Level 15 Unlocked", "Level 19 Unlocked", "Torture Chamber Researchable") & Has("Hatchery Researchable")
+    location_rules["Recipe Disease Creatures"] = HasAny("Attract Vampire", "Graveyard Researchable", "Level 12 Unlocked", "Level 19 Unlocked")
     location_rules["Recipe Chicken Creatures"] = HasAny("Attract Bile Demon", "Level 4 Unlocked", "Level 5 Unlocked","Level 9 Unlocked", "Level 11 Unlocked", "Level 18 Unlocked") | CanReachLocation("Recipe Bile Demon")
     location_rules["Recipe Tentacle"] = HasAll("Attract Troll", "Attract Spider") | HasAll("Attract Troll", "Level 4 Unlocked") | HasAll("Attract Troll", "Level 5 Unlocked") | HasAll("Attract Troll", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 9 Unlocked") | HasAll("Attract Spider", "Level 11 Unlocked")
     location_rules["Recipe Hellhound"] = HasAll("Attract Dragon", "Attract Fly") | Has("Level 10 Unlocked") | HasAll("Attract Dragon", "Level 20 Unlocked") | HasAll("Attract Fly", "Level 10 Unlocked") | HasAll("Attract Fly", "Level 13 Unlocked") | HasAll("Attract Fly", "Level 18 Unlocked")
@@ -116,10 +114,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
         except KeyError:
             print(f"Warning: Could not find location '{location_name}' to apply rules.")
 
-
     set_completion_condition(world)
-
-
 
 
 def set_completion_condition(world: DungeonKeeperWorld) -> None:

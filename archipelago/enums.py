@@ -24,8 +24,6 @@ class KeeperCreatureName(StrEnum):
         HORNY = "Attract Horned Reaper" #not usually attracted from Portal but I think that's fine and adds variety
         VAMPIRE = "Attract Vampire" #not usually attracted from Portal but I think that's fine and adds variety
 
-#       OTHERS = "Attract (others?)"
-
 class KeeperCreature(IntEnum):
         FLY = 1
         BUG = 2
@@ -43,9 +41,6 @@ class KeeperCreature(IntEnum):
         HELL_HOUND = 14
         HORNY = 15
         VAMPIRE = 16
-#        DRUID = 17
-#        MAIDEN = 18
-#        (others?)" = 19
 
 class KeeperFXCreatureName(StrEnum):
         DRUID = "Attract Druid"
@@ -95,7 +90,6 @@ class KeeperTrapName(StrEnum):
         BOULDER = "Boulder Trap Manufacturable"
         WORD_OF_POWER = "WOP Trap Manufacturable"
 
-
 class KeeperTrap(IntEnum):
         ALARM = 201
         POISON_GAS = 202
@@ -104,20 +98,17 @@ class KeeperTrap(IntEnum):
         BOULDER = 205
         WORD_OF_POWER = 206
 
-
 class KeeperDoorName(StrEnum):
         WOOD = "Wooden Door Manufacturable"
         BRACED = "Braced Door Manufacturable"
         STEEL = "Iron Door Manufacturable"
         MAGIC = "Magic Door Manufacturable"
 
-
 class KeeperDoor(IntEnum):     
         WOOD = 301
         BRACED = 302
         STEEL = 303
         MAGIC = 304
-
 
 class KeeperFXDoorName(StrEnum):
         SECRET = "Secret Door Manufacturable"
@@ -137,35 +128,25 @@ class KeeperFXTrap(IntEnum):
         SENTRY = 208
         BALLISTA = 209
 
-
 class KeeperPowerName(StrEnum):
-        POWER_HAND = "Hand of Evil"
-        POWER_SLAP = "Slap"
-        POWER_POSSESS = "Possession"
-        POWER_IMP = "Create Imp"
-        POWER_SIGHT = "Sight of Evil"
-        POWER_SPEED = "Speed Monster"
-        POWER_OBEY = "Must Obey"
-        POWER_CALL_TO_ARMS = "CTA"
-        POWER_CONCEAL = "Conceal"
-        POWER_HOLD_AUDIENCE = "Hold Audience"
-        POWER_CAVE_IN = "Cave-In"
-        POWER_HEAL_CREATURE = "Heal"
-        POWER_LIGHTNING = "Lightning Strike"
-        POWER_PROTECT = "Protect Monster"
-        POWER_CHICKEN = "Chicken"
-        POWER_DISEASE = "Disease"
-        POWER_ARMAGEDDON = "Armageddon"
-        POWER_DESTROY_WALLS = "Destroy Walls"
-#        POWER_TIME_BOMB" = "Time Bomb"
-#        POWER_SLOW = "Slow"
-#        POWER_FREEZE = "Freeze"
-#        POWER_REBOUND = "Rebound"
-#        POWER_FLIGHT = "Flight Researchable"
-#        POWER_VISION = "Vision Researchable"
-#        POWER_TUNNELLER = "Recruit Tunneller Researchable"
-#        POWER_CLEANSE = "Cleanse Researchable"
-#   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
+        POWER_HAND = "Hand of Evil Researchable"
+        POWER_SLAP = "Slap Researchable"
+        POWER_POSSESS = "Possession Researchable"
+        POWER_IMP = "Create Imp Researchable"
+        POWER_SIGHT = "Sight of Evil Researchable"
+        POWER_SPEED = "Speed Monster Researchable"
+        POWER_OBEY = "Must Obey Researchable"
+        POWER_CALL_TO_ARMS = "CTA Researchable"
+        POWER_CONCEAL = "Conceal Researchable"
+        POWER_HOLD_AUDIENCE = "Hold Audience Researchable"
+        POWER_CAVE_IN = "Cave-In Researchable"
+        POWER_HEAL_CREATURE = "Heal Researchable"
+        POWER_LIGHTNING = "Lightning Strike Researchable"
+        POWER_PROTECT = "Protect Monster Researchable"
+        POWER_CHICKEN = "Chicken Researchable"
+        POWER_DISEASE = "Disease Researchable"
+        POWER_ARMAGEDDON = "Armageddon Researchable"
+        POWER_DESTROY_WALLS = "Destroy Walls Researchable"
 
 class KeeperPower(IntEnum):
         POWER_HAND = 401
@@ -186,24 +167,17 @@ class KeeperPower(IntEnum):
         POWER_DISEASE = 416
         POWER_ARMAGEDDON = 417
         POWER_DESTROY_WALLS = 418
-#        POWER_TIME_BOMB = 419
-#        POWER_SLOW = 420
-#        POWER_FREEZE = 421
-#        POWER_REBOUND = 422
-#        POWER_FLIGHT = 423
-#        POWER_VISION = 424
-#        POWER_TUNNELLER = 425
-#        POWER_CLEANSE = 426 #not made yet
-#   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE POWER_PICKUP_GOLD POWER_PICKUP_FOOD
 
 class KeeperFXPowerName(StrEnum):
-        POWER_TIME_BOMB = "Time Bomb"
-        POWER_SLOW = "Slow"
-        POWER_FREEZE = "Freeze"
-        POWER_REBOUND = "Rebound"
+        POWER_TIME_BOMB = "Time Bomb Researchable"
+        POWER_SLOW = "Slow Researchable"
+        POWER_FREEZE = "Freeze Researchable"
+        POWER_REBOUND = "Rebound Researchable"
         POWER_FLIGHT = "Flight Researchable"
         POWER_VISION = "Vision Researchable"
         POWER_TUNNELLER = "Recruit Tunneller Researchable"
+#        POWER_CLEANSE = "Cleanse Researchable"
+#   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperFXPower(IntEnum):   
         POWER_TIME_BOMB = 419
@@ -213,8 +187,8 @@ class KeeperFXPower(IntEnum):
         POWER_FLIGHT = 423
         POWER_VISION = 424
         POWER_TUNNELLER = 425
-   
-
+#        POWER_CLEANSE = 426 #not made yet
+#   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperLevelName(StrEnum):
 #    #Levels
@@ -253,7 +227,6 @@ class KeeperLevelName(StrEnum):
         LEVEL_019 = "Level 19 Unlocked"
         LEVEL_020 = "Level 20 Unlocked"
 
-
 class KeeperLevel(IntEnum):
         LEVEL_001 = 501
         LEVEL_002 = 502
@@ -276,7 +249,6 @@ class KeeperLevel(IntEnum):
         LEVEL_019 = 519
         LEVEL_020 = 520
 
-
 class KeeperSecretLevel(IntEnum):
         LEVEL_100 = 521
         LEVEL_101 = 522
@@ -284,7 +256,6 @@ class KeeperSecretLevel(IntEnum):
         LEVEL_103 = 524
         LEVEL_104 = 525
         LEVEL_105 = 526
-
 
 class KeeperSecretLevelName(StrEnum):   
         LEVEL_100 = "Secret 1 Unlocked"
@@ -302,24 +273,7 @@ class KeeperRecipeName(StrEnum):
         RECIPE_SORCEROR = "Warlock Recipe Unlocked"
         RECIPE_DARK_MISTRESS = "Mistress Recipe Unlocked"
         RECIPE_HORNY = "Horned Reaper Recipe Unlocked"
-#       RECIPE_WISHING_WELL = "Wishing Well Recipe Unlocked" #default, might be hardcoded, would probably be stupid to include
-#       RECIPE_KILL_CHICKENS_1 = "All chickens die 1 Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_DISEASE = "Disease creatures Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_ANGRY = "All creatures angry Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_CHICKEN = "Chicken creatures Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
 #       RECIPE_SPIDER_EASTER_EGG = "Spider easter egg Recipe Unlocked" #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
-#       RECIPE_GOOD_SKELETON = "Good skeleton Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_TENTACLE = "Tentacle Recipe Unlocked"
-#       RECIPE_HOUND = "Hound Recipe Unlocked"
-#       RECIPE_SPEED = "Speed creatures Recipe Unlocked"
-#       RECIPE_CONCEAL = "Conceal creatures Recipe Unlocked"
-#       RECIPE_HEAL = "Heal creatures Recipe Unlocked"
-#       RECIPE_REBOUND = "Rebound creatures Recipe Unlocked"
-#       RECIPE_PROTECT = "Protect creatures Recipe Unlocked"
-#       RECIPE_FLIGHT = "Flight creatures Recipe Unlocked"
-#       RECIPE_FREEZE = "Freeze creatures Recipe Unlocked"
-#       RECIPE_SLOW = "Slow creatures Recipe Unlocked"
 
 class KeeperRecipe(IntEnum):
         RECIPE_CHEAPER_IMPS = 601
@@ -329,41 +283,70 @@ class KeeperRecipe(IntEnum):
         RECIPE_SORCEROR = 605
         RECIPE_DARK_MISTRESS = 606
         RECIPE_HORNY = 607
-#       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
-#       RECIPE_KILL_CHICKENS_1 = 609 #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_DISEASE = 611 #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_ANGRY = 612 #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_CHICKEN = 613 #default, unlock would probably be stupid to include outside of a Templesanity
 #       RECIPE_SPIDER_EASTER_EGG = 614 #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
-#       RECIPE_GOOD_SKELETON = 615 #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_TENTACLE = 616
-#       RECIPE_HOUND = 617
-#       RECIPE_SPEED = 618
-#       RECIPE_CONCEAL = 619
-#       RECIPE_HEAL = 620
-#       RECIPE_REBOUND = 621
-#       RECIPE_PROTECT = 622
-#       RECIPE_FLIGHT = 623
-#       RECIPE_FREEZE = 624
-#       RECIPE_SLOW = 625
+
+class NegativeRecipeName(StrEnum):
+#       RECIPE_WISHING_WELL = "Wishing Well Recipe Unlocked" #default, might be hardcoded, would probably be stupid to include
+       RECIPE_KILL_CHICKENS_1 = "All chickens die 1 Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_DISEASE = "Disease creatures Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_ANGRY = "All creatures angry Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_CHICKEN = "Chicken creatures Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
+
+class NegativeRecipe(StrEnum):
+#       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
+       RECIPE_KILL_CHICKENS_1 = 609 #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_DISEASE = 611 #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_ANGRY = 612 #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_CHICKEN = 613 #default, unlock would probably be stupid to include outside of a Templesanity
+
+class KeeperFXRecipeName(StrEnum):
+       RECIPE_GOOD_SKELETON = "Good skeleton Recipe Unlocked" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_TENTACLE = "Tentacle Recipe Unlocked"
+       RECIPE_HOUND = "Hound Recipe Unlocked"
+       RECIPE_SPEED = "Speed creatures Recipe Unlocked"
+       RECIPE_CONCEAL = "Conceal creatures Recipe Unlocked"
+       RECIPE_HEAL = "Heal creatures Recipe Unlocked"
+       RECIPE_REBOUND = "Rebound creatures Recipe Unlocked"
+       RECIPE_PROTECT = "Protect creatures Recipe Unlocked"
+       RECIPE_FLIGHT = "Flight creatures Recipe Unlocked"
+       RECIPE_FREEZE = "Freeze creatures Recipe Unlocked"
+       RECIPE_SLOW = "Slow creatures Recipe Unlocked"
+
+class KeeperFXRecipe(StrEnum):
+       RECIPE_GOOD_SKELETON = 615 #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_TENTACLE = 616
+       RECIPE_HOUND = 617
+       RECIPE_SPEED = 618
+       RECIPE_CONCEAL = 619
+       RECIPE_HEAL = 620
+       RECIPE_REBOUND = 621
+       RECIPE_PROTECT = 622
+       RECIPE_FLIGHT = 623
+       RECIPE_FREEZE = 624
+       RECIPE_SLOW = 625
 
 class KeeperProgressiveName(StrEnum):
-        PROGRESSIVE_LEVEL_CAP = "Progressive Level Cap" #Increase max creature level by 1 (starts max level 3): 4
+        PROGRESSIVE_LEVEL_CAP = "Progressive Level Cap" #Increase max creature level by 1 (starts max level 3)
 
-        PROGRESSIVE_CREATURE_LIMIT = "Progressive Creature Limit" #Increase creature limit by 5 (starts at max 10): 15
+        PROGRESSIVE_CREATURE_LIMIT = "Progressive Creature Limit" #Increase creature limit by 5 (starts at max 10)
 
-        PROGRESSIVE_STARTING_GOLD = "Progressive Starting Gold" #Increase starting gold by 1250 (starts at 2500): 3750
+        PROGRESSIVE_STARTING_GOLD = "Progressive Starting Gold" #Increase starting gold by 1250 (starts at 2500)
+
+        PROGRESSIVE_PORTAL_SPEED = "Progressive Portal Speed" #Increases Portal speed (decreases wait) by 125 (starts at 750)
 
 #    #Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)),
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
-
+#       progressive hand size (e.g. start with hand size of 4 (default 8), up to 16)
 class KeeperProgressive(IntEnum):
-        PROGRESSIVE_LEVEL_CAP = 701 #Increase max creature level by 1 (starts max level 3): 4
+        PROGRESSIVE_LEVEL_CAP = 701 #Increase max creature level by 1 (starts max level 3)
 
-        PROGRESSIVE_CREATURE_LIMIT = 702 #Increase creature limit by 5 (starts at max 10): 15
+        PROGRESSIVE_CREATURE_LIMIT = 702 #Increase creature limit by 5 (starts at max 10)
 
-        PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500): 3750
+        PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500)
+
+        PROGRESSIVE_PORTAL_SPEED = 704 #Increases Portal speed (decreases wait) by 125 (starts at 750)
 #    #---------------------------------------------------------
 #    #Filler
 #    #okay I feel like a lot of the stuff in this game could be considered filler, like you could beat the whole game without using traps or doors, or half the rooms or spells or creatures, but yeah

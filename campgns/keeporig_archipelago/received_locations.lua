@@ -115,25 +115,11 @@ ChecksTable = {
     [520] = {id=520, internal_name="",                    name="20",                           string="221",       text="Level 20 Unlocked"},
 -- PROGRESSIVES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- these work differently, see below.
-    [701] = {id=701, internal_name="4",                   name="Progressive Level Cap 1",      string="",       text="Progressive Level Cap 1 Unlocked"},      --Increase max creature level by 1 (starts max level 3): 4
-    [702] = {id=702, internal_name="5",                   name="Progressive Level Cap 2",      string="",       text="Progressive Level Cap 2 Unlocked"},      --5
-    [703] = {id=703, internal_name="6",                   name="Progressive Level Cap 3",      string="",       text="Progressive Level Cap 3 Unlocked"},      --6
-    [704] = {id=704, internal_name="7",                   name="Progressive Level Cap 4",      string="",       text="Progressive Level Cap 4 Unlocked"},      --7
-    [705] = {id=705, internal_name="8",                   name="Progressive Level Cap 5",      string="",       text="Progressive Level Cap 5 Unlocked"},      --8
-    [706] = {id=706, internal_name="9",                   name="Progressive Level Cap 6",      string="",       text="Progressive Level Cap 6 Unlocked"},      --9
-    [707] = {id=707, internal_name="0",                   name="Progressive Level Cap 7",      string="",       text="Progressive Level Cap 7 Unlocked"},      --10 and growup
-    [711] = {id=711, internal_name="",                    name="Progressive Creature Limit 1", string="",       text="Progressive Creature Limit 1 Unlocked"}, --Increase creature limit by 5 (starts at max 10): 15
-    [712] = {id=712, internal_name="",                    name="Progressive Creature Limit 2", string="",       text="Progressive Creature Limit 2 Unlocked"}, --20
-    [713] = {id=713, internal_name="",                    name="Progressive Creature Limit 3", string="",       text="Progressive Creature Limit 3 Unlocked"}, --25
-    [714] = {id=714, internal_name="",                    name="Progressive Creature Limit 4", string="",       text="Progressive Creature Limit 4 Unlocked"}, --30
-    [715] = {id=715, internal_name="",                    name="Progressive Creature Limit 5", string="",       text="Progressive Creature Limit 5 Unlocked"}, --35
-    [716] = {id=716, internal_name="",                    name="Progressive Creature Limit 6", string="",       text="Progressive Creature Limit 6 Unlocked"}, --40
-    [721] = {id=721, internal_name="",                    name="Progressive Starting Gold 1",  string="",       text="Progressive Starting Gold 1 Unlocked"},  --Increase starting gold by 1250 (starts at 2500): 3750
-    [722] = {id=722, internal_name="",                    name="Progressive Starting Gold 2",  string="",       text="Progressive Starting Gold 2 Unlocked"},  --5000
-    [723] = {id=723, internal_name="",                    name="Progressive Starting Gold 3",  string="",       text="Progressive Starting Gold 3 Unlocked"},  --6250
-    [724] = {id=724, internal_name="",                    name="Progressive Starting Gold 4",  string="",       text="Progressive Starting Gold 4 Unlocked"},  --7500
-    [725] = {id=725, internal_name="",                    name="Progressive Starting Gold 5",  string="",       text="Progressive Starting Gold 5 Unlocked"},  --8750
-    [726] = {id=726, internal_name="",                    name="Progressive Starting Gold 6",  string="",       text="Progressive Starting Gold 6 Unlocked"},  --10000
+    [701] = {id=701, internal_name="",                    name="Progressive Level Cap",        string="",       text="Progressive Level Cap Unlocked"},      --Increase max creature level by 1 (starts max level 3)
+    [702] = {id=702, internal_name="",                    name="Progressive Creature Limit",   string="",       text="Progressive Creature Limit Unlocked"}, --Increase creature limit by 5 (starts at max 10)
+    [703] = {id=703, internal_name="",                    name="Progressive Starting Gold",    string="",       text="Progressive Starting Gold Unlocked"},  --Increase starting gold by 1250 (starts at 2500)
+    [704] = {id=704, internal_name="",                    name="Progressive Portal Speed",     string="",       text="Progressive Portal Speed Unlocked"},  --Increases Portal speed (decreases wait) by 125 (starts at 750)
+    -- also do progressive hand size, progressive starting unlocks?, progressive starting imps, progressive portal speed.
 }
 
 BonusLevelsTable = {
@@ -378,8 +364,8 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
             UnlockLevel(itemid)
       elseif itemid > 600 and itemid <= 700 then
             UnlockRecipe(itemid)
-      -- elseif itemid > 700 and itemid <= 800 then
-      --     UnlockProgressive(itemid)
+      elseif itemid > 700 and itemid <= 800 then
+            UnlockProgressive(itemid)
       --don't think these work this way.
       --elseif itemid > 800 and itemid <= 900 then
       --    UnlockFiller(itemid)
@@ -436,55 +422,53 @@ function UnlockRecipe(itemid)
 end
 
 function UnlockProgressive(itemid)
-      if itemid >= 701 and itemid <= 707 then
+      if itemid == 701 then
             IncreaseLevelCap()
-      elseif itemid >= 711 and itemid <= 716 then
+      elseif itemid == 702 then
             IncreaseCreatureLimit()
-      elseif itemid >= 721 and itemid <= 726 then
+      --elseif itemid == 703 then
             --IncreaseStartingGold() -- only ever run this on level start.
+      elseif itemid == 704 then
+            IncreasePortalSpeed()
       end
 end
 
 function IncreaseLevelCap()
-    local levelcapcount = 0
-    for id = 701, 707 do
-      if ReceivedLocationsTable.Has(id) then
-            levelcapcount = levelcapcount + 1
-      end
-    end
-    local maxLevel = (levelcapcount + 3) % 10 --SET_CREATURE_MAX_LEVEL command uses 0 to mean "10 and growup"
-    if levelcapcount == 7 then
-      print("Level cap " .. levelcapcount .. " (Max level 10+) Unlocked")
-    else
-      print("Level cap " .. levelcapcount .. " (Max level " .. maxLevel .. ") Unlocked")
+    local levelcapcount = ReceivedLocationsTable.Count(701) -- number of increase level caps found
+    local maxLevel = levelcapcount + 3
+    if maxLevel > 10 then maxLevel = 0 end --SET_CREATURE_MAX_LEVEL command uses 0 to mean "10 and growup"
+    if ReceivedLocationsTable.Count(701) == 8 then --when you get the 8th unlock, let player know growup is available
+      print("Level cap increased! Creature growup unlocked")
+    elseif ReceivedLocationsTable.Count(701) < 8 then
+      print("Level cap increased! Max creature level " .. maxLevel .. " unlocked")
     end
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,ANY_CREATURE," .. maxLevel .. ")")
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,IMP," .. maxLevel .. ")")
 end
 
 function IncreaseCreatureLimit()
-    local creaturelimitcount = 0
-    for id = 711, 716 do
-      if ReceivedLocationsTable.Has(id) then
-            creaturelimitcount = creaturelimitcount + 1
-      end
-    end
+    local creaturelimitcount = ReceivedLocationsTable.Count(702)
     local creatureLimit = 10 + (creaturelimitcount * 5)
-    print("Creature limit " .. creaturelimitcount .. " (Max creatures " .. creatureLimit .. ") Unlocked")
+    print("Creature limit increased! Max creature count " .. creatureLimit .. " unlocked")
     MaxCreatures(PLAYER0, creatureLimit)
 end
 
 function IncreaseStartingGold()
-    local startinggoldcount = 0
-    for id = 721, 726 do
-      if ReceivedLocationsTable.Has(id) then
-            startinggoldcount = startinggoldcount + 1
-      end
-    end
+    local startinggoldcount = ReceivedLocationsTable.Count(703)
     local startingGold = 2500 + (startinggoldcount * 1250)
-    print("Starting gold " .. startinggoldcount .. " (Starting gold " .. startingGold .. ") Unlocked")
+    print("Starting gold increased! Starting gold " .. startingGold .. " unlocked")
     StartMoney(PLAYER0, startingGold)
 end
+
+function IncreasePortalSpeed()
+    local portalspeedcount = ReceivedLocationsTable.Count(704)
+    local portalSpeed = math.min(100,750 - (portalspeedcount * 125))
+    print("Portal speed increased! Generation every " .. portalSpeed .. " turns unlocked")
+    SetGenerateSpeed(portalSpeed,PLAYER0)
+end
+
+
+--hand size, portal speed, starting imps, progressive unlocks (gonna be a pain)
 
 function CheckForMiscUnlocks()
       for itemid = 401, 403 do -- if you are playing where you don't have hand, slap or possession available from start...

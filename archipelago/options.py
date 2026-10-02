@@ -3,13 +3,8 @@ from typing import Dict
 
 from Options import OptionGroup, ItemDict, Toggle
 from worlds.AutoWorld import PerGameCommonOptions
-from .items import CREATURES, ROOMS, SPELLS, LEVELS
-from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
-
-#to do:
-# various options on and off e.g. temple recipes yes/find/no, bonus levels yes/no, FX exclusive creatures/spells/traps/doors yes/no, cruelty mode yes/no, creature type evil/good/both
-# numbers of each progressive maybe
-# starting player colour maybe idk
+from .items import CREATURES, ROOMS, SPELLS, LEVELS, RECIPES
+from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName, KeeperRecipe
 
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
@@ -34,6 +29,23 @@ class KeeperFXDoors(Toggle):
     """Choose if you want KeeperFX Doors to be available in the game."""
     display_name = "KeeperFX Doors"
 
+class NegativeRecipes(Toggle):
+    """Choose if you want negative Temple recipes to be available in the game."""
+    display_name = "Negative Recipes"
+
+class KeeperFXRecipes(Toggle):
+    """Choose if you want KeeperFX Temple recipes to be available in the game."""
+    display_name = "KeeperFX Recipes"
+
+# option for temple recipes unlocked/unlockable/removed
+
+# cruelty mode yes/no
+
+# creature type evil/good/both
+
+# starting player colour
+
+# toggles for certain types of progressives (i.e. if off, you just set it to default values)
 
 
 class StartingLevels(ItemDict):
@@ -96,6 +108,8 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     KeeperFXDoors: KeeperFXDoors
     KeeperFXSpells: KeeperFXSpells
     KeeperFXTraps: KeeperFXTraps
+    NegativeRecipes: NegativeRecipes
+    KeeperFXRecipes: KeeperFXRecipes
 
 option_groups = [
     OptionGroup("KeeperFX Additions", [
@@ -103,7 +117,11 @@ option_groups = [
         KeeperFXSpells,
         KeeperFXDoors,
         KeeperFXTraps,
-    ]),    
+    ]),
+    OptionGroup("Temple Recipes", [
+        NegativeRecipes,
+        KeeperFXRecipes,
+    ]),
     OptionGroup("Starting Items", [
         StartingLevels,
         StartingSpells,
