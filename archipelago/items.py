@@ -98,20 +98,6 @@ SPELLS = {
 }
 
 #    #Levels
-#    #Three of these should be unlocked by default.
-#    #If you assume an initial level cap of 3, a creature cap of 10, and only bugs, demonspawn and warlocks I would say definitely levels 1-4 are doable, as are 101,103-105.
-#    #Maybe others too, but I think it would be extremely hard.
-#   #Sphere 1, candidate for being unlocked from start:
-#       1-4, 101, 103-105
-#   #Sphere 2, recommended some of e.g. level 5 cap, biles/orcs/skeletons/hounds, prison, speed/cta
-#       5-11
-#   #Sphere 3, recommended some of  e.g. level 7 cap, mistress/dragon/vampire, prison+torture, heal
-#       10-15
-#   #Sphere 4, tougher, best to restrict until you have a cap of 7+, decent creatures, prison/torture/temple/graveyard, heal/speed/cta/lightning/cave-in
-#       16-20
-#   #Not sure:
-#       100: Sphere 2/3? not sure, doable with extreme care in possession, or still pretty handily with a cap of level 7. If you have certain spells and rooms you can cheese it way earlier.
-#       102: not sure, requires a way to kill imps en masse, e.g. cave-in, a transferred creature, placeable boulder traps
 
 LEVELS = {
     KeeperLevelName.LEVEL_001: KeeperItem(KeeperLevel.LEVEL_001, ItemClassification.progression), #"Level 1 Unlocked"

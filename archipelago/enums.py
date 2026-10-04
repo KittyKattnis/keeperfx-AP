@@ -60,7 +60,7 @@ class KeeperRoomName(StrEnum):
         GUARD_POST = "Guard Post"
         WORKSHOP = "Workshop" #fine to allow trap/door creation if you somehow get one
         PRISON = "Prison" #i.e. if you get one in a map you can't make Skeletons until you unlock this
-        TORTURE = "Torture Chambe" #i.e. if you get one in a map you can't make Ghosts until you unlock this
+        TORTURE = "Torture Chamber" #i.e. if you get one in a map you can't make Ghosts until you unlock this
         BARRACKS = "Barracks"
         TEMPLE = "Temple" #fine to allow recipes if you somehow get one
         GRAVEYARD = "Graveyard" #i.e. if you get one in a map you can't make Vampires until you unlock this

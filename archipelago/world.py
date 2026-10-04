@@ -24,8 +24,7 @@ from . import options as dungeonkeeper_options  # rename due to a name conflict 
 # It is recommended that you read these in that specific order, then come back to the world class.
 class DungeonKeeperWorld(World):
     """
-    APQuest is a minimal 8bit-era inspired adventure game with grid-like movement.
-    Good games don't need more than six checks.
+    Dungeon Keeper is a game.
     """
 
     # The docstring should contain a description of the game, to be displayed on the WebHost.
@@ -49,6 +48,148 @@ class DungeonKeeperWorld(World):
     # There is always one region that the generator starts from & assumes you can always go back to.
     # This defaults to "Menu", but you can change it by overriding origin_region_name.
     origin_region_name = "Overworld"
+
+
+    levels_set = {
+        "Level 1", "Level 2", "Level 3", "Level 4", "Level 5",
+        "Level 6", "Level 7", "Level 8", "Level 9", "Level 10",
+        "Level 11", "Level 12", "Level 13", "Level 14", "Level 15",
+        "Level 16", "Level 17", "Level 18", "Level 19", "Level 20",
+    }
+    bonus_set = {
+        "Secret 1", "Secret 2", "Secret 3", "Secret 4", "Secret 5", "Secret 6",   
+    }
+
+    item_name_groups = {
+        "Levels": levels_set,
+        "Bonus Levels": bonus_set,
+        "All Levels": levels_set | bonus_set,
+        "Creatures": {
+            "Attract Fly",
+            "Attract Beetle",
+            "Attract Spider",
+            "Attract Demon Spawn",
+            "Attract Warlock",
+            "Attract Troll",
+            "Attract Bile Demon",
+            "Attract Orc",
+            "Attract Mistress",
+            "Attract Dragon",
+            "Attract Skeleton",
+            "Attract Ghost",
+            "Attract Tentacle",
+            "Attract Hound",
+            "Attract Horned Reaper",
+            "Attract Vampire",
+        },
+        "FX Creatures": {
+            "Attract Druid",
+            "Attract Maiden",
+        },
+        "Rooms": {
+            "Treasure Room",
+            "Lair",
+            "Hatchery",
+            "Training Room",
+            "Library",
+            "Bridge",
+            "Guard Post",
+            "Workshop",
+            "Prison",
+            "Torture Chamber",
+            "Barracks",
+            "Temple",
+            "Graveyard",
+            "Scavenger Room",
+        },
+        "Traps": {
+            "Alarm Trap Manufacturable",
+            "Poison Gas Trap Manufacturable",
+            "Lightning Trap Manufacturable",
+            "Lava Trap Manufacturable",
+            "Boulder Trap Manufacturable",
+            "Word of Power Trap Manufacturable",
+        },
+        "FX Traps": {
+            "Demolition Trap Manufacturable",
+            "Sentry Trap Manufacturable",
+            "Ballista Trap Manufacturable",
+        },
+        "Doors": {
+            "Wooden Door Manufacturable",
+            "Braced Door Manufacturable",
+            "Iron Door Manufacturable",
+            "Magic Door Manufacturable",
+        },
+        "FX Doors": {
+            "Secret Door Manufacturable"
+            "Midas Door Manufacturable"
+        },
+        "Powers": {
+            "Hand of Evil",
+            "Slap",
+            "Possession",
+            "Create Imp",
+            "Sight of Evil",
+            "Speed Monster",
+            "Must Obey",
+            "Call to Arms",
+            "Conceal",
+            "Hold Audience",
+            "Cave-In",
+            "Heal",
+            "Lightning Strike",
+            "Protect Monster",
+            "Chicken",
+            "Disease",
+            "Armageddon",
+            "Destroy Walls",
+        },
+        "FX Powers": {
+            "Time Bomb",
+            "Slow",
+            "Freeze",
+            "Rebound",
+            "Flight",
+            "Vision",
+            "Recruit Tunneller",
+        },
+        "Recipes": {
+            "Cheaper Imps Recipe",
+            "Complete Manufacturing Recipe",
+            "Complete Research Recipe",
+            "Bile Demon Recipe",
+            "Warlock Recipe",
+            "Mistress Recipe",
+            "Horned Reaper Recipe",
+        },
+        "Negative Recipes": {
+            "All chickens die 1 Recipe",
+            "All chickens die 2 Recipe",
+            "Disease creatures Recipe",
+            "All creatures angry Recipe",
+            "Chicken creatures Recipe",
+        },
+        "FX Recipes": {
+            "Good skeleton Recipe",
+            "Tentacle Recipe",
+            "Hound Recipe",
+            "Speed creatures Recipe",
+            "Conceal creatures Recipe",
+            "Heal creatures Recipe",
+            "Rebound creatures Recipe",
+            "Protect creatures Recipe",
+            "Flight creatures Recipe",
+            "Freeze creatures Recipe",
+            "Slow creatures Recipe",
+        },
+        "Progressives": {
+            "Progressive Level Cap",
+            "Progressive Creature Limit",
+            "Progressive Starting Gold",
+            "Progressive Portal Speed",
+        },
+    }
 
     # Our world class must have certain functions ("steps") that get called during generation.
     # The main ones are: create_regions, set_rules, create_items.

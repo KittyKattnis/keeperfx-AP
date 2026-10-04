@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Literal
 from .items import CREATURES, ROOMS, SPELLS, LEVELS
 from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
 
-from rule_builder.rules import (Rule, CanReachEntrance, CanReachLocation, Has, HasAll, HasAny, HasFromListUnique, HasGroupUnique,
+from rule_builder.rules import (Rule, CanReachEntrance, CanReachLocation, Has, HasAll, HasAny, HasFromListUnique, HasGroupUnique, HasGroup,
                                 OptionFilter, True_, HasFromList)
 
 if TYPE_CHECKING:
@@ -14,7 +14,6 @@ if TYPE_CHECKING:
 
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
-
 
 def set_all_rules(world: DungeonKeeperWorld) -> None:
 
@@ -79,31 +78,142 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
 #Scaling requirements for difficult levels
 
-    location_rules["Level 20 Beaten"] = HasFromListUnique(*[f"{key}" for key in CREATURES], 
-                                 count=9).resolve(world)
+#   #Region 1, candidate for being unlocked from start:
+#       1-4, 101, 103-105
+#   #Region 2, recommended some of e.g. level 5 cap, biles/orcs/skeletons/hounds, prison, speed/cta
+#       5-11
+#   #Region 3, recommended some of  e.g. level 7 cap, mistress/dragon/vampire, prison+torture, heal
+#       10-15
+#   #Region 4, tougher, best to restrict until you have a cap of 7+, decent creatures, prison/torture/temple/graveyard, heal/speed/cta/lightning/cave-in
+#       16-20
+#   #Not sure:
+#       100: Region 2/3? not sure, doable with extreme care in possession, or still pretty handily with a cap of level 7. If you have certain spells and rooms you can cheese it way earlier.
+#       102: not sure, requires a way to kill imps en masse, e.g. cave-in, a transferred creature, placeable boulder traps
+
+    #location_rules["Level 20 Beaten"] = HasFromListUnique(*[f"{key}" for key in CREATURES], 
+    #                             count=9).resolve(world)
+
+
+
+    #for now, just some mild smoothing of level unlocks so you don't have to try and beat level 18 and 20 near the start.
+
+    location_rules["Level 5 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=5)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=4)(state, world.player)
+    )
+    location_rules["Level 6 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=5)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=4)(state, world.player)
+    )
+    location_rules["Level 7 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=5)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=4)(state, world.player)
+    )
+    location_rules["Level 8 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=5)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=4)(state, world.player)
+    )
+    location_rules["Level 9 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=5)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=4)(state, world.player)
+    )
+
+    location_rules["Level 10 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=8)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=6)(state, world.player)
+    )
+    location_rules["Level 11 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=8)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=6)(state, world.player)
+    )
+    location_rules["Level 12 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=8)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=6)(state, world.player)
+    )
+    location_rules["Level 13 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=8)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=6)(state, world.player)
+    )
+    location_rules["Level 14 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=8)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=6)(state, world.player)
+    )
+    location_rules["Level 15 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=8)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=6)(state, world.player)
+    )
+
+    location_rules["Level 16 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=11)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=8)(state, world.player)
+    )
+    location_rules["Level 17 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=11)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=8)(state, world.player)
+    )
+    location_rules["Level 18 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=11)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=8)(state, world.player)
+    )
+    location_rules["Level 19 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=11)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=8)(state, world.player)
+    )
+    location_rules["Level 20 Beaten"] = lambda state: (
+        HasGroup("All Levels", count=11)(state, world.player)
+        if world.options.secret_levels.value
+        else HasGroup("Levels", count=8)(state, world.player)
+    )
+
+    location_rules["Level 105 Beaten"] = HasAny("Create Imp","Recruit Tunneller") #starts with no Imps.
+
+    #location_rules["Level 16 Beaten"] = Has("Progressive Level Cap",4)
+
+
+#HasAll("Progressive Level Cap", "Progressive Creature Limit", "Progressive Starting Gold", "Progressive Portal Speed","Attract Mistress","Torture Chamber") | HasAll("Progressive Level Cap", "Progressive Creature Limit", "Progressive Starting Gold", "Progressive Portal Speed", "Temple", "Mistress Recipe")
+
+
+
+
+
 
 # temple recipes
     location_rules["Recipe Cheaper Imps"] = Has("Create Imp")
-    location_rules["Recipe Complete Manufacturing"] = Has("Workshop") & HasAny("Level 20 Unlocked", "Attract Beetle")
-    location_rules["Recipe Complete Research"] = Has("Library") & HasAny("Level 20 Unlocked", "Level 10 Unlocked", "Attract Fly")
-    location_rules["Recipe Bile Demon"] = HasAny("Attract Spider", "Level 4 Unlocked", "Level 5 Unlocked", "Level 18 Unlocked")
-    location_rules["Recipe Warlock"] = HasAll("Attract Spider", "Attract Fly") | HasAll("Attract Fly", "Level 4 Unlocked") | HasAll("Attract Fly", "Level 5 Unlocked") | HasAll("Attract Fly", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 10 Unlocked") | HasAll("Attract Spider", "Level 20 Unlocked")
-    location_rules["Recipe Mistress"] = HasAll("Attract Beetle", "Attract Spider") | HasAll("Attract Spider", "Level 10 Unlocked") | HasAll("Attract Spider", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Beetle", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")
-    location_rules["Recipe Horned Reaper"] = HasAll("Attract Mistress", "Attract Bile Demon", "Attract Troll") | Has("Level 9 Unlocked")
+    location_rules["Recipe Complete Manufacturing"] = Has("Workshop") & HasAny("Level 20", "Attract Beetle")
+    location_rules["Recipe Complete Research"] = Has("Library") & HasAny("Level 20", "Level 10", "Attract Fly")
+    location_rules["Recipe Bile Demon"] = HasAny("Attract Spider", "Level 4", "Level 5", "Level 18")
+    location_rules["Recipe Warlock"] = HasAll("Attract Spider", "Attract Fly") | HasAll("Attract Fly", "Level 4") | HasAll("Attract Fly", "Level 5") | HasAll("Attract Fly", "Level 18") | HasAll("Attract Spider", "Level 10") | HasAll("Attract Spider", "Level 20")
+    location_rules["Recipe Mistress"] = HasAll("Attract Beetle", "Attract Spider") | HasAll("Attract Spider", "Level 10") | HasAll("Attract Spider", "Level 20") | HasAll("Attract Beetle", "Level 4") | HasAll("Attract Beetle", "Level 5") | HasAll("Attract Beetle", "Level 18")
+    location_rules["Recipe Horned Reaper"] = HasAll("Attract Mistress", "Attract Bile Demon", "Attract Troll") | Has("Level 9")
     location_rules["Recipe Make Angry"] = Has("Attract Horned Reaper") | CanReachLocation("Recipe Horned Reaper")
-    location_rules["Recipe Kill Chickens"] = HasAny("Attract Ghost", "Level 6 Unlocked", "Level 15 Unlocked", "Level 19 Unlocked", "Torture Chamber") & Has("Hatchery")
-    location_rules["Recipe Disease Creatures"] = HasAny("Attract Vampire", "Graveyard", "Level 12 Unlocked", "Level 19 Unlocked")
-    location_rules["Recipe Chicken Creatures"] = HasAny("Attract Bile Demon", "Level 4 Unlocked", "Level 5 Unlocked","Level 9 Unlocked", "Level 11 Unlocked", "Level 18 Unlocked") | CanReachLocation("Recipe Bile Demon")
-    location_rules["Recipe Tentacle"] = HasAll("Attract Troll", "Attract Spider") | HasAll("Attract Troll", "Level 4 Unlocked") | HasAll("Attract Troll", "Level 5 Unlocked") | HasAll("Attract Troll", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 9 Unlocked") | HasAll("Attract Spider", "Level 11 Unlocked")
-    location_rules["Recipe Hellhound"] = HasAll("Attract Dragon", "Attract Fly") | Has("Level 10 Unlocked") | HasAll("Attract Dragon", "Level 20 Unlocked") | HasAll("Attract Fly", "Level 10 Unlocked") | HasAll("Attract Fly", "Level 13 Unlocked") | HasAll("Attract Fly", "Level 18 Unlocked")
-    location_rules["Recipe Speed"] = Has("Attract Fly") & HasAny("Level 8 Unlocked", "Attract Hellhound")
-    location_rules["Recipe Conceal"] = HasAll("Attract Troll", "Attract Fly") | HasAll("Attract Troll", "Level 10 Unlocked") | HasAll("Attract Troll", "Level 20 Unlocked") | HasAll("Attract Fly", "Level 9 Unlocked") | HasAll("Attract Fly", "Level 11 Unlocked") | HasAll("Attract Fly", "Level 14 Unlocked")
-    location_rules["Recipe Heal"] = HasAll("Attract Orc", "Attract Spider") | HasAll("Attract Orc", "Level 4 Unlocked") | HasAll("Attract Orc", "Level 5 Unlocked") | HasAll("Attract Orc", "Level 18 Unlocked")
-    location_rules["Recipe Rebound"] = HasAll("Attract Mistress", "Attract Beetle") | HasAll("Attract Mistress", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Beetle", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 6 Unlocked") | HasAll("Attract Beetle", "Level 9 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")
-    location_rules["Recipe Protect"] = HasAll("Attract Bile Demon", "Attract Beetle") | HasAll("Attract Bile Demon", "Level 20 Unlocked") | HasAll("Attract Beetle", "Level 4 Unlocked") | HasAll("Attract Bile Demon", "Level 5 Unlocked") | HasAll("Attract Beetle", "Level 9 Unlocked") | HasAll("Attract Beetle", "Level 11 Unlocked") | HasAll("Attract Beetle", "Level 15 Unlocked") | HasAll("Attract Beetle", "Level 18 Unlocked")   
-    location_rules["Recipe Flight"] = HasAll("Attract Demon Spawn", "Attract Fly") | HasAll("Attract Demon Spawn", "Level 10 Unlocked") | HasAll("Attract Demon Spawn", "Level 10 Unlocked") | HasAll("Attract Fly", "Level 8 Unlocked") | HasAll("Attract Fly", "Level 11 Unlocked")
-    location_rules["Recipe Freeze"] = HasAll("Attract Vampire", "Attract Spider") | HasAll("Attract Vampire", "Level 4 Unlocked") | HasAll("Attract Vampire", "Level 5 Unlocked") | HasAll("Attract Vampire", "Level 18 Unlocked") | HasAll("Attract Spider", "Level 12 Unlocked") | HasAll("Attract Spider", "Level 19 Unlocked")
-    location_rules["Recipe Slow"] = HasAll("Attract Vampire", "Attract Demon Spawn") | HasAll("Attract Vampire", "Level 8 Unlocked") | HasAll("Attract Vampire", "Level 12 Unlocked") | HasAll("Attract Demon Spawn", "Level 12 Unlocked") | HasAll("Attract Demon Spawn", "Level 19 Unlocked")
+    location_rules["Recipe Kill Chickens"] = HasAny("Attract Ghost", "Level 6", "Level 15", "Level 19", "Torture Chamber") & Has("Hatchery")
+    location_rules["Recipe Disease Creatures"] = HasAny("Attract Vampire", "Graveyard", "Level 12", "Level 19")
+    location_rules["Recipe Chicken Creatures"] = HasAny("Attract Bile Demon", "Level 4", "Level 5","Level 9", "Level 11", "Level 18") | CanReachLocation("Recipe Bile Demon")
+    location_rules["Recipe Tentacle"] = HasAll("Attract Troll", "Attract Spider") | HasAll("Attract Troll", "Level 4") | HasAll("Attract Troll", "Level 5") | HasAll("Attract Troll", "Level 18") | HasAll("Attract Spider", "Level 9") | HasAll("Attract Spider", "Level 11")
+    location_rules["Recipe Hellhound"] = HasAll("Attract Dragon", "Attract Fly") | Has("Level 10") | HasAll("Attract Dragon", "Level 20") | HasAll("Attract Fly", "Level 10") | HasAll("Attract Fly", "Level 13") | HasAll("Attract Fly", "Level 18")
+    location_rules["Recipe Speed"] = Has("Attract Fly") & HasAny("Level 8", "Attract Hellhound")
+    location_rules["Recipe Conceal"] = HasAll("Attract Troll", "Attract Fly") | HasAll("Attract Troll", "Level 10") | HasAll("Attract Troll", "Level 20") | HasAll("Attract Fly", "Level 9") | HasAll("Attract Fly", "Level 11") | HasAll("Attract Fly", "Level 14")
+    location_rules["Recipe Heal"] = HasAll("Attract Orc", "Attract Spider") | HasAll("Attract Orc", "Level 4") | HasAll("Attract Orc", "Level 5") | HasAll("Attract Orc", "Level 18")
+    location_rules["Recipe Rebound"] = HasAll("Attract Mistress", "Attract Beetle") | HasAll("Attract Mistress", "Level 20") | HasAll("Attract Beetle", "Level 4") | HasAll("Attract Beetle", "Level 5") | HasAll("Attract Beetle", "Level 6") | HasAll("Attract Beetle", "Level 9") | HasAll("Attract Beetle", "Level 18")
+    location_rules["Recipe Protect"] = HasAll("Attract Bile Demon", "Attract Beetle") | HasAll("Attract Bile Demon", "Level 20") | HasAll("Attract Beetle", "Level 4") | HasAll("Attract Bile Demon", "Level 5") | HasAll("Attract Beetle", "Level 9") | HasAll("Attract Beetle", "Level 11") | HasAll("Attract Beetle", "Level 15") | HasAll("Attract Beetle", "Level 18")   
+    location_rules["Recipe Flight"] = HasAll("Attract Demon Spawn", "Attract Fly") | HasAll("Attract Demon Spawn", "Level 10") | HasAll("Attract Demon Spawn", "Level 10") | HasAll("Attract Fly", "Level 8") | HasAll("Attract Fly", "Level 11")
+    location_rules["Recipe Freeze"] = HasAll("Attract Vampire", "Attract Spider") | HasAll("Attract Vampire", "Level 4") | HasAll("Attract Vampire", "Level 5") | HasAll("Attract Vampire", "Level 18") | HasAll("Attract Spider", "Level 12") | HasAll("Attract Spider", "Level 19")
+    location_rules["Recipe Slow"] = HasAll("Attract Vampire", "Attract Demon Spawn") | HasAll("Attract Vampire", "Level 8") | HasAll("Attract Vampire", "Level 12") | HasAll("Attract Demon Spawn", "Level 12") | HasAll("Attract Demon Spawn", "Level 19")
 
     for location_name, rule_logic in location_rules.items():
         try:
