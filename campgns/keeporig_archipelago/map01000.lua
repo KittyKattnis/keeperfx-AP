@@ -242,11 +242,11 @@ function ItemStatus()
         end
     end
     --progressives
-
     local levelcapcount = ReceivedLocationsTable.Count(701)
     local creaturelimitcount = ReceivedLocationsTable.Count(702)
     local startinggoldcount = ReceivedLocationsTable.Count(703)
     local portalspeedcount = ReceivedLocationsTable.Count(704)
+    local handsizecount = ReceivedLocationsTable.Count(705)
     RegisterTimerEvent(function ()
         RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,34," .. math.min(levelcapcount + 3,11) .. ")")
     end, 17, true)
@@ -289,6 +289,17 @@ function ItemStatus()
         end
     end
 
+    RegisterTimerEvent(function ()
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,58," .. 4 + 2*handsizecount .. ")")
+    end, 17, true)
+    for i = 0, 6 do
+        if i <= portalspeedcount then
+            AddObjectToLevelAtPos("POTION_GREEN",316+3*i,58,1,"PLAYER_NEUTRAL",0)
+        else
+            AddObjectToLevelAtPos("POTION_RED",316+3*i,58,1,"PLAYER_NEUTRAL",0)
+        end
+    end
+
         --once this is changed to work properly (1 item multiple times?):
         -- for each copy of that item in the received pool, for i from 1 to n, place a green potion at subtile 316 + i (first one is always green representing starting value)
             --level Cap
@@ -298,7 +309,17 @@ function ItemStatus()
             --progressive starting unlocks (i.e. if it's 1 you have bridge and SOE, 2 you have guard post and speed etc.)
             --progressive starting traps
 
-            --would be cool to continuously spawn the effect for selling (to display values onscreen)
+    --filler
+    RevealMapRect(PLAYER0,325,340,45,18)
+    for itemid=901, 903 do
+        local fillercount = ReceivedLocationsTable.Count(itemid)
+        local item_subtile_x = 304 + 6*(itemid % 100)
+        local item_subtile_y = 340
+        RegisterTimerEvent(function ()
+            RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41," .. item_subtile_x .. "," .. item_subtile_y .. "," .. fillercount .. ")") -- doesn't show if it's 0 sadly.
+        end, 17, true)
+        end
+    end
 
         --if ReceivedLocationsTable.Has(itemid) then
         --    AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
@@ -307,14 +328,6 @@ function ItemStatus()
         --if SentLocations.Has(11000+(itemid % 100)) then --check this is the id we will use for having done a recipe
         --    AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
         --end
-
-
-end
-
-
---600 is Recipes
---700 is progressives
-
 
 
 --for creatures, rooms etc etc:

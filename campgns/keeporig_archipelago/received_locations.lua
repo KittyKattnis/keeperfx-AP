@@ -115,11 +115,16 @@ ChecksTable = {
     [520] = {id=520, internal_name="",                    name="20",                           string="221",       text="Level 20 Unlocked"},
 -- PROGRESSIVES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- these work differently, see below.
-    [701] = {id=701, internal_name="",                    name="Progressive Level Cap",        string="",       text="Progressive Level Cap Unlocked"},      --Increase max creature level by 1 (starts max level 3)
-    [702] = {id=702, internal_name="",                    name="Progressive Creature Limit",   string="",       text="Progressive Creature Limit Unlocked"}, --Increase creature limit by 5 (starts at max 10)
-    [703] = {id=703, internal_name="",                    name="Progressive Starting Gold",    string="",       text="Progressive Starting Gold Unlocked"},  --Increase starting gold by 1250 (starts at 2500)
-    [704] = {id=704, internal_name="",                    name="Progressive Portal Speed",     string="",       text="Progressive Portal Speed Unlocked"},  --Increases Portal speed (decreases wait) by 125 (starts at 750)
+    [701] = {id=701, internal_name="",                    name="Progressive Level Cap",        string="",          text="Progressive Level Cap Unlocked"},      --Increase max creature level by 1 (starts max level 3)
+    [702] = {id=702, internal_name="",                    name="Progressive Creature Limit",   string="",          text="Progressive Creature Limit Unlocked"}, --Increase creature limit by 5 (starts at max 10)
+    [703] = {id=703, internal_name="",                    name="Progressive Starting Gold",    string="",          text="Progressive Starting Gold Unlocked"},  --Increase starting gold by 1250 (starts at 2500)
+    [704] = {id=704, internal_name="",                    name="Progressive Portal Speed",     string="",          text="Progressive Portal Speed Unlocked"},  --Increases Portal speed (decreases wait) by 125 (starts at 750)
     -- also do progressive hand size, progressive starting unlocks?, progressive starting imps, progressive portal speed.
+-- FILLER --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    [901] = {id=901, internal_name="",                    name="Increase Level",               string="",          text="Increase Level"},
+    [902] = {id=902, internal_name="",                    name="Multiply Creatures",           string="",          text="Multiply Creatures"},
+    [903] = {id=903, internal_name="",                    name="Make Safe",                    string="",          text="Make Safe"},
+    --Not sure other specials like Reveal Map, Steal Hero, Heal All, Increase Gold.
 }
 
 BonusLevelsTable = {
@@ -366,11 +371,11 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
             UnlockRecipe(itemid)
       elseif itemid > 700 and itemid <= 800 then
             UnlockProgressive(itemid)
+      elseif itemid > 800 and itemid <= 900 then
+            UnlockHero(itemid)
+      elseif itemid > 900 and itemid <= 1000 then
+            UnlockFiller(itemid)
       --don't think these work this way.
-      --elseif itemid > 800 and itemid <= 900 then
-      --    UnlockFiller(itemid)
-      --elseif itemid > 900 and itemid <= 1000 then
-      --    UnlockTrap(itemid)
       else
             print("Unknown item ID " .. itemid)
             return
@@ -430,6 +435,8 @@ function UnlockProgressive(itemid)
             --IncreaseStartingGold() -- only ever run this on level start.
       elseif itemid == 704 then
             IncreasePortalSpeed()
+      elseif itemid == 705 then
+            IncreaseHandSize()
       end
 end
 
@@ -451,23 +458,55 @@ end
 function IncreaseCreatureLimit()
     local creaturelimitcount = ReceivedLocationsTable.Count(702)
     local creatureLimit = 10 + (creaturelimitcount * 5)
-    print("Creature limit increased! Max creature count " .. creatureLimit .. " unlocked")
     MaxCreatures(PLAYER0, creatureLimit)
+    if creaturelimitcount > 0 then
+        print("Progressive Creature Limit " .. creaturelimitcount .. " (Max creature count " .. creatureLimit .. ") Unlocked")
+    end
 end
 
 function IncreaseStartingGold()
     local startinggoldcount = ReceivedLocationsTable.Count(703)
     local startingGold = 2500 + (startinggoldcount * 1250)
-    print("Starting gold increased! Starting gold " .. startingGold .. " unlocked")
     StartMoney(PLAYER0, startingGold)
+    if startinggoldcount > 0 then
+        print("Progressive Starting Gold " .. startinggoldcount .. " (Starting gold " .. startingGold .. ") Unlocked")
+    end
 end
 
 function IncreasePortalSpeed()
     local portalspeedcount = ReceivedLocationsTable.Count(704)
     local portalSpeed = math.min(100,750 - (portalspeedcount * 125))
-    print("Portal speed increased! Generation every " .. portalSpeed .. " turns unlocked")
     SetGenerateSpeed(portalSpeed,PLAYER0)
+    if portalspeedcount > 0 then
+        print("Progressive Portal Speed " .. portalspeedcount .. " (Generation every " .. portalSpeed.. " turns) Unlocked")
+    end
 end
+
+function IncreaseHandSize()
+    local handsizecount = ReceivedLocationsTable.Count(705)
+    local handSize = 4 + (handsizecount * 2)
+    --RunDKScriptCommand("SET_GAME_RULE(MaxThingsInHand," .. handSize .. ",PLAYER0)")
+    SetGameRule("MaxThingsInHand",handSize) --originally used RunDKScriptCommand but all other players are CPUs anyway.
+    if handsizecount > 0 then
+        print("Progressive Hand Size " .. handsizecount .. " (" .. handSize.. " things) Unlocked")
+    end
+end
+
+function UnlockFiller(itemid)
+      if itemid == 901 then
+            UseSpecialIncreaseLevel(PLAYER0,1)
+      elseif itemid == 902 then
+            UseSpecialMultiplyCreatures(PLAYER0,1)
+      elseif itemid == 903 then
+            MakeSafe(PLAYER0)
+      end
+end
+
+
+
+
+
+
 
 
 --hand size, portal speed, starting imps, progressive unlocks (gonna be a pain)

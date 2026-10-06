@@ -347,6 +347,20 @@ class KeeperProgressive(IntEnum):
         PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500)
 
         PROGRESSIVE_PORTAL_SPEED = 704 #Increases Portal speed (decreases wait) by 125 (starts at 750)
+
+# Heroes
+
+class KeeperFillerName(StrEnum):
+        FILLER_INCREASE_LEVEL = "Increase Level"
+        FILLER_MULTIPLY_CREATURES = "Multiply Creatures"
+        FILLER_MAKE_SAFE = "Make Safe"
+
+class KeeperFiller(IntEnum):
+        FILLER_INCREASE_LEVEL = 901
+        FILLER_MULTIPLY_CREATURES = 902
+        FILLER_MAKE_SAFE = 903
+
+
 #    #---------------------------------------------------------
 #    #Filler
 #    #okay I feel like a lot of the stuff in this game could be considered filler, like you could beat the whole game without using traps or doors, or half the rooms or spells or creatures, but yeah

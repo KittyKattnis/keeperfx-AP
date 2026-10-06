@@ -60,10 +60,10 @@ function ActivateItems()
             local flags = apitem.flags
             local sender = apitem.player
             local location = apitem.location
-            -- process all items that need to be unclocked on each level, i.e. rooms/creatures/spells etc
+            -- process all items that need to be unlocked on each level, i.e. rooms/creatures/spells etc
             ReceivedLocations.ReceivedItemCheck(itemid)
             if apitem.index > lastProcessed then
-                  UnlockProgressive(itemid)
+                  UnlockFiller(itemid)
                   lastProcessed = index
                   -- NEW LOGIC HERE TO HANDLE ONLY SINGLE SHOT ACTIVATIONS! (fillers, traps, "progressives"?)
             end

@@ -6,7 +6,7 @@
 
 from typing import NamedTuple, Optional
 from BaseClasses import Item, ItemClassification
-from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName
+from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName, KeeperFiller, KeeperFillerName
 
 
 class DungeonKeeperItem(Item):
@@ -17,11 +17,14 @@ class KeeperItem(NamedTuple):
     classification: Optional[ItemClassification] = ItemClassification.filler
     amount: Optional[int] = 1
 
-PROGRESSIVE_COUNTS = {
+MULTIPLE_ITEM_COUNTS = {
     KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value: 8,
     KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT.value: 6, 
     KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD.value: 6,
     KeeperProgressiveName.PROGRESSIVE_PORTAL_SPEED.value: 4,
+    KeeperFillerName.FILLER_INCREASE_LEVEL.value: 4,
+    KeeperFillerName.FILLER_MULTIPLY_CREATURES.value: 0,
+    KeeperFillerName.FILLER_MAKE_SAFE.value: 0, # rest of filler becomes Make Safe
 }    
 
 CREATURES = {
@@ -151,6 +154,25 @@ PROGRESSIVES = {
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
 }
 
+FILLER = {
+    KeeperFillerName.FILLER_INCREASE_LEVEL: KeeperItem(KeeperFiller.FILLER_INCREASE_LEVEL, ItemClassification.filler),
+    KeeperFillerName.FILLER_MULTIPLY_CREATURES: KeeperItem(KeeperFiller.FILLER_MULTIPLY_CREATURES, ItemClassification.filler),
+    KeeperFillerName.FILLER_MAKE_SAFE: KeeperItem(KeeperFiller.FILLER_MAKE_SAFE, ItemClassification.filler),
+}
+
+# OPTIONAL STUFF
+
+NEGATIVE_RECIPES = {
+#    KeeperRecipeName.RECIPE_WISHING_WELL: KeeperItem(KeeperRecipe.RECIPE_WISHING_WELL, ItemClassification.useful), #"Wishing Well" #default, might be hardcoded, would probably be stupid to include
+    NegativeRecipeName.RECIPE_KILL_CHICKENS_1: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_1, ItemClassification.useful), #"All chickens die 1", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_KILL_CHICKENS_2: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_2, ItemClassification.useful), #"All chickens die 2", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_DISEASE: KeeperItem(NegativeRecipe.RECIPE_DISEASE, ItemClassification.useful), #"Disease creatures", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_ANGRY: KeeperItem(NegativeRecipe.RECIPE_ANGRY, ItemClassification.useful), #"All creatures angry", #default, unlock would probably be stupid to include outside of a Templesanity
+    NegativeRecipeName.RECIPE_CHICKEN: KeeperItem(NegativeRecipe.RECIPE_CHICKEN, ItemClassification.useful), #"Chicken creatures", #default, unlock would probably be stupid to include outside of a Templesanity
+}
+
+# Heroes
+
 # KEEPERFX ADDITIONS
 
 KEEPERFX_CREATURES = {
@@ -181,15 +203,6 @@ KEEPERFX_DOORS = {
     KeeperFXDoorName.MIDAS: KeeperItem(KeeperFXDoor.MIDAS, ItemClassification.useful),
 }
 
-NEGATIVE_RECIPES = {
-#    KeeperRecipeName.RECIPE_WISHING_WELL: KeeperItem(KeeperRecipe.RECIPE_WISHING_WELL, ItemClassification.useful), #"Wishing Well" #default, might be hardcoded, would probably be stupid to include
-    NegativeRecipeName.RECIPE_KILL_CHICKENS_1: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_1, ItemClassification.useful), #"All chickens die 1", #default, unlock would probably be stupid to include outside of a Templesanity
-    NegativeRecipeName.RECIPE_KILL_CHICKENS_2: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_2, ItemClassification.useful), #"All chickens die 2", #default, unlock would probably be stupid to include outside of a Templesanity
-    NegativeRecipeName.RECIPE_DISEASE: KeeperItem(NegativeRecipe.RECIPE_DISEASE, ItemClassification.useful), #"Disease creatures", #default, unlock would probably be stupid to include outside of a Templesanity
-    NegativeRecipeName.RECIPE_ANGRY: KeeperItem(NegativeRecipe.RECIPE_ANGRY, ItemClassification.useful), #"All creatures angry", #default, unlock would probably be stupid to include outside of a Templesanity
-    NegativeRecipeName.RECIPE_CHICKEN: KeeperItem(NegativeRecipe.RECIPE_CHICKEN, ItemClassification.useful), #"Chicken creatures", #default, unlock would probably be stupid to include outside of a Templesanity
-}
-
 KEEPERFX_RECIPES = {
     KeeperFXRecipeName.RECIPE_GOOD_SKELETON: KeeperItem(KeeperFXRecipe.RECIPE_GOOD_SKELETON, ItemClassification.useful), #"Good skeleton", #default, unlock would probably be stupid to include outside of a Templesanity
     KeeperFXRecipeName.RECIPE_TENTACLE: KeeperItem(KeeperFXRecipe.RECIPE_TENTACLE, ItemClassification.useful), #"Tentacle",
@@ -213,6 +226,7 @@ CHECKS.update(DOORS)
 CHECKS.update(LEVELS)
 CHECKS.update(RECIPES)
 CHECKS.update(PROGRESSIVES)
+CHECKS.update(FILLER)
 
 ITEM_NAME_TO_ID = {}
 
@@ -229,6 +243,7 @@ populate_item_dict(KeeperLevelName, KeeperLevel)
 populate_item_dict(KeeperRecipeName, KeeperRecipe)
 populate_item_dict(KeeperPowerName, KeeperPower)
 populate_item_dict(KeeperProgressiveName, KeeperProgressive)
+populate_item_dict(KeeperFillerName, KeeperFiller)
 
 def create_all_items(world):
     item_pool = []
@@ -260,7 +275,7 @@ def create_all_items(world):
 
     for item_name in ITEM_NAME_TO_ID.keys():
 
-        amount_to_create = PROGRESSIVE_COUNTS.get(item_name, 1)
+        amount_to_create = MULTIPLE_ITEM_COUNTS.get(item_name, 1)
 
         for _ in range(amount_to_create):
             if item_name in precollected_names:
@@ -281,7 +296,7 @@ def create_all_items(world):
     world.multiworld.itempool.extend(item_pool)
 
 def get_random_filler_item_name():
-    return KeeperDoorName.WOOD.value
+    return KeeperFillerName.FILLER_MAKE_SAFE.value
 
 all_category_dicts = {
     **CREATURES,
@@ -292,6 +307,7 @@ all_category_dicts = {
     **RECIPES,
     **SPELLS,
     **PROGRESSIVES,
+    **FILLER,
     **KEEPERFX_CREATURES,
     **KEEPERFX_DOORS,
     **KEEPERFX_SPELLS,
