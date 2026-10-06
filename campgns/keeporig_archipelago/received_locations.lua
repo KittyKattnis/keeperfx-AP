@@ -268,6 +268,10 @@ if IncludeImpsInPool then
       ChecksTable[100]  = {id=100,   internal_name="IMP",                 name="Imp",                          string="259",       text="Attract Imp"} -- also consider allowing imps through portal. Not sure how they work (they don't contribute towards portal limit, but can they come through when you reach your limit?)
      -- could be a fun alternative to having create imp
 end
+if IncludeTunnellersInPool then
+      ChecksTable[900]  = {id=900,   internal_name="Tunneller",                 name="Tunneller",                          string="259",       text="Attract Tunneller"}
+     -- could be a fun alternative to having create imp
+end
 
 if SplitHandPower then
     for id, check in pairs(SplitHandPowerTable) do

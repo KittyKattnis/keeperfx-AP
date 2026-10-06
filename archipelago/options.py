@@ -37,16 +37,45 @@ class KeeperFXRecipes(Toggle):
     """Choose if you want KeeperFX Temple recipes to be available in the game."""
     display_name = "KeeperFX Recipes"
 
+# really want this to be "creature type evil/good/both"
+
+class AddHeroes(Toggle):
+    """Choose if you want to attract Heroes."""
+    display_name = "Attract Heroes"
+
+class KeeperFXHeroes(Toggle):
+    """Choose if you want to attract Keeper FX Heroes."""
+    display_name = "Attract KeeperFX Heroes"
+
+class IncludeImpsInPool(Toggle):
+    """Choose if you want to attract Imps."""
+    display_name = "Attract Imps"
+
+class IncludeTunnellersInPool(Toggle):
+    """Choose if you want to attract Tunnellers."""
+    display_name = "Attract Tunnellers"
+    
+class IncludeKnightsInPool(Toggle):
+    """Choose if you want to attract Knights."""
+    display_name = "Attract Knights"
+
+class IncludeAvatarsInPool(Toggle):
+    """Choose if you want to attract Avatars."""
+    display_name = "Attract Avatars"
+
 # option for temple recipes unlocked/unlockable/removed
 
 # cruelty mode yes/no
 
-# creature type evil/good/both
+
 
 # starting player colour
 
 # toggles for certain types of progressives (i.e. if off, you just set it to default values)
 
+
+#    #If you assume an initial level cap of 3, a creature cap of 10, and only bugs, demonspawn and warlocks I would say definitely levels 1-4 are doable, as are 101,103-105.
+#    #Maybe others too, but I think it would be extremely hard.
 
 class StartingLevels(ItemDict):
     """Levels available at the start of the game."""
@@ -110,13 +139,28 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     KeeperFXTraps: KeeperFXTraps
     NegativeRecipes: NegativeRecipes
     KeeperFXRecipes: KeeperFXRecipes
+    AddHeroes: AddHeroes
+    KeeperFXHeroes: KeeperFXHeroes
+    IncludeImpsInPool: IncludeImpsInPool
+    IncludeTunnellersInPool: IncludeTunnellersInPool
+    IncludeKnightsInPool: IncludeKnightsInPool
+    IncludeAvatarsInPool: IncludeAvatarsInPool
 
 option_groups = [
-    OptionGroup("KeeperFX Additions", [
+    OptionGroup("KCreature Pool", [
         KeeperFXCreatures,
+        AddHeroes,
+        KeeperFXHeroes,
+        IncludeImpsInPool,
+        IncludeTunnellersInPool,
+        IncludeKnightsInPool,
+        IncludeAvatarsInPool,
+    ]),
+    OptionGroup("KeeperFX Additions", [
         KeeperFXSpells,
         KeeperFXDoors,
         KeeperFXTraps,
+        KeeperFXHeroes,
     ]),
     OptionGroup("Temple Recipes", [
         NegativeRecipes,

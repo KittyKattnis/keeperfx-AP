@@ -78,6 +78,9 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
 #Scaling requirements for difficult levels
 
+#    #Levels
+#    #Three of these should be unlocked by default.
+#    #If you assume an initial level cap of 3, a creature cap of 10, and only bugs, demonspawn and warlocks I would say definitely levels 1-4 are doable, as are 101,103-105.
 #   #Region 1, candidate for being unlocked from start:
 #       1-4, 101, 103-105
 #   #Region 2, recommended some of e.g. level 5 cap, biles/orcs/skeletons/hounds, prison, speed/cta

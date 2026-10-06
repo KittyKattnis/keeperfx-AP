@@ -171,7 +171,33 @@ NEGATIVE_RECIPES = {
     NegativeRecipeName.RECIPE_CHICKEN: KeeperItem(NegativeRecipe.RECIPE_CHICKEN, ItemClassification.useful), #"Chicken creatures", #default, unlock would probably be stupid to include outside of a Templesanity
 }
 
+IMP = {
+	KeeperCreatureName.IMP: KeeperItem(KeeperCreature.IMP, ItemClassification.progression),
+}
+
 # Heroes
+HEROES = {
+	KeeperHeroName.THIEF: KeeperItem(KeeperHero.THIEF, ItemClassification.progression),
+	KeeperHeroName.BARBARIAN: KeeperItem(KeeperHero.BARBARIAN, ItemClassification.progression),
+	KeeperHeroName.GIANT: KeeperItem(KeeperHero.GIANT, ItemClassification.progression),
+	KeeperHeroName.WIZARD: KeeperItem(KeeperHero.WIZARD, ItemClassification.progression),
+	KeeperHeroName.FAIRY: KeeperItem(KeeperHero.FAIRY, ItemClassification.progression),
+	KeeperHeroName.ARCHER: KeeperItem(KeeperHero.ARCHER, ItemClassification.progression),
+	KeeperHeroName.DWARFA: KeeperItem(KeeperHero.DWARFA, ItemClassification.progression),
+	KeeperHeroName.MONK: KeeperItem(KeeperHero.MONK, ItemClassification.progression),
+	KeeperHeroName.SAMURAI: KeeperItem(KeeperHero.SAMURAI, ItemClassification.progression),
+	KeeperHeroName.WITCH: KeeperItem(KeeperHero.WITCH, ItemClassification.progression),
+}
+
+TUNNELLER = {
+	KeeperHeroName.TUNNELLER: KeeperItem(KeeperHero.TUNNELLER, ItemClassification.progression),
+}
+KNIGHT = {
+    KeeperHeroName.KNIGHT: KeeperItem(KeeperHero.KNIGHT, ItemClassification.progression),
+}
+AVATAR = {
+	KeeperHeroName.AVATAR: KeeperItem(KeeperHero.AVATAR, ItemClassification.progression),
+}
 
 # KEEPERFX ADDITIONS
 
@@ -215,6 +241,10 @@ KEEPERFX_RECIPES = {
     KeeperFXRecipeName.RECIPE_FLIGHT: KeeperItem(KeeperFXRecipe.RECIPE_FLIGHT, ItemClassification.Helpful), #"Flight creatures", #"Flight creatures Recipe Unlocked",
     KeeperFXRecipeName.RECIPE_FREEZE: KeeperItem(KeeperFXRecipe.RECIPE_FREEZE, ItemClassification.Helpful), #"Freeze creatures", #"Freeze creatures Recipe Unlocked",
     KeeperFXRecipeName.RECIPE_SLOW: KeeperItem(KeeperFXRecipe.RECIPE_SLOW, ItemClassification.Helpful), #"Slow creatures", #"Slow creatures Recipe Unlocked",
+}
+
+KEEPERFX_HEROES = {
+	KeeperFXHeroName.TIME_MAGE: KeeperItem(KeeperFXHero.TIME_MAGE, ItemClassification.progression),
 }
 
 CHECKS = {}

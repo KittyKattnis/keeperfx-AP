@@ -23,6 +23,7 @@ class KeeperCreatureName(StrEnum):
         HELL_HOUND = "Attract Hound"
         HORNY = "Attract Horned Reaper" #not usually attracted from Portal but I think that's fine and adds variety
         VAMPIRE = "Attract Vampire" #not usually attracted from Portal but I think that's fine and adds variety
+        IMP = "Attract Imp" #allow attracting Imps through portal as an option
 
 class KeeperCreature(IntEnum):
         FLY = 1
@@ -41,6 +42,7 @@ class KeeperCreature(IntEnum):
         HELL_HOUND = 14
         HORNY = 15
         VAMPIRE = 16
+        IMP = 100
 
 class KeeperFXCreatureName(StrEnum):
         DRUID = "Attract Druid"
@@ -191,21 +193,6 @@ class KeeperFXPower(IntEnum):
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperLevelName(StrEnum):
-#    #Levels
-#    #Three of these should be unlocked by default.
-#    #If you assume an initial level cap of 3, a creature cap of 10, and only bugs, demonspawn and warlocks I would say definitely levels 1-4 are doable, as are 101,103-105.
-#    #Maybe others too, but I think it would be extremely hard.
-#   #Sphere 1, candidate for being unlocked from start:
-#       1-4, 101, 103-105
-#   #Sphere 2, recommended some of e.g. level 5 cap, biles/orcs/skeletons/hounds, prison, speed/cta
-#       5-11
-#   #Sphere 3, recommended some of  e.g. level 7 cap, mistress/dragon/vampire, prison+torture, heal
-#       10-15
-#   #Sphere 4, tougher, best to restrict until you have a cap of 7+, decent creatures, prison/torture/temple/graveyard, heal/speed/cta/lightning/cave-in
-#       16-20
-#   #Not sure:
-#       100: Sphere 2/3? not sure, doable with extreme care in possession, or still pretty handily with a cap of level 7. If you have certain spells and rooms you can cheese it way earlier.
-#       102: not sure, requires a way to kill imps en masse, e.g. cave-in, a transferred creature, placeable boulder traps
         LEVEL_001 = "Level 1"
         LEVEL_002 = "Level 2"
         LEVEL_003 = "Level 3"
@@ -329,11 +316,8 @@ class KeeperFXRecipe(StrEnum):
 
 class KeeperProgressiveName(StrEnum):
         PROGRESSIVE_LEVEL_CAP = "Progressive Level Cap" #Increase max creature level by 1 (starts max level 3)
-
         PROGRESSIVE_CREATURE_LIMIT = "Progressive Creature Limit" #Increase creature limit by 5 (starts at max 10)
-
         PROGRESSIVE_STARTING_GOLD = "Progressive Starting Gold" #Increase starting gold by 1250 (starts at 2500)
-
         PROGRESSIVE_PORTAL_SPEED = "Progressive Portal Speed" #Increases Portal speed (decreases wait) by 125 (starts at 750)
 
 #    #Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)),
@@ -341,14 +325,39 @@ class KeeperProgressiveName(StrEnum):
 #       progressive hand size (e.g. start with hand size of 4 (default 8), up to 16)
 class KeeperProgressive(IntEnum):
         PROGRESSIVE_LEVEL_CAP = 701 #Increase max creature level by 1 (starts max level 3)
-
         PROGRESSIVE_CREATURE_LIMIT = 702 #Increase creature limit by 5 (starts at max 10)
-
         PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500)
-
         PROGRESSIVE_PORTAL_SPEED = 704 #Increases Portal speed (decreases wait) by 125 (starts at 750)
 
-# Heroes
+class KeeperHeroName(StrEnum):
+        THIEF = "Attract Thief"
+        BARBARIAN = "Attract Barbarian",
+        GIANT = "Attract Giant",
+        WIZARD = "Attract Wizard",
+        FAIRY = "Attract Fairy",
+        ARCHER = "Attract Archer",
+        DWARFA = "Attract Mountain Dwarf",
+        MONK = "Attract Monk",
+        SAMURAI = "Attract Samurai",
+        WITCH = "Attract Priestess",
+        KNIGHT = "Attract Knight",
+        AVATAR = "Attract Avatar",
+        TUNNELLER = "Attract Tunneller"
+
+class KeeperHero(IntEnum):
+        THIEF = 801,
+        BARBARIAN = 802,
+        GIANT = 803,
+        WIZARD = 804,
+        FAIRY = 805,
+        ARCHER = 806,
+        DWARFA = 807,
+        MONK = 808,
+        SAMURAI = 809,
+        WITCH = 810,
+        KNIGHT = 811,
+        AVATAR = 812,
+        TUNNELLER = 900,
 
 class KeeperFillerName(StrEnum):
         FILLER_INCREASE_LEVEL = "Increase Level"
