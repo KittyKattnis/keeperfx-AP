@@ -4,6 +4,7 @@
 
 # Every check must have a unique integer ID associated with it.
 
+import random
 from typing import NamedTuple, Optional
 from BaseClasses import Item, ItemClassification
 from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName, KeeperFiller, KeeperFillerName, KeeperHero, KeeperHeroName, KeeperFXHero, KeeperFXHeroName, KeeperImp, KeeperImpName, KeeperKnight, KeeperKnightName, KeeperAvatar, KeeperAvatarName, KeeperTunneller, KeeperTunnellerName
@@ -262,7 +263,7 @@ populate_item_dict(KeeperLevelName, KeeperLevel)
 populate_item_dict(KeeperRecipeName, KeeperRecipe)
 populate_item_dict(KeeperPowerName, KeeperPower)
 populate_item_dict(KeeperProgressiveName, KeeperProgressive)
-populate_item_dict(KeeperFillerName, KeeperFiller)
+#populate_item_dict(KeeperFillerName, KeeperFiller)
 
 def create_all_items(world):
     item_pool = []
@@ -321,8 +322,19 @@ def create_all_items(world):
 
     world.multiworld.itempool.extend(item_pool)
 
+FILLER_WEIGHTS = {
+    KeeperFillerName.FILLER_MAKE_SAFE.value: 60,
+    KeeperFillerName.FILLER_INCREASE_LEVEL.value: 30,
+    KeeperFillerName.FILLER_MULTIPLY_CREATURES.value: 10,
+}
+
 def get_random_filler_item_name():
-    return KeeperFillerName.FILLER_MAKE_SAFE.value
+    return random.choices(
+        list(FILLER_WEIGHTS.keys()),
+        weights=list(FILLER_WEIGHTS.values()),
+        k=1,
+    )[0]
+
 
 all_category_dicts = {
     **CREATURES,
