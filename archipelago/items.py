@@ -233,14 +233,14 @@ KEEPERFX_RECIPES = {
     KeeperFXRecipeName.RECIPE_GOOD_SKELETON: KeeperItem(KeeperFXRecipe.RECIPE_GOOD_SKELETON, ItemClassification.useful), #"Good skeleton", #default, unlock would probably be stupid to include outside of a Templesanity
     KeeperFXRecipeName.RECIPE_TENTACLE: KeeperItem(KeeperFXRecipe.RECIPE_TENTACLE, ItemClassification.useful), #"Tentacle",
     KeeperFXRecipeName.RECIPE_HOUND: KeeperItem(KeeperFXRecipe.RECIPE_HOUND, ItemClassification.useful), #"Hound",
-    KeeperFXRecipeName.RECIPE_SPEED: KeeperItem(KeeperFXRecipe.RECIPE_SPEED, ItemClassification.Helpful), #"Speed creatures",
-    KeeperFXRecipeName.RECIPE_CONCEAL: KeeperItem(KeeperFXRecipe.RECIPE_CONCEAL, ItemClassification.Helpful), #"Conceal creatures", #"Conceal creatures Recipe Unlocked",
-    KeeperFXRecipeName.RECIPE_HEAL: KeeperItem(KeeperFXRecipe.RECIPE_HEAL, ItemClassification.Helpful), #"Heal creatures", #"Heal creatures Recipe Unlocked",
-    KeeperFXRecipeName.RECIPE_REBOUND: KeeperItem(KeeperFXRecipe.RECIPE_REBOUND, ItemClassification.Helpful), #"Rebound creatures", #"Rebound creatures Recipe Unlocked",
-    KeeperFXRecipeName.RECIPE_PROTECT: KeeperItem(KeeperFXRecipe.RECIPE_PROTECT, ItemClassification.Helpful), #"Protect creatures", #"Protect creatures Recipe Unlocked",
-    KeeperFXRecipeName.RECIPE_FLIGHT: KeeperItem(KeeperFXRecipe.RECIPE_FLIGHT, ItemClassification.Helpful), #"Flight creatures", #"Flight creatures Recipe Unlocked",
-    KeeperFXRecipeName.RECIPE_FREEZE: KeeperItem(KeeperFXRecipe.RECIPE_FREEZE, ItemClassification.Helpful), #"Freeze creatures", #"Freeze creatures Recipe Unlocked",
-    KeeperFXRecipeName.RECIPE_SLOW: KeeperItem(KeeperFXRecipe.RECIPE_SLOW, ItemClassification.Helpful), #"Slow creatures", #"Slow creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_SPEED: KeeperItem(KeeperFXRecipe.RECIPE_SPEED, ItemClassification.useful), #"Speed creatures",
+    KeeperFXRecipeName.RECIPE_CONCEAL: KeeperItem(KeeperFXRecipe.RECIPE_CONCEAL, ItemClassification.useful), #"Conceal creatures", #"Conceal creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_HEAL: KeeperItem(KeeperFXRecipe.RECIPE_HEAL, ItemClassification.useful), #"Heal creatures", #"Heal creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_REBOUND: KeeperItem(KeeperFXRecipe.RECIPE_REBOUND, ItemClassification.useful), #"Rebound creatures", #"Rebound creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_PROTECT: KeeperItem(KeeperFXRecipe.RECIPE_PROTECT, ItemClassification.useful), #"Protect creatures", #"Protect creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_FLIGHT: KeeperItem(KeeperFXRecipe.RECIPE_FLIGHT, ItemClassification.useful), #"Flight creatures", #"Flight creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_FREEZE: KeeperItem(KeeperFXRecipe.RECIPE_FREEZE, ItemClassification.useful), #"Freeze creatures", #"Freeze creatures Recipe Unlocked",
+    KeeperFXRecipeName.RECIPE_SLOW: KeeperItem(KeeperFXRecipe.RECIPE_SLOW, ItemClassification.useful), #"Slow creatures", #"Slow creatures Recipe Unlocked",
 }
 
 KEEPERFX_HEROES = {

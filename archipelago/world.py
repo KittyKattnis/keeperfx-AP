@@ -49,21 +49,23 @@ class DungeonKeeperWorld(World):
     # This defaults to "Menu", but you can change it by overriding origin_region_name.
     origin_region_name = "Overworld"
 
-
-    levels_set = {
-        "Level 1", "Level 2", "Level 3", "Level 4", "Level 5",
-        "Level 6", "Level 7", "Level 8", "Level 9", "Level 10",
-        "Level 11", "Level 12", "Level 13", "Level 14", "Level 15",
-        "Level 16", "Level 17", "Level 18", "Level 19", "Level 20",
-    }
-    bonus_set = {
-        "Secret 1", "Secret 2", "Secret 3", "Secret 4", "Secret 5", "Secret 6",   
-    }
-
     item_name_groups = {
-        "Levels": levels_set,
-        "Bonus Levels": bonus_set,
-        "All Levels": levels_set | bonus_set,
+        "Levels": {
+            "Level 1", "Level 2", "Level 3", "Level 4", "Level 5",
+            "Level 6", "Level 7", "Level 8", "Level 9", "Level 10",
+            "Level 11", "Level 12", "Level 13", "Level 14", "Level 15",
+            "Level 16", "Level 17", "Level 18", "Level 19", "Level 20",
+        },
+        "Bonus Levels": {
+            "Secret 1", "Secret 2", "Secret 3", "Secret 4", "Secret 5", "Secret 6",   
+        },
+        "All Levels": {
+            "Level 1", "Level 2", "Level 3", "Level 4", "Level 5",
+            "Level 6", "Level 7", "Level 8", "Level 9", "Level 10",
+            "Level 11", "Level 12", "Level 13", "Level 14", "Level 15",
+            "Level 16", "Level 17", "Level 18", "Level 19", "Level 20",
+            "Secret 1", "Secret 2", "Secret 3", "Secret 4", "Secret 5", "Secret 6",  
+        },
         "Creatures": {
             "Attract Fly",
             "Attract Beetle",
@@ -81,7 +83,7 @@ class DungeonKeeperWorld(World):
             "Attract Hound",
             "Attract Horned Reaper",
             "Attract Vampire",
-            #"Attract Imp",
+            "Attract Imp",
         },
         "FX Creatures": {
             "Attract Druid",
@@ -201,9 +203,9 @@ class DungeonKeeperWorld(World):
             "Attract Monk",
             "Attract Samurai",
             "Attract Priestess",
-            #"Attract Knight",
-            #"Attract Avatar",
-            #"Attract Tunneller"
+            "Attract Knight",
+            "Attract Avatar",
+            "Attract Tunneller"
         },
         "FX Heroes": {
             "Attract Time Mage",
