@@ -19,12 +19,12 @@ class KeeperItem(NamedTuple):
 
 MULTIPLE_ITEM_COUNTS = {
     KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value: 8,
-    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT.value: 6, 
+    KeeperProgressiveName.PROGRESSIVE_CREATURE_LIMIT.value: 6,
     KeeperProgressiveName.PROGRESSIVE_STARTING_GOLD.value: 6,
     KeeperProgressiveName.PROGRESSIVE_PORTAL_SPEED.value: 4,
-    KeeperFillerName.FILLER_INCREASE_LEVEL.value: 4,
-    KeeperFillerName.FILLER_MULTIPLY_CREATURES.value: 0,
-    KeeperFillerName.FILLER_MAKE_SAFE.value: 0, # rest of filler becomes Make Safe
+    #KeeperFillerName.FILLER_INCREASE_LEVEL.value: 4,
+    #KeeperFillerName.FILLER_MULTIPLY_CREATURES.value: 0,
+    #KeeperFillerName.FILLER_MAKE_SAFE.value: 0, # rest of filler becomes Make Safe
 }    
 
 CREATURES = {
