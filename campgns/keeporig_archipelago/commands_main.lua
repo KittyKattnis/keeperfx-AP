@@ -44,9 +44,12 @@ end
 Game.APBoxMessage = 1
 
 function OnItemReceived(itemid)
+      print(itemid)
       print("Received item " .. itemid)
+      print("Game.APBoxMessage: " .. Game.APBoxMessage)
+      print("ChecksTable[itemid].text: " .. ChecksTable[itemid].text)
       RunDKScriptCommand("QUICK_INFORMATION(" .. Game.APBoxMessage .. ",\"AP Item Received:\n" .. ChecksTable[itemid].text .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
-      Game.APBoxMessage = Game.APBoxMessage + 1
+      Game.APBoxMessage = Game.APBoxMessage + 1 or 1
       -- only need to do this when new items are received. Need to check setting message number to 100 is ok.
       -- Also if you receive items while outside a level and then join, will it send all of the new ones when you go into a level?
       ReceivedLocations.ReceivedItemCheck(itemid)
@@ -58,12 +61,14 @@ function ActivateItems()
       local receivedItems = GetAPItems()
       -- get the last processed index, stored in intralvl data so persists between levels and saves
       local lastProcessed = GetAPLastProcessedItemIndex()
+      print("lastProcessed: " .. lastProcessed)
       for _, apitem in pairs(receivedItems) do
             local itemid = apitem.item
             local index = apitem.index
             local flags = apitem.flags
             local sender = apitem.player
             local location = apitem.location
+            print("itemid = " .. itemid .. ", index = " .. index)
             -- process all items that need to be unlocked on each level, i.e. rooms/creatures/spells etc
             ReceivedLocations.ReceivedItemCheck(itemid)
             if apitem.index > lastProcessed then
