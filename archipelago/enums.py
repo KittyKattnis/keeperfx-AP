@@ -280,7 +280,7 @@ class NegativeRecipeName(StrEnum):
        RECIPE_ANGRY = "All creatures angry Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_CHICKEN = "Chicken creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
 
-class NegativeRecipe(StrEnum):
+class NegativeRecipe(IntEnum):
 #       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
        RECIPE_KILL_CHICKENS_1 = 609 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
@@ -301,7 +301,7 @@ class KeeperFXRecipeName(StrEnum):
        RECIPE_FREEZE = "Freeze creatures Recipe"
        RECIPE_SLOW = "Slow creatures Recipe"
 
-class KeeperFXRecipe(StrEnum):
+class KeeperFXRecipe(IntEnum):
        RECIPE_GOOD_SKELETON = 615 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_TENTACLE = 616
        RECIPE_HOUND = 617
@@ -331,39 +331,39 @@ class KeeperProgressive(IntEnum):
 
 class KeeperHeroName(StrEnum):
         THIEF = "Attract Thief"
-        BARBARIAN = "Attract Barbarian",
-        GIANT = "Attract Giant",
-        WIZARD = "Attract Wizard",
-        FAIRY = "Attract Fairy",
-        ARCHER = "Attract Archer",
-        DWARFA = "Attract Mountain Dwarf",
-        MONK = "Attract Monk",
-        SAMURAI = "Attract Samurai",
-        WITCH = "Attract Priestess",
-        KNIGHT = "Attract Knight",
-        AVATAR = "Attract Avatar",
+        BARBARIAN = "Attract Barbarian"
+        GIANT = "Attract Giant"
+        WIZARD = "Attract Wizard"
+        FAIRY = "Attract Fairy"
+        ARCHER = "Attract Archer"
+        DWARFA = "Attract Mountain Dwarf"
+        MONK = "Attract Monk"
+        SAMURAI = "Attract Samurai"
+        WITCH = "Attract Priestess"
+        KNIGHT = "Attract Knight"
+        AVATAR = "Attract Avatar"
         TUNNELLER = "Attract Tunneller"
 
 class KeeperHero(IntEnum):
-        THIEF = 801,
-        BARBARIAN = 802,
-        GIANT = 803,
-        WIZARD = 804,
-        FAIRY = 805,
-        ARCHER = 806,
-        DWARFA = 807,
-        MONK = 808,
-        SAMURAI = 809,
-        WITCH = 810,
-        KNIGHT = 811,
-        AVATAR = 812,
-        TUNNELLER = 813,
+        THIEF = 801
+        BARBARIAN = 802
+        GIANT = 803
+        WIZARD = 804
+        FAIRY = 805
+        ARCHER = 806
+        DWARFA = 807
+        MONK = 808
+        SAMURAI = 809
+        WITCH = 810
+        KNIGHT = 811
+        AVATAR = 812
+        TUNNELLER = 813
 
 class KeeperFXHeroName(StrEnum):
-        TIME_MAGE = "Attract Time Mage",
+        TIME_MAGE = "Attract Time Mage"
 
 class KeeperFXHero(IntEnum):
-        TIME_MAGE = 814,
+        TIME_MAGE = 814
 
 class KeeperFillerName(StrEnum):
         FILLER_INCREASE_LEVEL = "Increase Level"
