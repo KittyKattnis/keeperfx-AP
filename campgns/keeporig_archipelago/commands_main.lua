@@ -4,21 +4,25 @@ CommandsMain = {}
 function CommandsMain.MainSetup()
       RunDKScriptCommand("SET_NEXT_LEVEL(1000)")
       Setup()
-      SetupTriggers()
+      if Map.map_number ~= 1000 then
+            SetupTriggers()
+      end
 end
 
 function Setup()
       QuickMessage("Map: " .. Map.map_number .. " (" .. Map.map_name .. ").", "ARCHIPELAGO_ICON")
-      IncreaseLevelCap()
-      IncreaseCreatureLimit()
-      --IncreaseStartingGold() --Calling this each save and reload keeps adding gold to the player oops.
-      HideVariable()
-      DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_BIG")
       ActivateItems()
-      BoxLocations.DeleteBoxes(Map.map_number)
-      BoxLocations.SpawnBoxes(Map.map_number)
-      BoxLocations.ActivateBoxes(Map.map_number)
-      BoxLocations.IsLevelComplete(Map.map_number)
+      if Map.map_number ~= 1000 then
+            IncreaseLevelCap()
+            IncreaseCreatureLimit()
+            --IncreaseStartingGold() --Calling this each save and reload keeps adding gold to the player oops.
+            HideVariable()
+            DisplayVariableWithLabel("PLAYER0","BOXES_REMAIN","ARCHIPELAGO_BIG")
+            BoxLocations.DeleteBoxes(Map.map_number)
+            BoxLocations.SpawnBoxes(Map.map_number)
+            BoxLocations.ActivateBoxes(Map.map_number)
+            BoxLocations.IsLevelComplete(Map.map_number)
+      end
       BoxLocations.UpdateEnsigns()
 end
 

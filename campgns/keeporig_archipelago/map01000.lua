@@ -12,11 +12,10 @@ ReceivedLocations = require("received_locations")
 --will get called when the game starts
 function OnGameStart()
 	CommandsMain.MainSetup()
-    IncreaseStartingGold()
     Startup()
     LevelStatus()
     ItemStatus()
-
+    IncreaseStartingGold()
 end
 
 function OnGameLoad()
@@ -55,7 +54,7 @@ function SubtileToSlab(subtile_coord)
     return slab_coord
 end
 
-function FlattenBoxes() --because specboxes have a limit of 256 we just make a link between the location number and a number from 1+ so we can display them all on one map
+function FlattenBoxes() --because specboxes have a limit of 512 we just make a link between the location number and a number from 1+ so we can display them all on one map
     local FlatBoxNumbers = {}
     local number = 1
     local level_ids = {}
@@ -242,13 +241,14 @@ function ItemStatus()
         end
     end
     --progressives
-    local levelcapcount = ReceivedLocationsTable.Count(701)
-    local creaturelimitcount = ReceivedLocationsTable.Count(702)
+    local levelcapcount = ReceivedLocationsTable.Count(701)-1 --why is this off by 1?
+    local creaturelimitcount = ReceivedLocationsTable.Count(702)-1 --why is this off by 1?
     local startinggoldcount = ReceivedLocationsTable.Count(703)
     local portalspeedcount = ReceivedLocationsTable.Count(704)
     local handsizecount = ReceivedLocationsTable.Count(705)
     RegisterTimerEvent(function ()
         RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,34," .. math.min(levelcapcount + 3,11) .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,34," .. levelcapcount .. ")")
     end, 17, true)
     for i = 0, 8 do
         if i <= levelcapcount then
@@ -259,6 +259,7 @@ function ItemStatus()
     end
     RegisterTimerEvent(function ()
         RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,40," .. 10 + 5*creaturelimitcount .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,40," .. creaturelimitcount .. ")")
     end, 17, true)
     for i = 0, 6 do
         if i <= creaturelimitcount then
@@ -269,6 +270,7 @@ function ItemStatus()
     end
     RegisterTimerEvent(function ()
         RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,46," .. 2500 + 1250*startinggoldcount .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,46," .. startinggoldcount .. ")")
     end, 17, true)
     for i = 0, 6 do
         if i <= startinggoldcount then
@@ -279,7 +281,8 @@ function ItemStatus()
     end
 
     RegisterTimerEvent(function ()
-        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,52," .. 750 - 100*portalspeedcount .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,52," .. math.max(100,750 - (portalspeedcount * 125)) .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,52," .. portalspeedcount .. ")")
     end, 17, true)
     for i = 0, 6 do
         if i <= portalspeedcount then
@@ -291,9 +294,10 @@ function ItemStatus()
 
     RegisterTimerEvent(function ()
         RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,58," .. 4 + 2*handsizecount .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,58," .. handsizecount .. ")")
     end, 17, true)
     for i = 0, 6 do
-        if i <= portalspeedcount then
+        if i <= handsizecount then
             AddObjectToLevelAtPos("POTION_GREEN",316+3*i,58,1,"PLAYER_NEUTRAL",0)
         else
             AddObjectToLevelAtPos("POTION_RED",316+3*i,58,1,"PLAYER_NEUTRAL",0)

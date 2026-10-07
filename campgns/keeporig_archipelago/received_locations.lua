@@ -146,10 +146,13 @@ RecipesTable = {
     [607] = {id=607, internal_name="MkCreature,HORNY,TROLL,BILE_DEMON,DARK_MISTRESS", name="Horned Reaper",                string="",       text="Horned Reaper Recipe Unlocked"},
 }
 NegativeRecipesTable = {
-    [608] = {id=608, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die",             string="",       text="All chickens die Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [609] = {id=609, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [610] = {id=610, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [611] = {id=611, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    -- 608 is wishing well
+    -- 609 is kill chickens 1
+    -- 610 is kill chickens 2
+    [611] = {id=611, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [612] = {id=612, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [613] = {id=613, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    -- 614 is spider easter egg
 }
 
 FXCreaturesTable = {
@@ -176,18 +179,19 @@ FXSpellsTable = {
     [426] = {id=426, internal_name="POWER_CLEANSE",       name="Cleanse",                      string="",          text="Cleanse Researchable"},          --not made yet
 }
 FXRecipesTable = {
-    [612] = {id=612, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good skeleton",                string="",       text="Good skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [613] = {id=613, internal_name="MkCreature,TENTACLE,TROLL,SPIDER",                name="Tentacle",                     string="",       text="Tentacle Recipe Unlocked"},
-    [614] = {id=614, internal_name="MkCreature,HELL_HOUND,DRAGON,FLY",                name="Hound",                        string="",       text="Hound Recipe Unlocked"},
-    [615] = {id=615, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed creatures",              string="",       text="Speed creatures Recipe Unlocked"},
-    [616] = {id=616, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal creatures",            string="",       text="Conceal creatures Recipe Unlocked"},
-    [617] = {id=617, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal creatures",               string="",       text="Heal creatures Recipe Unlocked"},
-    [618] = {id=618, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound creatures",            string="",       text="Rebound creatures Recipe Unlocked"},
-    [619] = {id=619, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect creatures",            string="",       text="Protect creatures Recipe Unlocked"},
-    [620] = {id=620, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight creatures",             string="",       text="Flight creatures Recipe Unlocked"},
-    [621] = {id=621, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze creatures",             string="",       text="Freeze creatures Recipe Unlocked"},
-    [622] = {id=622, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow creatures",               string="",       text="Slow creatures Recipe Unlocked"},
+    [615] = {id=615, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good skeleton",                string="",       text="Good skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [616] = {id=616, internal_name="MkCreature,TENTACLE,TROLL,SPIDER",                name="Tentacle",                     string="",       text="Tentacle Recipe Unlocked"},
+    [617] = {id=617, internal_name="MkCreature,HELL_HOUND,DRAGON,FLY",                name="Hound",                        string="",       text="Hound Recipe Unlocked"},
+    [618] = {id=618, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed creatures",              string="",       text="Speed creatures Recipe Unlocked"},
+    [619] = {id=619, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal creatures",            string="",       text="Conceal creatures Recipe Unlocked"},
+    [620] = {id=620, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal creatures",               string="",       text="Heal creatures Recipe Unlocked"},
+    [621] = {id=621, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound creatures",            string="",       text="Rebound creatures Recipe Unlocked"},
+    [622] = {id=622, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect creatures",            string="",       text="Protect creatures Recipe Unlocked"},
+    [623] = {id=623, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight creatures",             string="",       text="Flight creatures Recipe Unlocked"},
+    [624] = {id=624, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze creatures",             string="",       text="Freeze creatures Recipe Unlocked"},
+    [625] = {id=625, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow creatures",               string="",       text="Slow creatures Recipe Unlocked"},
 }
+
 SplitHandPowerTable = {
     [427] = {id=427, internal_name="POWER_PICKUP_CREATURE",                           name="Pick Up Creature",             string="961",    text="Pick Up Creature Researchable"},
     [428] = {id=428, internal_name="POWER_PICKUP_GOLD",                               name="Pick Up Gold",                 string="961",    text="Pick Up Gold Researchable"},
@@ -447,7 +451,7 @@ function IncreaseLevelCap()
     if ReceivedLocationsTable.Count(701) == 8 then --when you get the 8th unlock, let player know growup is available
       --print("Level cap increased! Creature growup unlocked")
       print("Progressive Level Cap " .. levelcapcount .. " (Creature growup) Unlocked")
-    elseif ReceivedLocationsTable.Count(701) < 8 then
+    elseif ReceivedLocationsTable.Count(701) < 8 and ReceivedLocationsTable.Count(701) > 0 then
       --print("Level cap increased! Max creature level " .. maxLevel .. " unlocked")
       print("Progressive Level Cap " .. levelcapcount .. " (max level " .. maxLevel.. ") Unlocked")
     end
@@ -475,7 +479,7 @@ end
 
 function IncreasePortalSpeed()
     local portalspeedcount = ReceivedLocationsTable.Count(704)
-    local portalSpeed = math.min(100,750 - (portalspeedcount * 125))
+    local portalSpeed = math.max(100,750 - (portalspeedcount * 125))
     SetGenerateSpeed(portalSpeed,PLAYER0)
     if portalspeedcount > 0 then
         print("Progressive Portal Speed " .. portalspeedcount .. " (Generation every " .. portalSpeed.. " turns) Unlocked")
