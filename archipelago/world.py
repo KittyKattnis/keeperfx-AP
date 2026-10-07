@@ -81,6 +81,7 @@ class DungeonKeeperWorld(World):
             "Attract Hound",
             "Attract Horned Reaper",
             "Attract Vampire",
+            #"Attract Imp",
         },
         "FX Creatures": {
             "Attract Druid",
@@ -189,10 +190,30 @@ class DungeonKeeperWorld(World):
             "Progressive Starting Gold",
             "Progressive Portal Speed",
         },
+        "Heroes": {
+            "Attract Thief",
+            "Attract Barbarian",
+            "Attract Giant",
+            "Attract Wizard",
+            "Attract Fairy",
+            "Attract Archer",
+            "Attract Mountain Dwarf",
+            "Attract Monk",
+            "Attract Samurai",
+            "Attract Priestess",
+            #"Attract Knight",
+            #"Attract Avatar",
+            #"Attract Tunneller"
+        },
+        "FX Heroes": {
+            "Attract Time Mage",
+        },
+        "Filler": {
+            "Increase Level"
+            "Multiply Creatures"
+            "Make Safe"
+        }
     }
-
-    # add filler
-    # add heroes, FXHeroes, other creatures.
 
     # Our world class must have certain functions ("steps") that get called during generation.
     # The main ones are: create_regions, set_rules, create_items.
