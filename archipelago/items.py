@@ -6,7 +6,7 @@
 
 from typing import NamedTuple, Optional
 from BaseClasses import Item, ItemClassification
-from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName, KeeperFiller, KeeperFillerName, KeeperHero, KeeperHeroName, KeeperFXHero, KeeperFXHeroName
+from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName, KeeperFiller, KeeperFillerName, KeeperHero, KeeperHeroName, KeeperFXHero, KeeperFXHeroName, KeeperImp, KeeperImpName, KeeperKnight, KeeperKnightName, KeeperAvatar, KeeperAvatarName, KeeperTunneller, KeeperTunnellerName
 
 
 class DungeonKeeperItem(Item):
@@ -172,7 +172,7 @@ NEGATIVE_RECIPES = {
 }
 
 IMP = {
-	KeeperCreatureName.IMP: KeeperItem(KeeperCreature.IMP, ItemClassification.progression),
+	KeeperImpName.IMP: KeeperItem(KeeperImp.IMP, ItemClassification.progression),
 }
 
 # Heroes
@@ -190,13 +190,13 @@ HEROES = {
 }
 
 TUNNELLER = {
-	KeeperHeroName.TUNNELLER: KeeperItem(KeeperHero.TUNNELLER, ItemClassification.progression),
+	KeeperTunnellerName.TUNNELLER: KeeperItem(KeeperTunneller.TUNNELLER, ItemClassification.progression),
 }
 KNIGHT = {
-    KeeperHeroName.KNIGHT: KeeperItem(KeeperHero.KNIGHT, ItemClassification.progression),
+    KeeperKnightName.KNIGHT: KeeperItem(KeeperKnight.KNIGHT, ItemClassification.progression),
 }
 AVATAR = {
-	KeeperHeroName.AVATAR: KeeperItem(KeeperHero.AVATAR, ItemClassification.progression),
+	KeeperAvatarName.AVATAR: KeeperItem(KeeperAvatar.AVATAR, ItemClassification.progression),
 }
 
 # KEEPERFX ADDITIONS
@@ -285,23 +285,31 @@ def create_all_items(world):
 
     if world.options.KeeperFXCreatures:
         populate_item_dict(KeeperFXCreatureName, KeeperFXCreature)
-
     if world.options.KeeperFXSpells:
         populate_item_dict(KeeperFXPowerName, KeeperFXPower)
-
     if world.options.KeeperFXTraps:
         populate_item_dict(KeeperFXTrapName, KeeperFXTrap)
-
     if world.options.KeeperFXDoors:
         populate_item_dict(KeeperFXDoorName, KeeperFXDoor)
 
     if world.options.NegativeRecipes:
         populate_item_dict(NegativeRecipeName, NegativeRecipe)
-
     if world.options.KeeperFXRecipes:
         populate_item_dict(KeeperFXRecipeName, KeeperFXRecipe)
 
-    #to do - adding heroes to pool
+    if world.options.AddHeroes:
+        populate_item_dict(KeeperHeroName, KeeperHero)
+    if world.options.KeeperFXHeroes:
+        populate_item_dict(KeeperFXHeroName, KeeperFXHero)
+       
+    if world.options.IncludeImpsInPool:
+        populate_item_dict(KeeperImpName, KeeperImp)
+    if world.options.IncludeTunnellersInPool:
+        populate_item_dict(KeeperTunnellerName, KeeperTunneller)
+    if world.options.IncludeKnightsInPool:
+        populate_item_dict(KeeperKnightName, KeeperKnight)
+    if world.options.IncludeAvatarsInPool:
+        populate_item_dict(KeeperAvatarName, KeeperAvatar)
 
     for item_name in ITEM_NAME_TO_ID.keys():
 
@@ -345,6 +353,13 @@ all_category_dicts = {
     **SECRET_LEVELS,
     **NEGATIVE_RECIPES,
     **KEEPERFX_RECIPES,
+    **FILLER,
+    **IMP,
+    **HEROES,
+    **KEEPERFX_HEROES,
+    **TUNNELLER,
+    **KNIGHT,
+    **AVATAR,
 }
 
 item_table = {enum_key.value: item_data for enum_key, item_data in all_category_dicts.items()}

@@ -101,86 +101,86 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     #for now, just some mild smoothing of level unlocks so you don't have to try and beat level 18 and 20 near the start.
 
     location_rules["Level 5 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=5)(state, world.player)
+        state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=4)(state, world.player)
+        else state.has_group("Levels", world.player, count=4)
     )
     location_rules["Level 6 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=5)(state, world.player)
+        state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=4)(state, world.player)
+        else state.has_group("Levels", world.player, count=4)
     )
     location_rules["Level 7 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=5)(state, world.player)
+        state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=4)(state, world.player)
+        else state.has_group("Levels", world.player, count=4)
     )
     location_rules["Level 8 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=5)(state, world.player)
+        state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=4)(state, world.player)
+        else state.has_group("Levels", world.player, count=4)
     )
     location_rules["Level 9 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=5)(state, world.player)
+        state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=4)(state, world.player)
+        else state.has_group("Levels", world.player, count=4)
     )
 
     location_rules["Level 10 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=8)(state, world.player)
+        state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=6)(state, world.player)
+        else state.has_group("Levels", world.player, count=6)
     )
     location_rules["Level 11 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=8)(state, world.player)
+        state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=6)(state, world.player)
+        else state.has_group("Levels", world.player, count=6)
     )
     location_rules["Level 12 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=8)(state, world.player)
+        state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=6)(state, world.player)
+        else state.has_group("Levels", world.player, count=6)
     )
     location_rules["Level 13 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=8)(state, world.player)
+        state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=6)(state, world.player)
+        else state.has_group("Levels", world.player, count=6)
     )
     location_rules["Level 14 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=8)(state, world.player)
+        state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=6)(state, world.player)
+        else state.has_group("Levels", world.player, count=6)
     )
     location_rules["Level 15 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=8)(state, world.player)
+        state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=6)(state, world.player)
+        else state.has_group("Levels", world.player, count=6)
     )
 
     location_rules["Level 16 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=11)(state, world.player)
+        state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=8)(state, world.player)
+        else state.has_group("Levels", world.player, count=8)
     )
     location_rules["Level 17 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=11)(state, world.player)
+        state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=8)(state, world.player)
+        else state.has_group("Levels", world.player, count=8)
     )
     location_rules["Level 18 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=11)(state, world.player)
+        state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=8)(state, world.player)
+        else state.has_group("Levels", world.player, count=8)
     )
     location_rules["Level 19 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=11)(state, world.player)
+        state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=8)(state, world.player)
+        else state.has_group("Levels", world.player, count=8)
     )
     location_rules["Level 20 Beaten"] = lambda state: (
-        HasGroup("All Levels", count=11)(state, world.player)
+        state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
-        else HasGroup("Levels", count=8)(state, world.player)
+        else state.has_group("Levels", world.player, count=8)
     )
 
     location_rules["Level 105 Beaten"] = HasAny("Create Imp","Recruit Tunneller") #starts with no Imps.

@@ -23,7 +23,6 @@ class KeeperCreatureName(StrEnum):
         HELL_HOUND = "Attract Hound"
         HORNY = "Attract Horned Reaper" #not usually attracted from Portal but I think that's fine and adds variety
         VAMPIRE = "Attract Vampire" #not usually attracted from Portal but I think that's fine and adds variety
-        IMP = "Attract Imp" #allow attracting Imps through portal as an option
 
 class KeeperCreature(IntEnum):
         FLY = 1
@@ -42,6 +41,11 @@ class KeeperCreature(IntEnum):
         HELL_HOUND = 14
         HORNY = 15
         VAMPIRE = 16
+
+class KeeperImpName(StrEnum):
+        IMP = "Attract Imp" #allow attracting Imps through portal as an option
+
+class KeeperImp(IntEnum):
         IMP = 100
 
 class KeeperFXCreatureName(StrEnum):
@@ -340,9 +344,6 @@ class KeeperHeroName(StrEnum):
         MONK = "Attract Monk"
         SAMURAI = "Attract Samurai"
         WITCH = "Attract Priestess"
-        KNIGHT = "Attract Knight"
-        AVATAR = "Attract Avatar"
-        TUNNELLER = "Attract Tunneller"
 
 class KeeperHero(IntEnum):
         THIEF = 801
@@ -355,8 +356,23 @@ class KeeperHero(IntEnum):
         MONK = 808
         SAMURAI = 809
         WITCH = 810
+
+class KeeperKnightName(StrEnum):
+        KNIGHT = "Attract Knight"
+
+class KeeperKnight(IntEnum):
         KNIGHT = 811
+
+class KeeperAvatarName(StrEnum):
+        AVATAR = "Attract Avatar"
+
+class KeeperAvatar(IntEnum):
         AVATAR = 812
+
+class KeeperTunnellerName(StrEnum):
+        TUNNELLER = "Attract Tunneller"
+        
+class KeeperTunneller(IntEnum):
         TUNNELLER = 813
 
 class KeeperFXHeroName(StrEnum):
@@ -374,7 +390,6 @@ class KeeperFiller(IntEnum):
         FILLER_INCREASE_LEVEL = 901
         FILLER_MULTIPLY_CREATURES = 902
         FILLER_MAKE_SAFE = 903
-
 
 #    #---------------------------------------------------------
 #    #Filler
