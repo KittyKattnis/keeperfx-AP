@@ -247,17 +247,6 @@ KEEPERFX_HEROES = {
 	KeeperFXHeroName.TIME_MAGE: KeeperItem(KeeperFXHero.TIME_MAGE, ItemClassification.progression),
 }
 
-CHECKS = {}
-CHECKS.update(CREATURES)
-CHECKS.update(ROOMS)
-CHECKS.update(SPELLS)
-CHECKS.update(TRAPS)
-CHECKS.update(DOORS)
-CHECKS.update(LEVELS)
-CHECKS.update(RECIPES)
-CHECKS.update(PROGRESSIVES)
-CHECKS.update(FILLER)
-
 ITEM_NAME_TO_ID = {}
 
 # Helper function for populating ITEM_NAME_TO_ID for world.py
@@ -282,7 +271,6 @@ def create_all_items(world):
 
     if world.options.secret_levels:
         populate_item_dict(KeeperSecretLevelName, KeeperSecretLevel)
-
     if world.options.KeeperFXCreatures:
         populate_item_dict(KeeperFXCreatureName, KeeperFXCreature)
     if world.options.KeeperFXSpells:
@@ -353,7 +341,6 @@ all_category_dicts = {
     **SECRET_LEVELS,
     **NEGATIVE_RECIPES,
     **KEEPERFX_RECIPES,
-    **FILLER,
     **IMP,
     **HEROES,
     **KEEPERFX_HEROES,
