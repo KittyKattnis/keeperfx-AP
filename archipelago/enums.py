@@ -357,7 +357,13 @@ class KeeperHero(IntEnum):
         WITCH = 810,
         KNIGHT = 811,
         AVATAR = 812,
-        TUNNELLER = 900,
+        TUNNELLER = 813,
+
+class KeeperFXHeroName(StrEnum):
+        TIME_MAGE = "Attract Time Mage",
+
+class KeeperFXHero(IntEnum):
+        TIME_MAGE = 814,
 
 class KeeperFillerName(StrEnum):
         FILLER_INCREASE_LEVEL = "Increase Level"
