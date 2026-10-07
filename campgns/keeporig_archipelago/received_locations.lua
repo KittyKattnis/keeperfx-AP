@@ -179,17 +179,17 @@ FXSpellsTable = {
     [426] = {id=426, internal_name="POWER_CLEANSE",       name="Cleanse",                      string="",          text="Cleanse Researchable"},          --not made yet
 }
 FXRecipesTable = {
-    [615] = {id=615, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good skeleton",                string="",       text="Good skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [615] = {id=615, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good Skeleton",                string="",       text="Good Skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     [616] = {id=616, internal_name="MkCreature,TENTACLE,TROLL,SPIDER",                name="Tentacle",                     string="",       text="Tentacle Recipe Unlocked"},
     [617] = {id=617, internal_name="MkCreature,HELL_HOUND,DRAGON,FLY",                name="Hound",                        string="",       text="Hound Recipe Unlocked"},
-    [618] = {id=618, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed creatures",              string="",       text="Speed creatures Recipe Unlocked"},
-    [619] = {id=619, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal creatures",            string="",       text="Conceal creatures Recipe Unlocked"},
-    [620] = {id=620, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal creatures",               string="",       text="Heal creatures Recipe Unlocked"},
-    [621] = {id=621, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound creatures",            string="",       text="Rebound creatures Recipe Unlocked"},
-    [622] = {id=622, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect creatures",            string="",       text="Protect creatures Recipe Unlocked"},
-    [623] = {id=623, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight creatures",             string="",       text="Flight creatures Recipe Unlocked"},
-    [624] = {id=624, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze creatures",             string="",       text="Freeze creatures Recipe Unlocked"},
-    [625] = {id=625, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow creatures",               string="",       text="Slow creatures Recipe Unlocked"},
+    [618] = {id=618, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed Creatures",              string="",       text="Speed Creatures Recipe Unlocked"},
+    [619] = {id=619, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal Creatures",            string="",       text="Conceal Creatures Recipe Unlocked"},
+    [620] = {id=620, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal Creatures",               string="",       text="Heal Creatures Recipe Unlocked"},
+    [621] = {id=621, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound Creatures",            string="",       text="Rebound Creatures Recipe Unlocked"},
+    [622] = {id=622, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect Creatures",            string="",       text="Protect Creatures Recipe Unlocked"},
+    [623] = {id=623, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight Creatures",             string="",       text="Flight Creatures Recipe Unlocked"},
+    [624] = {id=624, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze Creatures",             string="",       text="Freeze Creatures Recipe Unlocked"},
+    [625] = {id=625, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow Creatures",               string="",       text="Slow Creatures Recipe Unlocked"},
 }
 
 SplitHandPowerTable = {
@@ -499,10 +499,13 @@ end
 function UnlockFiller(itemid)
       if itemid == 901 then
             UseSpecialIncreaseLevel(PLAYER0,1)
+            --play the sound effect for it
       elseif itemid == 902 then
             UseSpecialMultiplyCreatures(PLAYER0,1)
+            --play the sound effect for it
       elseif itemid == 903 then
             MakeSafe(PLAYER0)
+            --play the sound effect for it
       end
 end
 

@@ -293,17 +293,17 @@ class NegativeRecipe(IntEnum):
        RECIPE_CHICKEN = 613 #default, unlock would probably be stupid to include outside of a Templesanity
 
 class KeeperFXRecipeName(StrEnum):
-       RECIPE_GOOD_SKELETON = "Good skeleton Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_GOOD_SKELETON = "Good Skeleton Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_TENTACLE = "Tentacle Recipe"
        RECIPE_HOUND = "Hound Recipe"
-       RECIPE_SPEED = "Speed creatures Recipe"
-       RECIPE_CONCEAL = "Conceal creatures Recipe"
-       RECIPE_HEAL = "Heal creatures Recipe"
-       RECIPE_REBOUND = "Rebound creatures Recipe"
-       RECIPE_PROTECT = "Protect creatures Recipe"
-       RECIPE_FLIGHT = "Flight creatures Recipe"
-       RECIPE_FREEZE = "Freeze creatures Recipe"
-       RECIPE_SLOW = "Slow creatures Recipe"
+       RECIPE_SPEED = "Speed Creatures Recipe"
+       RECIPE_CONCEAL = "Conceal Creatures Recipe"
+       RECIPE_HEAL = "Heal Creatures Recipe"
+       RECIPE_REBOUND = "Rebound Creatures Recipe"
+       RECIPE_PROTECT = "Protect Creatures Recipe"
+       RECIPE_FLIGHT = "Flight Creatures Recipe"
+       RECIPE_FREEZE = "Freeze Creatures Recipe"
+       RECIPE_SLOW = "Slow Creatures Recipe"
 
 class KeeperFXRecipe(IntEnum):
        RECIPE_GOOD_SKELETON = 615 #default, unlock would probably be stupid to include outside of a Templesanity
@@ -371,7 +371,7 @@ class KeeperAvatar(IntEnum):
 
 class KeeperTunnellerName(StrEnum):
         TUNNELLER = "Attract Tunneller"
-        
+
 class KeeperTunneller(IntEnum):
         TUNNELLER = 813
 
