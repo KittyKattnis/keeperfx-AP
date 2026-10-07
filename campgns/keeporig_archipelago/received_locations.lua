@@ -377,9 +377,8 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
             UnlockProgressive(itemid)
       elseif itemid > 800 and itemid <= 900 then
             UnlockHero(itemid)
-      elseif itemid > 900 and itemid <= 1000 then
-            UnlockFiller(itemid)
-      --don't think these work this way.
+      --elseif itemid > 900 and itemid <= 1000 then
+            --UnlockFiller(itemid)
       else
             print("Unknown item ID " .. itemid)
             return
@@ -489,24 +488,46 @@ end
 function IncreaseHandSize()
     local handsizecount = ReceivedLocationsTable.Count(705)
     local handSize = 4 + (handsizecount * 2)
-    --RunDKScriptCommand("SET_GAME_RULE(MaxThingsInHand," .. handSize .. ",PLAYER0)")
-    SetGameRule("MaxThingsInHand",handSize) --originally used RunDKScriptCommand but all other players are CPUs anyway.
+    RunDKScriptCommand("SET_GAME_RULE(MaxThingsInHand," .. handSize .. ",PLAYER0)")
+    --SetGameRule("MaxThingsInHand",handSize) --originally used RunDKScriptCommand but all other players are CPUs anyway.
     if handsizecount > 0 then
         print("Progressive Hand Size " .. handsizecount .. " (" .. handSize.. " things) Unlocked")
     end
 end
 
+function UnlockHero(itemid)
+      print("Hero " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
+      CreatureAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,0)
+      AddCreatureToPool(ChecksTable[itemid].internal_name,10) -- want every creature available everywhere we've unlocked it! Fine to just be added on top of level's pool I think.
+end
+
 function UnlockFiller(itemid)
-      if itemid == 901 then
-            UseSpecialIncreaseLevel(PLAYER0,1)
-            --play the sound effect for it
-      elseif itemid == 902 then
-            UseSpecialMultiplyCreatures(PLAYER0,1)
-            --play the sound effect for it
-      elseif itemid == 903 then
-            MakeSafe(PLAYER0)
-            --play the sound effect for it
-      end
+    if itemid == 901 then
+        UseSpecialIncreaseLevel(PLAYER0,1)
+        PlayMessage(PLAYER0,"SPEECH",83)
+        print("Filler " .. itemid .. " (Increase Level) Found")
+    elseif itemid == 902 then
+        UseSpecialMultiplyCreatures(PLAYER0,1)
+        PlayMessage(PLAYER0,"SPEECH",82)
+        print("Filler " .. itemid .. " (Multiply Creatures) Found")
+    elseif itemid == 903 then
+        MakeSafe(PLAYER0)
+        PlayMessage(PLAYER0,"SPEECH",84)
+        print("Filler " .. itemid .. " (Make Safe) Found")
+      -- 904: steal hero
+      -- 905: receive gold
+      -- 906: Make happy
+      -- 907: receive imps
+    elseif itemid == 907 then
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        PlayMessage(PLAYER0,"SOUND",400)
+        print("Filler " .. itemid .. " (Receive Imps) Found")
+    end
+      -- steal hero is 81
+      -- evil laugh is 117
 end
 
 
