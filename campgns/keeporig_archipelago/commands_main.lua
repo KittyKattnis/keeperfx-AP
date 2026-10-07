@@ -71,6 +71,7 @@ function ActivateItems()
             print("itemid = " .. itemid .. ", index = " .. index)
             -- process all items that need to be unlocked on each level, i.e. rooms/creatures/spells etc
             ReceivedLocations.ReceivedItemCheck(itemid)
+            print("apitem.index = " .. apitem.index .. ", lastProcessed = " .. lastProcessed)
             if apitem.index > lastProcessed then
                   UnlockFiller(itemid)
                   lastProcessed = index

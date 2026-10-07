@@ -327,7 +327,6 @@ FILLER_WEIGHTS = {
     KeeperFillerName.FILLER_INCREASE_LEVEL.value: 30,
     KeeperFillerName.FILLER_MULTIPLY_CREATURES.value: 10,
 }
-
 def get_random_filler_item_name():
     return random.choices(
         list(FILLER_WEIGHTS.keys()),

@@ -109,9 +109,9 @@ function BoxLocations.ActivateBoxes(level_id)
             if SentLocations.Has(id) then --this shouldn't happen, but just in case!
                 if message2 ~= "" then message2 = message2 .. ", " end
                 message2 = message2 .. id
-                RegisterSpecialActivatedEvent(function()
-                    QuickMessage("Check already sent!", "ARCHIPELAGO_ICON") -- just in case we can't get removal on game load working.
-                end, boxID)
+                --RegisterSpecialActivatedEvent(function()
+                --    QuickMessage("Check already sent!", "ARCHIPELAGO_ICON") -- just in case we can't get removal on game load working.
+                --end, boxID)
             else -- If it ISN'T in sent_locations , we've not sent it.
                 if not first then message = message .. ", " end
                 message = message .. id
