@@ -303,8 +303,8 @@ void ap_process_sacrifice_recipe(struct SacrificeRecipe *sac)
     }
     if (recipe_name[0] != '\0') {
         const AP_LocationInfo* info = ap_location_info_get_by_name(recipe_name);
-        if(info != NULL && ap_location_is_missing(&g_ap_state, info->item)){
-            AP_SendItem(info->item);
+        if(info != NULL && ap_location_is_missing(&g_ap_state, info->location)){
+            AP_SendItem(info->location);
         }
     }
 }
