@@ -512,33 +512,37 @@ function UnlockHero(itemid)
 end
 
 function UnlockFiller(itemid)
-    if itemid == 901 then
+    if itemid == 901 then -- increase level
         UseSpecialIncreaseLevel(PLAYER0,1)
         PlayMessage(PLAYER0,"SPEECH",83)
         print("Filler " .. itemid .. " (Increase Level) Found")
-    elseif itemid == 902 then
+    elseif itemid == 902 then -- multiply creatures
         UseSpecialMultiplyCreatures(PLAYER0,1)
         PlayMessage(PLAYER0,"SPEECH",82)
         print("Filler " .. itemid .. " (Multiply Creatures) Found")
-    elseif itemid == 903 then
+    elseif itemid == 903 then -- make safe
         MakeSafe(PLAYER0)
         PlayMessage(PLAYER0,"SPEECH",84)
         print("Filler " .. itemid .. " (Make Safe) Found")
-      -- 904: steal hero -- steal hero is 81
-      -- 905: reveal map
-    elseif itemid == 905 then
+    elseif itemid == 904 then -- steal hero
+        --when we merge PR 5422, uncomment this!
+        --UseSpecialStealHero(PLAYER0,PLAYER0)
+        --PlayMessage(PLAYER0,"SPEECH",81)
+        print("Filler " .. itemid .. " (Steal Hero) Found")
+    elseif itemid == 905 then -- reveal map
         PlayMessage(PLAYER0,"SPEECH",77)
         print("Filler " .. itemid .. " (Reveal Map) Found")
-        RevealMapRect(PLAYER0,math.floor((Map.width-1)/2), math.floor((Map.height-1)/2), Map.width-1, Map.height-1) --hopefully this is ok!
-    elseif itemid == 906 then
+        local map_width_subtile = (Map.width-1)*3
+        local map_height_subtile = (Map.height-1)*3
+        RevealMapRect(PLAYER0,math.floor(map_width_subtile/2), math.floor(map_height_subtile/2), map_width_subtile, map_height_subtile) --hopefully this is ok!
+    elseif itemid == 906 then -- receive gold
         PlayMessage(PLAYER0,"SOUND",34) --gold deposit sound
         local goldamount = 2500 + math.random(0,5)*500
         print("Filler " .. itemid .. " (Receive Gold) Found")
         PLAYER0.add_gold(PLAYER0,goldamount)
         QuickMessage("Received " .. goldamount " Gold!","ARCHIPELAGO_ICON")
       -- 907: Make happy
-      -- 908: receive imps
-    elseif itemid == 908 then
+    elseif itemid == 908 then -- receive imps
         AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
         AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
         AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")

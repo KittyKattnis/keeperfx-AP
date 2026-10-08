@@ -115,7 +115,7 @@ end
 
 -- Testing area, set these up to options in the future.
 local shuffle_tilesets = true
-local change_player_colour = "BLUE"
+local change_player_colour = "RANDOM"
 local change_neutrals_option = "KILL"
 local swap_water_and_lava = true
 local remove_neutral_rooms = true
@@ -282,6 +282,29 @@ function SwapWaterAndLava()
                   end
             end
       end
+      --does this fix the graphics?
+      --not really, it's waaaaaay too slow, so you'll have to live with it.
+      --print("Refreshing slab types")
+      --local final_pass_slab_type = "HARD"
+      --for slab_x = 0, Map.width-1 do
+      --      for slab_y = 0, Map.height-1 do
+      --            local slab = GetSlab(slab_x, slab_y)
+      --            local slabtype = slab.kind
+      --            if slabtype ~= final_pass_slab_type and (slabtype == "HARD"
+      --            or slabtype == "GOLD"
+      --            or slabtype == "DIRT"
+      --            or slabtype == "GEMS"
+      --            or slabtype == "DENSE_GOLD"
+      --            or slabtype == "ABYSS") then
+      --                  print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slabtype)
+      --                  ChangeSlabType(slab_x, slab_y, "PURPLE_PATH", "MATCH")
+      --                  ChangeSlabType(slab_x, slab_y, slabtype, "MATCH")
+      --                  print("Changed to " .. slabtype .."!")
+      --                  final_pass_slab_type = slabtype
+      --                  print("final_pass_slab_type: " .. final_pass_slab_type)
+      --            end
+      --      end
+      --end
       print("Swap complete!")
 end
 
