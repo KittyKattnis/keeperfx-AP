@@ -529,7 +529,7 @@ function UnlockFiller(itemid)
     elseif itemid == 905 then
         PlayMessage(PLAYER0,"SPEECH",77)
         print("Filler " .. itemid .. " (Reveal Map) Found")
-        RevealMapRect(PLAYER0,128,128,255,255) --hopefully this is ok!
+        RevealMapRect(PLAYER0,math.floor((Map.width-1)/2), math.floor((Map.height-1)/2), Map.width-1, Map.height-1) --hopefully this is ok!
     elseif itemid == 906 then
         PlayMessage(PLAYER0,"SOUND",34) --gold deposit sound
         local goldamount = 2500 + math.random(0,5)*500
