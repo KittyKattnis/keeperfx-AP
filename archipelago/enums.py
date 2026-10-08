@@ -182,7 +182,7 @@ class KeeperFXPowerName(StrEnum):
         POWER_FLIGHT = "Flight"
         POWER_VISION = "Vision"
         POWER_TUNNELLER = "Recruit Tunneller"
-#        POWER_CLEANSE = "Cleanse"
+        POWER_CLEANSE = "Cleanse"
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperFXPower(IntEnum):   
@@ -193,7 +193,7 @@ class KeeperFXPower(IntEnum):
         POWER_FLIGHT = 423
         POWER_VISION = 424
         POWER_TUNNELLER = 425
-#        POWER_CLEANSE = 426 #not made yet
+        POWER_CLEANSE = 426
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperLevelName(StrEnum):

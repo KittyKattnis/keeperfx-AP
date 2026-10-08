@@ -189,6 +189,11 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     ) & Has("Training Room")
 
     location_rules["Level 105 Beaten"] = HasAny("Create Imp","Recruit Tunneller") #starts with no Imps.
+    location_rules["Buffy Oak South Gold Seam"] = Has("Level 13 Beaten") #behind opponents, can't be expected to reach it without beating them.
+
+
+    location_rules["Sleepiburgh NW Cavern"] = Has("Level 14 Beaten") #more doable, but still can't be expected to reach it without beating at least the other keepers.
+    location_rules["Sleepiburgh NE Cavern"] = Has("Level 14 Beaten") #more doable, but still can't be expected to reach it without beating at least the other keepers.
 
     #location_rules["Level 16 Beaten"] = Has("Progressive Level Cap",4)
 

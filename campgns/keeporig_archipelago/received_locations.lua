@@ -549,6 +549,11 @@ function UnlockFiller(itemid)
     --cast a nice spell on all creatures
       
       -- evil laugh is 117
+    --160 is rescomp
+    --94-99 is fart
+    --89 is buzzer
+    --77 is reveal map
+    --80 is "so be it"
 end
 
 
