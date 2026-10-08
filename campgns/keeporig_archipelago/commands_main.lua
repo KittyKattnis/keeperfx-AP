@@ -44,16 +44,18 @@ end
 Game.APBoxMessage = 1
 
 function OnItemReceived(itemid)
-      print(itemid)
+      print("=== OnItemReceived ===")
       print("Received item " .. itemid)
       print("Game.APBoxMessage: " .. Game.APBoxMessage)
       print("ChecksTable[itemid].text: " .. ChecksTable[itemid].text)
       RunDKScriptCommand("QUICK_INFORMATION(" .. Game.APBoxMessage .. ",\"AP Item Received:\n" .. ChecksTable[itemid].text .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
+      print("Quick Info (Msg ID " .. Game.APBoxMessage .."): Received: " .. ChecksTable[itemid].text)
       Game.APBoxMessage = Game.APBoxMessage + 1 or 1
-      -- only need to do this when new items are received. Need to check setting message number to 100 is ok.
+      print("Game.APBoxMessage: " .. Game.APBoxMessage)
       -- Also if you receive items while outside a level and then join, will it send all of the new ones when you go into a level?
       ReceivedLocations.ReceivedItemCheck(itemid)
       QuickMessage("Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total() .. ".", "ARCHIPELAGO_ICON")
+      print("QuickMessage: Total AP Items Received: " .. ReceivedLocationsTable.Total() .. "/" .. ChecksTable.Total())
 end
 
 function ActivateItems()
@@ -68,11 +70,12 @@ function ActivateItems()
             local flags = apitem.flags
             local sender = apitem.player
             local location = apitem.location
-            print("itemid = " .. itemid .. ", index = " .. index)
             -- process all items that need to be unlocked on each level, i.e. rooms/creatures/spells etc
-            ReceivedLocations.ReceivedItemCheck(itemid)
-            print("apitem.index = " .. apitem.index .. ", lastProcessed = " .. lastProcessed)
-            if apitem.index > lastProcessed then
+            if itemid <= 900 or itemid > 1000 then --avoid filler items
+                  ReceivedLocations.ReceivedItemCheck(itemid)
+            end
+            print("itemid = " .. itemid .. ", index = " .. index ..", lastProcessed = " .. lastProcessed)
+            if index > lastProcessed then
                   UnlockFiller(itemid)
                   lastProcessed = index
                   -- NEW LOGIC HERE TO HANDLE ONLY SINGLE SHOT ACTIVATIONS! (fillers, traps, "progressives"?)

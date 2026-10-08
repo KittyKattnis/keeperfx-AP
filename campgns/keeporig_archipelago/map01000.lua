@@ -241,8 +241,8 @@ function ItemStatus()
         end
     end
     --progressives
-    local levelcapcount = ReceivedLocationsTable.Count(701)-1 --why is this off by 1?
-    local creaturelimitcount = ReceivedLocationsTable.Count(702)-1 --why is this off by 1?
+    local levelcapcount = ReceivedLocationsTable.Count(701)
+    local creaturelimitcount = ReceivedLocationsTable.Count(702)
     local startinggoldcount = ReceivedLocationsTable.Count(703)
     local portalspeedcount = ReceivedLocationsTable.Count(704)
     local handsizecount = ReceivedLocationsTable.Count(705)

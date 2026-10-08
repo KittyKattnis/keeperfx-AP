@@ -76,6 +76,11 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
     location_rules["Blaise End Central Portal"] = HasAll("Destroy Walls", "Library") | HasAll("Demolition Trap Manufacturable", "Workshop")
 
+    location_rules["Skybird Trill Hero Fortress Centre"] = Has("Training Room") # would be awful having to fight level 10 Tentacles with level 1 creatures
+    location_rules["Skybird Trill Hero Fortress West"] = Has("Training Room") # would be awful having to fight level 10 Tentacles with level 1 creatures
+
+
+
 #Scaling requirements for difficult levels
 
 #    #Levels
@@ -114,48 +119,48 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
         state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=4)
-    )
+    ) & Has("Training Room")
     location_rules["Level 8 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=4)
-    )
+    ) & Has("Training Room")
     location_rules["Level 9 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=5)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=4)
-    )
+    ) & Has("Training Room")
 
     location_rules["Level 10 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=6)
-    )
+    ) & Has("Training Room")
     location_rules["Level 11 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=6)
-    )
+    ) & Has("Training Room")
     location_rules["Level 12 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=6)
-    )
+    ) & Has("Training Room")
     location_rules["Level 13 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=6)
-    )
+    ) & Has("Training Room")
     location_rules["Level 14 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=6)
-    )
+    ) & Has("Training Room")
     location_rules["Level 15 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=8)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=6)
-    )
+    ) & HasAll("Training Room","Library")
 
     location_rules["Level 16 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=11)
@@ -166,12 +171,12 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
         state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=8)
-    )
+    ) & Has("Training Room")
     location_rules["Level 18 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=8)
-    )
+    ) & Has("Training Room")
     location_rules["Level 19 Beaten"] = lambda state: (
         state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
@@ -181,7 +186,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
         state.has_group("All Levels", world.player, count=11)
         if world.options.secret_levels.value
         else state.has_group("Levels", world.player, count=8)
-    )
+    ) & Has("Training Room")
 
     location_rules["Level 105 Beaten"] = HasAny("Create Imp","Recruit Tunneller") #starts with no Imps.
 

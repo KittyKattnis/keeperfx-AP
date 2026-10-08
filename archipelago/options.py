@@ -147,6 +147,9 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     IncludeAvatarsInPool: IncludeAvatarsInPool
 
 option_groups = [
+    OptionGroup("Levels", [
+        secret_levels,
+    ]),
     OptionGroup("Creature Pool", [
         KeeperFXCreatures,
         AddHeroes,

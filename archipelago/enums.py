@@ -143,7 +143,7 @@ class KeeperPowerName(StrEnum):
         POWER_SPEED = "Speed Monster"
         POWER_OBEY = "Must Obey"
         POWER_CALL_TO_ARMS = "Call to Arms"
-        POWER_CONCEAL = "Conceal"
+        POWER_CONCEAL = "Conceal Monster"
         POWER_HOLD_AUDIENCE = "Hold Audience"
         POWER_CAVE_IN = "Cave-In"
         POWER_HEAL_CREATURE = "Heal"
@@ -279,7 +279,7 @@ class KeeperRecipe(IntEnum):
 class NegativeRecipeName(StrEnum):
 #       RECIPE_WISHING_WELL = "Wishing Well Recipe" #default, might be hardcoded, would probably be stupid to include
        RECIPE_KILL_CHICKENS_1 = "All chickens die 1 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+#       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_DISEASE = "Disease creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_ANGRY = "All creatures angry Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_CHICKEN = "Chicken creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
@@ -287,7 +287,7 @@ class NegativeRecipeName(StrEnum):
 class NegativeRecipe(IntEnum):
 #       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
        RECIPE_KILL_CHICKENS_1 = 609 #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
+#       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_DISEASE = 611 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_ANGRY = 612 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_CHICKEN = 613 #default, unlock would probably be stupid to include outside of a Templesanity

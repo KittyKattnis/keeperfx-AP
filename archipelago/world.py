@@ -125,8 +125,8 @@ class DungeonKeeperWorld(World):
             "Magic Door Manufacturable",
         },
         "FX Doors": {
-            "Secret Door Manufacturable"
-            "Midas Door Manufacturable"
+            "Secret Door Manufacturable",
+            "Midas Door Manufacturable",
         },
         "Powers": {
             "Hand of Evil",
@@ -137,7 +137,7 @@ class DungeonKeeperWorld(World):
             "Speed Monster",
             "Must Obey",
             "Call to Arms",
-            "Conceal",
+            "Conceal Monster",
             "Hold Audience",
             "Cave-In",
             "Heal",
@@ -174,17 +174,17 @@ class DungeonKeeperWorld(World):
             "Chicken creatures Recipe",
         },
         "FX Recipes": {
-            "Good skeleton Recipe",
+            "Good Skeleton Recipe",
             "Tentacle Recipe",
             "Hound Recipe",
-            "Speed creatures Recipe",
-            "Conceal creatures Recipe",
-            "Heal creatures Recipe",
-            "Rebound creatures Recipe",
-            "Protect creatures Recipe",
-            "Flight creatures Recipe",
-            "Freeze creatures Recipe",
-            "Slow creatures Recipe",
+            "Speed Creatures Recipe",
+            "Conceal Creatures Recipe",
+            "Heal Creatures Recipe",
+            "Rebound Creatures Recipe",
+            "Protect Creatures Recipe",
+            "Flight Creatures Recipe",
+            "Freeze Creatures Recipe",
+            "Slow Creatures Recipe",
         },
         "Progressives": {
             "Progressive Level Cap",
@@ -205,15 +205,15 @@ class DungeonKeeperWorld(World):
             "Attract Priestess",
             "Attract Knight",
             "Attract Avatar",
-            "Attract Tunneller"
+            "Attract Tunneller",
         },
         "FX Heroes": {
             "Attract Time Mage",
         },
         "Filler": {
-            "Increase Level"
-            "Multiply Creatures"
-            "Make Safe"
+            "Increase Level",
+            "Multiply Creatures",
+            "Make Safe",
         }
     }
 

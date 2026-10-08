@@ -166,7 +166,7 @@ FILLER = {
 NEGATIVE_RECIPES = {
 #    KeeperRecipeName.RECIPE_WISHING_WELL: KeeperItem(KeeperRecipe.RECIPE_WISHING_WELL, ItemClassification.useful), #"Wishing Well" #default, might be hardcoded, would probably be stupid to include
     NegativeRecipeName.RECIPE_KILL_CHICKENS_1: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_1, ItemClassification.useful), #"All chickens die 1", #default, unlock would probably be stupid to include outside of a Templesanity
-    NegativeRecipeName.RECIPE_KILL_CHICKENS_2: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_2, ItemClassification.useful), #"All chickens die 2", #default, unlock would probably be stupid to include outside of a Templesanity
+    #NegativeRecipeName.RECIPE_KILL_CHICKENS_2: KeeperItem(NegativeRecipe.RECIPE_KILL_CHICKENS_2, ItemClassification.useful), #"All chickens die 2", #default, unlock would probably be stupid to include outside of a Templesanity
     NegativeRecipeName.RECIPE_DISEASE: KeeperItem(NegativeRecipe.RECIPE_DISEASE, ItemClassification.useful), #"Disease creatures", #default, unlock would probably be stupid to include outside of a Templesanity
     NegativeRecipeName.RECIPE_ANGRY: KeeperItem(NegativeRecipe.RECIPE_ANGRY, ItemClassification.useful), #"All creatures angry", #default, unlock would probably be stupid to include outside of a Templesanity
     NegativeRecipeName.RECIPE_CHICKEN: KeeperItem(NegativeRecipe.RECIPE_CHICKEN, ItemClassification.useful), #"Chicken creatures", #default, unlock would probably be stupid to include outside of a Templesanity
@@ -263,45 +263,66 @@ populate_item_dict(KeeperLevelName, KeeperLevel)
 populate_item_dict(KeeperRecipeName, KeeperRecipe)
 populate_item_dict(KeeperPowerName, KeeperPower)
 populate_item_dict(KeeperProgressiveName, KeeperProgressive)
-#populate_item_dict(KeeperFillerName, KeeperFiller)
+
+populate_item_dict(KeeperFillerName, KeeperFiller)
+populate_item_dict(KeeperSecretLevelName, KeeperSecretLevel)
+populate_item_dict(KeeperFXCreatureName, KeeperFXCreature)
+populate_item_dict(KeeperFXPowerName, KeeperFXPower)
+populate_item_dict(KeeperFXTrapName, KeeperFXTrap)
+populate_item_dict(KeeperFXDoorName, KeeperFXDoor)
+populate_item_dict(NegativeRecipeName, NegativeRecipe)
+populate_item_dict(KeeperFXRecipeName, KeeperFXRecipe)
+populate_item_dict(KeeperHeroName, KeeperHero)
+populate_item_dict(KeeperFXHeroName, KeeperFXHero)
+populate_item_dict(KeeperImpName, KeeperImp)
+populate_item_dict(KeeperTunnellerName, KeeperTunneller)
+populate_item_dict(KeeperKnightName, KeeperKnight)
+populate_item_dict(KeeperAvatarName, KeeperAvatar)
 
 def create_all_items(world):
     item_pool = []
 
     precollected_names = [item.name for item in world.multiworld.precollected_items[world.player]]
 
+    enabled_items = {
+        **CREATURES,
+        **ROOMS,
+        **TRAPS,
+        **DOORS,
+        **LEVELS,
+        **RECIPES,
+        **SPELLS,
+        **PROGRESSIVES,
+    }
+
     if world.options.secret_levels:
-        populate_item_dict(KeeperSecretLevelName, KeeperSecretLevel)
+        enabled_items.update(SECRET_LEVELS)
     if world.options.KeeperFXCreatures:
-        populate_item_dict(KeeperFXCreatureName, KeeperFXCreature)
+        enabled_items.update(KEEPERFX_CREATURES)
     if world.options.KeeperFXSpells:
-        populate_item_dict(KeeperFXPowerName, KeeperFXPower)
+        enabled_items.update(KEEPERFX_SPELLS)
     if world.options.KeeperFXTraps:
-        populate_item_dict(KeeperFXTrapName, KeeperFXTrap)
+        enabled_items.update(KEEPERFX_TRAPS)
     if world.options.KeeperFXDoors:
-        populate_item_dict(KeeperFXDoorName, KeeperFXDoor)
-
+        enabled_items.update(KEEPERFX_DOORS)
     if world.options.NegativeRecipes:
-        populate_item_dict(NegativeRecipeName, NegativeRecipe)
+        enabled_items.update(NEGATIVE_RECIPES)
     if world.options.KeeperFXRecipes:
-        populate_item_dict(KeeperFXRecipeName, KeeperFXRecipe)
-
+        enabled_items.update(KEEPERFX_RECIPES)
     if world.options.AddHeroes:
-        populate_item_dict(KeeperHeroName, KeeperHero)
+        enabled_items.update(HEROES)
     if world.options.KeeperFXHeroes:
-        populate_item_dict(KeeperFXHeroName, KeeperFXHero)
-       
+        enabled_items.update(KEEPERFX_HEROES)
     if world.options.IncludeImpsInPool:
-        populate_item_dict(KeeperImpName, KeeperImp)
+        enabled_items.update(IMP)
     if world.options.IncludeTunnellersInPool:
-        populate_item_dict(KeeperTunnellerName, KeeperTunneller)
+        enabled_items.update(TUNNELLER)
     if world.options.IncludeKnightsInPool:
-        populate_item_dict(KeeperKnightName, KeeperKnight)
+        enabled_items.update(KNIGHT)
     if world.options.IncludeAvatarsInPool:
-        populate_item_dict(KeeperAvatarName, KeeperAvatar)
+        enabled_items.update(AVATAR)
 
-    for item_name in ITEM_NAME_TO_ID.keys():
-
+    for item_name in enabled_items:
         amount_to_create = MULTIPLE_ITEM_COUNTS.get(item_name, 1)
 
         for _ in range(amount_to_create):

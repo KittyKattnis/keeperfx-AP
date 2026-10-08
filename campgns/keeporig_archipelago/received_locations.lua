@@ -147,8 +147,8 @@ RecipesTable = {
 }
 NegativeRecipesTable = {
     -- 608 is wishing well
-    -- 609 is kill chickens 1
-    -- 610 is kill chickens 2
+    [609] = {id=609, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die 1",           string="",       text="All chickens die 1 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    --[610] = {id=610, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,CHICKEN",           name="All chickens die 2",           string="",       text="All chickens die 2 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     [611] = {id=611, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     [612] = {id=612, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     [613] = {id=613, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
@@ -210,8 +210,6 @@ HeroesTable = {
     [808]  = {id=808,   internal_name="MONK",                                         name="Monk",                         string="",       text="Attract Monk"},
     [809]  = {id=809,   internal_name="SAMURAI",                                      name="Samurai",                      string="",       text="Attract Samurai"},
     [810]  = {id=810,   internal_name="WITCH",                                        name="Priestess",                    string="",       text="Attract Priestess"},
-    [811]  = {id=811,   internal_name="KNIGHT",                                       name="Knight",                       string="",       text="Attract Knight"},
-    [812]  = {id=812,   internal_name="AVATAR",                                       name="Avatar",                       string="",       text="Attract Avatar"},
 }
 
 local IncludeBonusLevels = true
@@ -224,9 +222,11 @@ local IncludeFXSpells = true
 local IncludeFXRecipes = true
 local IncludeImpsInPool = false
 local SplitHandPower = false
-local IncludeHeroes = false
+local IncludeHeroes = true
 local IncludeTunnellersInPool = false
-local IncludeFXHeroes = false
+local IncludeKnightsInPool = false
+local IncludeAvatarsInPool = false
+local IncludeFXHeroes = true
 
 if IncludeBonusLevels then
     for id, check in pairs(BonusLevelsTable) do
@@ -292,6 +292,16 @@ end
 if IncludeFXHeroes then
       ChecksTable[814]  = {id=814,   internal_name="TIME_MAGE",                                      name="Time Mage",                    string="",       text="Attract Time Mage"}
 end
+if IncludeKnightsInPool then
+      ChecksTable[811]  = {id=811,   internal_name="KNIGHT",                                       name="Knight",                       string="",       text="Attract Knight"}
+end
+if IncludeAvatarsInPool then
+      ChecksTable[812]  = {id=812,   internal_name="AVATAR",                                       name="Avatar",                       string="",       text="Attract Avatar"}
+end
+
+
+
+
 
 --if _ then
 --    for id, check in pairs(_) do
@@ -377,8 +387,8 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
             UnlockProgressive(itemid)
       elseif itemid > 800 and itemid <= 900 then
             UnlockHero(itemid)
-      --elseif itemid > 900 and itemid <= 1000 then
-            --UnlockFiller(itemid)
+      elseif itemid > 900 and itemid <= 1000 then
+            UnlockFiller(itemid)
       else
             print("Unknown item ID " .. itemid)
             return
@@ -514,11 +524,21 @@ function UnlockFiller(itemid)
         MakeSafe(PLAYER0)
         PlayMessage(PLAYER0,"SPEECH",84)
         print("Filler " .. itemid .. " (Make Safe) Found")
-      -- 904: steal hero
-      -- 905: receive gold
-      -- 906: Make happy
-      -- 907: receive imps
-    elseif itemid == 907 then
+      -- 904: steal hero -- steal hero is 81
+      -- 905: reveal map
+    elseif itemid == 905 then
+        PlayMessage(PLAYER0,"SPEECH",77)
+        print("Filler " .. itemid .. " (Reveal Map) Found")
+        RevealMapRect(PLAYER0,128,128,255,255) --hopefully this is ok!
+    elseif itemid == 906 then
+        PlayMessage(PLAYER0,"SOUND",34) --gold deposit sound
+        local goldamount = 2500 + math.random(0,5)*500
+        print("Filler " .. itemid .. " (Receive Gold) Found")
+        PLAYER0.add_gold(PLAYER0,goldamount)
+        QuickMessage("Received " .. goldamount " Gold!","ARCHIPELAGO_ICON")
+      -- 907: Make happy
+      -- 908: receive imps
+    elseif itemid == 908 then
         AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
         AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
         AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
@@ -526,7 +546,8 @@ function UnlockFiller(itemid)
         PlayMessage(PLAYER0,"SOUND",400)
         print("Filler " .. itemid .. " (Receive Imps) Found")
     end
-      -- steal hero is 81
+    --cast a nice spell on all creatures
+      
       -- evil laugh is 117
 end
 
