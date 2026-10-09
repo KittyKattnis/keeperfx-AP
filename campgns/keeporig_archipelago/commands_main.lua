@@ -27,7 +27,10 @@ function Setup()
 end
 
 function SetupTriggers()
+      print("=== SetupTriggers called on map " .. Map.map_number .. " ===")
+      print("SetupTriggers called; trigger count before: " .. #(Game.triggers or {}))
       RegisterSpecialActivatedEvent(function (eventData)
+            print("=== RegisterSpecialActivatedEvent ===")
             local activated_box = (eventData.SpecialBoxId % 100) + ((Map.map_number % 79)*100) --SpecialBoxId currently capped to 256 so this is a workaround. % 79 is a stupid workaround to map 100-105 to 21-26
             print("Activated Box No.: " .. activated_box)
             SendLocation(activated_box)
@@ -39,18 +42,24 @@ function SetupTriggers()
             BoxLocations.UpdateEnsigns()
       end)
     RegisterOnConditionEvent(function() print("Level " .. Map.map_number .. " Complete!") SendLocation(10000+(Map.map_number % 79)) BoxLocations.UpdateEnsigns() BoxLocations.IsLevelComplete(Map.map_number) end, function() return (PLAYER0.victory_state == 1) end)
+    print("SetupTriggers finished; trigger count after: " .. #(Game.triggers or {}))
 end
 
 Game.APBoxMessage = 1
 
 function OnItemReceived(itemid)
       print("=== OnItemReceived ===")
+      print("itemid type: " .. type(itemid) .. ", itemid value: " .. tostring(itemid))
       print("Received item " .. itemid)
-      print("Game.APBoxMessage: " .. Game.APBoxMessage)
+      if type(itemid) ~= "number" then
+          print("ERROR: Invalid item ID:", tostring(itemid))
+          return
+      end
+      --print("Game.APBoxMessage: " .. Game.APBoxMessage)
       print("ChecksTable[itemid].text: " .. ChecksTable[itemid].text)
       RunDKScriptCommand("QUICK_INFORMATION(" .. Game.APBoxMessage .. ",\"AP Item Received:\n" .. ChecksTable[itemid].text .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
       print("Quick Info (Msg ID " .. Game.APBoxMessage .."): Received: " .. ChecksTable[itemid].text)
-      Game.APBoxMessage = Game.APBoxMessage + 1 or 1
+      Game.APBoxMessage = (Game.APBoxMessage or 0) + 1
       print("Game.APBoxMessage: " .. Game.APBoxMessage)
       -- Also if you receive items while outside a level and then join, will it send all of the new ones when you go into a level?
       ReceivedLocations.ReceivedItemCheck(itemid)
@@ -60,7 +69,8 @@ end
 
 function ActivateItems()
       -- now returns full AP_NetworkItem!
-      local receivedItems = GetAPItems()
+      print("=== ActivateItems ===")
+      local receivedItems = GetAPItems() or {}
       -- get the last processed index, stored in intralvl data so persists between levels and saves
       local lastProcessed = GetAPLastProcessedItemIndex()
       print("lastProcessed: " .. lastProcessed)

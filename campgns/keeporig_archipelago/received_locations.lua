@@ -540,7 +540,7 @@ function UnlockFiller(itemid)
         local goldamount = 2500 + math.random(0,5)*500
         print("Filler " .. itemid .. " (Receive Gold) Found")
         PLAYER0.add_gold(PLAYER0,goldamount)
-        QuickMessage("Received " .. goldamount " Gold!","ARCHIPELAGO_ICON")
+        QuickMessage("Received " .. goldamount .. " Gold!","ARCHIPELAGO_ICON")
       -- 907: Make happy
     elseif itemid == 908 then -- receive imps
         AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
