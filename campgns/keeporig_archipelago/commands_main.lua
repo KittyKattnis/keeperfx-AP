@@ -131,6 +131,7 @@ local change_player_colour = "RANDOM"
 local change_neutrals_option = "KILL"
 local swap_water_and_lava = true
 local remove_neutral_rooms = true
+local cruelty_mode = true
 
 local map_tileset_shuffle_value = {
     [1]  = -1,
@@ -220,20 +221,25 @@ end
 function ChangeOnMapNeutrals()
       local neutral_creatures_table = GetCreaturesOfPlayer(PLAYER_NEUTRAL)
       if change_neutrals_option == "REMOVE" then
+            local creature_count = #neutral_creatures_table
             for _, creature in ipairs(neutral_creatures_table) do
                   if creature then
                         creature:delete()
                   end
             end
-            print("Neutrals removed!")
+            print(creature_count .. " neutrals removed!")
+            QuickMessage(creature_count .. " neutrals removed!", "ARCHIPELAGO_ICON")
       elseif change_neutrals_option == "KILL" then
+            local creature_count = #neutral_creatures_table
             for _, creature in ipairs(neutral_creatures_table) do
                   if creature then
                         creature:kill()
                   end
             end
-            print("Neutrals killed!")
+            print(creature_count .. " neutrals killed!")
+            QuickMessage(creature_count .. " neutrals killed!", "ARCHIPELAGO_ICON")
       elseif change_neutrals_option == "HOSTILE" then
+            local creature_count = #neutral_creatures_table
             ComputerPlayer("PLAYER5","ROAMING")
             RunDKScriptCommand("ALLY_PLAYERS(PLAYER5, PLAYER1, 3)")
             RunDKScriptCommand("ALLY_PLAYERS(PLAYER5, PLAYER2, 3)")
@@ -244,16 +250,8 @@ function ChangeOnMapNeutrals()
                         creature.owner = PLAYER5
                   end
             end
-            -- ChangeCreatureOwner doesn't work. Doing it the old fasioned way for now.
---            for _, creature in ipairs(neutral_creatures_table) do
---                  if creature then
---                        ChangeCreatureOwner(creature,"PLAYER5")
---                  end
---            end
---            for i = 1, #neutral_creatures_table do
---                  RunDKScriptCommand("CHANGE_CREATURE_OWNER(PLAYER_NEUTRAL,ANY_CREATURE,ANYWHERE,PLAYER5)")
---            end
---            print("Neutrals made hostile!")
+            print(creature_count .. " neutrals made hostile!")
+            QuickMessage(creature_count .. " neutrals made hostile!", "ARCHIPELAGO_ICON")
       else
             print("Invalid option, options are \"REMOVE\", \"KILL\" and \"HOSTILE\". Default behaviour used instead.")
       end
@@ -270,9 +268,9 @@ function SwapSlabType(old_type, new_type, owner)
                         old_type_format = slab.kind == old_type
                   end
                   if old_type_format and (owner == nil or slab.owner == owner) then
-                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
+                        --print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
                         ChangeSlabType(slab_x, slab_y, new_type, "MATCH")
-                        print("Changed to " .. new_type .. "!")
+                        --print("Changed to " .. new_type .. "!")
                   end
             end
       end
@@ -310,46 +308,129 @@ function SwapWaterAndLava()
       --      end
       --end
       print("Swap complete!")
+      QuickMessage("Water and lava swapped!", "ARCHIPELAGO_ICON")
 end
 
-local NEUTRAL_ROOM_FLOORS = {
-      TREASURY_AREA = true,
-      BOOK_SHELVES = true,
-      PRISON_AREA = true,
-      TORTURE_AREA = true,
-      TRAINING_AREA = true,
-      WORKSHOP_AREA = true,
-      SCAVENGE_AREA = true,
-      TEMPLE_POOL = true,
-      GRAVE_AREA = true,
-      HATCHERY = true,
-      LAIR_AREA = true,
-      BARRACK_AREA = true,
-      BRIDGE_FRAME = true,
-      GUARD_AREA = true,
-}
+--other ideas:
 
-local NEUTRAL_ROOM_WALLS = {
-      TREASURY_WALL = true,
-      LIBRARY_WALL = true,
-      PRISON_WALL = true,
-      TORTURE_WALL = true,
-      TRAINING_WALL = true,
-      WORKSHOP_WALL = true,
-      SCAVENGER_WALL = true,
-      TEMPLE_WALL = true,
-      GRAVE_WALL = true,
-      HATCHERY_WALL = true,
-      LAIR_WALL = true,
-      BARRACK_WALL = true,
-}
+--swap start positions: if player1 exists, you swap places with them (i think this means literally swapping soulcontainer positions, swap p1's stuff to p6, p0's to p1, p6's to p0. Concealing again might be weird but meh we'll deal with it when we get there.)
+--probably no need to do it for p2, because green always has a mostly identical position to blue
+
+
+--cruelty mode:
+--  (obtainable meaning "you have the associated check")
+--  if you obtain a creature you don't have access to (e.g. neutrals, conversion, steal hero(? only if heroes are in pool), creation in prison/torture/gy), it dies immediately
+--  if you obtain a creature higher level than your cap, reduce its level to the cap
+--  DONE: if you obtain a room you don't have access to, it turns to dirt (maybe there's a way to turn bridge into whatever it's on but idk)
+--  if you obtain a spell you don't have access to, the spellbook is destroyed and it's set to unresearchable (not sure how easy it is to destroy a spellbook)
+--  if you obtain a trap/door crate you don't have access to, destroy it and make the trap/door unplaceable (set to 0?)
+--  if you *have* a trap/door you haven't unlocked yet, the slab it's on turns to dirt.
+
+function GetPlayerRooms(player)
+      local rooms = {}
+      local player_room_list = GetRoomsOfPlayer(player)
+      print("Getting rooms for " .. tostring(player))
+      --print_r(player_room_list)
+      for _, room in ipairs(player_room_list) do
+            local centreslab_x = math.floor(room.centerpos.val_x / (256*3))
+            local centreslab_y = math.floor(room.centerpos.val_y / (256*3))
+            local room_info = {
+                  room_idx = room.room_idx,
+                  room_name = room.type,
+                  room_owner = room.owner,
+                  room_centreslab_x = centreslab_x,
+                  room_centreslab_y = centreslab_y,
+            }
+            --print_r(room_info)
+            table.insert(rooms, room_info)
+            --print("Room " .. room_info.room_idx .. " (" .. tostring(room_info.room_name) .. " with owner " .. tostring(room_info.room_owner) .. "), centre slab (" .. tostring(room_info.room_centreslab_x) .. ", " .. tostring(room_info.room_centreslab_y) .. ")")
+            --print("Room " .. room.room_idx .. " (" .. room_name .. " with owner " .. tostring(room_owner) .. ") with centre slab at (" .. room_centreslab_x .. ", " .. room_centreslab_y .. ")")
+      end
+      --print("rooms:")
+      --print_r(rooms)
+      return rooms
+end
 
 function RemoveNeutralRooms()
       print("Removing neutral rooms")
-      SwapSlabType(NEUTRAL_ROOM_FLOORS, "PATH", PLAYER_NEUTRAL)
-      SwapSlabType(NEUTRAL_ROOM_WALLS, "DRAPE_WALL", PLAYER_NEUTRAL)
-      print("Neutral room removal complete!")
+      local neutral_rooms = GetPlayerRooms(PLAYER_NEUTRAL)
+      local neutral_room_count = 0
+      --print_r(neutral_rooms)
+      --print(neutral_room_count)
+      for _, room in ipairs(neutral_rooms) do
+            --print_r(room)
+            if room.room_name ~= "ENTRANCE" and room.room_name ~= "DUNGEON_HEART" then
+                  print("Removing neutral room " .. room.room_idx .. ": " .. tostring(room.room_name) .. ", centre slab (" .. tostring(room.room_centreslab_x) .. ", " .. tostring(room.room_centreslab_y) .. ")")
+                  ChangeSlabType(room.room_centreslab_x, room.room_centreslab_y, "PATH", "MATCH")
+                  neutral_room_count = neutral_room_count + 1
+            end
+      end
+      --print("Swapping room walls...") -- seems to do this automatically actually! So not needed!
+      --SwapSlabType(NEUTRAL_ROOM_WALLS, "DRAPE_WALL", PLAYER_NEUTRAL)
+      print(neutral_room_count .. " neutral rooms removed!")
+      QuickMessage(neutral_room_count .. " neutral rooms removed!", "ARCHIPELAGO_ICON")
 end
+
+function GetIDFromInternalName(name_internal)
+      for id, check in pairs(ChecksTable) do
+            if type(check) == "table" and check.internal_name == name_internal then
+                  return id
+            end
+      end
+      return nil
+end
+
+function GetForbiddenRooms()
+    local forbidden_rooms = {}
+    for id = 101, 200 do
+        local check = ChecksTable[id]
+        if type(check) == "table"
+        and check.internal_name
+        and not ReceivedLocationsTable.Has(id) then
+            forbidden_rooms[check.internal_name] = true
+        end
+    end
+    return forbidden_rooms
+end
+
+function HasForbiddenRoom()
+    local forbidden_rooms = GetForbiddenRooms()
+    for room_name, _ in pairs(forbidden_rooms) do
+        if PLAYER0[room_name] > 0 then
+            return true
+        end
+    end
+    return false
+end
+
+function RemoveForbiddenPlayerRooms()
+      print("Checking PLAYER0 rooms")
+      local player_rooms = GetPlayerRooms(PLAYER0)
+      local forbidden_rooms = GetForbiddenRooms()
+      local count = 0
+      for _, room in ipairs(player_rooms) do
+            local room_name = room.room_name
+            --local room_centre_slab_x = room.room_centreslab_x
+            --local room_centre_slab_y = room.room_centreslab_y
+            --local room_owner = room.room_owner
+            if room.room_owner == PLAYER0 and room_name ~= "ENTRANCE" and room_name ~= "DUNGEON_HEART" and forbidden_rooms[room_name] then
+                  print("Removing forbidden room: " .. tostring(room_name) .. " at (" .. tostring(room.room_centreslab_x) .. ", " .. tostring(room.room_centreslab_y) .. ")")
+                  ChangeSlabType(room.room_centreslab_x, room.room_centreslab_y, "PATH", "MATCH") -- "MATCH" converts adjacent rooms of same type but different owner
+                  count = count + 1
+            end
+      end
+      if count > 0 then
+            print("Cruelty mode: Removed " .. count .. " locked rooms!")
+            QuickMessage("Cruelty mode: Removed " .. count .. " locked rooms!", "ARCHIPELAGO_ICON")
+            PlayMessage(PLAYER0,"SPEECH",117)
+      end
+end
+
+
+
+
+
+
 
 
 function FunOptions()
@@ -360,9 +441,10 @@ function FunOptions()
             end
             SetShuffledTileset()
             print("Tileset changed to: " .. Map.default_texture)
+            QuickMessage("Tileset changed to: " .. Map.default_texture, "ARCHIPELAGO_ICON")
       end
 
-      if change_player_colour ~= nil then
+      if change_player_colour ~= nil and change_player_colour ~= "RED" then
             if type(change_player_colour) == "number" then
                   if change_player_colour >= 8 then
                         PLAYER0.colour = player_colour_change_table[math.random(0,7)]
@@ -372,7 +454,7 @@ function FunOptions()
                         PLAYER0.colour = player_colour_change_table[change_player_colour]
                   end
             elseif type(change_player_colour) == "string" then
-                  if change_player_colour == "random" then
+                  if change_player_colour == "RANDOM" then
                         PLAYER0.colour = player_colour_change_table[math.random(0,7)]
                   elseif change_player_colour == "red"
                   or change_player_colour == "BLUE"
@@ -386,7 +468,8 @@ function FunOptions()
                   end
             end
             PlayerColour()
-            print("Player colour changed to: " .. PLAYER0.colour)
+            print("Player colour changed to: " .. tostring(PLAYER0.colour))
+            QuickMessage("Player colour changed to: " .. tostring(PLAYER0.colour), "ARCHIPELAGO_ICON")
       end
 
       if change_neutrals_option then
@@ -400,50 +483,12 @@ function FunOptions()
       if remove_neutral_rooms then
             RemoveNeutralRooms()
       end
+
+      local trigger_remove_forbidden_rooms = RegisterOnConditionEvent(
+            function () RemoveForbiddenPlayerRooms() end,
+            function () return (cruelty_mode and HasForbiddenRoom()) end
+      )
+      trigger_remove_forbidden_rooms.triggerData.destroyAfterUse = false
 end
-
---other ideas:
-
---swap start positions: if player1 exists, you swap places with them (i think this means literally swapping soulcontainer positions, swap p1's stuff to p6, p0's to p1, p6's to p0. Concealing again might be weird but meh we'll deal with it when we get there.)
---probably no need to do it for p2, because green always has a mostly identical position to blue
-
-
---cruelty mode:
---  (obtainable meaning "you have the associated check")
---  if you obtain a creature you don't have access to (e.g. neutrals, conversion, steal hero(? only if heroes are in pool), creation in prison/torture/gy), it dies immediately
---  if you obtain a creature higher level than your cap, reduce its level to the cap
---  if you obtain a room you don't have access to, it turns to dirt (maybe there's a way to turn bridge into whatever it's on but idk)
---  if you obtain a spell you don't have access to, the spellbook is destroyed and it's set to unresearchable (not sure how easy it is to destroy a spellbook)
---  if you obtain a trap/door crate you don't have access to, destroy it and make the trap/door unplaceable (set to 0?)
---  if you *have* a trap/door you haven't unlocked yet, the slab it's on turns to dirt.
-
--- what's the best way to do this? make some sort of special table for it, linking room name/room slab type to its id, same with creatures etc?
--- ideally want just if PLAYER0.ROOM > 0 and 
-
---e.g. for ids from 101 to 200, if 
-
-
--- call this if the player owns a room and doesn't have the check?
---
-
-      --local player_room_list = GetRoomsOfPlayer(PLAYER0)
-      --print_r(player_room_list)
-
-      --this returns the class, room_idx and creation_turn. But not location.
-      --so not useful. I might just have to sweep the entire map again and do "if it's owned by player, and they don't have the check, change to dirt" like before and just live with it being shitty.
-      
-
-      --GetRoomsOfPlayerAndType
-
-
---for id = 101,200 do
---      if ChecksTable[id] then
---            local ingame_name = ChecksTable[id].internal_name
---            if not ReceivedLocationsTable.Has(id) and PLAYER0[ingame_name] > 0  then
---                  --local player_room_list = GetRoomsOfPlayer(PLAYER0)
---                  --print_r(player_room_list)
---            end
---      end
---end
 
 return CommandsMain
