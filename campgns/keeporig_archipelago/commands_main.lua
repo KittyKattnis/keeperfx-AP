@@ -52,10 +52,11 @@ function OnItemReceived(itemid)
       print("itemid type: " .. type(itemid) .. ", itemid value: " .. tostring(itemid))
       print("Received item " .. tostring(itemid))
       if type(itemid) ~= "number" then
-          print("ERROR: Invalid item ID:", tostring(itemid))
+          print("ERROR: Invalid item ID:" .. tostring(itemid))
           return
       end
       local message_num = (Game.APBoxMessage or 1)
+      print("message_num = " .. message_num)
       --print("Game.APBoxMessage: " .. Game.APBoxMessage)
       print("ChecksTable[itemid].text: " .. ChecksTable[itemid].text)
       RunDKScriptCommand("QUICK_INFORMATION(" .. (message_num or 1) .. ",\"AP Item Received:\n" .. tostring(ChecksTable[itemid].text) .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
@@ -258,41 +259,33 @@ function ChangeOnMapNeutrals()
       end
 end
 
+function SwapSlabType(old_type, new_type, owner)
+      for slab_x = 0, Map.width-1 do
+            for slab_y = 0, Map.height-1 do
+                  local slab = GetSlab(slab_x, slab_y)
+                  local old_type_format
+                  if type(old_type) == "table" then
+                        old_type_format = old_type[slab.kind] == true
+                  else
+                        old_type_format = slab.kind == old_type
+                  end
+                  if old_type_format and (owner == nil or slab.owner == owner) then
+                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
+                        ChangeSlabType(slab_x, slab_y, new_type, "MATCH")
+                        print("Changed to " .. new_type .. "!")
+                  end
+            end
+      end
+end
+
 -- if "swap water and lava" is on
 function SwapWaterAndLava()
       print("Swapping water and lava")
-      for slab_x = 0, Map.width-1 do
-            for slab_y = 0, Map.height-1 do
-                  local slab = GetSlab(slab_x, slab_y)
-                  if slab.kind == "LAVA" then
-                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
-                        ChangeSlabType(slab_x, slab_y, "PURPLE_PATH", "MATCH")
-                        print("Changed to PURPLE_PATH!")
-                  end
-            end
-      end
+      SwapSlabType("LAVA", "PURPLE_PATH")
       --print("First pass done!")
-      for slab_x = 0, Map.width-1 do
-            for slab_y = 0, Map.height-1 do
-                  local slab = GetSlab(slab_x, slab_y)
-                  if slab.kind == "WATER" then
-                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
-                        ChangeSlabType(slab_x, slab_y, "LAVA", "MATCH")
-                        print("Changed to LAVA!")
-                  end
-            end
-      end
+      SwapSlabType("WATER", "LAVA")
       --print("Second pass done!")
-      for slab_x = 0, Map.width-1 do
-            for slab_y = 0, Map.height-1 do
-                  local slab = GetSlab(slab_x, slab_y)
-                  if slab.kind == "PURPLE_PATH" then
-                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
-                        ChangeSlabType(slab_x, slab_y, "WATER", "MATCH")
-                        print("Changed to WATER!")
-                  end
-            end
-      end
+      SwapSlabType("PURPLE_PATH", "WATER")
       --does this fix the graphics?
       --not really, it's waaaaaay too slow, so you'll have to live with it.
       --print("Refreshing slab types")
@@ -319,49 +312,42 @@ function SwapWaterAndLava()
       print("Swap complete!")
 end
 
+local NEUTRAL_ROOM_FLOORS = {
+      TREASURY_AREA = true,
+      BOOK_SHELVES = true,
+      PRISON_AREA = true,
+      TORTURE_AREA = true,
+      TRAINING_AREA = true,
+      WORKSHOP_AREA = true,
+      SCAVENGE_AREA = true,
+      TEMPLE_POOL = true,
+      GRAVE_AREA = true,
+      HATCHERY = true,
+      LAIR_AREA = true,
+      BARRACK_AREA = true,
+      BRIDGE_FRAME = true,
+      GUARD_AREA = true,
+}
+
+local NEUTRAL_ROOM_WALLS = {
+      TREASURY_WALL = true,
+      LIBRARY_WALL = true,
+      PRISON_WALL = true,
+      TORTURE_WALL = true,
+      TRAINING_WALL = true,
+      WORKSHOP_WALL = true,
+      SCAVENGER_WALL = true,
+      TEMPLE_WALL = true,
+      GRAVE_WALL = true,
+      HATCHERY_WALL = true,
+      LAIR_WALL = true,
+      BARRACK_WALL = true,
+}
+
 function RemoveNeutralRooms()
       print("Removing neutral rooms")
-      for slab_x = 0, Map.width-1 do
-            for slab_y = 0, Map.height-1 do
-                  local slab = GetSlab(slab_x, slab_y)
-                  if slab.owner == PLAYER_NEUTRAL
-                  and (slab.kind == "TREASURY_AREA"
-                  or slab.kind == "BOOK_SHELVES"
-                  or slab.kind == "PRISON_AREA"
-                  or slab.kind == "TORTURE_AREA"
-                  or slab.kind == "TRAINING_AREA"
-                  or slab.kind == "WORKSHOP_AREA"
-                  or slab.kind == "SCAVENGE_AREA"
-                  or slab.kind == "TEMPLE_POOL"
-                  or slab.kind == "GRAVE_AREA"
-                  or slab.kind == "HATCHERY"
-                  or slab.kind == "LAIR_AREA"
-                  or slab.kind == "BARRACK_AREA"
-                  or slab.kind == "BRIDGE_FRAME"
-                  or slab.kind == "GUARD_AREA") then
-                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
-                        ChangeSlabType(slab_x, slab_y, "PATH", "MATCH")
-                        print("Changed to PATH!")
-                  end
-                  if slab.owner == PLAYER_NEUTRAL
-                  and (slab.kind == "TREASURY_WALL"
-                  or slab.kind == "LIBRARY_WALL"
-                  or slab.kind == "PRISON_WALL"
-                  or slab.kind == "TORTURE_WALL"
-                  or slab.kind == "TRAINING_WALL"
-                  or slab.kind == "WORKSHOP_WALL"
-                  or slab.kind == "SCAVENGER_WALL"
-                  or slab.kind == "TEMPLE_WALL"
-                  or slab.kind == "GRAVE_WALL"
-                  or slab.kind == "HATCHERY_WALL"
-                  or slab.kind == "LAIR_WALL"
-                  or slab.kind == "BARRACK_WALL") then
-                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
-                        ChangeSlabType(slab_x, slab_y, "DRAPE_WALL", "MATCH")
-                        print("Changed to DRAPE_WALL!")
-                  end
-            end
-      end
+      SwapSlabType(NEUTRAL_ROOM_FLOORS, "PATH", PLAYER_NEUTRAL)
+      SwapSlabType(NEUTRAL_ROOM_WALLS, "DRAPE_WALL", PLAYER_NEUTRAL)
       print("Neutral room removal complete!")
 end
 
@@ -416,6 +402,48 @@ function FunOptions()
       end
 end
 
+--other ideas:
 
+--swap start positions: if player1 exists, you swap places with them (i think this means literally swapping soulcontainer positions, swap p1's stuff to p6, p0's to p1, p6's to p0. Concealing again might be weird but meh we'll deal with it when we get there.)
+--probably no need to do it for p2, because green always has a mostly identical position to blue
+
+
+--cruelty mode:
+--  (obtainable meaning "you have the associated check")
+--  if you obtain a creature you don't have access to (e.g. neutrals, conversion, steal hero(? only if heroes are in pool), creation in prison/torture/gy), it dies immediately
+--  if you obtain a creature higher level than your cap, reduce its level to the cap
+--  if you obtain a room you don't have access to, it turns to dirt (maybe there's a way to turn bridge into whatever it's on but idk)
+--  if you obtain a spell you don't have access to, the spellbook is destroyed and it's set to unresearchable (not sure how easy it is to destroy a spellbook)
+--  if you obtain a trap/door crate you don't have access to, destroy it and make the trap/door unplaceable (set to 0?)
+--  if you *have* a trap/door you haven't unlocked yet, the slab it's on turns to dirt.
+
+-- what's the best way to do this? make some sort of special table for it, linking room name/room slab type to its id, same with creatures etc?
+-- ideally want just if PLAYER0.ROOM > 0 and 
+
+--e.g. for ids from 101 to 200, if 
+
+
+-- call this if the player owns a room and doesn't have the check?
+--
+
+      --local player_room_list = GetRoomsOfPlayer(PLAYER0)
+      --print_r(player_room_list)
+
+      --this returns the class, room_idx and creation_turn. But not location.
+      --so not useful. I might just have to sweep the entire map again and do "if it's owned by player, and they don't have the check, change to dirt" like before and just live with it being shitty.
+      
+
+      --GetRoomsOfPlayerAndType
+
+
+--for id = 101,200 do
+--      if ChecksTable[id] then
+--            local ingame_name = ChecksTable[id].internal_name
+--            if not ReceivedLocationsTable.Has(id) and PLAYER0[ingame_name] > 0  then
+--                  --local player_room_list = GetRoomsOfPlayer(PLAYER0)
+--                  --print_r(player_room_list)
+--            end
+--      end
+--end
 
 return CommandsMain
