@@ -344,13 +344,111 @@ local NEUTRAL_ROOM_WALLS = {
       BARRACK_WALL = true,
 }
 
+--old version, here as backup
+
+--function RemoveNeutralRooms()
+--     print("Removing neutral rooms")
+--     SwapSlabType(NEUTRAL_ROOM_FLOORS, "PATH", PLAYER_NEUTRAL)
+--     SwapSlabType(NEUTRAL_ROOM_WALLS, "DRAPE_WALL", PLAYER_NEUTRAL)
+--     print("Neutral room removal complete!")
+--end
+
+
+--other ideas:
+
+--swap start positions: if player1 exists, you swap places with them (i think this means literally swapping soulcontainer positions, swap p1's stuff to p6, p0's to p1, p6's to p0. Concealing again might be weird but meh we'll deal with it when we get there.)
+--probably no need to do it for p2, because green always has a mostly identical position to blue
+
+
+--cruelty mode:
+--  (obtainable meaning "you have the associated check")
+--  if you obtain a creature you don't have access to (e.g. neutrals, conversion, steal hero(? only if heroes are in pool), creation in prison/torture/gy), it dies immediately
+--  if you obtain a creature higher level than your cap, reduce its level to the cap
+--  if you obtain a room you don't have access to, it turns to dirt (maybe there's a way to turn bridge into whatever it's on but idk)
+--  if you obtain a spell you don't have access to, the spellbook is destroyed and it's set to unresearchable (not sure how easy it is to destroy a spellbook)
+--  if you obtain a trap/door crate you don't have access to, destroy it and make the trap/door unplaceable (set to 0?)
+--  if you *have* a trap/door you haven't unlocked yet, the slab it's on turns to dirt.
+
+-- what's the best way to do this? make some sort of special table for it, linking room name/room slab type to its id, same with creatures etc?
+-- ideally want just if PLAYER0.ROOM > 0 and 
+
+--e.g. for ids from 101 to 200, if 
+
+
+-- call this if the player owns a room and doesn't have the check?
+--
+
+      --local player_room_list = GetRoomsOfPlayer(PLAYER0)
+      --print_r(player_room_list)
+
+      --this returns the class, room_idx and creation_turn. But not location.
+      --so not useful. I might just have to sweep the entire map again and do "if it's owned by player, and they don't have the check, change to dirt" like before and just live with it being shitty.
+      
+
+      --GetRoomsOfPlayerAndType
+
+
+--for id = 101,200 do
+--      if ChecksTable[id] then
+--            local ingame_name = ChecksTable[id].internal_name
+--            if not ReceivedLocationsTable.Has(id) and PLAYER0[ingame_name] > 0  then
+--                  --local player_room_list = GetRoomsOfPlayer(PLAYER0)
+--                  --print_r(player_room_list)
+--            end
+--      end
+--end
+
+
+
+-- do we make this a function that takes player as input and returns a list of room_name, room_owner, room_centreslab_x, room_centreslab_y?
+
+-- can now rewrite RemoveNeutralRooms to use this instead, 
+-- i.e. for RemoveNeutralRooms, you get every neutral room, find its centre position and name,
+-- if its name isn't ENTRANCE or DUNGEON_HEART then turn that slab at that pos to dirt with "MATCH"
+
+-- then, for cruelty mode, maybe instead we do 
+-- "for the list of rooms the player does NOT have (ReceivedLocationsTable.Has),
+-- put these in a table or something???
+-- if player owns a slab of any of them (idk, either if ((PLAYER.[specific room name] > 0 or ...) or the sum of these is >0) and not Has)
+-- then do GetRoomsOfPlayer(player) etc, and for each, if room_name is in this "don't have it yet" list 
+-- OR alternatively, if we have the list of ones found, and it's not in there AND isn't ENTRANCE or DUNGEON_HEART, remove it.
+
+--GetRoomsOfPlayerAndType
+
+
+function GetPlayerRooms(player)
+      local rooms = {}
+      local player_room_list = GetRoomsOfPlayer(player)
+      print("Getting rooms for " .. player)
+      --print_r(player_room_list)
+      for _, room in ipairs(player_room_list) do
+            local room_info = {
+                  room_idx = room.room_idx,
+                  room_name = room.type,
+                  room_owner = room.owner,
+                  room_centreslab_x = math.floor(room.centerpos.val_x / (256*3)),
+                  room_centreslab_y = math.floor(room.centerpos.val_y / (256*3)),
+            }
+            table.insert(rooms, room_info)
+            print("Room " .. room_info.room_idx .. " (" .. tostring(room_info.room_name) .. "with owner " .. tostring(room_info.room_owner) .. "), centre slab (" .. room_info.centre_slab_x .. ", " .. room_info.centre_slab_y .. ")")
+            --print("Room " .. room.room_idx .. " (" .. room_name .. " with owner " .. tostring(room_owner) .. ") with centre slab at (" .. room_centreslab_x .. ", " .. room_centreslab_y .. ")")
+      end
+      return rooms
+end
+
 function RemoveNeutralRooms()
       print("Removing neutral rooms")
-      SwapSlabType(NEUTRAL_ROOM_FLOORS, "PATH", PLAYER_NEUTRAL)
+      local neutral_rooms = GetPlayerRooms(PLAYER_NEUTRAL)
+      for _, room in ipairs(neutral_rooms) do
+            if room.room_name ~= "ENTRANCE" and room.room_name ~= "DUNGEON_HEART" then
+                  print("Removing neutral room " .. room.room_idx .. ": " .. tostring(room.room_name) .. ", centre slab (" .. room.room_centreslab_x .. ", " .. room.room_centreslab_y .. ")")
+                  ChangeSlabType(room.centre_slab_x, room.centre_slab_y, "DIRT", "MATCH")
+            end
+      end
+      print("Swapping room walls...")
       SwapSlabType(NEUTRAL_ROOM_WALLS, "DRAPE_WALL", PLAYER_NEUTRAL)
       print("Neutral room removal complete!")
 end
-
 
 function FunOptions()
       print("=== FUN OPTIONS ===")
@@ -401,49 +499,5 @@ function FunOptions()
             RemoveNeutralRooms()
       end
 end
-
---other ideas:
-
---swap start positions: if player1 exists, you swap places with them (i think this means literally swapping soulcontainer positions, swap p1's stuff to p6, p0's to p1, p6's to p0. Concealing again might be weird but meh we'll deal with it when we get there.)
---probably no need to do it for p2, because green always has a mostly identical position to blue
-
-
---cruelty mode:
---  (obtainable meaning "you have the associated check")
---  if you obtain a creature you don't have access to (e.g. neutrals, conversion, steal hero(? only if heroes are in pool), creation in prison/torture/gy), it dies immediately
---  if you obtain a creature higher level than your cap, reduce its level to the cap
---  if you obtain a room you don't have access to, it turns to dirt (maybe there's a way to turn bridge into whatever it's on but idk)
---  if you obtain a spell you don't have access to, the spellbook is destroyed and it's set to unresearchable (not sure how easy it is to destroy a spellbook)
---  if you obtain a trap/door crate you don't have access to, destroy it and make the trap/door unplaceable (set to 0?)
---  if you *have* a trap/door you haven't unlocked yet, the slab it's on turns to dirt.
-
--- what's the best way to do this? make some sort of special table for it, linking room name/room slab type to its id, same with creatures etc?
--- ideally want just if PLAYER0.ROOM > 0 and 
-
---e.g. for ids from 101 to 200, if 
-
-
--- call this if the player owns a room and doesn't have the check?
---
-
-      --local player_room_list = GetRoomsOfPlayer(PLAYER0)
-      --print_r(player_room_list)
-
-      --this returns the class, room_idx and creation_turn. But not location.
-      --so not useful. I might just have to sweep the entire map again and do "if it's owned by player, and they don't have the check, change to dirt" like before and just live with it being shitty.
-      
-
-      --GetRoomsOfPlayerAndType
-
-
---for id = 101,200 do
---      if ChecksTable[id] then
---            local ingame_name = ChecksTable[id].internal_name
---            if not ReceivedLocationsTable.Has(id) and PLAYER0[ingame_name] > 0  then
---                  --local player_room_list = GetRoomsOfPlayer(PLAYER0)
---                  --print_r(player_room_list)
---            end
---      end
---end
 
 return CommandsMain
