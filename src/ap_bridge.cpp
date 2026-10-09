@@ -64,6 +64,20 @@ RedirectStdoutToFile();
     AP_SetHintCallback(ap_hint_message);
     AP_SetPrintCallback(ap_print);
     AP_SetCmdResultCallback(ap_command_result);
+//  Sslot info setup callbacks
+    AP_RegisterSlotDataIntCallback("KeeperFXCreatures",        OnKeeperFXCreaturesReceived);
+    AP_RegisterSlotDataIntCallback("KeeperFXDoors",            OnKeeperFXDoorsReceived);
+    AP_RegisterSlotDataIntCallback("KeeperFXSpells",           OnKeeperFXSpellsReceived);
+    AP_RegisterSlotDataIntCallback("KeeperFXTraps",            OnKeeperFXTrapsReceived);
+    AP_RegisterSlotDataIntCallback("NegativeRecipes",          OnNegativeRecipesReceived);
+    AP_RegisterSlotDataIntCallback("KeeperFXRecipes",          OnKeeperFXRecipesReceived);
+    AP_RegisterSlotDataIntCallback("AddHeroes",                OnAddHeroesReceived);
+    AP_RegisterSlotDataIntCallback("KeeperFXHeroes",           OnKeeperFXHeroesReceived);
+    AP_RegisterSlotDataIntCallback("IncludeImpsInPool",        OnIncludeImpsInPoolReceived);
+    AP_RegisterSlotDataIntCallback("IncludeTunnellersInPool",  OnIncludeTunnellersInPoolReceived);
+    AP_RegisterSlotDataIntCallback("IncludeKnightsInPool",     OnIncludeKnightsInPoolReceived);
+    AP_RegisterSlotDataIntCallback("IncludeAvatarsInPool",     OnIncludeAvatarsInPoolReceived);
+
     ap_location_info_init();    
     ap_state_init(&g_ap_state);
     AP_Start();
@@ -189,6 +203,7 @@ void ap_bridge_scout_locations(const int *locations, int count)
     }
 }
 
+
 // probably dont need this anymore, was used to get the first digit from received item ids: 1 = room, 2 = spell
 int ap_getitem_type(int id)
 {
@@ -214,6 +229,20 @@ void set_quick_information_default(short icon_idx, const char* msg_text)
 
     set_quick_information_with_icon(msg_id, 0, 0, 0, 0,icon_idx);
 }
+
+// Callback functions for slot data
+void OnKeeperFXCreaturesReceived(int val)       { g_ap_state.slot_data.KeeperFXCreatures = val; }
+void OnKeeperFXDoorsReceived(int val)           { g_ap_state.slot_data.KeeperFXDoors = val; }
+void OnKeeperFXSpellsReceived(int val)          { g_ap_state.slot_data.KeeperFXSpells = val; }
+void OnKeeperFXTrapsReceived(int val)           { g_ap_state.slot_data.KeeperFXTraps = val; }
+void OnNegativeRecipesReceived(int val)         { g_ap_state.slot_data.NegativeRecipes = val; }
+void OnKeeperFXRecipesReceived(int val)         { g_ap_state.slot_data.KeeperFXRecipes = val; }
+void OnAddHeroesReceived(int val)               { g_ap_state.slot_data.AddHeroes = val; }
+void OnKeeperFXHeroesReceived(int val)          { g_ap_state.slot_data.KeeperFXHeroes = val; }
+void OnIncludeImpsInPoolReceived(int val)       { g_ap_state.slot_data.IncludeImpsInPool = val; }
+void OnIncludeTunnellersInPoolReceived(int val) { g_ap_state.slot_data.IncludeTunnellersInPool = val; }
+void OnIncludeKnightsInPoolReceived(int val)    { g_ap_state.slot_data.IncludeKnightsInPool = val; }
+void OnIncludeAvatarsInPoolReceived(int val)    { g_ap_state.slot_data.IncludeAvatarsInPool = val; }
 
 // Functions below are run through the C compiler so that lua/console can call them
 

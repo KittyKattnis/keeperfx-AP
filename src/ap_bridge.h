@@ -10,6 +10,21 @@ void ap_send(int id);
 void ap_clear();
 bool ap_connection_status();
 int ap_getitem_type(int id);
+
+// slot data handling
+void OnKeeperFXCreaturesReceived(int val);
+void OnKeeperFXDoorsReceived(int val);
+void OnKeeperFXSpellsReceived(int val);
+void OnKeeperFXTrapsReceived(int val);
+void OnNegativeRecipesReceived(int val);
+void OnKeeperFXRecipesReceived(int val);
+void OnAddHeroesReceived(int val);
+void OnKeeperFXHeroesReceived(int val);
+void OnIncludeImpsInPoolReceived(int val);
+void OnIncludeTunnellersInPoolReceived(int val);
+void OnIncludeKnightsInPoolReceived(int val);
+void OnIncludeAvatarsInPoolReceived(int val);
+
 #ifdef __cplusplus
 extern "C" {
 #endif

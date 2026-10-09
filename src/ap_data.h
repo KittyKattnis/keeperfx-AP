@@ -20,6 +20,22 @@ struct AP_ReceivedItem
     int flags;
     int index;
 };
+
+struct AP_SlotData
+{
+int KeeperFXCreatures;
+int KeeperFXDoors;
+int KeeperFXSpells;
+int KeeperFXTraps;
+int NegativeRecipes;
+int KeeperFXRecipes;
+int AddHeroes;
+int KeeperFXHeroes;
+int IncludeImpsInPool;
+int IncludeTunnellersInPool;
+int IncludeKnightsInPool;
+int IncludeAvatarsInPool;
+};
 struct APState
 {
     bool connected;
@@ -29,6 +45,7 @@ struct APState
     int items_count;
     int locations_count;
     int missing_locations_count;
+    struct AP_SlotData slot_data;
 };
 
 struct AP_LocationInfo
