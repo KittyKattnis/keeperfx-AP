@@ -133,7 +133,7 @@ function BoxLocations.ActivateBoxes(level_id)
 
 
                     local info = GetAPLocationInfo(id)
-                    print("info = " .. info)
+                    print("info = " .. tostring(info))
 
                     if type(info) ~= "table" then
                         print("ERROR: No AP location info for location ID", tostring(locationID))
