@@ -24,6 +24,13 @@ void OnIncludeImpsInPoolReceived(int val);
 void OnIncludeTunnellersInPoolReceived(int val);
 void OnIncludeKnightsInPoolReceived(int val);
 void OnIncludeAvatarsInPoolReceived(int val);
+void OnShuffleTilesets(int val);
+void OnChangePlayerColour(int val);
+void OnChangeNeutrals(int val);
+void OnSwapWaterAndLava(int val);
+void OnRemoveNeutralRooms(int val);
+void OnCrueltyMode(int val);
+void OnSecretLevels(int val);
 
 #ifdef __cplusplus
 extern "C" {

@@ -280,6 +280,13 @@ class DungeonKeeperWorld(World):
             "IncludeTunnellersInPool": self.options.IncludeTunnellersInPool.value,
             "IncludeKnightsInPool": self.options.IncludeKnightsInPool.value,
             "IncludeAvatarsInPool": self.options.IncludeAvatarsInPool.value,
+            "ShuffleTilesets": self.options.shuffle_tilesets.value,
+            "ChangePlayerColour": self.options.change_player_colour.value,
+            "ChangeNeutrals": self.options.change_neutrals.value,
+            "SwapWaterAndLava": self.options.swap_water_and_lava.value,
+            "RemoveNeutralRooms": self.options.remove_neutral_rooms.value,
+            "CrueltyMode": self.options.cruelty_mode.value,
+            "SecretLevels": self.options.secret_levels.value,
         }
     
 

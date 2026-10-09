@@ -102,6 +102,37 @@ end
 
 function OnChatMsg(plyr_idx, msg)
       SendAPMessage(msg)
+      local slot_data = GetAPSlotData()
+
+    if type(slot_data) == "table" then
+    print("--- Archipelago Slot Data ---")
+    
+    -- Print each field explicitly
+    print("KeeperFXCreatures:        " .. tostring(slot_data.KeeperFXCreatures))
+    print("KeeperFXDoors:            " .. tostring(slot_data.KeeperFXDoors))
+    print("KeeperFXSpells:           " .. tostring(slot_data.KeeperFXSpells))
+    print("KeeperFXTraps:            " .. tostring(slot_data.KeeperFXTraps))
+    print("NegativeRecipes:          " .. tostring(slot_data.NegativeRecipes))
+    print("KeeperFXRecipes:          " .. tostring(slot_data.KeeperFXRecipes))
+    print("AddHeroes:                " .. tostring(slot_data.AddHeroes))
+    print("KeeperFXHeroes:           " .. tostring(slot_data.KeeperFXHeroes))
+    print("IncludeImpsInPool:        " .. tostring(slot_data.IncludeImpsInPool))
+    print("IncludeTunnellersInPool:  " .. tostring(slot_data.IncludeTunnellersInPool))
+    print("IncludeKnightsInPool:     " .. tostring(slot_data.IncludeKnightsInPool))
+    print("ShuffleTilesets:          " .. tostring(slot_data.ShuffleTilesets))
+    print("ChangePlayerColour:       " .. tostring(slot_data.ChangePlayerColour))
+    print("ChangeNeutrals:           " .. tostring(slot_data.ChangeNeutrals))
+    print("SwapWaterAndLava:         " .. tostring(slot_data.SwapWaterAndLava))
+    print("RemoveNeutralRooms:       " .. tostring(slot_data.RemoveNeutralRooms))
+    print("CrueltyMode:              " .. tostring(slot_data.CrueltyMode))
+    print("SecretLevels:             " .. tostring(slot_data.SecretLevels))
+
+    
+    
+    print("------------------------------")
+    else
+    print("Error: Expected slot_data to be a table, got " .. type(slot_data))
+    end
 end
 
 function print_r(t, indent)

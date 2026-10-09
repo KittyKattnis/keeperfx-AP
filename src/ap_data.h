@@ -35,6 +35,13 @@ int IncludeImpsInPool;
 int IncludeTunnellersInPool;
 int IncludeKnightsInPool;
 int IncludeAvatarsInPool;
+int ShuffleTilesets;
+int ChangePlayerColour;
+int ChangeNeutrals;
+int SwapWaterAndLava;
+int RemoveNeutralRooms;
+int CrueltyMode;
+int SecretLevels;
 };
 struct APState
 {

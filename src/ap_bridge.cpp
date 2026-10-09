@@ -77,6 +77,13 @@ RedirectStdoutToFile();
     AP_RegisterSlotDataIntCallback("IncludeTunnellersInPool",  OnIncludeTunnellersInPoolReceived);
     AP_RegisterSlotDataIntCallback("IncludeKnightsInPool",     OnIncludeKnightsInPoolReceived);
     AP_RegisterSlotDataIntCallback("IncludeAvatarsInPool",     OnIncludeAvatarsInPoolReceived);
+    AP_RegisterSlotDataIntCallback("ShuffleTilesets",          OnShuffleTilesets);
+    AP_RegisterSlotDataIntCallback("ChangePlayerColour",       OnChangePlayerColour);
+    AP_RegisterSlotDataIntCallback("ChangeNeutrals",           OnChangeNeutrals);
+    AP_RegisterSlotDataIntCallback("SwapWaterAndLava",         OnSwapWaterAndLava);
+    AP_RegisterSlotDataIntCallback("RemoveNeutralRooms",       OnRemoveNeutralRooms);
+    AP_RegisterSlotDataIntCallback("CrueltyMode",              OnCrueltyMode);
+    AP_RegisterSlotDataIntCallback("SecretLevels",             OnSecretLevels);
 
     ap_location_info_init();    
     ap_state_init(&g_ap_state);
@@ -243,6 +250,13 @@ void OnIncludeImpsInPoolReceived(int val)       { g_ap_state.slot_data.IncludeIm
 void OnIncludeTunnellersInPoolReceived(int val) { g_ap_state.slot_data.IncludeTunnellersInPool = val; }
 void OnIncludeKnightsInPoolReceived(int val)    { g_ap_state.slot_data.IncludeKnightsInPool = val; }
 void OnIncludeAvatarsInPoolReceived(int val)    { g_ap_state.slot_data.IncludeAvatarsInPool = val; }
+void OnShuffleTilesets(int val)    { g_ap_state.slot_data.ShuffleTilesets = val; }
+void OnChangePlayerColour(int val)    { g_ap_state.slot_data.ChangePlayerColour = val; }
+void OnChangeNeutrals(int val)    { g_ap_state.slot_data.ChangeNeutrals = val; }
+void OnSwapWaterAndLava(int val)    { g_ap_state.slot_data.SwapWaterAndLava = val; }
+void OnRemoveNeutralRooms(int val)    { g_ap_state.slot_data.RemoveNeutralRooms = val; }
+void OnCrueltyMode(int val)    { g_ap_state.slot_data.CrueltyMode = val; }
+void OnSecretLevels(int val)    { g_ap_state.slot_data.SecretLevels = val; }
 
 // Functions below are run through the C compiler so that lua/console can call them
 

@@ -301,6 +301,27 @@ static int lua_ap_get_slot_data(lua_State *L)
     lua_pushinteger(L, slot_data.IncludeAvatarsInPool);
     lua_setfield(L, -2, "IncludeAvatarsInPool");
 
+    lua_pushinteger(L, slot_data.ShuffleTilesets);
+    lua_setfield(L, -2, "ShuffleTilesets");
+
+    lua_pushinteger(L, slot_data.ChangePlayerColour);
+    lua_setfield(L, -2, "ChangePlayerColour");
+
+    lua_pushinteger(L, slot_data.ChangeNeutrals);
+    lua_setfield(L, -2, "ChangeNeutrals");
+
+    lua_pushinteger(L, slot_data.SwapWaterAndLava);
+    lua_setfield(L, -2, "SwapWaterAndLava");
+
+    lua_pushinteger(L, slot_data.RemoveNeutralRooms);
+    lua_setfield(L, -2, "RemoveNeutralRooms");
+
+    lua_pushinteger(L, slot_data.CrueltyMode);
+    lua_setfield(L, -2, "CrueltyMode");
+
+    lua_pushinteger(L, slot_data.SecretLevels);
+    lua_setfield(L, -2, "SecretLevels");
+
     return 1;
 }
 
