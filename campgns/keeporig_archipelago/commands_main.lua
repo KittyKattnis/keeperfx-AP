@@ -220,20 +220,25 @@ end
 function ChangeOnMapNeutrals()
       local neutral_creatures_table = GetCreaturesOfPlayer(PLAYER_NEUTRAL)
       if change_neutrals_option == "REMOVE" then
+            local creature_count = #neutral_creatures_table
             for _, creature in ipairs(neutral_creatures_table) do
                   if creature then
                         creature:delete()
                   end
             end
-            print("Neutrals removed!")
+            print(creature_count .. " neutrals removed!")
+            QuickMessage(creature_count .. " neutrals removed!", "ARCHIPELAGO_ICON")
       elseif change_neutrals_option == "KILL" then
+            local creature_count = #neutral_creatures_table
             for _, creature in ipairs(neutral_creatures_table) do
                   if creature then
                         creature:kill()
                   end
             end
-            print("Neutrals killed!")
+            print(creature_count .. " neutrals killed!")
+            QuickMessage(creature_count .. " neutrals killed!", "ARCHIPELAGO_ICON")
       elseif change_neutrals_option == "HOSTILE" then
+            local creature_count = #neutral_creatures_table
             ComputerPlayer("PLAYER5","ROAMING")
             RunDKScriptCommand("ALLY_PLAYERS(PLAYER5, PLAYER1, 3)")
             RunDKScriptCommand("ALLY_PLAYERS(PLAYER5, PLAYER2, 3)")
@@ -244,16 +249,8 @@ function ChangeOnMapNeutrals()
                         creature.owner = PLAYER5
                   end
             end
-            -- ChangeCreatureOwner doesn't work. Doing it the old fasioned way for now.
---            for _, creature in ipairs(neutral_creatures_table) do
---                  if creature then
---                        ChangeCreatureOwner(creature,"PLAYER5")
---                  end
---            end
---            for i = 1, #neutral_creatures_table do
---                  RunDKScriptCommand("CHANGE_CREATURE_OWNER(PLAYER_NEUTRAL,ANY_CREATURE,ANYWHERE,PLAYER5)")
---            end
---            print("Neutrals made hostile!")
+            print(creature_count .. " neutrals made hostile!")
+            QuickMessage(creature_count .. " neutrals made hostile!", "ARCHIPELAGO_ICON")
       else
             print("Invalid option, options are \"REMOVE\", \"KILL\" and \"HOSTILE\". Default behaviour used instead.")
       end
@@ -270,9 +267,9 @@ function SwapSlabType(old_type, new_type, owner)
                         old_type_format = slab.kind == old_type
                   end
                   if old_type_format and (owner == nil or slab.owner == owner) then
-                        print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
+                        --print("slab (" .. slab_x .. "," .. slab_y .."), type: " .. slab.kind)
                         ChangeSlabType(slab_x, slab_y, new_type, "MATCH")
-                        print("Changed to " .. new_type .. "!")
+                        --print("Changed to " .. new_type .. "!")
                   end
             end
       end
@@ -310,39 +307,40 @@ function SwapWaterAndLava()
       --      end
       --end
       print("Swap complete!")
+      QuickMessage("Water and lava swapped!", "ARCHIPELAGO_ICON")
 end
 
-local NEUTRAL_ROOM_FLOORS = {
-      TREASURY_AREA = true,
-      BOOK_SHELVES = true,
-      PRISON_AREA = true,
-      TORTURE_AREA = true,
-      TRAINING_AREA = true,
-      WORKSHOP_AREA = true,
-      SCAVENGE_AREA = true,
-      TEMPLE_POOL = true,
-      GRAVE_AREA = true,
-      HATCHERY = true,
-      LAIR_AREA = true,
-      BARRACK_AREA = true,
-      BRIDGE_FRAME = true,
-      GUARD_AREA = true,
-}
-
-local NEUTRAL_ROOM_WALLS = {
-      TREASURY_WALL = true,
-      LIBRARY_WALL = true,
-      PRISON_WALL = true,
-      TORTURE_WALL = true,
-      TRAINING_WALL = true,
-      WORKSHOP_WALL = true,
-      SCAVENGER_WALL = true,
-      TEMPLE_WALL = true,
-      GRAVE_WALL = true,
-      HATCHERY_WALL = true,
-      LAIR_WALL = true,
-      BARRACK_WALL = true,
-}
+--local NEUTRAL_ROOM_FLOORS = {
+--      TREASURY_AREA = true,
+--      BOOK_SHELVES = true,
+--      PRISON_AREA = true,
+--      TORTURE_AREA = true,
+--      TRAINING_AREA = true,
+--      WORKSHOP_AREA = true,
+--      SCAVENGE_AREA = true,
+--      TEMPLE_POOL = true,
+--      GRAVE_AREA = true,
+--      HATCHERY = true,
+--      LAIR_AREA = true,
+--      BARRACK_AREA = true,
+--      BRIDGE_FRAME = true,
+--      GUARD_AREA = true,
+--}
+--
+--local NEUTRAL_ROOM_WALLS = {
+--      TREASURY_WALL = true,
+--      LIBRARY_WALL = true,
+--      PRISON_WALL = true,
+--      TORTURE_WALL = true,
+--      TRAINING_WALL = true,
+--      WORKSHOP_WALL = true,
+--      SCAVENGER_WALL = true,
+--      TEMPLE_WALL = true,
+--      GRAVE_WALL = true,
+--      HATCHERY_WALL = true,
+--      LAIR_WALL = true,
+--      BARRACK_WALL = true,
+--}
 
 --old version, here as backup
 
@@ -419,35 +417,44 @@ local NEUTRAL_ROOM_WALLS = {
 function GetPlayerRooms(player)
       local rooms = {}
       local player_room_list = GetRoomsOfPlayer(player)
-      print("Getting rooms for " .. player)
+      print("Getting rooms for " .. tostring(player))
       --print_r(player_room_list)
       for _, room in ipairs(player_room_list) do
+            local centreslab_x = math.floor(room.centerpos.val_x / (256*3))
+            local centreslab_y = math.floor(room.centerpos.val_y / (256*3))
             local room_info = {
                   room_idx = room.room_idx,
                   room_name = room.type,
                   room_owner = room.owner,
-                  room_centreslab_x = math.floor(room.centerpos.val_x / (256*3)),
-                  room_centreslab_y = math.floor(room.centerpos.val_y / (256*3)),
+                  room_centreslab_x = centreslab_x,
+                  room_centreslab_y = centreslab_y,
             }
+            --print_r(room_info)
             table.insert(rooms, room_info)
-            print("Room " .. room_info.room_idx .. " (" .. tostring(room_info.room_name) .. "with owner " .. tostring(room_info.room_owner) .. "), centre slab (" .. room_info.centre_slab_x .. ", " .. room_info.centre_slab_y .. ")")
+            --print("Room " .. room_info.room_idx .. " (" .. tostring(room_info.room_name) .. " with owner " .. tostring(room_info.room_owner) .. "), centre slab (" .. tostring(room_info.room_centreslab_x) .. ", " .. tostring(room_info.room_centreslab_y) .. ")")
             --print("Room " .. room.room_idx .. " (" .. room_name .. " with owner " .. tostring(room_owner) .. ") with centre slab at (" .. room_centreslab_x .. ", " .. room_centreslab_y .. ")")
       end
+      --print("rooms:")
+      --print_r(rooms)
       return rooms
 end
 
 function RemoveNeutralRooms()
       print("Removing neutral rooms")
       local neutral_rooms = GetPlayerRooms(PLAYER_NEUTRAL)
+      local neutral_room_count = #neutral_rooms
+      --print_r(neutral_rooms)
       for _, room in ipairs(neutral_rooms) do
+            --print_r(room)
             if room.room_name ~= "ENTRANCE" and room.room_name ~= "DUNGEON_HEART" then
-                  print("Removing neutral room " .. room.room_idx .. ": " .. tostring(room.room_name) .. ", centre slab (" .. room.room_centreslab_x .. ", " .. room.room_centreslab_y .. ")")
-                  ChangeSlabType(room.centre_slab_x, room.centre_slab_y, "DIRT", "MATCH")
+                  print("Removing neutral room " .. room.room_idx .. ": " .. tostring(room.room_name) .. ", centre slab (" .. tostring(room.room_centreslab_x) .. ", " .. tostring(room.room_centreslab_y) .. ")")
+                  ChangeSlabType(room.room_centreslab_x, room.room_centreslab_y, "PATH", "MATCH")
             end
       end
-      print("Swapping room walls...")
-      SwapSlabType(NEUTRAL_ROOM_WALLS, "DRAPE_WALL", PLAYER_NEUTRAL)
+      --print("Swapping room walls...") -- seems to do this automatically actually! So not needed!
+      --SwapSlabType(NEUTRAL_ROOM_WALLS, "DRAPE_WALL", PLAYER_NEUTRAL)
       print("Neutral room removal complete!")
+      QuickMessage(neutral_room_count .. " neutral rooms removed!", "ARCHIPELAGO_ICON")
 end
 
 function FunOptions()
@@ -458,9 +465,10 @@ function FunOptions()
             end
             SetShuffledTileset()
             print("Tileset changed to: " .. Map.default_texture)
+            QuickMessage("Tileset changed to: " .. Map.default_texture, "ARCHIPELAGO_ICON")
       end
 
-      if change_player_colour ~= nil then
+      if change_player_colour ~= nil and change_player_colour ~= "RED" then
             if type(change_player_colour) == "number" then
                   if change_player_colour >= 8 then
                         PLAYER0.colour = player_colour_change_table[math.random(0,7)]
@@ -470,7 +478,7 @@ function FunOptions()
                         PLAYER0.colour = player_colour_change_table[change_player_colour]
                   end
             elseif type(change_player_colour) == "string" then
-                  if change_player_colour == "random" then
+                  if change_player_colour == "RANDOM" then
                         PLAYER0.colour = player_colour_change_table[math.random(0,7)]
                   elseif change_player_colour == "red"
                   or change_player_colour == "BLUE"
@@ -484,7 +492,8 @@ function FunOptions()
                   end
             end
             PlayerColour()
-            print("Player colour changed to: " .. PLAYER0.colour)
+            print("Player colour changed to: " .. tostring(PLAYER0.colour))
+            QuickMessage("Player colour changed to: " .. tostring(PLAYER0.colour), "ARCHIPELAGO_ICON")
       end
 
       if change_neutrals_option then
