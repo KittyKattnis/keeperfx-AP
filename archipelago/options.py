@@ -3,13 +3,8 @@ from typing import Dict
 
 from Options import OptionGroup, ItemDict, Toggle
 from worlds.AutoWorld import PerGameCommonOptions
-from .items import CREATURES, ROOMS, SPELLS, LEVELS
-from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName
-
-#to do:
-# various options on and off e.g. temple recipes yes/find/no, bonus levels yes/no, FX exclusive creatures/spells/traps/doors yes/no, cruelty mode yes/no, creature type evil/good/both
-# numbers of each progressive maybe
-# starting player colour maybe idk
+from .items import CREATURES, ROOMS, SPELLS, LEVELS, RECIPES
+from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName, KeeperRecipe
 
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
@@ -34,7 +29,53 @@ class KeeperFXDoors(Toggle):
     """Choose if you want KeeperFX Doors to be available in the game."""
     display_name = "KeeperFX Doors"
 
+class NegativeRecipes(Toggle):
+    """Choose if you want negative Temple recipes to be available in the game."""
+    display_name = "Negative Recipes"
 
+class KeeperFXRecipes(Toggle):
+    """Choose if you want KeeperFX Temple recipes to be available in the game."""
+    display_name = "KeeperFX Recipes"
+
+# really want this to be "creature type evil/good/both"
+
+class AddHeroes(Toggle):
+    """Choose if you want to attract Heroes."""
+    display_name = "Attract Heroes"
+
+class KeeperFXHeroes(Toggle):
+    """Choose if you want to attract Keeper FX Heroes."""
+    display_name = "Attract KeeperFX Heroes"
+
+class IncludeImpsInPool(Toggle):
+    """Choose if you want to attract Imps."""
+    display_name = "Attract Imps"
+
+class IncludeTunnellersInPool(Toggle):
+    """Choose if you want to attract Tunnellers."""
+    display_name = "Attract Tunnellers"
+    
+class IncludeKnightsInPool(Toggle):
+    """Choose if you want to attract Knights."""
+    display_name = "Attract Knights"
+
+class IncludeAvatarsInPool(Toggle):
+    """Choose if you want to attract Avatars."""
+    display_name = "Attract Avatars"
+
+# option for temple recipes unlocked/unlockable/removed
+
+# cruelty mode yes/no
+
+
+
+# starting player colour
+
+# toggles for certain types of progressives (i.e. if off, you just set it to default values)
+
+
+#    #If you assume an initial level cap of 3, a creature cap of 10, and only bugs, demonspawn and warlocks I would say definitely levels 1-4 are doable, as are 101,103-105.
+#    #Maybe others too, but I think it would be extremely hard.
 
 class StartingLevels(ItemDict):
     """Levels available at the start of the game."""
@@ -96,14 +137,38 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     KeeperFXDoors: KeeperFXDoors
     KeeperFXSpells: KeeperFXSpells
     KeeperFXTraps: KeeperFXTraps
+    NegativeRecipes: NegativeRecipes
+    KeeperFXRecipes: KeeperFXRecipes
+    AddHeroes: AddHeroes
+    KeeperFXHeroes: KeeperFXHeroes
+    IncludeImpsInPool: IncludeImpsInPool
+    IncludeTunnellersInPool: IncludeTunnellersInPool
+    IncludeKnightsInPool: IncludeKnightsInPool
+    IncludeAvatarsInPool: IncludeAvatarsInPool
 
 option_groups = [
-    OptionGroup("KeeperFX Additions", [
+    OptionGroup("Levels", [
+        secret_levels,
+    ]),
+    OptionGroup("Creature Pool", [
         KeeperFXCreatures,
+        AddHeroes,
+        KeeperFXHeroes,
+        IncludeImpsInPool,
+        IncludeTunnellersInPool,
+        IncludeKnightsInPool,
+        IncludeAvatarsInPool,
+    ]),
+    OptionGroup("KeeperFX Additions", [
         KeeperFXSpells,
         KeeperFXDoors,
         KeeperFXTraps,
-    ]),    
+        KeeperFXHeroes,
+    ]),
+    OptionGroup("Temple Recipes", [
+        NegativeRecipes,
+        KeeperFXRecipes,
+    ]),
     OptionGroup("Starting Items", [
         StartingLevels,
         StartingSpells,

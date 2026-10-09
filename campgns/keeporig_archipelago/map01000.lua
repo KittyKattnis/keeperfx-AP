@@ -12,11 +12,10 @@ ReceivedLocations = require("received_locations")
 --will get called when the game starts
 function OnGameStart()
 	CommandsMain.MainSetup()
-    IncreaseStartingGold()
     Startup()
     LevelStatus()
     ItemStatus()
-
+    IncreaseStartingGold()
 end
 
 function OnGameLoad()
@@ -27,7 +26,7 @@ end
 function Startup()
     ConcealMapRect(PLAYER0, 187, 328, 24, 24)
     RevealMapRect(PLAYER0,34,100,3,3)
-    RevealMapRect(PLAYER0,328,40,27,15)
+    RevealMapRect(PLAYER0,328,46,27,27)
     ZoomToLocation(PLAYER0, 50)
     RunDKScriptCommand("COMPUTER_PLAYER(PLAYER6,ROAMING)")
     RunDKScriptCommand("ALLY_PLAYERS(PLAYER0, PLAYER6, 3)")
@@ -55,7 +54,7 @@ function SubtileToSlab(subtile_coord)
     return slab_coord
 end
 
-function FlattenBoxes() --because specboxes have a limit of 256 we just make a link between the location number and a number from 1+ so we can display them all on one map
+function FlattenBoxes() --because specboxes have a limit of 512 we just make a link between the location number and a number from 1+ so we can display them all on one map
     local FlatBoxNumbers = {}
     local number = 1
     local level_ids = {}
@@ -164,7 +163,7 @@ function ItemStatus()
             local item_subtile_x = 85 + 12*(itemid)
             local item_subtile_y = 88
             if itemid > 16  then
-                item_subtile_x = 169 + 12*(itemid)
+                item_subtile_x = 169 + 12*(itemid-16)
                 item_subtile_y = 112
             end
             local item_pos = {stl_x = item_subtile_x, stl_y = item_subtile_y}
@@ -190,29 +189,29 @@ function ItemStatus()
         end
     end
     --Traps
-    --for itemid=101, 200 do
-    --    if ChecksTable[itemid] then
-    --        local item_subtile_x = 97 + 12*(itemid % 100)
-    --        local item_subtile_y = 142
-    --        --ChangeSlabType(SubtileToSlab(item_subtile_x), SubtileToSlab(item_subtile_y), ChecksTable[itemid].internal_name, "NONE") --terrain and rooms are different. Just place them on the map.
-    --        if ReceivedLocationsTable.Has(itemid) then
-    --            AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x, item_subtile_y+6, 0)
-    --            AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x, item_subtile_y+12, 0)
-    --        end
-    --    end
-    --end
+    for itemid=201, 300 do
+        if ChecksTable[itemid] then
+            local item_subtile_x = 121 + 12*(itemid % 100)
+            local item_subtile_y = 250
+            --ChangeSlabType(SubtileToSlab(item_subtile_x), SubtileToSlab(item_subtile_y), ChecksTable[itemid].internal_name, "NONE") --terrain and rooms are different. Just place them on the map.
+            if ReceivedLocationsTable.Has(itemid) then
+                AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x, item_subtile_y+6, 0)
+                AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x, item_subtile_y+12, 0)
+            end
+        end
+    end
     --Doors
-    --for itemid=101, 200 do
-    --    if ChecksTable[itemid] then
-    --        local item_subtile_x = 97 + 12*(itemid % 100)
-    --        local item_subtile_y = 142
-    --        --ChangeSlabType(SubtileToSlab(item_subtile_x), SubtileToSlab(item_subtile_y), ChecksTable[itemid].internal_name, "NONE") --terrain and rooms are different. Just place them on the map.
-    --        if ReceivedLocationsTable.Has(itemid) then
-    --            AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x, item_subtile_y+6, 0)
-    --            AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x, item_subtile_y+12, 0)
-    --        end
-    --    end
-    --end
+    for itemid=301, 400 do
+        if ChecksTable[itemid] then
+            local item_subtile_x = 145 + 12*(itemid % 100)
+            local item_subtile_y = 274
+            --ChangeSlabType(SubtileToSlab(item_subtile_x), SubtileToSlab(item_subtile_y), ChecksTable[itemid].internal_name, "NONE") --terrain and rooms are different. Just place them on the map.
+            if ReceivedLocationsTable.Has(itemid) then
+                AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x, item_subtile_y+6, 0)
+                AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x, item_subtile_y+12, 0)
+            end
+        end
+    end
     --Spells
     for itemid=401, 500 do
         if ChecksTable[itemid] then
@@ -242,26 +241,14 @@ function ItemStatus()
         end
     end
     --progressives
-    local levelcapcount = 0
-    local creaturelimitcount = 0
-    local startinggoldcount = 0
-    for itemid = 701, 707 do
-        if ReceivedLocationsTable.Has(itemid) then
-            levelcapcount = levelcapcount + 1
-        end
-    end
-    for id = 711, 716 do
-        if ReceivedLocationsTable.Has(id) then
-            creaturelimitcount = creaturelimitcount + 1
-        end
-    end
-    for id = 721, 726 do
-        if ReceivedLocationsTable.Has(id) then
-            startinggoldcount = startinggoldcount + 1
-        end
-    end
+    local levelcapcount = ReceivedLocationsTable.Count(701)
+    local creaturelimitcount = ReceivedLocationsTable.Count(702)
+    local startinggoldcount = ReceivedLocationsTable.Count(703)
+    local portalspeedcount = ReceivedLocationsTable.Count(704)
+    local handsizecount = ReceivedLocationsTable.Count(705)
     RegisterTimerEvent(function ()
-        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,34," .. levelcapcount + 3 .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,34," .. math.min(levelcapcount + 3,11) .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,34," .. levelcapcount .. ")")
     end, 17, true)
     for i = 0, 8 do
         if i <= levelcapcount then
@@ -272,6 +259,7 @@ function ItemStatus()
     end
     RegisterTimerEvent(function ()
         RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,40," .. 10 + 5*creaturelimitcount .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,40," .. creaturelimitcount .. ")")
     end, 17, true)
     for i = 0, 6 do
         if i <= creaturelimitcount then
@@ -282,12 +270,37 @@ function ItemStatus()
     end
     RegisterTimerEvent(function ()
         RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,46," .. 2500 + 1250*startinggoldcount .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,46," .. startinggoldcount .. ")")
     end, 17, true)
     for i = 0, 6 do
         if i <= startinggoldcount then
             AddObjectToLevelAtPos("POTION_GREEN",316+3*i,46,1,"PLAYER_NEUTRAL",0)
         else
             AddObjectToLevelAtPos("POTION_RED",316+3*i,46,1,"PLAYER_NEUTRAL",0)
+        end
+    end
+
+    RegisterTimerEvent(function ()
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,52," .. math.max(100,750 - (portalspeedcount * 125)) .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,52," .. portalspeedcount .. ")")
+    end, 17, true)
+    for i = 0, 6 do
+        if i <= portalspeedcount then
+            AddObjectToLevelAtPos("POTION_GREEN",316+3*i,52,1,"PLAYER_NEUTRAL",0)
+        else
+            AddObjectToLevelAtPos("POTION_RED",316+3*i,52,1,"PLAYER_NEUTRAL",0)
+        end
+    end
+
+    RegisterTimerEvent(function ()
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,310,58," .. 4 + 2*handsizecount .. ")")
+        RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41,307,58," .. handsizecount .. ")")
+    end, 17, true)
+    for i = 0, 6 do
+        if i <= handsizecount then
+            AddObjectToLevelAtPos("POTION_GREEN",316+3*i,58,1,"PLAYER_NEUTRAL",0)
+        else
+            AddObjectToLevelAtPos("POTION_RED",316+3*i,58,1,"PLAYER_NEUTRAL",0)
         end
     end
 
@@ -300,7 +313,17 @@ function ItemStatus()
             --progressive starting unlocks (i.e. if it's 1 you have bridge and SOE, 2 you have guard post and speed etc.)
             --progressive starting traps
 
-            --would be cool to continuously spawn the effect for selling (to display values onscreen)
+    --filler
+    RevealMapRect(PLAYER0,325,340,45,18)
+    for itemid=901, 903 do
+        local fillercount = ReceivedLocationsTable.Count(itemid)
+        local item_subtile_x = 304 + 6*(itemid % 100)
+        local item_subtile_y = 340
+        RegisterTimerEvent(function ()
+            RunDKScriptCommand("CREATE_EFFECT_AT_POS(-41," .. item_subtile_x .. "," .. item_subtile_y .. "," .. fillercount .. ")") -- doesn't show if it's 0 sadly.
+        end, 17, true)
+        end
+    end
 
         --if ReceivedLocationsTable.Has(itemid) then
         --    AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
@@ -309,14 +332,6 @@ function ItemStatus()
         --if SentLocations.Has(11000+(itemid % 100)) then --check this is the id we will use for having done a recipe
         --    AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
         --end
-
-
-end
-
-
---600 is Recipes
---700 is progressives
-
 
 
 --for creatures, rooms etc etc:

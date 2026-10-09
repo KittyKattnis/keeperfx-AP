@@ -109,9 +109,9 @@ function BoxLocations.ActivateBoxes(level_id)
             if SentLocations.Has(id) then --this shouldn't happen, but just in case!
                 if message2 ~= "" then message2 = message2 .. ", " end
                 message2 = message2 .. id
-                RegisterSpecialActivatedEvent(function()
-                    QuickMessage("Check already sent!", "ARCHIPELAGO_ICON") -- just in case we can't get removal on game load working.
-                end, boxID)
+                --RegisterSpecialActivatedEvent(function()
+                --    QuickMessage("Check already sent!", "ARCHIPELAGO_ICON") -- just in case we can't get removal on game load working.
+                --end, boxID)
             else -- If it ISN'T in sent_locations , we've not sent it.
                 if not first then message = message .. ", " end
                 message = message .. id
@@ -119,8 +119,36 @@ function BoxLocations.ActivateBoxes(level_id)
                 RegisterSpecialActivatedEvent(function()
                     --found = found + 1 --game can crash if box activated while found is unset i.e. when loading saved game.
                     DecAPLvlBoxRemain()
+
+                    local locationID = id
+
+                    print("Box callback: id =", tostring(locationID), "type =", type(locationID))
+
+                    if type(locationID) ~= "number"
+                        or locationID ~= locationID
+                        or locationID % 1 ~= 0 then
+                        print("ERROR: Invalid location ID in box callback")
+                        return
+                    end
+
+
                     local info = GetAPLocationInfo(id)
-                    QuickMessage("Box " .. info.itemName .. " for " .. info.playerName .. " Activated.", "ARCHIPELAGO_ICON")
+                    print("info = " .. tostring(info))
+
+                    if type(info) ~= "table" then
+                        print("ERROR: No AP location info for location ID", tostring(locationID))
+                        QuickMessage("Box location metadata missing: " .. tostring(locationID), "ARCHIPELAGO_ICON")
+                        return
+                    end
+                    print("GetAPLocationInfo input:", tostring(id))
+                    print("GetAPLocationInfo return type:", type(info))
+                    print("GetAPLocationInfo return value:", tostring(info))
+                    if type(info) == "table" then
+                        for key, value in pairs(info) do
+                            print("Location info:", tostring(key), tostring(value))
+                        end
+                    end
+                    --QuickMessage("Box " .. tostring(info.itemName or "Unknown item") .. " for " .. tostring(info.playerName or "Unknown Player") .. " Activated.", "ARCHIPELAGO_ICON")
                     --QuickMessage("Boxes Found: " .. found.. "/" .. total .. ".", "ARCHIPELAGO_ICON")
                     if message2 ~= "" then
                         message2 = message2 .. ", "

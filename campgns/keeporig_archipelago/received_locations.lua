@@ -115,25 +115,16 @@ ChecksTable = {
     [520] = {id=520, internal_name="",                    name="20",                           string="221",       text="Level 20 Unlocked"},
 -- PROGRESSIVES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- these work differently, see below.
-    [701] = {id=701, internal_name="4",                   name="Progressive Level Cap 1",      string="",       text="Progressive Level Cap 1 Unlocked"},      --Increase max creature level by 1 (starts max level 3): 4
-    [702] = {id=702, internal_name="5",                   name="Progressive Level Cap 2",      string="",       text="Progressive Level Cap 2 Unlocked"},      --5
-    [703] = {id=703, internal_name="6",                   name="Progressive Level Cap 3",      string="",       text="Progressive Level Cap 3 Unlocked"},      --6
-    [704] = {id=704, internal_name="7",                   name="Progressive Level Cap 4",      string="",       text="Progressive Level Cap 4 Unlocked"},      --7
-    [705] = {id=705, internal_name="8",                   name="Progressive Level Cap 5",      string="",       text="Progressive Level Cap 5 Unlocked"},      --8
-    [706] = {id=706, internal_name="9",                   name="Progressive Level Cap 6",      string="",       text="Progressive Level Cap 6 Unlocked"},      --9
-    [707] = {id=707, internal_name="0",                   name="Progressive Level Cap 7",      string="",       text="Progressive Level Cap 7 Unlocked"},      --10 and growup
-    [711] = {id=711, internal_name="",                    name="Progressive Creature Limit 1", string="",       text="Progressive Creature Limit 1 Unlocked"}, --Increase creature limit by 5 (starts at max 10): 15
-    [712] = {id=712, internal_name="",                    name="Progressive Creature Limit 2", string="",       text="Progressive Creature Limit 2 Unlocked"}, --20
-    [713] = {id=713, internal_name="",                    name="Progressive Creature Limit 3", string="",       text="Progressive Creature Limit 3 Unlocked"}, --25
-    [714] = {id=714, internal_name="",                    name="Progressive Creature Limit 4", string="",       text="Progressive Creature Limit 4 Unlocked"}, --30
-    [715] = {id=715, internal_name="",                    name="Progressive Creature Limit 5", string="",       text="Progressive Creature Limit 5 Unlocked"}, --35
-    [716] = {id=716, internal_name="",                    name="Progressive Creature Limit 6", string="",       text="Progressive Creature Limit 6 Unlocked"}, --40
-    [721] = {id=721, internal_name="",                    name="Progressive Starting Gold 1",  string="",       text="Progressive Starting Gold 1 Unlocked"},  --Increase starting gold by 1250 (starts at 2500): 3750
-    [722] = {id=722, internal_name="",                    name="Progressive Starting Gold 2",  string="",       text="Progressive Starting Gold 2 Unlocked"},  --5000
-    [723] = {id=723, internal_name="",                    name="Progressive Starting Gold 3",  string="",       text="Progressive Starting Gold 3 Unlocked"},  --6250
-    [724] = {id=724, internal_name="",                    name="Progressive Starting Gold 4",  string="",       text="Progressive Starting Gold 4 Unlocked"},  --7500
-    [725] = {id=725, internal_name="",                    name="Progressive Starting Gold 5",  string="",       text="Progressive Starting Gold 5 Unlocked"},  --8750
-    [726] = {id=726, internal_name="",                    name="Progressive Starting Gold 6",  string="",       text="Progressive Starting Gold 6 Unlocked"},  --10000
+    [701] = {id=701, internal_name="",                    name="Progressive Level Cap",        string="",          text="Progressive Level Cap Unlocked"},      --Increase max creature level by 1 (starts max level 3)
+    [702] = {id=702, internal_name="",                    name="Progressive Creature Limit",   string="",          text="Progressive Creature Limit Unlocked"}, --Increase creature limit by 5 (starts at max 10)
+    [703] = {id=703, internal_name="",                    name="Progressive Starting Gold",    string="",          text="Progressive Starting Gold Unlocked"},  --Increase starting gold by 1250 (starts at 2500)
+    [704] = {id=704, internal_name="",                    name="Progressive Portal Speed",     string="",          text="Progressive Portal Speed Unlocked"},  --Increases Portal speed (decreases wait) by 125 (starts at 750)
+    -- also do progressive hand size, progressive starting unlocks?, progressive starting imps, progressive portal speed.
+-- FILLER --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    [901] = {id=901, internal_name="",                    name="Increase Level",               string="",          text="Increase Level"},
+    [902] = {id=902, internal_name="",                    name="Multiply Creatures",           string="",          text="Multiply Creatures"},
+    [903] = {id=903, internal_name="",                    name="Make Safe",                    string="",          text="Make Safe"},
+    --Not sure other specials like Reveal Map, Steal Hero, Heal All, Increase Gold.
 }
 
 BonusLevelsTable = {
@@ -155,10 +146,13 @@ RecipesTable = {
     [607] = {id=607, internal_name="MkCreature,HORNY,TROLL,BILE_DEMON,DARK_MISTRESS", name="Horned Reaper",                string="",       text="Horned Reaper Recipe Unlocked"},
 }
 NegativeRecipesTable = {
-    [608] = {id=608, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die",             string="",       text="All chickens die Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [609] = {id=609, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [610] = {id=610, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [611] = {id=611, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    -- 608 is wishing well
+    [609] = {id=609, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die 1",           string="",       text="All chickens die 1 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    --[610] = {id=610, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,CHICKEN",           name="All chickens die 2",           string="",       text="All chickens die 2 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [611] = {id=611, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [612] = {id=612, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [613] = {id=613, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    -- 614 is spider easter egg
 }
 
 FXCreaturesTable = {
@@ -185,18 +179,19 @@ FXSpellsTable = {
     [426] = {id=426, internal_name="POWER_CLEANSE",       name="Cleanse",                      string="",          text="Cleanse Researchable"},          --not made yet
 }
 FXRecipesTable = {
-    [612] = {id=612, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good skeleton",                string="",       text="Good skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [613] = {id=613, internal_name="MkCreature,TENTACLE,TROLL,SPIDER",                name="Tentacle",                     string="",       text="Tentacle Recipe Unlocked"},
-    [614] = {id=614, internal_name="MkCreature,HELL_HOUND,DRAGON,FLY",                name="Hound",                        string="",       text="Hound Recipe Unlocked"},
-    [615] = {id=615, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed creatures",              string="",       text="Speed creatures Recipe Unlocked"},
-    [616] = {id=616, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal creatures",            string="",       text="Conceal creatures Recipe Unlocked"},
-    [617] = {id=617, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal creatures",               string="",       text="Heal creatures Recipe Unlocked"},
-    [618] = {id=618, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound creatures",            string="",       text="Rebound creatures Recipe Unlocked"},
-    [619] = {id=619, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect creatures",            string="",       text="Protect creatures Recipe Unlocked"},
-    [620] = {id=620, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight creatures",             string="",       text="Flight creatures Recipe Unlocked"},
-    [621] = {id=621, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze creatures",             string="",       text="Freeze creatures Recipe Unlocked"},
-    [622] = {id=622, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow creatures",               string="",       text="Slow creatures Recipe Unlocked"},
+    [615] = {id=615, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good Skeleton",                string="",       text="Good Skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [616] = {id=616, internal_name="MkCreature,TENTACLE,TROLL,SPIDER",                name="Tentacle",                     string="",       text="Tentacle Recipe Unlocked"},
+    [617] = {id=617, internal_name="MkCreature,HELL_HOUND,DRAGON,FLY",                name="Hound",                        string="",       text="Hound Recipe Unlocked"},
+    [618] = {id=618, internal_name="PosSpellAll,SPELL_SPEED,FLY,HELL_HOUND",          name="Speed Creatures",              string="",       text="Speed Creatures Recipe Unlocked"},
+    [619] = {id=619, internal_name="PosSpellAll,SPELL_INVISIBILITY,TROLL,FLY",        name="Conceal Creatures",            string="",       text="Conceal Creatures Recipe Unlocked"},
+    [620] = {id=620, internal_name="PosSpellAll,SPELL_HEAL,ORC,SPIDER",               name="Heal Creatures",               string="",       text="Heal Creatures Recipe Unlocked"},
+    [621] = {id=621, internal_name="PosSpellAll,SPELL_REBOUND,DARK_MISTRESS,BUG",     name="Rebound Creatures",            string="",       text="Rebound Creatures Recipe Unlocked"},
+    [622] = {id=622, internal_name="PosSpellAll,SPELL_ARMOUR,BILE_DEMON,BUG",         name="Protect Creatures",            string="",       text="Protect Creatures Recipe Unlocked"},
+    [623] = {id=623, internal_name="PosSpellAll,SPELL_FLIGHT,DEMONSPAWN,FLY",         name="Flight Creatures",             string="",       text="Flight Creatures Recipe Unlocked"},
+    [624] = {id=624, internal_name="NegSpellAll,SPELL_FREEZE,VAMPIRE,SPIDER",         name="Freeze Creatures",             string="",       text="Freeze Creatures Recipe Unlocked"},
+    [625] = {id=625, internal_name="NegSpellAll,SPELL_SLOW,VAMPIRE,DEMONSPAWN",       name="Slow Creatures",               string="",       text="Slow Creatures Recipe Unlocked"},
 }
+
 SplitHandPowerTable = {
     [427] = {id=427, internal_name="POWER_PICKUP_CREATURE",                           name="Pick Up Creature",             string="961",    text="Pick Up Creature Researchable"},
     [428] = {id=428, internal_name="POWER_PICKUP_GOLD",                               name="Pick Up Gold",                 string="961",    text="Pick Up Gold Researchable"},
@@ -215,23 +210,23 @@ HeroesTable = {
     [808]  = {id=808,   internal_name="MONK",                                         name="Monk",                         string="",       text="Attract Monk"},
     [809]  = {id=809,   internal_name="SAMURAI",                                      name="Samurai",                      string="",       text="Attract Samurai"},
     [810]  = {id=810,   internal_name="WITCH",                                        name="Priestess",                    string="",       text="Attract Priestess"},
-    [811]  = {id=811,   internal_name="KNIGHT",                                       name="Knight",                       string="",       text="Attract Knight"},
-    [812]  = {id=812,   internal_name="AVATAR",                                       name="Avatar",                       string="",       text="Attract Avatar"},
 }
 
 local IncludeBonusLevels = true
 local IncludeRecipes = true
-local IncludeNegativeRecipes = false
-local IncludeFXCreatures = false
-local IncludeFXTraps = false
-local IncludeFXDoors = false
-local IncludeFXSpells = false
-local IncludeFXRecipes = false
+local IncludeNegativeRecipes = true
+local IncludeFXCreatures = true
+local IncludeFXTraps = true
+local IncludeFXDoors = true
+local IncludeFXSpells = true
+local IncludeFXRecipes = true
 local IncludeImpsInPool = false
 local SplitHandPower = false
-local IncludeHeroes = false
+local IncludeHeroes = true
 local IncludeTunnellersInPool = false
-local IncludeFXHeroes = false
+local IncludeKnightsInPool = false
+local IncludeAvatarsInPool = false
+local IncludeFXHeroes = true
 
 if IncludeBonusLevels then
     for id, check in pairs(BonusLevelsTable) do
@@ -297,6 +292,16 @@ end
 if IncludeFXHeroes then
       ChecksTable[814]  = {id=814,   internal_name="TIME_MAGE",                                      name="Time Mage",                    string="",       text="Attract Time Mage"}
 end
+if IncludeKnightsInPool then
+      ChecksTable[811]  = {id=811,   internal_name="KNIGHT",                                       name="Knight",                       string="",       text="Attract Knight"}
+end
+if IncludeAvatarsInPool then
+      ChecksTable[812]  = {id=812,   internal_name="AVATAR",                                       name="Avatar",                       string="",       text="Attract Avatar"}
+end
+
+
+
+
 
 --if _ then
 --    for id, check in pairs(_) do
@@ -378,13 +383,12 @@ function ReceivedLocations.ReceivedItemCheck(itemid)
             UnlockLevel(itemid)
       elseif itemid > 600 and itemid <= 700 then
             UnlockRecipe(itemid)
-      -- elseif itemid > 700 and itemid <= 800 then
-      --     UnlockProgressive(itemid)
-      --don't think these work this way.
-      --elseif itemid > 800 and itemid <= 900 then
-      --    UnlockFiller(itemid)
-      --elseif itemid > 900 and itemid <= 1000 then
-      --    UnlockTrap(itemid)
+      elseif itemid > 700 and itemid <= 800 then
+            UnlockProgressive(itemid)
+      elseif itemid > 800 and itemid <= 900 then
+            UnlockHero(itemid)
+      elseif itemid > 900 and itemid <= 1000 then
+            UnlockFiller(itemid)
       else
             print("Unknown item ID " .. itemid)
             return
@@ -436,55 +440,134 @@ function UnlockRecipe(itemid)
 end
 
 function UnlockProgressive(itemid)
-      if itemid >= 701 and itemid <= 707 then
+      if itemid == 701 then
             IncreaseLevelCap()
-      elseif itemid >= 711 and itemid <= 716 then
+      elseif itemid == 702 then
             IncreaseCreatureLimit()
-      elseif itemid >= 721 and itemid <= 726 then
+      --elseif itemid == 703 then
             --IncreaseStartingGold() -- only ever run this on level start.
+      elseif itemid == 704 then
+            IncreasePortalSpeed()
+      elseif itemid == 705 then
+            IncreaseHandSize()
       end
 end
 
 function IncreaseLevelCap()
-    local levelcapcount = 0
-    for id = 701, 707 do
-      if ReceivedLocationsTable.Has(id) then
-            levelcapcount = levelcapcount + 1
-      end
-    end
-    local maxLevel = (levelcapcount + 3) % 10 --SET_CREATURE_MAX_LEVEL command uses 0 to mean "10 and growup"
-    if levelcapcount == 7 then
-      print("Level cap " .. levelcapcount .. " (Max level 10+) Unlocked")
-    else
-      print("Level cap " .. levelcapcount .. " (Max level " .. maxLevel .. ") Unlocked")
+    local levelcapcount = ReceivedLocationsTable.Count(701) -- number of increase level caps found
+    local maxLevel = levelcapcount + 3
+    if maxLevel > 10 then maxLevel = 0 end --SET_CREATURE_MAX_LEVEL command uses 0 to mean "10 and growup"
+    if ReceivedLocationsTable.Count(701) == 8 then --when you get the 8th unlock, let player know growup is available
+      --print("Level cap increased! Creature growup unlocked")
+      print("Progressive Level Cap " .. levelcapcount .. " (Creature growup) Unlocked")
+    elseif ReceivedLocationsTable.Count(701) < 8 and ReceivedLocationsTable.Count(701) > 0 then
+      --print("Level cap increased! Max creature level " .. maxLevel .. " unlocked")
+      print("Progressive Level Cap " .. levelcapcount .. " (max level " .. maxLevel.. ") Unlocked")
     end
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,ANY_CREATURE," .. maxLevel .. ")")
       RunDKScriptCommand("SET_CREATURE_MAX_LEVEL(PLAYER0,IMP," .. maxLevel .. ")")
 end
 
 function IncreaseCreatureLimit()
-    local creaturelimitcount = 0
-    for id = 711, 716 do
-      if ReceivedLocationsTable.Has(id) then
-            creaturelimitcount = creaturelimitcount + 1
-      end
-    end
+    local creaturelimitcount = ReceivedLocationsTable.Count(702)
     local creatureLimit = 10 + (creaturelimitcount * 5)
-    print("Creature limit " .. creaturelimitcount .. " (Max creatures " .. creatureLimit .. ") Unlocked")
     MaxCreatures(PLAYER0, creatureLimit)
+    if creaturelimitcount > 0 then
+        print("Progressive Creature Limit " .. creaturelimitcount .. " (Max creature count " .. creatureLimit .. ") Unlocked")
+    end
 end
 
 function IncreaseStartingGold()
-    local startinggoldcount = 0
-    for id = 721, 726 do
-      if ReceivedLocationsTable.Has(id) then
-            startinggoldcount = startinggoldcount + 1
-      end
-    end
+    local startinggoldcount = ReceivedLocationsTable.Count(703)
     local startingGold = 2500 + (startinggoldcount * 1250)
-    print("Starting gold " .. startinggoldcount .. " (Starting gold " .. startingGold .. ") Unlocked")
     StartMoney(PLAYER0, startingGold)
+    if startinggoldcount > 0 then
+        print("Progressive Starting Gold " .. startinggoldcount .. " (Starting gold " .. startingGold .. ") Unlocked")
+    end
 end
+
+function IncreasePortalSpeed()
+    local portalspeedcount = ReceivedLocationsTable.Count(704)
+    local portalSpeed = math.max(100,750 - (portalspeedcount * 125))
+    SetGenerateSpeed(portalSpeed,PLAYER0)
+    if portalspeedcount > 0 then
+        print("Progressive Portal Speed " .. portalspeedcount .. " (Generation every " .. portalSpeed.. " turns) Unlocked")
+    end
+end
+
+function IncreaseHandSize()
+    local handsizecount = ReceivedLocationsTable.Count(705)
+    local handSize = 4 + (handsizecount * 2)
+    RunDKScriptCommand("SET_GAME_RULE(MaxThingsInHand," .. handSize .. ",PLAYER0)")
+    --SetGameRule("MaxThingsInHand",handSize) --originally used RunDKScriptCommand but all other players are CPUs anyway.
+    if handsizecount > 0 then
+        print("Progressive Hand Size " .. handsizecount .. " (" .. handSize.. " things) Unlocked")
+    end
+end
+
+function UnlockHero(itemid)
+      print("Hero " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
+      CreatureAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,0)
+      AddCreatureToPool(ChecksTable[itemid].internal_name,10) -- want every creature available everywhere we've unlocked it! Fine to just be added on top of level's pool I think.
+end
+
+function UnlockFiller(itemid)
+    if itemid == 901 then -- increase level
+        UseSpecialIncreaseLevel(PLAYER0,1)
+        PlayMessage(PLAYER0,"SPEECH",83)
+        print("Filler " .. itemid .. " (Increase Level) Found")
+    elseif itemid == 902 then -- multiply creatures
+        UseSpecialMultiplyCreatures(PLAYER0,1)
+        PlayMessage(PLAYER0,"SPEECH",82)
+        print("Filler " .. itemid .. " (Multiply Creatures) Found")
+    elseif itemid == 903 then -- make safe
+        MakeSafe(PLAYER0)
+        PlayMessage(PLAYER0,"SPEECH",84)
+        print("Filler " .. itemid .. " (Make Safe) Found")
+    elseif itemid == 904 then -- steal hero
+        --when we merge PR 5422, uncomment this!
+        --UseSpecialStealHero(PLAYER0,PLAYER0)
+        --PlayMessage(PLAYER0,"SPEECH",81)
+        print("Filler " .. itemid .. " (Steal Hero) Found")
+    elseif itemid == 905 then -- reveal map
+        PlayMessage(PLAYER0,"SPEECH",77)
+        print("Filler " .. itemid .. " (Reveal Map) Found")
+        local map_width_subtile = (Map.width-1)*3
+        local map_height_subtile = (Map.height-1)*3
+        RevealMapRect(PLAYER0,math.floor(map_width_subtile/2), math.floor(map_height_subtile/2), map_width_subtile, map_height_subtile) --hopefully this is ok!
+    elseif itemid == 906 then -- receive gold
+        PlayMessage(PLAYER0,"SOUND",34) --gold deposit sound
+        local goldamount = 2500 + math.random(0,5)*500
+        print("Filler " .. itemid .. " (Receive Gold) Found")
+        PLAYER0.add_gold(PLAYER0,goldamount)
+        QuickMessage("Received " .. goldamount .. " Gold!","ARCHIPELAGO_ICON")
+      -- 907: Make happy
+    elseif itemid == 908 then -- receive imps
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        AddCreatureToLevel("PLAYER0","IMP","PLAYER0",1,0,"JUMP")
+        PlayMessage(PLAYER0,"SOUND",400)
+        print("Filler " .. itemid .. " (Receive Imps) Found")
+    end
+    --cast a nice spell on all creatures
+      
+      -- evil laugh is 117
+    --160 is rescomp
+    --94-99 is fart
+    --89 is buzzer
+    --77 is reveal map
+    --80 is "so be it"
+end
+
+
+
+
+
+
+
+
+--hand size, portal speed, starting imps, progressive unlocks (gonna be a pain)
 
 function CheckForMiscUnlocks()
       for itemid = 401, 403 do -- if you are playing where you don't have hand, slap or possession available from start...
