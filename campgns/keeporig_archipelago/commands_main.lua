@@ -50,16 +50,17 @@ Game.APBoxMessage = 1
 function OnItemReceived(itemid)
       print("=== OnItemReceived ===")
       print("itemid type: " .. type(itemid) .. ", itemid value: " .. tostring(itemid))
-      print("Received item " .. itemid)
+      print("Received item " .. tostring(itemid))
       if type(itemid) ~= "number" then
           print("ERROR: Invalid item ID:", tostring(itemid))
           return
       end
+      local message_num = (Game.APBoxMessage or 1)
       --print("Game.APBoxMessage: " .. Game.APBoxMessage)
       print("ChecksTable[itemid].text: " .. ChecksTable[itemid].text)
-      RunDKScriptCommand("QUICK_INFORMATION(" .. Game.APBoxMessage .. ",\"AP Item Received:\n" .. ChecksTable[itemid].text .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
-      print("Quick Info (Msg ID " .. Game.APBoxMessage .."): Received: " .. ChecksTable[itemid].text)
-      Game.APBoxMessage = (Game.APBoxMessage or 0) + 1
+      RunDKScriptCommand("QUICK_INFORMATION(" .. (message_num or 1) .. ",\"AP Item Received:\n" .. tostring(ChecksTable[itemid].text) .. "\",ALL_PLAYERS,ARCHIPELAGO_MESSAGE)") -- have to use this version as the custom icon argument isn't set up in Lua yet
+      print("Quick Info (Msg ID " .. message_num .."): Received: " .. ChecksTable[itemid].text)
+      Game.APBoxMessage = (message_num or 0) + 1
       print("Game.APBoxMessage: " .. Game.APBoxMessage)
       -- Also if you receive items while outside a level and then join, will it send all of the new ones when you go into a level?
       ReceivedLocations.ReceivedItemCheck(itemid)
