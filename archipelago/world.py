@@ -5,7 +5,7 @@ from typing import Any
 from worlds.AutoWorld import World
 
 # Imports of your world's files must be relative.
-from . import items, locations, regions, rules, web_world
+from . import items, locations, regions, rules, web_world, enums
 from . import options as dungeonkeeper_options  # rename due to a name conflict with World.options
 
 # APQuest will go through all the parts of the world api one step at a time,
@@ -50,172 +50,27 @@ class DungeonKeeperWorld(World):
     origin_region_name = "Overworld"
 
     item_name_groups = {
-        "Levels": {
-            "Level 1", "Level 2", "Level 3", "Level 4", "Level 5",
-            "Level 6", "Level 7", "Level 8", "Level 9", "Level 10",
-            "Level 11", "Level 12", "Level 13", "Level 14", "Level 15",
-            "Level 16", "Level 17", "Level 18", "Level 19", "Level 20",
-        },
-        "Bonus Levels": {
-            "Secret 1", "Secret 2", "Secret 3", "Secret 4", "Secret 5", "Secret 6",   
-        },
-        "All Levels": {
-            "Level 1", "Level 2", "Level 3", "Level 4", "Level 5",
-            "Level 6", "Level 7", "Level 8", "Level 9", "Level 10",
-            "Level 11", "Level 12", "Level 13", "Level 14", "Level 15",
-            "Level 16", "Level 17", "Level 18", "Level 19", "Level 20",
-            "Secret 1", "Secret 2", "Secret 3", "Secret 4", "Secret 5", "Secret 6",  
-        },
-        "Creatures": {
-            "Attract Fly",
-            "Attract Beetle",
-            "Attract Spider",
-            "Attract Demon Spawn",
-            "Attract Warlock",
-            "Attract Troll",
-            "Attract Bile Demon",
-            "Attract Orc",
-            "Attract Mistress",
-            "Attract Dragon",
-            "Attract Skeleton",
-            "Attract Ghost",
-            "Attract Tentacle",
-            "Attract Hound",
-            "Attract Horned Reaper",
-            "Attract Vampire",
-            "Attract Imp",
-        },
-        "FX Creatures": {
-            "Attract Druid",
-            "Attract Maiden",
-        },
-        "Rooms": {
-            "Treasure Room",
-            "Lair",
-            "Hatchery",
-            "Training Room",
-            "Library",
-            "Bridge",
-            "Guard Post",
-            "Workshop",
-            "Prison",
-            "Torture Chamber",
-            "Barracks",
-            "Temple",
-            "Graveyard",
-            "Scavenger Room",
-        },
-        "Traps": {
-            "Alarm Trap Manufacturable",
-            "Poison Gas Trap Manufacturable",
-            "Lightning Trap Manufacturable",
-            "Lava Trap Manufacturable",
-            "Boulder Trap Manufacturable",
-            "Word of Power Trap Manufacturable",
-        },
-        "FX Traps": {
-            "Demolition Trap Manufacturable",
-            "Sentry Trap Manufacturable",
-            "Ballista Trap Manufacturable",
-        },
-        "Doors": {
-            "Wooden Door Manufacturable",
-            "Braced Door Manufacturable",
-            "Iron Door Manufacturable",
-            "Magic Door Manufacturable",
-        },
-        "FX Doors": {
-            "Secret Door Manufacturable",
-            "Midas Door Manufacturable",
-        },
-        "Powers": {
-            "Hand of Evil",
-            "Slap",
-            "Possession",
-            "Create Imp",
-            "Sight of Evil",
-            "Speed Monster",
-            "Must Obey",
-            "Call to Arms",
-            "Conceal Monster",
-            "Hold Audience",
-            "Cave-In",
-            "Heal",
-            "Lightning Strike",
-            "Protect Monster",
-            "Chicken",
-            "Disease",
-            "Armageddon",
-            "Destroy Walls",
-        },
-        "FX Powers": {
-            "Time Bomb",
-            "Slow",
-            "Freeze",
-            "Rebound",
-            "Flight",
-            "Vision",
-            "Recruit Tunneller",
-        },
-        "Recipes": {
-            "Cheaper Imps Recipe",
-            "Complete Manufacturing Recipe",
-            "Complete Research Recipe",
-            "Bile Demon Recipe",
-            "Warlock Recipe",
-            "Mistress Recipe",
-            "Horned Reaper Recipe",
-        },
-        "Negative Recipes": {
-            "All chickens die 1 Recipe",
-            "All chickens die 2 Recipe",
-            "Disease creatures Recipe",
-            "All creatures angry Recipe",
-            "Chicken creatures Recipe",
-        },
-        "FX Recipes": {
-            "Good Skeleton Recipe",
-            "Tentacle Recipe",
-            "Hound Recipe",
-            "Speed Creatures Recipe",
-            "Conceal Creatures Recipe",
-            "Heal Creatures Recipe",
-            "Rebound Creatures Recipe",
-            "Protect Creatures Recipe",
-            "Flight Creatures Recipe",
-            "Freeze Creatures Recipe",
-            "Slow Creatures Recipe",
-        },
-        "Progressives": {
-            "Progressive Level Cap",
-            "Progressive Creature Limit",
-            "Progressive Starting Gold",
-            "Progressive Portal Speed",
-        },
-        "Heroes": {
-            "Attract Thief",
-            "Attract Barbarian",
-            "Attract Giant",
-            "Attract Wizard",
-            "Attract Fairy",
-            "Attract Archer",
-            "Attract Mountain Dwarf",
-            "Attract Monk",
-            "Attract Samurai",
-            "Attract Priestess",
-            "Attract Knight",
-            "Attract Avatar",
-            "Attract Tunneller",
-        },
-        "FX Heroes": {
-            "Attract Time Mage",
-        },
-        "Filler": {
-            "Increase Level",
-            "Multiply Creatures",
-            "Make Safe",
-        }
+        "Levels": {entry.value for entry in enums.KeeperLevelName},
+        "Bonus Levels": {entry.value for entry in enums.KeeperSecretLevelName},
+        "Creatures": {entry.value for entry in enums.KeeperCreatureName},
+        "FX Creatures": {entry.value for entry in enums.KeeperFXCreatureName},
+        "Rooms": {entry.value for entry in enums.KeeperRoomName},
+        "Traps": {entry.value for entry in enums.KeeperTrapName},
+        "FX Traps": {entry.value for entry in enums.KeeperFXTrapName},
+        "Doors": {entry.value for entry in enums.KeeperDoorName},
+        "FX Doors": {entry.value for entry in enums.KeeperFXDoorName},
+        "Powers": {entry.value for entry in enums.KeeperPowerName},
+        "FX Powers": {entry.value for entry in enums.KeeperFXPowerName},
+        "Recipes": {entry.value for entry in enums.KeeperRecipeName},
+        "Negative Recipes": {entry.value for entry in enums.NegativeRecipeName},
+        "FX Recipes": {entry.value for entry in enums.KeeperFXRecipeName},
+        "Progressives": {entry.value for entry in enums.KeeperProgressiveName},
+        "Heroes": {entry.value for entry in enums.KeeperHeroName},
+        "FX Heroes": {entry.value for entry in enums.KeeperFXHeroName},
+        "Filler": {entry.value for entry in enums.KeeperFillerName}
     }
+    item_name_groups["All Levels"] = item_name_groups["Levels"] | item_name_groups["Bonus Levels"]
+    item_name_groups["Creatures"].update(enums.KeeperImpName.IMP.value)
 
     # Our world class must have certain functions ("steps") that get called during generation.
     # The main ones are: create_regions, set_rules, create_items.
@@ -267,7 +122,7 @@ class DungeonKeeperWorld(World):
     # You must override this function and return this infinitely repeatable item's name.
     # In our case, we defined a function called get_random_filler_item_name for this purpose in our items.py.
     def get_filler_item_name(self) -> str:
-        return items.get_random_filler_item_name(self)
+        return items.get_random_filler_item_name()
 
     def fill_slot_data(self) -> dict[str, Any]:
         return {
