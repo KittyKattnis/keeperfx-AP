@@ -98,11 +98,11 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
     location_rules[f"{get_val(KeeperLevelName.LEVEL_008)} Northeast Fortress"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals # demonspawn, hound, barbarian
 
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Wood SW Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals # bile, troll, mistress
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Wood SE Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Wood NE Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Wood NW Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Wood Neutral Fort"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
+    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} SW Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals # bile, troll, mistress
+    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} SE Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
+    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} NE Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
+    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} NW Library"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
+    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Neutral Fort"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher_if_changed_neutrals
 
     location_rules[f"{get_val(KeeperLevelName.LEVEL_010)} East Island"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH))  & have_base_researcher_if_changed_neutrals #dragons, flies #Technically Blue could bridge to you
     location_rules[f"{get_val(KeeperLevelName.LEVEL_010)} West Island"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH))  & have_base_researcher_if_changed_neutrals #dragons, flies #Technically Blue could bridge to you
@@ -145,25 +145,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     location_rules[f"{get_val(KeeperLevelName.LEVEL_020)} Hero Fortress Centre"] = Has(get_val(KeeperRoomName.TRAINING)) # would be awful having to fight level 10 Tentacles with level 1 creatures
     location_rules[f"{get_val(KeeperLevelName.LEVEL_020)} Hero Fortress West"] = Has(get_val(KeeperRoomName.TRAINING)) # would be awful having to fight level 10 Tentacles with level 1 creatures
 
-    location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_101)} In Water"] = Has(get_val(KeeperRoomName.BRIDGE)) & have_library_if_cruelty_mode  & have_base_researcher & CanReachLocation(f"{get_val(KeeperSecretLevelName.LEVEL_101)} Beaten") #Have Library from beginning on non-cruelty mode
-
-    location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_103)} Lava Pool"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_103)} Next to Witch"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_103)} Next to Boulder"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-
-    location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_104)} Goal Area"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH))
-
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_004)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_005)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_006)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_007)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_010)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_013)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_014)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-    location_rules[f"{get_val(KeeperLevelName.LEVEL_015)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
-
-    #location_rules[f"{get_val(KeeperLevelName.LEVEL_016)} Beaten"] = Has("Progressive Level Cap",4)
+        #location_rules[f"{get_val(KeeperLevelName.LEVEL_016)} Beaten"] = Has("Progressive Level Cap",4)
 
 
 #HasAll("Progressive Level Cap", "Progressive Creature Limit", "Progressive Starting Gold", "Progressive Portal Speed",get_val(KeeperCreatureName.DARK_MISTRESS),get_val(KeeperRoomName.TORTURE)) | HasAll("Progressive Level Cap", "Progressive Creature Limit", "Progressive Starting Gold", "Progressive Portal Speed", get_val(KeeperRoomName.TEMPLE), "Mistress Recipe")
@@ -281,7 +263,26 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
         & (state.count("Progressive Creature Limit", world.player) >= 3)
     )
 
-    location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_105)} Beaten"] = HasAny(get_val(KeeperPowerName.POWER_IMP),get_val(KeeperFXPowerName.POWER_TUNNELLER)) #starts with no Imps.
+    if world.options.secret_levels.value:
+        location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_101)} In Water"] = Has(get_val(KeeperRoomName.BRIDGE)) & have_library_if_cruelty_mode  & have_base_researcher & CanReachLocation(f"{get_val(KeeperSecretLevelName.LEVEL_101)} Beaten") #Have Library from beginning on non-cruelty mode
+
+        location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_103)} Lava Pool"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_103)} Next to Witch"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_103)} Next to Boulder"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+
+        location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_104)} Goal Area"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH))
+
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_004)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_005)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_006)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_007)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_009)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_010)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_013)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_014)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+        location_rules[f"{get_val(KeeperLevelName.LEVEL_015)} Beaten"] = HasAll(get_val(KeeperRoomName.BRIDGE), get_val(KeeperRoomName.RESEARCH)) & have_base_researcher
+
+        location_rules[f"{get_val(KeeperSecretLevelName.LEVEL_105)} Beaten"] = HasAny(get_val(KeeperPowerName.POWER_IMP),get_val(KeeperFXPowerName.POWER_TUNNELLER)) #starts with no Imps.
 
 
 
