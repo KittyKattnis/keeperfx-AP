@@ -4,7 +4,8 @@ from typing import Dict
 from Options import OptionGroup, ItemDict, Toggle, Choice
 from worlds.AutoWorld import PerGameCommonOptions
 from .items import CREATURES, ROOMS, SPELLS, LEVELS, POSITIVE_RECIPES
-from .enums import KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName, KeeperRecipe
+from .enums import (KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName, KeeperRecipe, TileMode,
+                    TileOption)
 
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
@@ -100,9 +101,28 @@ class IncludeAvatarsInPool(Toggle):
     """Choose if you want to attract Avatars."""
     display_name = "Attract Avatars"
 
-class ShuffleTilesets(Toggle):
-    """Choose if you want to shuffle tilesets."""
-    display_name = "Shuffle Tilesets"
+class TilesetMode(Choice):
+    """Choose the shuffle mode for the level tiles
+    Tileset -> Shuffles only the 4 original tilesets
+    Level -> Assigns a tileset for EACH level for the session
+    Random -> Randomises each time the level is played"""
+    display_name = "Tileset Shuffle Mode"
+    option_Off = TileMode.OFF
+    option_Tileset = TileMode.TILESET
+    option_Level = TileMode.LEVEL
+    option_Random = TileMode.RANDOM
+
+    default = 0
+
+class TilesetChoices(Choice):
+    """Decide what level tilesets can be chosen amongst"""
+    option_Original = TileOption.Original
+    option_DeeperDungeon = TileOption.DeeperDungeon
+    option_OriginalAndDeeper = TileOption.OriginalAndDeeper
+    option_NewOnly = TileOption.NewOnly
+    option_ALL = TileOption.ALL
+
+    default = option_Original
 
 class ChangePlayerColour(Choice):
     """Choose if you want to change the player colour."""
@@ -227,7 +247,8 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     IncludeTunnellersInPool: IncludeTunnellersInPool
     IncludeKnightsInPool: IncludeKnightsInPool
     IncludeAvatarsInPool: IncludeAvatarsInPool
-    shuffle_tilesets: ShuffleTilesets
+    tileset_mode: TilesetMode
+    tileset_choice: TilesetChoices
     change_player_colour: ChangePlayerColour
     change_neutrals: ChangeNeutrals
     swap_water_and_lava: SwapWaterAndLava
@@ -274,7 +295,8 @@ option_groups = [
         FlatTempleGuardPost,
     ]),
     OptionGroup("Fun", [
-        ShuffleTilesets,
+        TilesetMode,
+        TilesetChoices,
         ChangePlayerColour,
     ])    
 ]

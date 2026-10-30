@@ -432,6 +432,19 @@ class KeeperFXBadTempleLocations(StrEnum):
         FREEZE = "Temple: Cast freeze on friendly creatures [Vampire, Spider]"
         SLOW = "Temple: Cast slow on friendly creatures [Vampire, Demonspawn]"
 
+class TileMode(IntEnum):
+        OFF = 0
+        TILESET = 1
+        LEVEL = 2
+        RANDOM = 3
+
+class TileOption(IntEnum):
+        Original = 0
+        DeeperDungeon = 1
+        OriginalAndDeeper = 2
+        NewOnly = 3
+        ALL = 4
+
 #    #---------------------------------------------------------
 #    #Filler
 #    #okay I feel like a lot of the stuff in this game could be considered filler, like you could beat the whole game without using traps or doors, or half the rooms or spells or creatures, but yeah
