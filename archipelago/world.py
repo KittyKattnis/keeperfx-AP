@@ -113,8 +113,8 @@ class DungeonKeeperWorld(World):
                     item = self.create_item(item_name)
                     self.multiworld.push_precollected(item)
 
-        self.multiworld.early_items[self.player]["Library"] = 1
-        self.multiworld.early_items[self.player]["Training Room"] = 1
+        self.multiworld.early_items[self.player][enums.KeeperRoomName.RESEARCH] = 1
+        self.multiworld.early_items[self.player][enums.KeeperRoomName.TRAINING] = 1
 
     # For features such as item links and panic-method start inventory, AP may ask your world to create extra filler.
     # The way it does this is by calling get_filler_item_name.
