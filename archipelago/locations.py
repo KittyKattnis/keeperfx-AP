@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from BaseClasses import ItemClassification, Location
 
-from . import items
+from . import items, enums
 
 if TYPE_CHECKING:
     from .world import DungeonKeeperWorld
@@ -13,212 +13,212 @@ if TYPE_CHECKING:
 # We will have a lookup from location name to ID here that, in world.py, we will import and bind to the world class.
 # Even if a location doesn't exist on specific options, it must be present in this lookup.
 LOCATION_NAME_TO_ID = {
-    "Eversmile Starting Room": 101,
-    "Eversmile Water Patch": 102,
-    "Eversmile Hero Cave": 103,
+    f"{enums.KeeperLevelName.LEVEL_001.value} Starting Room": 101,
+    f"{enums.KeeperLevelName.LEVEL_001.value} Water Patch": 102,
+    f"{enums.KeeperLevelName.LEVEL_001.value} Hero Cave": 103,
 
-    "Cosyton East Water": 201,
-    "Cosyton Treasure Room": 202,
-    "Cosyton Hero Fortress": 203,
+    f"{enums.KeeperLevelName.LEVEL_002.value} East Water": 201,
+    f"{enums.KeeperLevelName.LEVEL_002.value} Treasure Room": 202,
+    f"{enums.KeeperLevelName.LEVEL_002.value} Hero Fortress": 203,
 
-    "Waterdream Warm South Water": 301,
-    "Waterdream Warm Training Room": 302,
-    "Waterdream Warm Hero Fortress": 303,
+    f"{enums.KeeperLevelName.LEVEL_003.value} South Water": 301,
+    f"{enums.KeeperLevelName.LEVEL_003.value} Training Room": 302,
+    f"{enums.KeeperLevelName.LEVEL_003.value} Hero Fortress": 303,
 
-    "Flowerhat Hero Fortress NE": 401,
-    "Flowerhat Hero Fortress SE": 402,
-    "Flowerhat Lava Island": 403,
-    "Flowerhat Spider Cave": 404,
+    f"{enums.KeeperLevelName.LEVEL_004.value} Hero Fortress NE": 401,
+    f"{enums.KeeperLevelName.LEVEL_004.value} Hero Fortress SE": 402,
+    f"{enums.KeeperLevelName.LEVEL_004.value} Lava Island": 403,
+    f"{enums.KeeperLevelName.LEVEL_004.value} Spider Cave": 404,
 
-    "Lushmeadow-on-Down East Fort": 501,
-    "Lushmeadow-on-Down West Fort": 502,
-    "Lushmeadow-on-Down West Islet": 503,
+    f"{enums.KeeperLevelName.LEVEL_005.value} East Fort": 501,
+    f"{enums.KeeperLevelName.LEVEL_005.value} West Fort": 502,
+    f"{enums.KeeperLevelName.LEVEL_005.value} West Islet": 503,
 
-    "Snuggledell East Water": 601,
-    "Snuggledell Southeast Water": 602,
-    "Snuggledell West Water": 603,
+    f"{enums.KeeperLevelName.LEVEL_006.value} East Water": 601,
+    f"{enums.KeeperLevelName.LEVEL_006.value} Southeast Water": 602,
+    f"{enums.KeeperLevelName.LEVEL_006.value} West Water": 603,
 
-    "Wishvale NE Hero Fortress": 701,
-    "Wishvale East Hero Fortress": 702,
-    "Wishvale SE Hero Fortress": 703,
-    "Wishvale Blue Keeper": 704,
+    f"{enums.KeeperLevelName.LEVEL_007.value} NE Hero Fortress": 701,
+    f"{enums.KeeperLevelName.LEVEL_007.value} East Hero Fortress": 702,
+    f"{enums.KeeperLevelName.LEVEL_007.value} SE Hero Fortress": 703,
+    f"{enums.KeeperLevelName.LEVEL_007.value} Blue Keeper": 704,
 
-    "Tickle Southeast Cave": 801,
-    "Tickle Northwest Cave": 802,
-    "Tickle Northeast Fortress": 803,
+    f"{enums.KeeperLevelName.LEVEL_008.value} Southeast Cave": 801,
+    f"{enums.KeeperLevelName.LEVEL_008.value} Northwest Cave": 802,
+    f"{enums.KeeperLevelName.LEVEL_008.value} Northeast Fortress": 803,
 
-    "Moonbrush Wood SW Library": 901,
-    "Moonbrush Wood NW Library": 902,
-    "Moonbrush Wood NE Library": 903,
-    "Moonbrush Wood SE Library": 904,
-    "Moonbrush Wood Maze Deadend": 905,
-    "Moonbrush Wood Maze Exit": 906,
-    "Moonbrush Wood Neutral Fort": 907,
+    f"{enums.KeeperLevelName.LEVEL_009.value} SW Library": 901,
+    f"{enums.KeeperLevelName.LEVEL_009.value} NW Library": 902,
+    f"{enums.KeeperLevelName.LEVEL_009.value} NE Library": 903,
+    f"{enums.KeeperLevelName.LEVEL_009.value} SE Library": 904,
+    f"{enums.KeeperLevelName.LEVEL_009.value} Maze Deadend": 905,
+    f"{enums.KeeperLevelName.LEVEL_009.value} Maze Exit": 906,
+    f"{enums.KeeperLevelName.LEVEL_009.value} Neutral Fort": 907,
 
-    "Nevergrim East Island": 1001,
-    "Nevergrim West Island": 1002,
-    "Nevergrim Blue Keeper": 1003,
+    f"{enums.KeeperLevelName.LEVEL_010.value} East Island": 1001,
+    f"{enums.KeeperLevelName.LEVEL_010.value} West Island": 1002,
+    f"{enums.KeeperLevelName.LEVEL_010.value} Blue Keeper": 1003,
 
-    "Hearth Hero Storeroom 1": 1101,
-    "Hearth Hero Storeroom 2": 1102,
-    "Hearth NE Water": 1103,
-    "Hearth SE Water": 1104,
-    "Hearth SW Water": 1105,
-    "Hearth NW Water": 1106,
+    f"{enums.KeeperLevelName.LEVEL_011.value} Hero Storeroom 1": 1101,
+    f"{enums.KeeperLevelName.LEVEL_011.value} Hero Storeroom 2": 1102,
+    f"{enums.KeeperLevelName.LEVEL_011.value} NE Water": 1103,
+    f"{enums.KeeperLevelName.LEVEL_011.value} SE Water": 1104,
+    f"{enums.KeeperLevelName.LEVEL_011.value} SW Water": 1105,
+    f"{enums.KeeperLevelName.LEVEL_011.value} NW Water": 1106,
 
-    "Elf's Dance SE Cavern": 1201,
-    "Elf's Dance SW Cavern": 1202,
-    "Elf's Dance Western Trail": 1203,
+    f"{enums.KeeperLevelName.LEVEL_012.value} SE Cavern": 1201,
+    f"{enums.KeeperLevelName.LEVEL_012.value} SW Cavern": 1202,
+    f"{enums.KeeperLevelName.LEVEL_012.value} Western Trail": 1203,
 
-    "Buffy Oak Poison Cavern": 1301,
-    "Buffy Oak Lava Cavern": 1302,
-    "Buffy Oak South Gold Seam": 1303,
+    f"{enums.KeeperLevelName.LEVEL_013.value} Poison Cavern": 1301,
+    f"{enums.KeeperLevelName.LEVEL_013.value} Lava Cavern": 1302,
+    f"{enums.KeeperLevelName.LEVEL_013.value} South Gold Seam": 1303,
 
-    "Sleepiburgh NW Cavern": 1401,
-    "Sleepiburgh NE Cavern": 1402,
-    "Sleepiburgh Workshop Tunnel": 1403,
+    f"{enums.KeeperLevelName.LEVEL_014.value} NW Cavern": 1401,
+    f"{enums.KeeperLevelName.LEVEL_014.value} NE Cavern": 1402,
+    f"{enums.KeeperLevelName.LEVEL_014.value} Workshop Tunnel": 1403,
 
-    "Woodly Rhyme Hero Fortress North": 1501,
-    "Woodly Rhyme Hero Fortress South": 1502,
-    "Woodly Rhyme Checkerboard 1": 1503,
-    "Woodly Rhyme Checkerboard 2": 1504,
-    "Woodly Rhyme Southern Tunnel": 1505,
+    f"{enums.KeeperLevelName.LEVEL_015.value} Hero Fortress North": 1501,
+    f"{enums.KeeperLevelName.LEVEL_015.value} Hero Fortress South": 1502,
+    f"{enums.KeeperLevelName.LEVEL_015.value} Checkerboard 1": 1503,
+    f"{enums.KeeperLevelName.LEVEL_015.value} Checkerboard 2": 1504,
+    f"{enums.KeeperLevelName.LEVEL_015.value} Southern Tunnel": 1505,
 
-    "Tulipscent NE Hero Fortress": 1601,
-    "Tulipscent SW Hero Fortress": 1602,
-    "Tulipscent NW Hero Fortress 1": 1603,
-    "Tulipscent NW Hero Fortress 2": 1604,
+    f"{enums.KeeperLevelName.LEVEL_016.value} NE Hero Fortress": 1601,
+    f"{enums.KeeperLevelName.LEVEL_016.value} SW Hero Fortress": 1602,
+    f"{enums.KeeperLevelName.LEVEL_016.value} NW Hero Fortress 1": 1603,
+    f"{enums.KeeperLevelName.LEVEL_016.value} NW Hero Fortress 2": 1604,
 
-    "Mirthshire SE Fort": 1701,
-    "Mirthshire Southern Storeroom": 1702,
-    "Mirthshire Western Cavern": 1703,
-    "Mirthshire NW Fort": 1704,
+    f"{enums.KeeperLevelName.LEVEL_017.value} SE Fort": 1701,
+    f"{enums.KeeperLevelName.LEVEL_017.value} Southern Storeroom": 1702,
+    f"{enums.KeeperLevelName.LEVEL_017.value} Western Cavern": 1703,
+    f"{enums.KeeperLevelName.LEVEL_017.value} NW Fort": 1704,
 
-    "Blaise End Central Fort": 1801,
-    "Blaise End Western Fort": 1802,
-    "Blaise End NW Lava": 1803,
-    "Blaise End NW Guard Room": 1804,
-    "Blaise End Behind Wall NW": 1805,
-    "Blaise End Behind Wall NE": 1806,
-    "Blaise End Fortress Fairy Tunnel": 1807,
-    "Blaise End NE Fairy Room": 1808,
-    "Blaise End Fortress Barbarian Tunnel": 1809,
-    "Blaise End Central Portal": 1810,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Central Fort": 1801,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Western Fort": 1802,
+    f"{enums.KeeperLevelName.LEVEL_018.value} NW Lava": 1803,
+    f"{enums.KeeperLevelName.LEVEL_018.value} NW Guard Room": 1804,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Behind Wall NW": 1805,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Behind Wall NE": 1806,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Fortress Fairy Tunnel": 1807,
+    f"{enums.KeeperLevelName.LEVEL_018.value} NE Fairy Room": 1808,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Fortress Barbarian Tunnel": 1809,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Central Portal": 1810,
 
-    "Mistle Behind Earth": 1901,
-    "Mistle Prison Tunnel": 1902,
-    "Mistle Central Water 1": 1903,
-    "Mistle Central Water 2": 1904,
-    "Mistle Fairy Room": 1905,
-    "Mistle Cave Centre": 1906,
-    "Mistle Cave North": 1907,
-    "Mistle Hero Fortress Heart": 1908,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Behind Earth": 1901,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Prison Tunnel": 1902,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Central Water 1": 1903,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Central Water 2": 1904,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Fairy Room": 1905,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Cave Centre": 1906,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Cave North": 1907,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Hero Fortress Heart": 1908,
 
-    "Skybird Trill Near Gems 1": 2001,
-    "Skybird Trill Near Gems 2": 2002,
-    "Skybird Trill Eastern Hero Fort 1": 2003,
-    "Skybird Trill Eastern Hero Fort 2": 2004,
-    "Skybird Trill Hero Fortress Centre": 2005,
-    "Skybird Trill Hero Fortress West": 2006,
+    f"{enums.KeeperLevelName.LEVEL_020.value} Near Gems 1": 2001,
+    f"{enums.KeeperLevelName.LEVEL_020.value} Near Gems 2": 2002,
+    f"{enums.KeeperLevelName.LEVEL_020.value} Eastern Hero Fort 1": 2003,
+    f"{enums.KeeperLevelName.LEVEL_020.value} Eastern Hero Fort 2": 2004,
+    f"{enums.KeeperLevelName.LEVEL_020.value} Hero Fortress Centre": 2005,
+    f"{enums.KeeperLevelName.LEVEL_020.value} Hero Fortress West": 2006,
 
-    "Secret 1 Archer Room": 2101,
-    "Secret 1 Samurai Room": 2102,
-    "Secret 1 Near Hatchery": 2103,
-    "Secret 1 Prison Corridor": 2104,
-    "Secret 1 Barbarian Room 1": 2105,
-    "Secret 1 Barbarian Room 2": 2106,
-    "Secret 1 Barbarian Room 3": 2107,
-    "Secret 1 Barbarian Room 4": 2108,
-    "Secret 1 Past Magic Door": 2109,
-    "Secret 1 Knight Corridor": 2110,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Archer Room": 2101,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Samurai Room": 2102,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Near Hatchery": 2103,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Prison Corridor": 2104,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 1": 2105,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 2": 2106,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 3": 2107,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 4": 2108,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Past Magic Door": 2109,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Knight Corridor": 2110,
 
-    "Secret 2 Next to Heart": 2201,
-    "Secret 2 Gold Mine": 2202,
-    "Secret 2 Next to Hound": 2203,
-    "Secret 2 In Water": 2204,
-    "Secret 2 Lava Treasure Room": 2205,
+    f"{enums.KeeperSecretLevelName.LEVEL_101.value} Next to Heart": 2201,
+    f"{enums.KeeperSecretLevelName.LEVEL_101.value} Gold Mine": 2202,
+    f"{enums.KeeperSecretLevelName.LEVEL_101.value} Next to Hound": 2203,
+    f"{enums.KeeperSecretLevelName.LEVEL_101.value} In Water": 2204,
+    f"{enums.KeeperSecretLevelName.LEVEL_101.value} Lava Treasure Room": 2205,
 
-    "Secret 3 NE": 2301,
-    "Secret 3 NW 2": 2302,
-    "Secret 3 NW 3": 2303,
-    "Secret 3 NW 4": 2304,
-    "Secret 3 Horny Lair": 2305,
-    "Secret 3 Library": 2306,
+    f"{enums.KeeperSecretLevelName.LEVEL_102.value} NE": 2301,
+    f"{enums.KeeperSecretLevelName.LEVEL_102.value} NW 2": 2302,
+    f"{enums.KeeperSecretLevelName.LEVEL_102.value} NW 3": 2303,
+    f"{enums.KeeperSecretLevelName.LEVEL_102.value} NW 4": 2304,
+    f"{enums.KeeperSecretLevelName.LEVEL_102.value} Horny Lair": 2305,
+    f"{enums.KeeperSecretLevelName.LEVEL_102.value} Library": 2306,
 
-    "Secret 4 Next to Heart": 2401,
-    "Secret 4 Lava Pool": 2402,
-    "Secret 4 Next to Witch": 2403,
-    "Secret 4 Next to Boulder": 2404,
+    f"{enums.KeeperSecretLevelName.LEVEL_103.value} Next to Heart": 2401,
+    f"{enums.KeeperSecretLevelName.LEVEL_103.value} Lava Pool": 2402,
+    f"{enums.KeeperSecretLevelName.LEVEL_103.value} Next to Witch": 2403,
+    f"{enums.KeeperSecretLevelName.LEVEL_103.value} Next to Boulder": 2404,
 
-    "Secret 5 Near Heart": 2501,
-    "Secret 5 Lava Platform": 2502,
-    "Secret 5 Next to Bile Demon": 2503,
-    "Secret 5 Next to Mistress": 2504,
-    "Secret 5 Next to Vampire": 2505,
-    "Secret 5 Goal Area": 2506,
+    f"{enums.KeeperSecretLevelName.LEVEL_104.value} Near Heart": 2501,
+    f"{enums.KeeperSecretLevelName.LEVEL_104.value} Lava Platform": 2502,
+    f"{enums.KeeperSecretLevelName.LEVEL_104.value} Next to Bile Demon": 2503,
+    f"{enums.KeeperSecretLevelName.LEVEL_104.value} Next to Mistress": 2504,
+    f"{enums.KeeperSecretLevelName.LEVEL_104.value} Next to Vampire": 2505,
+    f"{enums.KeeperSecretLevelName.LEVEL_104.value} Goal Area": 2506,
 
-    "Secret 6 NE Storeroom": 2601,
-    "Secret 6 SE Storeroom": 2602,
-    "Secret 6 SW Storeroom": 2603,
-    "Secret 6 NW Storeroom": 2604,
-    "Secret 6 Centre Gold": 2605,
-    "Secret 6 NE Reward Moon": 2606,
-    "Secret 6 Blue Library": 2607,
-    "Secret 6 Green Library": 2608,
-    "Secret 6 Yellow Library": 2609,
-
-    #-----------------------------------------------------
-
-    "Level 1 Beaten": 10001,
-    "Level 2 Beaten": 10002,
-    "Level 3 Beaten": 10003,
-    "Level 4 Beaten": 10004,
-    "Level 5 Beaten": 10005,
-    "Level 6 Beaten": 10006,
-    "Level 7 Beaten": 10007,
-    "Level 8 Beaten": 10008,
-    "Level 9 Beaten": 10009,
-    "Level 10 Beaten": 10010,
-    "Level 11 Beaten": 10011,
-    "Level 12 Beaten": 10012,
-    "Level 13 Beaten": 10013,
-    "Level 14 Beaten": 10014,
-    "Level 15 Beaten": 10015,
-    "Level 16 Beaten": 10016,
-    "Level 17 Beaten": 10017,
-    "Level 18 Beaten": 10018,
-    "Level 19 Beaten": 10019,
-    "Level 20 Beaten": 10020,
-    "Level 100 Beaten": 10021,
-    "Level 101 Beaten": 10022,
-    "Level 102 Beaten": 10023,
-    "Level 103 Beaten": 10024,
-    "Level 104 Beaten": 10025,
-    "Level 105 Beaten": 10026,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} NE Storeroom": 2601,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} SE Storeroom": 2602,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} SW Storeroom": 2603,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} NW Storeroom": 2604,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} Centre Gold": 2605,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} NE Reward Moon": 2606,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} Blue Library": 2607,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} Green Library": 2608,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} Yellow Library": 2609,
 
     #-----------------------------------------------------
 
-    "Recipe Cheaper Imps":11001,
-    "Recipe Complete Manufacturing":11002,
-    "Recipe Complete Research":11003,
-    "Recipe Bile Demon":11004,
-    "Recipe Warlock":11005,
-    "Recipe Mistress":11006,
-    "Recipe Horned Reaper":11007,
-    "Recipe Make Angry":11008,
-    "Recipe Kill Chickens":11009,
-    "Recipe Disease Creatures":11010,
-    "Recipe Chicken Creatures":11011,
-    "Recipe Tentacle":11012,
-    "Recipe Hellhound":11013,
-    "Recipe Speed":11014,
-    "Recipe Conceal":11015,
-    "Recipe Heal":11016,
-    "Recipe Rebound":11017,
-    "Recipe Protect":11018,
-    "Recipe Flight":11019,
-    "Recipe Freeze":11020,
-    "Recipe Slow":11021,
+    f"{enums.KeeperLevelName.LEVEL_001.value} Beaten": 10001,
+    f"{enums.KeeperLevelName.LEVEL_002.value} Beaten": 10002,
+    f"{enums.KeeperLevelName.LEVEL_003.value} Beaten": 10003,
+    f"{enums.KeeperLevelName.LEVEL_004.value} Beaten": 10004,
+    f"{enums.KeeperLevelName.LEVEL_005.value} Beaten": 10005,
+    f"{enums.KeeperLevelName.LEVEL_006.value} Beaten": 10006,
+    f"{enums.KeeperLevelName.LEVEL_007.value} Beaten": 10007,
+    f"{enums.KeeperLevelName.LEVEL_008.value} Beaten": 10008,
+    f"{enums.KeeperLevelName.LEVEL_009.value} Beaten": 10009,
+    f"{enums.KeeperLevelName.LEVEL_010.value} Beaten": 10010,
+    f"{enums.KeeperLevelName.LEVEL_011.value} Beaten": 10011,
+    f"{enums.KeeperLevelName.LEVEL_012.value} Beaten": 10012,
+    f"{enums.KeeperLevelName.LEVEL_013.value} Beaten": 10013,
+    f"{enums.KeeperLevelName.LEVEL_014.value} Beaten": 10014,
+    f"{enums.KeeperLevelName.LEVEL_015.value} Beaten": 10015,
+    f"{enums.KeeperLevelName.LEVEL_016.value} Beaten": 10016,
+    f"{enums.KeeperLevelName.LEVEL_017.value} Beaten": 10017,
+    f"{enums.KeeperLevelName.LEVEL_018.value} Beaten": 10018,
+    f"{enums.KeeperLevelName.LEVEL_019.value} Beaten": 10019,
+    f"{enums.KeeperLevelName.LEVEL_020.value} Beaten": 10020,
+    f"{enums.KeeperSecretLevelName.LEVEL_100.value} Beaten": 10021,
+    f"{enums.KeeperSecretLevelName.LEVEL_101.value} Beaten": 10022,
+    f"{enums.KeeperSecretLevelName.LEVEL_102.value} Beaten": 10023,
+    f"{enums.KeeperSecretLevelName.LEVEL_103.value} Beaten": 10024,
+    f"{enums.KeeperSecretLevelName.LEVEL_104.value} Beaten": 10025,
+    f"{enums.KeeperSecretLevelName.LEVEL_105.value} Beaten": 10026,
+
+    #-----------------------------------------------------
+
+    enums.KeeperGoodTempleLocations.CHEAPER_IMPS.value:11001,
+    enums.KeeperGoodTempleLocations.MANUFACTURING.value:11002,
+    enums.KeeperGoodTempleLocations.RESEARCH.value:11003,
+    enums.KeeperGoodTempleLocations.BILE_DEMON.value:11004,
+    enums.KeeperGoodTempleLocations.WARLOCK.value:11005,
+    enums.KeeperGoodTempleLocations.MISTRESS.value:11006,
+    enums.KeeperGoodTempleLocations.HORNY.value:11007,
+    enums.KeeperBadTempleLocations.MAKE_ANGRY.value:11008,
+    enums.KeeperBadTempleLocations.KILL_CHICKENS.value:11009,
+    enums.KeeperBadTempleLocations.DISEASE_CREATURES.value:11010,
+    enums.KeeperBadTempleLocations.CHICKEN_CREATURES.value:11011,
+    enums.KeeperFXGoodTempleLocations.TENTACLE.value:11012,
+    enums.KeeperFXGoodTempleLocations.HELLHOUND.value:11013,
+    enums.KeeperFXGoodTempleLocations.SPEED.value:11014,
+    enums.KeeperFXGoodTempleLocations.CONCEAL.value:11015,
+    enums.KeeperFXGoodTempleLocations.HEAL.value:11016,
+    enums.KeeperFXGoodTempleLocations.REBOUND.value:11017,
+    enums.KeeperFXGoodTempleLocations.PROTECT.value:11018,
+    enums.KeeperFXGoodTempleLocations.FLIGHT.value:11019,
+    enums.KeeperFXBadTempleLocations.FREEZE.value:11020,
+    enums.KeeperFXBadTempleLocations.SLOW.value:11021,
     #"Recipe Good Skeleton"
 
     #Other checks you can do anywhere
@@ -254,7 +254,7 @@ LOCATION_NAME_TO_ID = {
 # Each Location instance must correctly report the "game" it belongs to.
 # To make this simple, it is common practice to subclass the basic Location class and override the "game" field.
 class DungeonKeeperLocation(Location):
-    game = "Dungeon Keeper"
+    game = enums.GAME_NAME
 
 
 # Let's make one more helper method before we begin actually creating locations.
@@ -275,28 +275,26 @@ def create_all_locations(world: DungeonKeeperWorld) -> None:
 def create_regular_locations(world: DungeonKeeperWorld) -> None:
     # Finally, we need to put the Locations ("checks") into their regions.
     # Once again, before we do anything, we can grab our regions we created by using world.get_region()
-    overworld = world.get_region("Overworld")
-    eversmile = world.get_region("Eversmile")
-    cosyton = world.get_region("Cosyton")
-    waterdreamwarm = world.get_region("Waterdream Warm")
-    flowerhat = world.get_region("Flowerhat")
-    lushmeadow = world.get_region("LushMeadow-On-Down")
-    snuggledell = world.get_region("Snuggledell")
-    wishvale = world.get_region("Wishvale")
-    tickle = world.get_region("Tickle")
-    moonbrushwood = world.get_region("Moonbrush Wood")
-    nevergrim = world.get_region("Nevergrim")
-    hearth = world.get_region("Hearth")
-    elfsdance = world.get_region("Elf's Dance")
-    buffyoak = world.get_region("Buffy Oak")
-    sleepiburgh = world.get_region("Sleepiburgh")
-    woodlyrhyme = world.get_region("Woodly Rhyme")
-    tulipscent = world.get_region("Tulipscent")
-    mirthshire = world.get_region("Mirthshire")
-    blaiseend = world.get_region("Blaise End")
-    mistle = world.get_region("Mistle")
-    skybirdtrill = world.get_region("Skybird Trill")
-    temple = world.get_region("Temple")
+    eversmile = world.get_region(enums.KeeperLevelName.LEVEL_001.value)
+    cosyton = world.get_region(enums.KeeperLevelName.LEVEL_002.value)
+    waterdreamwarm = world.get_region(enums.KeeperLevelName.LEVEL_003.value)
+    flowerhat = world.get_region(enums.KeeperLevelName.LEVEL_004.value)
+    lushmeadow = world.get_region(enums.KeeperLevelName.LEVEL_005.value)
+    snuggledell = world.get_region(enums.KeeperLevelName.LEVEL_006.value)
+    wishvale = world.get_region(enums.KeeperLevelName.LEVEL_007.value)
+    tickle = world.get_region(enums.KeeperLevelName.LEVEL_008.value)
+    moonbrushwood = world.get_region(enums.KeeperLevelName.LEVEL_009.value)
+    nevergrim = world.get_region(enums.KeeperLevelName.LEVEL_010.value)
+    hearth = world.get_region(enums.KeeperLevelName.LEVEL_011.value)
+    elfsdance = world.get_region(enums.KeeperLevelName.LEVEL_012.value)
+    buffyoak = world.get_region(enums.KeeperLevelName.LEVEL_013.value)
+    sleepiburgh = world.get_region(enums.KeeperLevelName.LEVEL_014.value)
+    woodlyrhyme = world.get_region(enums.KeeperLevelName.LEVEL_015.value)
+    tulipscent = world.get_region(enums.KeeperLevelName.LEVEL_016.value)
+    mirthshire = world.get_region(enums.KeeperLevelName.LEVEL_017.value)
+    blaiseend = world.get_region(enums.KeeperLevelName.LEVEL_018.value)
+    mistle = world.get_region(enums.KeeperLevelName.LEVEL_019.value)
+    skybirdtrill = world.get_region(enums.KeeperLevelName.LEVEL_020.value)
 
     # You can then add them to the region.
 
@@ -305,103 +303,185 @@ def create_regular_locations(world: DungeonKeeperWorld) -> None:
     # Aha! So that's why we made that "get_location_names_with_ids" helper method earlier.
     # You also need to pass your overridden Location class.
     eversmile_locations = get_location_names_with_ids(
-        ["Eversmile Starting Room", "Eversmile Water Patch", "Eversmile Hero Cave", "Level 1 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_001.value} Starting Room",
+         f"{enums.KeeperLevelName.LEVEL_001.value} Water Patch",
+         f"{enums.KeeperLevelName.LEVEL_001.value} Hero Cave",
+         f"{enums.KeeperLevelName.LEVEL_001.value} Beaten"]
     )
     eversmile.add_locations(eversmile_locations, DungeonKeeperLocation)
     cosyton_locations = get_location_names_with_ids(
-        ["Cosyton East Water", "Cosyton Treasure Room", "Cosyton Hero Fortress", "Level 2 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_002.value} East Water",
+         f"{enums.KeeperLevelName.LEVEL_002.value} Treasure Room",
+         f"{enums.KeeperLevelName.LEVEL_002.value} Hero Fortress",
+         f"{enums.KeeperLevelName.LEVEL_002.value} Beaten"]
     )
-    cosyton.add_locations(cosyton_locations, DungeonKeeperLocation) 
+    cosyton.add_locations(cosyton_locations, DungeonKeeperLocation)
     waterdreamwarm_locations = get_location_names_with_ids(
-        ["Waterdream Warm South Water", "Waterdream Warm Training Room", "Waterdream Warm Hero Fortress", "Level 3 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_003.value} South Water",
+         f"{enums.KeeperLevelName.LEVEL_003.value} Training Room",
+         f"{enums.KeeperLevelName.LEVEL_003.value} Hero Fortress",
+         f"{enums.KeeperLevelName.LEVEL_003.value} Beaten"]
     )
-    waterdreamwarm.add_locations(waterdreamwarm_locations, DungeonKeeperLocation)   
+    waterdreamwarm.add_locations(waterdreamwarm_locations, DungeonKeeperLocation)
     flowerhat_locations = get_location_names_with_ids(
-        ["Flowerhat Hero Fortress NE", "Flowerhat Hero Fortress SE", "Flowerhat Lava Island", "Flowerhat Spider Cave", "Level 4 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_004.value} Hero Fortress NE",
+         f"{enums.KeeperLevelName.LEVEL_004.value} Hero Fortress SE",
+         f"{enums.KeeperLevelName.LEVEL_004.value} Lava Island",
+         f"{enums.KeeperLevelName.LEVEL_004.value} Spider Cave",
+         f"{enums.KeeperLevelName.LEVEL_004.value} Beaten"]
     )
     flowerhat.add_locations(flowerhat_locations, DungeonKeeperLocation)
     lushmeadow_locations = get_location_names_with_ids(
-        ["Lushmeadow-on-Down East Fort", "Lushmeadow-on-Down West Fort", "Lushmeadow-on-Down West Islet", "Level 5 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_005.value} East Fort",
+         f"{enums.KeeperLevelName.LEVEL_005.value} West Fort",
+         f"{enums.KeeperLevelName.LEVEL_005.value} West Islet",
+         f"{enums.KeeperLevelName.LEVEL_005.value} Beaten"]
     )
     lushmeadow.add_locations(lushmeadow_locations, DungeonKeeperLocation)
     snuggledell_locations = get_location_names_with_ids(
-        ["Snuggledell East Water", "Snuggledell Southeast Water", "Snuggledell West Water", "Level 6 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_006.value} East Water",
+         f"{enums.KeeperLevelName.LEVEL_006.value} Southeast Water",
+         f"{enums.KeeperLevelName.LEVEL_006.value} West Water",
+         f"{enums.KeeperLevelName.LEVEL_006.value} Beaten"]
     )
     snuggledell.add_locations(snuggledell_locations, DungeonKeeperLocation)
 
     wishvale_locations = get_location_names_with_ids(
-        ["Wishvale NE Hero Fortress", "Wishvale East Hero Fortress", "Wishvale SE Hero Fortress", "Wishvale Blue Keeper", "Level 7 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_007.value} NE Hero Fortress",
+         f"{enums.KeeperLevelName.LEVEL_007.value} East Hero Fortress",
+         f"{enums.KeeperLevelName.LEVEL_007.value} SE Hero Fortress",
+         f"{enums.KeeperLevelName.LEVEL_007.value} Blue Keeper",
+         f"{enums.KeeperLevelName.LEVEL_007.value} Beaten"]
     )
     wishvale.add_locations(wishvale_locations, DungeonKeeperLocation)
 
     tickle_locations = get_location_names_with_ids(
-        ["Tickle Southeast Cave", "Tickle Northwest Cave", "Tickle Northeast Fortress", "Level 8 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_008.value} Southeast Cave",
+         f"{enums.KeeperLevelName.LEVEL_008.value} Northwest Cave",
+         f"{enums.KeeperLevelName.LEVEL_008.value} Northeast Fortress",
+         f"{enums.KeeperLevelName.LEVEL_008.value} Beaten"]
     )
     tickle.add_locations(tickle_locations, DungeonKeeperLocation)
 
     moonbrushwood_locations = get_location_names_with_ids(
-        ["Moonbrush Wood SW Library", "Moonbrush Wood NW Library", "Moonbrush Wood NE Library", "Moonbrush Wood SE Library", 
-         "Moonbrush Wood Maze Deadend", "Moonbrush Wood Maze Exit", "Moonbrush Wood Neutral Fort", "Level 9 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_009.value} SW Library",
+         f"{enums.KeeperLevelName.LEVEL_009.value} NW Library",
+         f"{enums.KeeperLevelName.LEVEL_009.value} NE Library",
+         f"{enums.KeeperLevelName.LEVEL_009.value} SE Library",
+         f"{enums.KeeperLevelName.LEVEL_009.value} Maze Deadend",
+         f"{enums.KeeperLevelName.LEVEL_009.value} Maze Exit",
+         f"{enums.KeeperLevelName.LEVEL_009.value} Neutral Fort",
+         f"{enums.KeeperLevelName.LEVEL_009.value} Beaten"]
     )
     moonbrushwood.add_locations(moonbrushwood_locations, DungeonKeeperLocation)
 
     nevergrim_locations = get_location_names_with_ids(
-        ["Nevergrim East Island", "Nevergrim West Island", "Nevergrim Blue Keeper", "Level 10 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_010.value} East Island",
+         f"{enums.KeeperLevelName.LEVEL_010.value} West Island",
+         f"{enums.KeeperLevelName.LEVEL_010.value} Blue Keeper",
+         f"{enums.KeeperLevelName.LEVEL_010.value} Beaten"]
     )
     nevergrim.add_locations(nevergrim_locations, DungeonKeeperLocation)
 
     hearth_locations = get_location_names_with_ids(
-        ["Hearth Hero Storeroom 1", "Hearth Hero Storeroom 2", "Hearth NE Water", "Hearth SE Water", "Hearth SW Water", "Hearth NW Water", "Level 11 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_011.value} Hero Storeroom 1",
+         f"{enums.KeeperLevelName.LEVEL_011.value} Hero Storeroom 2",
+         f"{enums.KeeperLevelName.LEVEL_011.value} NE Water",
+         f"{enums.KeeperLevelName.LEVEL_011.value} SE Water",
+         f"{enums.KeeperLevelName.LEVEL_011.value} SW Water",
+         f"{enums.KeeperLevelName.LEVEL_011.value} NW Water",
+         f"{enums.KeeperLevelName.LEVEL_011.value} Beaten"]
     )
     hearth.add_locations(hearth_locations, DungeonKeeperLocation)
 
     elfsdance_locations = get_location_names_with_ids(
-        ["Elf's Dance SE Cavern", "Elf's Dance SW Cavern", "Elf's Dance Western Trail", "Level 12 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_012.value} SE Cavern",
+         f"{enums.KeeperLevelName.LEVEL_012.value} SW Cavern",
+         f"{enums.KeeperLevelName.LEVEL_012.value} Western Trail",
+         f"{enums.KeeperLevelName.LEVEL_012.value} Beaten"]
     )
     elfsdance.add_locations(elfsdance_locations, DungeonKeeperLocation)
 
     buffyoak_locations = get_location_names_with_ids(
-        ["Buffy Oak Poison Cavern", "Buffy Oak Lava Cavern", "Buffy Oak South Gold Seam", "Level 13 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_013.value} Poison Cavern",
+         f"{enums.KeeperLevelName.LEVEL_013.value} Lava Cavern",
+         f"{enums.KeeperLevelName.LEVEL_013.value} South Gold Seam",
+         f"{enums.KeeperLevelName.LEVEL_013.value} Beaten"]
     )
     buffyoak.add_locations(buffyoak_locations, DungeonKeeperLocation)
 
     sleepiburgh_locations = get_location_names_with_ids(
-        ["Sleepiburgh NW Cavern", "Sleepiburgh NE Cavern", "Sleepiburgh Workshop Tunnel", "Level 14 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_014.value} NW Cavern",
+         f"{enums.KeeperLevelName.LEVEL_014.value} NE Cavern",
+         f"{enums.KeeperLevelName.LEVEL_014.value} Workshop Tunnel",
+         f"{enums.KeeperLevelName.LEVEL_014.value} Beaten"]
     )
     sleepiburgh.add_locations(sleepiburgh_locations, DungeonKeeperLocation)
 
     woodlyrhyme_locations = get_location_names_with_ids(
-        ["Woodly Rhyme Hero Fortress North", "Woodly Rhyme Hero Fortress South", "Woodly Rhyme Checkerboard 1", 
-         "Woodly Rhyme Checkerboard 2", "Woodly Rhyme Southern Tunnel", "Level 15 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_015.value} Hero Fortress North",
+         f"{enums.KeeperLevelName.LEVEL_015.value} Hero Fortress South",
+         f"{enums.KeeperLevelName.LEVEL_015.value} Checkerboard 1",
+         f"{enums.KeeperLevelName.LEVEL_015.value} Checkerboard 2",
+         f"{enums.KeeperLevelName.LEVEL_015.value} Southern Tunnel",
+         f"{enums.KeeperLevelName.LEVEL_015.value} Beaten"]
     )
     woodlyrhyme.add_locations(woodlyrhyme_locations, DungeonKeeperLocation)
 
     tulipscent_locations = get_location_names_with_ids(
-        ["Tulipscent NE Hero Fortress", "Tulipscent SW Hero Fortress", "Tulipscent NW Hero Fortress 1", "Tulipscent NW Hero Fortress 2", "Level 16 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_016.value} NE Hero Fortress",
+         f"{enums.KeeperLevelName.LEVEL_016.value} SW Hero Fortress",
+         f"{enums.KeeperLevelName.LEVEL_016.value} NW Hero Fortress 1",
+         f"{enums.KeeperLevelName.LEVEL_016.value} NW Hero Fortress 2",
+         f"{enums.KeeperLevelName.LEVEL_016.value} Beaten"]
     )
     tulipscent.add_locations(tulipscent_locations, DungeonKeeperLocation)
 
     mirthshire_locations = get_location_names_with_ids(
-        ["Mirthshire SE Fort", "Mirthshire Southern Storeroom", "Mirthshire Western Cavern", "Mirthshire NW Fort", "Level 17 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_017.value} SE Fort",
+         f"{enums.KeeperLevelName.LEVEL_017.value} Southern Storeroom",
+         f"{enums.KeeperLevelName.LEVEL_017.value} Western Cavern",
+         f"{enums.KeeperLevelName.LEVEL_017.value} NW Fort",
+         f"{enums.KeeperLevelName.LEVEL_017.value} Beaten"]
     )
     mirthshire.add_locations(mirthshire_locations, DungeonKeeperLocation)
 
     blaiseend_locations = get_location_names_with_ids(
-        ["Blaise End Central Fort", "Blaise End Western Fort", "Blaise End NW Lava", "Blaise End NW Guard Room", 
-         "Blaise End Behind Wall NW", "Blaise End Behind Wall NE", "Blaise End Fortress Fairy Tunnel", 
-         "Blaise End NE Fairy Room", "Blaise End Fortress Barbarian Tunnel", "Blaise End Central Portal", "Level 18 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_018.value} Central Fort",
+         f"{enums.KeeperLevelName.LEVEL_018.value} Western Fort",
+         f"{enums.KeeperLevelName.LEVEL_018.value} NW Lava",
+         f"{enums.KeeperLevelName.LEVEL_018.value} NW Guard Room",
+         f"{enums.KeeperLevelName.LEVEL_018.value} Behind Wall NW",
+         f"{enums.KeeperLevelName.LEVEL_018.value} Behind Wall NE",
+         f"{enums.KeeperLevelName.LEVEL_018.value} Fortress Fairy Tunnel",
+         f"{enums.KeeperLevelName.LEVEL_018.value} NE Fairy Room",
+         f"{enums.KeeperLevelName.LEVEL_018.value} Fortress Barbarian Tunnel",
+         f"{enums.KeeperLevelName.LEVEL_018.value} Central Portal",
+         f"{enums.KeeperLevelName.LEVEL_018.value} Beaten"]
     )
     blaiseend.add_locations(blaiseend_locations, DungeonKeeperLocation)
 
     mistle_locations = get_location_names_with_ids(
-        ["Mistle Behind Earth", "Mistle Prison Tunnel", "Mistle Central Water 1", "Mistle Central Water 2", 
-         "Mistle Fairy Room", "Mistle Cave Centre", "Mistle Cave North", "Mistle Hero Fortress Heart", "Level 19 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_019.value} Behind Earth",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Prison Tunnel",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Central Water 1",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Central Water 2",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Fairy Room",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Cave Centre",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Cave North",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Hero Fortress Heart",
+         f"{enums.KeeperLevelName.LEVEL_019.value} Beaten"]
     )
     mistle.add_locations(mistle_locations, DungeonKeeperLocation)
 
     skybirdtrill_locations = get_location_names_with_ids(
-        ["Skybird Trill Near Gems 1", "Skybird Trill Near Gems 2", "Skybird Trill Eastern Hero Fort 1", 
-         "Skybird Trill Eastern Hero Fort 2", "Skybird Trill Hero Fortress Centre", "Skybird Trill Hero Fortress West", "Level 20 Beaten"]
+        [f"{enums.KeeperLevelName.LEVEL_020.value} Near Gems 1",
+         f"{enums.KeeperLevelName.LEVEL_020.value} Near Gems 2",
+         f"{enums.KeeperLevelName.LEVEL_020.value} Eastern Hero Fort 1",
+         f"{enums.KeeperLevelName.LEVEL_020.value} Eastern Hero Fort 2",
+         f"{enums.KeeperLevelName.LEVEL_020.value} Hero Fortress Centre",
+         f"{enums.KeeperLevelName.LEVEL_020.value} Hero Fortress West",
+         f"{enums.KeeperLevelName.LEVEL_020.value} Beaten"]
     )
     skybirdtrill.add_locations(skybirdtrill_locations, DungeonKeeperLocation)
 
@@ -413,53 +493,107 @@ def create_regular_locations(world: DungeonKeeperWorld) -> None:
 
 def create_temple_locations(world: DungeonKeeperWorld) -> None:
 
-    temple = world.get_region("Temple")
+    temple = world.get_region(enums.KeeperRoomName.TEMPLE.value)
     temple_locations = get_location_names_with_ids(
-         ["Recipe Cheaper Imps", "Recipe Complete Manufacturing", "Recipe Complete Research", "Recipe Bile Demon",
-         "Recipe Warlock", "Recipe Mistress", "Recipe Horned Reaper", "Recipe Make Angry", "Recipe Kill Chickens", "Recipe Disease Creatures", "Recipe Chicken Creatures",
-         "Recipe Tentacle", "Recipe Hellhound", "Recipe Speed", "Recipe Conceal", "Recipe Heal", "Recipe Rebound", "Recipe Protect", "Recipe Flight", "Recipe Freeze", "Recipe Slow"]
+         [enums.KeeperGoodTempleLocations.CHEAPER_IMPS.value,
+          enums.KeeperGoodTempleLocations.MANUFACTURING.value,
+          enums.KeeperGoodTempleLocations.RESEARCH.value,
+          enums.KeeperGoodTempleLocations.BILE_DEMON.value,
+          enums.KeeperGoodTempleLocations.WARLOCK.value,
+          enums.KeeperGoodTempleLocations.MISTRESS.value,
+          enums.KeeperGoodTempleLocations.HORNY.value,
+          enums.KeeperBadTempleLocations.MAKE_ANGRY.value,
+          enums.KeeperBadTempleLocations.KILL_CHICKENS.value,
+          enums.KeeperBadTempleLocations.DISEASE_CREATURES.value,
+          enums.KeeperBadTempleLocations.CHICKEN_CREATURES.value,
+          enums.KeeperFXGoodTempleLocations.TENTACLE.value,
+          enums.KeeperFXGoodTempleLocations.HELLHOUND.value,
+          enums.KeeperFXGoodTempleLocations.SPEED.value,
+          enums.KeeperFXGoodTempleLocations.CONCEAL.value,
+          enums.KeeperFXGoodTempleLocations.HEAL.value,
+          enums.KeeperFXGoodTempleLocations.REBOUND.value,
+          enums.KeeperFXGoodTempleLocations.PROTECT.value,
+          enums.KeeperFXGoodTempleLocations.FLIGHT.value,
+          enums.KeeperFXBadTempleLocations.FREEZE.value,
+          enums.KeeperFXBadTempleLocations.SLOW.value]
     )
     temple.add_locations(temple_locations, DungeonKeeperLocation)
 
 def create_secret_locations(world: DungeonKeeperWorld) -> None:
         
-    secret1 = world.get_region("Secret 1")
+    secret1 = world.get_region(enums.KeeperSecretLevelName.LEVEL_100.value)
     secret1_locations = get_location_names_with_ids(
-        ["Secret 1 Archer Room", "Secret 1 Samurai Room", "Secret 1 Near Hatchery", "Secret 1 Prison Corridor", 
-         "Secret 1 Barbarian Room 1", "Secret 1 Barbarian Room 2", "Secret 1 Barbarian Room 3", "Secret 1 Barbarian Room 4", 
-         "Secret 1 Past Magic Door", "Secret 1 Knight Corridor", "Level 100 Beaten"]
+        [f"{enums.KeeperSecretLevelName.LEVEL_100.value} Archer Room",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Samurai Room",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Near Hatchery",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Prison Corridor",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 1",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 2",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 3",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Barbarian Room 4",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Past Magic Door",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Knight Corridor",
+         f"{enums.KeeperSecretLevelName.LEVEL_100.value} Beaten"]
     )
     secret1.add_locations(secret1_locations, DungeonKeeperLocation)
 
-    secret2 = world.get_region("Secret 2")
+    secret2 = world.get_region(enums.KeeperSecretLevelName.LEVEL_101.value)
     secret2_locations = get_location_names_with_ids(
-        ["Secret 2 Next to Heart", "Secret 2 Gold Mine", "Secret 2 Next to Hound", "Secret 2 In Water", "Secret 2 Lava Treasure Room", "Level 101 Beaten"]
+        [f"{enums.KeeperSecretLevelName.LEVEL_101.value} Next to Heart",
+         f"{enums.KeeperSecretLevelName.LEVEL_101.value} Gold Mine",
+         f"{enums.KeeperSecretLevelName.LEVEL_101.value} Next to Hound",
+         f"{enums.KeeperSecretLevelName.LEVEL_101.value} In Water",
+         f"{enums.KeeperSecretLevelName.LEVEL_101.value} Lava Treasure Room",
+         f"{enums.KeeperSecretLevelName.LEVEL_101.value} Beaten"]
     )
     secret2.add_locations(secret2_locations, DungeonKeeperLocation)
 
-    secret3 = world.get_region("Secret 3")
+    secret3 = world.get_region(enums.KeeperSecretLevelName.LEVEL_102.value)
     secret3_locations = get_location_names_with_ids(
-        ["Secret 3 NE", "Secret 3 NW 2", "Secret 3 NW 3", "Secret 3 NW 4", "Secret 3 Horny Lair", "Secret 3 Library", "Level 102 Beaten"]
+        [f"{enums.KeeperSecretLevelName.LEVEL_102.value} NE",
+         f"{enums.KeeperSecretLevelName.LEVEL_102.value} NW 2",
+         f"{enums.KeeperSecretLevelName.LEVEL_102.value} NW 3",
+         f"{enums.KeeperSecretLevelName.LEVEL_102.value} NW 4",
+         f"{enums.KeeperSecretLevelName.LEVEL_102.value} Horny Lair",
+         f"{enums.KeeperSecretLevelName.LEVEL_102.value} Library",
+         f"{enums.KeeperSecretLevelName.LEVEL_102.value} Beaten"]
     )
     secret3.add_locations(secret3_locations, DungeonKeeperLocation)
 
-    secret4 = world.get_region("Secret 4")
+    secret4 = world.get_region(enums.KeeperSecretLevelName.LEVEL_103.value)
     secret4_locations = get_location_names_with_ids(
-        ["Secret 4 Next to Heart", "Secret 4 Lava Pool", "Secret 4 Next to Witch", "Secret 4 Next to Boulder", "Level 103 Beaten"]
+        [f"{enums.KeeperSecretLevelName.LEVEL_103.value} Next to Heart",
+         f"{enums.KeeperSecretLevelName.LEVEL_103.value} Lava Pool",
+         f"{enums.KeeperSecretLevelName.LEVEL_103.value} Next to Witch",
+         f"{enums.KeeperSecretLevelName.LEVEL_103.value} Next to Boulder",
+         f"{enums.KeeperSecretLevelName.LEVEL_103.value} Beaten"]
     )
     secret4.add_locations(secret4_locations, DungeonKeeperLocation)
 
-    secret5 = world.get_region("Secret 5")
+    secret5 = world.get_region(enums.KeeperSecretLevelName.LEVEL_104.value)
     secret5_locations = get_location_names_with_ids(
-        ["Secret 5 Near Heart", "Secret 5 Lava Platform", "Secret 5 Next to Bile Demon", "Secret 5 Next to Mistress", 
-         "Secret 5 Next to Vampire", "Secret 5 Goal Area", "Level 104 Beaten"]
+        [f"{enums.KeeperSecretLevelName.LEVEL_104.value} Near Heart",
+         f"{enums.KeeperSecretLevelName.LEVEL_104.value} Lava Platform",
+         f"{enums.KeeperSecretLevelName.LEVEL_104.value} Next to Bile Demon",
+         f"{enums.KeeperSecretLevelName.LEVEL_104.value} Next to Mistress",
+         f"{enums.KeeperSecretLevelName.LEVEL_104.value} Next to Vampire",
+         f"{enums.KeeperSecretLevelName.LEVEL_104.value} Goal Area",
+         f"{enums.KeeperSecretLevelName.LEVEL_104.value} Beaten"]
     )
     secret5.add_locations(secret5_locations, DungeonKeeperLocation)
 
-    secret6 = world.get_region("Secret 6")
+    secret6 = world.get_region(enums.KeeperSecretLevelName.LEVEL_105.value)
     secret6_locations = get_location_names_with_ids(
-        ["Secret 6 NE Storeroom", "Secret 6 SE Storeroom", "Secret 6 SW Storeroom", "Secret 6 NW Storeroom", 
-         "Secret 6 Centre Gold", "Secret 6 NE Reward Moon", "Secret 6 Blue Library", "Secret 6 Green Library", "Secret 6 Yellow Library", "Level 105 Beaten"]
+        [f"{enums.KeeperSecretLevelName.LEVEL_105.value} NE Storeroom",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} SE Storeroom",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} SW Storeroom",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} NW Storeroom",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} Centre Gold",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} NE Reward Moon",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} Blue Library",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} Green Library",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} Yellow Library",
+         f"{enums.KeeperSecretLevelName.LEVEL_105.value} Beaten"]
     )
     secret6.add_locations(secret6_locations, DungeonKeeperLocation)
     # Locations may be in different regions depending on the player's options.

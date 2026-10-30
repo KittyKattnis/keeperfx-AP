@@ -6,6 +6,9 @@
 
 from enum import IntEnum, StrEnum
 
+GAME_NAME = "Dungeon Keeper"
+OVERWORLD = "Overworld"
+
 class KeeperCreatureName(StrEnum):
         FLY = "Attract Fly"
         BUG = "Attract Beetle"
@@ -197,26 +200,26 @@ class KeeperFXPower(IntEnum):
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperLevelName(StrEnum):
-        LEVEL_001 = "Level 1"
-        LEVEL_002 = "Level 2"
-        LEVEL_003 = "Level 3"
-        LEVEL_004 = "Level 4"
-        LEVEL_005 = "Level 5"
-        LEVEL_006 = "Level 6"
-        LEVEL_007 = "Level 7"
-        LEVEL_008 = "Level 8"
-        LEVEL_009 = "Level 9"
-        LEVEL_010 = "Level 10"
-        LEVEL_011 = "Level 11"
-        LEVEL_012 = "Level 12"
-        LEVEL_013 = "Level 13"
-        LEVEL_014 = "Level 14"
-        LEVEL_015 = "Level 15"
-        LEVEL_016 = "Level 16"
-        LEVEL_017 = "Level 17"
-        LEVEL_018 = "Level 18"
-        LEVEL_019 = "Level 19"
-        LEVEL_020 = "Level 20"
+        LEVEL_001 = "Eversmile"
+        LEVEL_002 = "Cosyton"
+        LEVEL_003 = "Waterdream Warm"
+        LEVEL_004 = "Flowerhat"
+        LEVEL_005 = "Lushmeadow-on-Down"
+        LEVEL_006 = "Snuggledell"
+        LEVEL_007 = "Wishvale"
+        LEVEL_008 = "Tickle"
+        LEVEL_009 = "Moonbrush"
+        LEVEL_010 = "Nevergrim"
+        LEVEL_011 = "Hearth"
+        LEVEL_012 = "Elf's Dance"
+        LEVEL_013 = "Buffy Oak"
+        LEVEL_014 = "Sleepiburgh"
+        LEVEL_015 = "Woodly Rhyme"
+        LEVEL_016 = "Tulipscent"
+        LEVEL_017 = "Mirthshire"
+        LEVEL_018 = "Blaise End"
+        LEVEL_019 = "Mistle"
+        LEVEL_020 = "Skybird Trill"
 
 class KeeperLevel(IntEnum):
         LEVEL_001 = 501
@@ -400,6 +403,47 @@ class KeeperFiller(IntEnum):
         FILLER_RECEIVE_GOLD = 906
         FILLER_RECEIVE_IMPS = 907
 
+class KeeperGoodTempleLocations(StrEnum):
+        CHEAPER_IMPS = "Temple: Cheaper Imps [1x Imp]"
+        MANUFACTURING = "Temple: Complete Manufacturing [2x Beetle]"
+        RESEARCH = "Temple: Complete Research [2x Fly]"
+        BILE_DEMON = "Temple: Receive Bile demon [3x Spider]"
+        WARLOCK = "Temple: Receive Warlock [Fly, Spider]"
+        MISTRESS = "Temple: Receive Dark mistress [Beetle, Spider]"
+        HORNY = "Temple: Receive Horned reaper [Troll, Bile demon, Dark mistress]"
+
+class KeeperBadTempleLocations(StrEnum):
+        MAKE_ANGRY = "Temple: Make creatures angry [1x Horned reaper]"
+        KILL_CHICKENS = "Temple: Kill friendly chickens [Ghost / Chicken]"
+        DISEASE_CREATURES = "Temple: Disease friendly creatures [1x Vampire]"
+        CHICKEN_CREATURES = "Temple: Cast chicken on friendly creatures [2x Bile demon]"
+
+class KeeperFXGoodTempleLocations(StrEnum):
+        TENTACLE = "Temple: Receive Tentacle [Troll, Spider]"
+        HELLHOUND = "Temple: Receive Hellhound [Dragon, Fly]"
+        SPEED = "Temple: Cast speed on friendly creatures [Fly, Hellhound]"
+        CONCEAL = "Temple: Cast conceal on friendly creatures [Troll, Fly]"
+        HEAL = "Temple: Cast heal on friendly creatures [Orc, Spider]"
+        REBOUND = "Temple: Cast rebound on friendly creatures [Dark mistress, Beetle]"
+        PROTECT = "Temple: Cast protect on friendly creatures [Bile demon, Beetle]"
+        FLIGHT = "Temple: Cast flight on friendly creatures [Demonspawn, Fly]"
+
+class KeeperFXBadTempleLocations(StrEnum):
+        FREEZE = "Temple: Cast freeze on friendly creatures [Vampire, Spider]"
+        SLOW = "Temple: Cast slow on friendly creatures [Vampire, Demonspawn]"
+
+class TileMode(IntEnum):
+        OFF = 0
+        TILESET = 1
+        LEVEL = 2
+        RANDOM = 3
+
+class TileOption(IntEnum):
+        Original = 0
+        DeeperDungeon = 1
+        OriginalAndDeeper = 2
+        NewOnly = 3
+        ALL = 4
 
 #    #---------------------------------------------------------
 #    #Filler
