@@ -21,9 +21,9 @@ LOCATION_NAME_TO_ID = {
     f"{enums.KeeperLevelName.LEVEL_002.value} Treasure Room": 202,
     f"{enums.KeeperLevelName.LEVEL_002.value} Hero Fortress": 203,
 
-    f"{enums.KeeperLevelName.LEVEL_003.value} Warm South Water": 301,
-    f"{enums.KeeperLevelName.LEVEL_003.value} Warm Training Room": 302,
-    f"{enums.KeeperLevelName.LEVEL_003.value} Warm Hero Fortress": 303,
+    f"{enums.KeeperLevelName.LEVEL_003.value} South Water": 301,
+    f"{enums.KeeperLevelName.LEVEL_003.value} Training Room": 302,
+    f"{enums.KeeperLevelName.LEVEL_003.value} Hero Fortress": 303,
 
     f"{enums.KeeperLevelName.LEVEL_004.value} Hero Fortress NE": 401,
     f"{enums.KeeperLevelName.LEVEL_004.value} Hero Fortress SE": 402,
@@ -47,13 +47,13 @@ LOCATION_NAME_TO_ID = {
     f"{enums.KeeperLevelName.LEVEL_008.value} Northwest Cave": 802,
     f"{enums.KeeperLevelName.LEVEL_008.value} Northeast Fortress": 803,
 
-    f"{enums.KeeperLevelName.LEVEL_009.value} Wood SW Library": 901,
-    f"{enums.KeeperLevelName.LEVEL_009.value}Wood NW Library": 902,
-    f"{enums.KeeperLevelName.LEVEL_009.value} Wood NE Library": 903,
-    f"{enums.KeeperLevelName.LEVEL_009.value} Wood SE Library": 904,
-    f"{enums.KeeperLevelName.LEVEL_009.value} Wood Maze Deadend": 905,
-    f"{enums.KeeperLevelName.LEVEL_009.value} Wood Maze Exit": 906,
-    f"{enums.KeeperLevelName.LEVEL_009.value} Wood Neutral Fort": 907,
+    f"{enums.KeeperLevelName.LEVEL_009.value} SW Library": 901,
+    f"{enums.KeeperLevelName.LEVEL_009.value} NW Library": 902,
+    f"{enums.KeeperLevelName.LEVEL_009.value} NE Library": 903,
+    f"{enums.KeeperLevelName.LEVEL_009.value} SE Library": 904,
+    f"{enums.KeeperLevelName.LEVEL_009.value} Maze Deadend": 905,
+    f"{enums.KeeperLevelName.LEVEL_009.value} Maze Exit": 906,
+    f"{enums.KeeperLevelName.LEVEL_009.value} Neutral Fort": 907,
 
     f"{enums.KeeperLevelName.LEVEL_010.value} East Island": 1001,
     f"{enums.KeeperLevelName.LEVEL_010.value} West Island": 1002,

@@ -24,27 +24,27 @@ def create_and_connect_regions(world: DungeonKeeperWorld) -> None:
 
 
 def create_all_regions(world: DungeonKeeperWorld) -> None:
-    world.multiworld.regions += Region(enums.OVERWORLD, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_001.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_002.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_003.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_004.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_005.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_006.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_007.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_008.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_009.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_010.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_011.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_012.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_013.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_014.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_015.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_016.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_017.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_018.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_019.value, world.player, world.multiworld)
-    world.multiworld.regions += Region(enums.KeeperLevelName.LEVEL_020.value, world.player, world.multiworld)
+    world.multiworld.regions += [Region(enums.OVERWORLD, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_001.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_002.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_003.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_004.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_005.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_006.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_007.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_008.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_009.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_010.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_011.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_012.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_013.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_014.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_015.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_016.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_017.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_018.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_019.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_020.value, world.player, world.multiworld)]
 
     if world.options.temple_locations:
         world.multiworld.regions += [Region(enums.KeeperRoomName.TEMPLE.value.value, world.player, world.multiworld)]
