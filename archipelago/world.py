@@ -30,7 +30,7 @@ class DungeonKeeperWorld(World):
     # The docstring should contain a description of the game, to be displayed on the WebHost.
 
     # You must override the "game" field to say the name of the game.
-    game = "Dungeon Keeper"
+    game = enums.GAME_NAME
 
     # The WebWorld is a definition class that governs how this world will be displayed on the website.
     web = web_world.DungeonKeeperWebWorld()
@@ -47,7 +47,7 @@ class DungeonKeeperWorld(World):
 
     # There is always one region that the generator starts from & assumes you can always go back to.
     # This defaults to "Menu", but you can change it by overriding origin_region_name.
-    origin_region_name = "Overworld"
+    origin_region_name = enums.OVERWORLD
 
     item_name_groups = {
         "Levels": {entry.value for entry in enums.KeeperLevelName},

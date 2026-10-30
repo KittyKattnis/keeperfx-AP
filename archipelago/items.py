@@ -7,11 +7,11 @@
 import random
 from typing import NamedTuple, Optional
 from BaseClasses import Item, ItemClassification
-from .enums import KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName, KeeperFiller, KeeperFillerName, KeeperHero, KeeperHeroName, KeeperFXHero, KeeperFXHeroName, KeeperImp, KeeperImpName, KeeperKnight, KeeperKnightName, KeeperAvatar, KeeperAvatarName, KeeperTunneller, KeeperTunnellerName
+from .enums import GAME_NAME, KeeperCreature, KeeperCreatureName, KeeperRoom, KeeperRoomName, KeeperTrap, KeeperTrapName, KeeperDoor, KeeperDoorName, KeeperPower, KeeperPowerName, KeeperLevel, KeeperLevelName, KeeperRecipe, KeeperRecipeName, KeeperProgressive, KeeperProgressiveName, KeeperSecretLevel, KeeperSecretLevelName, KeeperFXCreature, KeeperFXCreatureName, KeeperFXDoor, KeeperFXDoorName, KeeperFXPower, KeeperFXPowerName, KeeperFXTrap, KeeperFXTrapName, NegativeRecipe, NegativeRecipeName, KeeperFXRecipe, KeeperFXRecipeName, KeeperFiller, KeeperFillerName, KeeperHero, KeeperHeroName, KeeperFXHero, KeeperFXHeroName, KeeperImp, KeeperImpName, KeeperKnight, KeeperKnightName, KeeperAvatar, KeeperAvatarName, KeeperTunneller, KeeperTunnellerName
 
 
 class DungeonKeeperItem(Item):
-    game: str = "Dungeon Keeper"
+    game: str = GAME_NAME
 
 class KeeperItem(NamedTuple):
     code: int
