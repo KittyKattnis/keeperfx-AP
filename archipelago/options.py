@@ -273,7 +273,6 @@ option_groups = [
         KeeperFXSpells,
         KeeperFXDoors,
         KeeperFXTraps,
-        KeeperFXHeroes,
     ]),
     OptionGroup("Temple Recipes", [
         temple_locations,
