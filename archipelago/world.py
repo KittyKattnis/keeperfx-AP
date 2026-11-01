@@ -127,14 +127,12 @@ class DungeonKeeperWorld(World):
     def fill_slot_data(self) -> dict[str, Any]:
         selected_tiles = {}
         match self.options.tileset_mode:
-            case enums.TileMode.OFF:
-                selected_tiles = {-1}
             case enums.TileMode.TILESET:
                 selected_tiles = get_shuffled_slots(4, self.options.tileset_choice.value, self.random)
             case enums.TileMode.LEVEL:
                 selected_tiles = get_shuffled_slots(self.options.secret_levels == True and 26 or 20, self.options.tileset_choice.value, self.random)
             case enums.TileMode.RANDOM: # Full random
-                selected_tiles = {-4}
+                selected_tiles = determine_tileset_values(self.options.tileset_choice.value)
         return {
             "KeeperFXCreatures": self.options.KeeperFXCreatures.value,
             "KeeperFXDoors": self.options.KeeperFXDoors.value,
@@ -148,7 +146,8 @@ class DungeonKeeperWorld(World):
             "IncludeTunnellersInPool": self.options.IncludeTunnellersInPool.value,
             "IncludeKnightsInPool": self.options.IncludeKnightsInPool.value,
             "IncludeAvatarsInPool": self.options.IncludeAvatarsInPool.value,
-            "ShuffleTilesets": selected_tiles,
+            "TilesetShuffleMode": self.options.tileset_mode,
+            "SelectedTilesets": selected_tiles,
             "ChangePlayerColour": self.options.change_player_colour.value,
             "ChangeNeutrals": self.options.change_neutrals.value,
             "SwapWaterAndLava": self.options.swap_water_and_lava.value,
@@ -163,10 +162,24 @@ class DungeonKeeperWorld(World):
     # This is what slot_data exists for. Upon every client connection, the slot's slot_data is sent to the client.
     # slot_data is just a dictionary using basic types, that will be converted to json when sent to the client.
 
-def get_shuffled_slots(count: int, tileset: int, rand):
-    result = {}
+def determine_tileset_values(tileset_option: int) -> tuple[int, int]:
     min_tileset = 0
     max_tileset = 13
+    match tileset_option:
+        case enums.TileOption.Original:
+            max_tileset = 3
+        case enums.TileOption.DeeperDungeon:
+            min_tileset = 4
+            max_tileset = 7
+        case enums.TileOption.OriginalAndDeeper:
+            max_tileset = 7
+        case enums.TileOption.NewOnly:
+            min_tileset = 8
+    return min_tileset, max_tileset
+
+def get_shuffled_slots(count: int, tileset: int, rand):
+    result = {}
+    min_tileset, max_tileset = determine_tileset_values(tileset)
     match tileset:
         case enums.TileOption.Original:
             max_tileset = 3
