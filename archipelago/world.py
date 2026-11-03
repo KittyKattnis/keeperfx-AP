@@ -166,31 +166,29 @@ class DungeonKeeperWorld(World):
 def determine_tileset_values(tileset_option: int) -> tuple[int, int]:
     min_tileset = 0
     max_tileset = 13
-    match tileset_option:
-        case enums.TileOption.Original:
-            max_tileset = 3
-        case enums.TileOption.DeeperDungeon:
-            min_tileset = 4
+    if tileset_option == enums.TileOption.Original:
+        max_tileset = 3
+    if tileset_option == enums.TileOption.DeeperDungeon:
+        min_tileset = 4
+        max_tileset = 7
+    if tileset_option == enums.TileOption.OriginalAndDeeper:
             max_tileset = 7
-        case enums.TileOption.OriginalAndDeeper:
-            max_tileset = 7
-        case enums.TileOption.NewOnly:
+    if tileset_option == enums.TileOption.NewOnly:
             min_tileset = 8
     return min_tileset, max_tileset
 
 def get_shuffled_slots(count: int, tileset: int, rand):
     result = {}
     min_tileset, max_tileset = determine_tileset_values(tileset)
-    match tileset:
-        case enums.TileOption.Original:
-            max_tileset = 3
-        case enums.TileOption.DeeperDungeon:
-            min_tileset = 4
-            max_tileset = 7
-        case enums.TileOption.OriginalAndDeeper:
-            max_tileset = 7
-        case enums.TileOption.NewOnly:
-            min_tileset = 8
+    if tileset == enums.TileOption.Original:
+        max_tileset = 3
+    if tileset == enums.TileOption.DeeperDungeon:
+        min_tileset = 4
+        max_tileset = 7
+    if tileset == enums.TileOption.OriginalAndDeeper:
+        max_tileset = 7
+    if tileset == enums.TileOption.NewOnly:
+        min_tileset = 8
     for i in range(0, count):
         result[i] = rand.randint(min_tileset, max_tileset)
     return result
