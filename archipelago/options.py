@@ -105,12 +105,12 @@ class TilesetMode(Choice):
     """Choose the shuffle mode for the level tiles
     Tileset -> Shuffles only the 4 original tilesets
     Level -> Assigns a tileset for EACH level for the session
-    Random -> Randomises each time the level is played"""
+    Shuffle -> Randomises each time the level is played"""
     display_name = "Tileset Shuffle Mode"
     option_Off = TileMode.OFF
     option_Tileset = TileMode.TILESET
     option_Level = TileMode.LEVEL
-    option_Random = TileMode.RANDOM
+    option_Shuffle = TileMode.RANDOM
 
     default = 0
 
