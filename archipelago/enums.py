@@ -208,7 +208,7 @@ class KeeperLevelName(StrEnum):
         LEVEL_006 = "Snuggledell"
         LEVEL_007 = "Wishvale"
         LEVEL_008 = "Tickle"
-        LEVEL_009 = "Moonbrush"
+        LEVEL_009 = "Moonbrush Wood"
         LEVEL_010 = "Nevergrim"
         LEVEL_011 = "Hearth"
         LEVEL_012 = "Elf's Dance"
