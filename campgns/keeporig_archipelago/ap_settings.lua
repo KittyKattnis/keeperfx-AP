@@ -16,6 +16,9 @@ APSettings = {
     IncludeTunnellersInPool = false,
     IncludeKnightsInPool = false,
     IncludeAvatarsInPool = false,
+    ShuffleMode = 0,
+    ShuffleChoices = {},
+    ShuffleTilesets = false,
     SwappedTileset = 0,
     ChangePlayerColour = 0,
     ChangeNeutrals = "DEFAULT",
@@ -29,12 +32,43 @@ local function IsValueTrue(var)
     return var == true or var == 1 -- Because it was setup with 1/0, we'll check for that or true in case it gets swapped in the future
 end
 
+local tilesetToID = {
+    ["STANDARD"] = 1,
+    ["ANCIENT"] = 2,
+    ["WINTER"] = 3,
+    ["SNAKE_KEY"] = 4
+}
+
+function APSettings.CalculateTileset()
+    local state = false
+    local tileChoice = -1
+    local mapNumber = Map.map_number
+    if APSettings.ShuffleMode == 0 or mapNumber > 200 then -- If OFF or Hub world.
+        goto returnValue
+    end
+    state = true
+    tileChoice = 0
+    if APSettings.ShuffleMode == 1 then -- if 'tileset' mode.
+        tileChoice = APSettings.ShuffleChoices[tilesetToID[Map.default_texture]]
+        goto returnValue
+    end
+    if APSettings.ShuffleMode == 2 then -- if 'level' mode.
+        mapNumber = mapNumber > 50 and mapNumber - 79 or mapNumber -- Adjust down if it's a secret level
+        tileChoice = APSettings.ShuffleChoices[mapNumber]
+        goto returnValue
+    end
+    tileChoice = math.random(APSettings.ShuffleChoices[1],APSettings.ShuffleChoices[2])
+    ::returnValue::
+    APSettings.ShuffleTilesets = state
+    APSettings.SwappedTileset = tileChoice
+end
+
 local slot_data = GetAPSlotData()
 
 if slot_data == nil then
-    QuickMessage("!WARNING! slot_data missing! Defaults are being used", "ARCHIPELAGO_ICON")
+    print("!WARNING! slot_data missing! Defaults are being used")
 elseif type(slot_data) ~= "table" then
-    QuickMessage("!WARNING! slot_data was not a table! Defaults are being used", "ARCHIPELAGO_ICON")
+    print("!WARNING! slot_data was not a table! Defaults are being used")
 else
     print("--- Archipelago Slot Data ---")
     APSettings.SecretLevels = IsValueTrue(slot_data.SecretLevels)
@@ -67,11 +101,8 @@ else
     print("IncludeKnightsInPool:     " .. tostring(APSettings.IncludeKnightsInPool) .. " (" .. tostring(slot_data.IncludeKnightsInPool) .. ")")
     APSettings.IncludeAvatarsInPool = IsValueTrue(slot_data.IncludeAvatarsInPool)
     print("IncludeAvatarsInPool:     " .. tostring(APSettings.IncludeAvatarsInPool) .. " (" .. tostring(slot_data.IncludeAvatarsInPool) .. ")")
-    APSettings.ShuffleTilesets = IsValueTrue(slot_data.ShuffleTilesets)
-    if APSettings.ShuffleTilesets then --TODO: Change this when the AP populates this information.
-        APSettings.SwappedTileset = math.random(0,13)
-    end
-    print("ShuffleTilesets:          " .. tostring(APSettings.ShuffleTilesets) .. "(" .. tostring(APSettings.SwappedTileset) .. ")")
+    APSettings.ShuffleMode = slot_data.TilesetMode
+    APSettings.ShuffleChoices = slot_data.TilesetChoices
     if slot_data.ChangePlayerColour >= 8 then
         APSettings.ChangePlayerColour = math.random(0,7)
     elseif slot_data.ChangePlayerColour < 0 then

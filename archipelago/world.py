@@ -126,15 +126,14 @@ class DungeonKeeperWorld(World):
 
     def fill_slot_data(self) -> dict[str, Any]:
         selected_tiles = {}
-        match self.options.tileset_mode:
-            case enums.TileMode.OFF:
-                selected_tiles = {-1}
-            case enums.TileMode.TILESET:
-                selected_tiles = get_shuffled_slots(4, self.options.tileset_choice.value, self.random)
-            case enums.TileMode.LEVEL:
-                selected_tiles = get_shuffled_slots(self.options.secret_levels == True and 26 or 20, self.options.tileset_choice.value, self.random)
-            case enums.TileMode.RANDOM: # Full random
-                selected_tiles = {-4}
+        # this WOULD be a "match" switch case. And it worked. But APPARENTLY it's not 'traditional' and this is 'CLEANER' >=/
+        if self.options.tileset_mode.value == enums.TileMode.TILESET:
+            selected_tiles = get_shuffled_slots(4, self.options.tileset_choice.value, self.random)
+        elif self.options.tileset_mode.value == enums.TileMode.LEVEL:
+            selected_tiles = get_shuffled_slots(self.options.secret_levels == True and 26 or 20, self.options.tileset_choice.value, self.random)
+        elif self.options.tileset_mode.value == enums.TileMode.RANDOM: # Full random
+            min_tile, max_tile =  determine_tileset_values(self.options.tileset_choice.value)
+            selected_tiles = {0:min_tile, 1:max_tile}
         return {
             "KeeperFXCreatures": self.options.KeeperFXCreatures.value,
             "KeeperFXDoors": self.options.KeeperFXDoors.value,
@@ -148,7 +147,8 @@ class DungeonKeeperWorld(World):
             "IncludeTunnellersInPool": self.options.IncludeTunnellersInPool.value,
             "IncludeKnightsInPool": self.options.IncludeKnightsInPool.value,
             "IncludeAvatarsInPool": self.options.IncludeAvatarsInPool.value,
-            "ShuffleTilesets": selected_tiles,
+            "TilesetShuffleMode": self.options.tileset_mode.value,
+            "SelectedTilesets": selected_tiles,
             "ChangePlayerColour": self.options.change_player_colour.value,
             "ChangeNeutrals": self.options.change_neutrals.value,
             "SwapWaterAndLava": self.options.swap_water_and_lava.value,
@@ -163,22 +163,32 @@ class DungeonKeeperWorld(World):
     # This is what slot_data exists for. Upon every client connection, the slot's slot_data is sent to the client.
     # slot_data is just a dictionary using basic types, that will be converted to json when sent to the client.
 
-def get_shuffled_slots(count: int, tileset: int, rand):
-    result = {}
+def determine_tileset_values(tileset_option: int) -> tuple[int, int]:
     min_tileset = 0
     max_tileset = 13
-    match tileset:
-        case enums.TileOption.Original:
-            max_tileset = 3
-        case enums.TileOption.DeeperDungeon:
-            min_tileset = 4
+    if tileset_option == enums.TileOption.Original:
+        max_tileset = 3
+    if tileset_option == enums.TileOption.DeeperDungeon:
+        min_tileset = 4
+        max_tileset = 7
+    if tileset_option == enums.TileOption.OriginalAndDeeper:
             max_tileset = 7
-        case enums.TileOption.OriginalAndDeeper:
-            max_tileset = 7
-        case enums.TileOption.NewOnly:
+    if tileset_option == enums.TileOption.NewOnly:
             min_tileset = 8
-    for i in range(1, count + 1):
-        if i > 20:
-            i += 79 # Align with the secret level numbers of 100 - 105
+    return min_tileset, max_tileset
+
+def get_shuffled_slots(count: int, tileset: int, rand):
+    result = {}
+    min_tileset, max_tileset = determine_tileset_values(tileset)
+    if tileset == enums.TileOption.Original:
+        max_tileset = 3
+    if tileset == enums.TileOption.DeeperDungeon:
+        min_tileset = 4
+        max_tileset = 7
+    if tileset == enums.TileOption.OriginalAndDeeper:
+        max_tileset = 7
+    if tileset == enums.TileOption.NewOnly:
+        min_tileset = 8
+    for i in range(0, count):
         result[i] = rand.randint(min_tileset, max_tileset)
     return result

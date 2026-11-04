@@ -10,6 +10,7 @@ function CommandsMain.MainSetup()
 end
 
 function Setup()
+      APSettings.CalculateTileset()
       QuickMessage("Map: " .. Map.map_number .. " (" .. Map.map_name .. ").", "ARCHIPELAGO_ICON")
       ActivateItems()
       if Map.map_number ~= 1000 then
