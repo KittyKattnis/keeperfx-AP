@@ -301,8 +301,16 @@ static int lua_ap_get_slot_data(lua_State *L)
     lua_pushinteger(L, slot_data.IncludeAvatarsInPool);
     lua_setfield(L, -2, "IncludeAvatarsInPool");
 
-    lua_pushinteger(L, slot_data.ShuffleTilesets);
-    lua_setfield(L, -2, "ShuffleTilesets");
+    lua_pushinteger(L, slot_data.TilesetMode);
+    lua_setfield(L, -2, "TilesetMode");
+
+    lua_newtable(L);
+    for (int i = 0; i < slot_data.TilesetCount; i++)
+    {
+        lua_pushinteger(L, slot_data.TilesetChoices[i]);
+        lua_rawseti(L, -2, i + 1);
+    }
+    lua_setfield(L, -2, "TilesetChoices");
 
     lua_pushinteger(L, slot_data.ChangePlayerColour);
     lua_setfield(L, -2, "ChangePlayerColour");

@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from BaseClasses import Entrance, Region
+from . import enums
 
 if TYPE_CHECKING:
     from .world import DungeonKeeperWorld
@@ -23,124 +24,108 @@ def create_and_connect_regions(world: DungeonKeeperWorld) -> None:
 
 
 def create_all_regions(world: DungeonKeeperWorld) -> None:
-    # Creating a region is as simple as calling the constructor of the Region class.
-    overworld = Region("Overworld", world.player, world.multiworld)
-    eversmile = Region("Eversmile", world.player, world.multiworld)
-    cosyton = Region("Cosyton", world.player, world.multiworld)
-    waterdreamwarm = Region("Waterdream Warm", world.player, world.multiworld)
-    flowerhat = Region("Flowerhat", world.player, world.multiworld)
-    lushmeadow = Region("LushMeadow-On-Down", world.player, world.multiworld)
-    snuggledell = Region("Snuggledell", world.player, world.multiworld)
-    wishvale = Region("Wishvale", world.player, world.multiworld)
-    tickle = Region("Tickle", world.player, world.multiworld)
-    moonbrushwood = Region("Moonbrush Wood", world.player, world.multiworld)
-    nevergrim = Region("Nevergrim", world.player, world.multiworld)
-    hearth = Region("Hearth", world.player, world.multiworld)
-    elfsdance = Region("Elf's Dance", world.player, world.multiworld)
-    buffyoak = Region("Buffy Oak", world.player, world.multiworld)
-    sleepiburgh = Region("Sleepiburgh", world.player, world.multiworld)
-    woodlyrhyme = Region("Woodly Rhyme", world.player, world.multiworld)
-    tulipscent = Region("Tulipscent", world.player, world.multiworld)
-    mirthshire = Region("Mirthshire", world.player, world.multiworld)
-    blaiseend = Region("Blaise End", world.player, world.multiworld)
-    mistle = Region("Mistle", world.player, world.multiworld)
-    skybirdtrill = Region("Skybird Trill", world.player, world.multiworld)
-    if world.option.temple_locations:
-        temple = Region("Temple", world.player, world.multiworld)
-    if world.options.secret_levels:
-        secret1 = Region("Secret 1", world.player, world.multiworld)
-        secret2 = Region("Secret 2", world.player, world.multiworld)
-        secret3 = Region("Secret 3", world.player, world.multiworld)
-        secret4 = Region("Secret 4", world.player, world.multiworld)
-        secret5 = Region("Secret 5", world.player, world.multiworld)
-        secret6 = Region("Secret 6", world.player, world.multiworld)
+    world.multiworld.regions += [Region(enums.OVERWORLD, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_001.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_002.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_003.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_004.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_005.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_006.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_007.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_008.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_009.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_010.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_011.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_012.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_013.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_014.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_015.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_016.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_017.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_018.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_019.value, world.player, world.multiworld)]
+    world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_020.value, world.player, world.multiworld)]
 
-
-
-
-    # Let's put all these regions in a list.
-    regions = [overworld, eversmile, cosyton, waterdreamwarm, flowerhat, lushmeadow, snuggledell, wishvale, tickle, moonbrushwood, nevergrim, hearth, elfsdance, buffyoak, sleepiburgh, woodlyrhyme, tulipscent, mirthshire, blaiseend, mistle, skybirdtrill]
     if world.options.temple_locations:
-        regions += [temple]
+        world.multiworld.regions += [Region(enums.KeeperRoomName.TEMPLE.value.value, world.player, world.multiworld)]
+
     if world.options.secret_levels:
-        regions += [secret1, secret2, secret3, secret4, secret5, secret6]
-
-    # Some regions may only exist if the player enables certain options.
-    # In our case, the Hammer locks the top middle chest in its own room if the hammer option is enabled.
-
-
-    # We now need to add these regions to multiworld.regions so that AP knows about their existence.
-    world.multiworld.regions += regions
-
+        world.multiworld.regions += [
+            Region(enums.KeeperSecretLevelName.LEVEL_100.value, world.player, world.multiworld),
+            Region(enums.KeeperSecretLevelName.LEVEL_101.value, world.player, world.multiworld),
+            Region(enums.KeeperSecretLevelName.LEVEL_102.value, world.player, world.multiworld),
+            Region(enums.KeeperSecretLevelName.LEVEL_103.value, world.player, world.multiworld),
+            Region(enums.KeeperSecretLevelName.LEVEL_104.value, world.player, world.multiworld),
+            Region(enums.KeeperSecretLevelName.LEVEL_105.value, world.player, world.multiworld)]
 
 def connect_regions(world: DungeonKeeperWorld) -> None:
     # We have regions now, but still need to connect them to each other.
     # But wait, we no longer have access to the region variables we created in create_all_regions()!
     # Luckily, once you've submitted your regions to multiworld.regions,
     # you can get them at any time using world.get_region(...).
-    overworld = world.get_region("Overworld")
-    eversmile = world.get_region("Eversmile")
-    cosyton = world.get_region("Cosyton")
-    waterdreamwarm = world.get_region("Waterdream Warm")
-    flowerhat = world.get_region("Flowerhat")
-    lushmeadow = world.get_region("LushMeadow-On-Down")
-    snuggledell = world.get_region("Snuggledell")
-    wishvale = world.get_region("Wishvale")
-    tickle = world.get_region("Tickle")
-    moonbrushwood = world.get_region("Moonbrush Wood")
-    nevergrim = world.get_region("Nevergrim")
-    hearth = world.get_region("Hearth")
-    elfsdance = world.get_region("Elf's Dance")
-    buffyoak = world.get_region("Buffy Oak")
-    sleepiburgh = world.get_region("Sleepiburgh")
-    woodlyrhyme = world.get_region("Woodly Rhyme")
-    tulipscent = world.get_region("Tulipscent")
-    mirthshire = world.get_region("Mirthshire")
-    blaiseend = world.get_region("Blaise End")
-    mistle = world.get_region("Mistle")
-    skybirdtrill = world.get_region("Skybird Trill")
+    overworld = world.get_region(enums.OVERWORLD)
+    eversmile = world.get_region(enums.KeeperLevelName.LEVEL_001.value)
+    cosyton = world.get_region(enums.KeeperLevelName.LEVEL_002.value)
+    waterdreamwarm = world.get_region(enums.KeeperLevelName.LEVEL_003.value)
+    flowerhat = world.get_region(enums.KeeperLevelName.LEVEL_004.value)
+    lushmeadow = world.get_region(enums.KeeperLevelName.LEVEL_005.value)
+    snuggledell = world.get_region(enums.KeeperLevelName.LEVEL_006.value)
+    wishvale = world.get_region(enums.KeeperLevelName.LEVEL_007.value)
+    tickle = world.get_region(enums.KeeperLevelName.LEVEL_008.value)
+    moonbrushwood = world.get_region(enums.KeeperLevelName.LEVEL_009.value)
+    nevergrim = world.get_region(enums.KeeperLevelName.LEVEL_010.value)
+    hearth = world.get_region(enums.KeeperLevelName.LEVEL_011.value)
+    elfsdance = world.get_region(enums.KeeperLevelName.LEVEL_012.value)
+    buffyoak = world.get_region(enums.KeeperLevelName.LEVEL_013.value)
+    sleepiburgh = world.get_region(enums.KeeperLevelName.LEVEL_014.value)
+    woodlyrhyme = world.get_region(enums.KeeperLevelName.LEVEL_015.value)
+    tulipscent = world.get_region(enums.KeeperLevelName.LEVEL_016.value)
+    mirthshire = world.get_region(enums.KeeperLevelName.LEVEL_017.value)
+    blaiseend = world.get_region(enums.KeeperLevelName.LEVEL_018.value)
+    mistle = world.get_region(enums.KeeperLevelName.LEVEL_019.value)
+    skybirdtrill = world.get_region(enums.KeeperLevelName.LEVEL_020.value)
 
     # Okay, now we can get connecting. For this, we need to create Entrances.
     # Entrances are inherently one-way, but crucially, AP assumes you can always return to the origin region.
     # One way to create an Entrance is by calling the Entrance constructor.
-    overworld.connect(eversmile, "Overworld to Eversmile", lambda state: state.has("Level 1", world.player))
-    overworld.connect(cosyton, "Overworld to Cosyton", lambda state: state.has("Level 2", world.player))
-    overworld.connect(waterdreamwarm, "Overworld to Waterdream Warm", lambda state: state.has("Level 3", world.player))
-    overworld.connect(flowerhat, "Overworld to Flowerhat", lambda state: state.has("Level 4", world.player))
-    overworld.connect(lushmeadow, "Overworld to LushMeadow-On-Down", lambda state: state.has("Level 5", world.player))
-    overworld.connect(snuggledell, "Overworld to Snuggledell", lambda state: state.has("Level 6", world.player))
-    overworld.connect(wishvale, "Overworld to Wishvale", lambda state: state.has("Level 7", world.player))
-    overworld.connect(tickle, "Overworld to Tickle", lambda state: state.has("Level 8", world.player))
-    overworld.connect(moonbrushwood, "Overworld to Moonbrush Wood", lambda state: state.has("Level 9", world.player))
-    overworld.connect(nevergrim, "Overworld to Nevergrim", lambda state: state.has("Level 10", world.player))
-    overworld.connect(hearth, "Overworld to Hearth", lambda state: state.has("Level 11", world.player) & (state.count("Progressive Level Cap", world.player) >= 2))
-    overworld.connect(elfsdance, "Overworld to Elf's Dance", lambda state: state.has("Level 12", world.player))
-    overworld.connect(buffyoak, "Overworld to Buffy Oak", lambda state: state.has("Level 13", world.player))
-    overworld.connect(sleepiburgh, "Overworld to Sleepiburgh", lambda state: state.has("Level 14", world.player))
-    overworld.connect(woodlyrhyme, "Overworld to Woodly Rhyme", lambda state: state.has("Level 15", world.player))
-    overworld.connect(tulipscent, "Overworld to Tulipscent", lambda state: state.has("Level 16", world.player))
-    overworld.connect(mirthshire, "Overworld to Mirthshire", lambda state: state.has("Level 17", world.player) & (state.count("Progressive Level Cap", world.player) >= 3))
-    overworld.connect(blaiseend, "Overworld to Blaise End", lambda state: state.has("Level 18", world.player) & (state.count("Progressive Level Cap", world.player) >= 5) & state.has_group("Creatures", world.player, count=10))
-    overworld.connect(mistle, "Overworld to Mistle", lambda state: state.has("Level 19", world.player))
-    overworld.connect(skybirdtrill, "Overworld to Skybird Trill", lambda state: state.has("Level 20", world.player) & (state.count("Progressive Level Cap", world.player) >= 5) & state.has_group("Creatures", world.player, count=10))
+    overworld.connect(eversmile, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_001.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_001.value, world.player))
+    overworld.connect(cosyton, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_002.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_002.value, world.player))
+    overworld.connect(waterdreamwarm, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_003.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_003.value, world.player))
+    overworld.connect(flowerhat, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_004.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_004.value, world.player))
+    overworld.connect(lushmeadow, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_005.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_005.value, world.player))
+    overworld.connect(snuggledell, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_006.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_006.value, world.player))
+    overworld.connect(wishvale, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_007.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_007.value, world.player))
+    overworld.connect(tickle, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_008.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_008.value, world.player))
+    overworld.connect(moonbrushwood, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_009.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_009.value, world.player))
+    overworld.connect(nevergrim, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_010.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_010.value, world.player))
+    overworld.connect(hearth, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_011.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_011.value, world.player) & (state.count(enums.KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value, world.player) >= 2))
+    overworld.connect(elfsdance, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_012.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_012.value, world.player))
+    overworld.connect(buffyoak, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_013.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_013.value, world.player))
+    overworld.connect(sleepiburgh, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_014.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_014.value, world.player))
+    overworld.connect(woodlyrhyme, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_015.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_015.value, world.player))
+    overworld.connect(tulipscent, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_016.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_016.value, world.player))
+    overworld.connect(mirthshire, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_017.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_017.value, world.player) & (state.count(enums.KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value, world.player) >= 3))
+    overworld.connect(blaiseend, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_018.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_018.value, world.player) & (state.count(enums.KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value, world.player) >= 5) & state.has_group("Creatures", world.player, count=10))
+    overworld.connect(mistle, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_019.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_019.value, world.player))
+    overworld.connect(skybirdtrill, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_020.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_020.value, world.player) & (state.count(enums.KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value, world.player) >= 5) & state.has_group("Creatures", world.player, count=10))
 
     if world.options.temple_locations:
-        temple = world.get_region("Temple")
-        overworld.connect(temple, "Overworld to Temple", lambda state: state.has_all({"Temple", "Library"}, world.player))
+        temple = world.get_region(enums.KeeperRoomName.TEMPLE.value)
+        overworld.connect(temple, f"{enums.OVERWORLD} to {enums.KeeperRoomName.TEMPLE.value}", lambda state: state.has_all({enums.KeeperRoomName.TEMPLE.value, enums.KeeperRoomName.RESEARCH.value}, world.player))
 
     if world.options.secret_levels:
-        secret1 = world.get_region("Secret 1")
-        secret2 = world.get_region("Secret 2")
-        secret3 = world.get_region("Secret 3")
-        secret4 = world.get_region("Secret 4")
-        secret5 = world.get_region("Secret 5")
-        secret6 = world.get_region("Secret 6")
-        overworld.connect(secret1, "Overworld to Secret 1", lambda state: state.has("Secret 1", world.player))
-        overworld.connect(secret2, "Overworld to Secret 2", lambda state: state.has("Secret 2", world.player))
-        overworld.connect(secret3, "Overworld to Secret 3", lambda state: state.has("Secret 3", world.player))
-        overworld.connect(secret4, "Overworld to Secret 4", lambda state: state.has("Secret 4", world.player))
-        overworld.connect(secret5, "Overworld to Secret 5", lambda state: state.has("Secret 5", world.player)) 
-        overworld.connect(secret6, "Overworld to Secret 6", lambda state: state.has("Secret 6", world.player))        
+        secret1 = world.get_region(enums.KeeperSecretLevelName.LEVEL_100.value)
+        secret2 = world.get_region(enums.KeeperSecretLevelName.LEVEL_101.value)
+        secret3 = world.get_region(enums.KeeperSecretLevelName.LEVEL_102.value)
+        secret4 = world.get_region(enums.KeeperSecretLevelName.LEVEL_103.value)
+        secret5 = world.get_region(enums.KeeperSecretLevelName.LEVEL_104.value)
+        secret6 = world.get_region(enums.KeeperSecretLevelName.LEVEL_105.value)
+        overworld.connect(secret1, f"{enums.OVERWORLD} to {enums.KeeperSecretLevelName.LEVEL_100.value}", lambda state: state.has(enums.KeeperSecretLevelName.LEVEL_100.value, world.player))
+        overworld.connect(secret2, f"{enums.OVERWORLD} to {enums.KeeperSecretLevelName.LEVEL_101.value}", lambda state: state.has(enums.KeeperSecretLevelName.LEVEL_101.value, world.player))
+        overworld.connect(secret3, f"{enums.OVERWORLD} to {enums.KeeperSecretLevelName.LEVEL_102.value}", lambda state: state.has(enums.KeeperSecretLevelName.LEVEL_102.value, world.player))
+        overworld.connect(secret4, f"{enums.OVERWORLD} to {enums.KeeperSecretLevelName.LEVEL_103.value}", lambda state: state.has(enums.KeeperSecretLevelName.LEVEL_103.value, world.player))
+        overworld.connect(secret5, f"{enums.OVERWORLD} to {enums.KeeperSecretLevelName.LEVEL_104.value}", lambda state: state.has(enums.KeeperSecretLevelName.LEVEL_104.value, world.player))
+        overworld.connect(secret6, f"{enums.OVERWORLD} to {enums.KeeperSecretLevelName.LEVEL_105.value}", lambda state: state.has(enums.KeeperSecretLevelName.LEVEL_105.value, world.player))
 
     # You can then connect the Entrance to the target region.
 
