@@ -1004,7 +1004,7 @@ void process_object_sacrifice(struct Thing *thing, long sacowner)
     {
         if (thing->valuable.gold_stored > 0)
         {
-            player_wish_well(thing->valuable.gold_stored);
+            if (is_my_player_number(sacowner)) player_wish_well(thing->valuable.gold_stored);
             process_temple_special(thing, sacowner);
             int num_allies = 0;
             PlayerNumber plyr_idx;
