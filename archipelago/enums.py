@@ -281,11 +281,11 @@ class KeeperRecipe(IntEnum):
 
 class NegativeRecipeName(StrEnum):
 #       RECIPE_WISHING_WELL = "Wishing Well Recipe" #default, might be hardcoded, would probably be stupid to include
-       RECIPE_KILL_CHICKENS_1 = "All chickens die 1 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_1 = "Kill Chickens Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
 #       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_DISEASE = "Disease creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_ANGRY = "All creatures angry Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
-       RECIPE_CHICKEN = "Chicken creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_DISEASE = "Disease Creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_ANGRY = "All Creatures angry Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_CHICKEN = "Chicken Creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
 
 class NegativeRecipe(IntEnum):
 #       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
@@ -329,13 +329,12 @@ class KeeperProgressiveName(StrEnum):
         PROGRESSIVE_HAND_SIZE = "Progressive Hand Size" #Increases Hand size by 2 (starts at 4)
 #    #Others e.g. progressive starting imps number/level, progressive auto-researched (e.g. at 1, bridge/guardpost and SOE are unlocked, at 2, workshop and speed are unlocked and so on (IF THOSE ARE UNLOCKED)),
 #    #progressive auto-manufacturing (at 1, you get an alarm/gas trap and wooden door at start, at 2 you get a lightning trap and braced door, at 3 you get WOP trap and iron door, at 4 you get lava/boulder and magic door (IF THOSE ARE UNLOCKED))
-#       progressive hand size (e.g. start with hand size of 4 (default 8), up to 16)
 class KeeperProgressive(IntEnum):
         PROGRESSIVE_LEVEL_CAP = 701 #Increase max creature level by 1 (starts max level 3)
         PROGRESSIVE_CREATURE_LIMIT = 702 #Increase creature limit by 5 (starts at max 10)
         PROGRESSIVE_STARTING_GOLD = 703 #Increase starting gold by 1250 (starts at 2500)
         PROGRESSIVE_PORTAL_SPEED = 704 #Increases Portal speed (decreases wait) by 125 (starts at 750)
-        PROGRESSIVE_HAND_SIZE = 705
+        PROGRESSIVE_HAND_SIZE = 705 #Increases hand size by 2 (starts at 4)
 
 class KeeperHeroName(StrEnum):
         THIEF = "Attract Thief"
@@ -407,30 +406,30 @@ class KeeperGoodTempleLocations(StrEnum):
         CHEAPER_IMPS = "Temple: Cheaper Imps [1x Imp]"
         MANUFACTURING = "Temple: Complete Manufacturing [2x Beetle]"
         RESEARCH = "Temple: Complete Research [2x Fly]"
-        BILE_DEMON = "Temple: Receive Bile demon [3x Spider]"
+        BILE_DEMON = "Temple: Receive Bile Demon [3x Spider]"
         WARLOCK = "Temple: Receive Warlock [Fly, Spider]"
-        MISTRESS = "Temple: Receive Dark mistress [Beetle, Spider]"
-        HORNY = "Temple: Receive Horned reaper [Troll, Bile demon, Dark mistress]"
+        MISTRESS = "Temple: Receive Dark Mistress [Beetle, Spider]"
+        HORNY = "Temple: Receive Horned reaper [Troll, Bile Demon, Dark Mistress]"
 
 class KeeperBadTempleLocations(StrEnum):
-        MAKE_ANGRY = "Temple: Make creatures angry [1x Horned reaper]"
-        KILL_CHICKENS = "Temple: Kill friendly chickens [Ghost / Chicken]"
-        DISEASE_CREATURES = "Temple: Disease friendly creatures [1x Vampire]"
-        CHICKEN_CREATURES = "Temple: Cast chicken on friendly creatures [2x Bile demon]"
+        MAKE_ANGRY = "Temple: Make Creatures angry [1x Horned Reaper]"
+        KILL_CHICKENS = "Temple: Kill friendly chickens [1x Ghost]"
+        DISEASE_CREATURES = "Temple: Disease friendly Creatures [1x Vampire]"
+        CHICKEN_CREATURES = "Temple: Cast Chicken on friendly Creatures [2x Bile Demon]"
 
 class KeeperFXGoodTempleLocations(StrEnum):
         TENTACLE = "Temple: Receive Tentacle [Troll, Spider]"
         HELLHOUND = "Temple: Receive Hellhound [Dragon, Fly]"
-        SPEED = "Temple: Cast speed on friendly creatures [Fly, Hellhound]"
-        CONCEAL = "Temple: Cast conceal on friendly creatures [Troll, Fly]"
-        HEAL = "Temple: Cast heal on friendly creatures [Orc, Spider]"
-        REBOUND = "Temple: Cast rebound on friendly creatures [Dark mistress, Beetle]"
-        PROTECT = "Temple: Cast protect on friendly creatures [Bile demon, Beetle]"
-        FLIGHT = "Temple: Cast flight on friendly creatures [Demonspawn, Fly]"
+        SPEED = "Temple: Cast Speed on friendly Creatures [Fly, Hellhound]"
+        CONCEAL = "Temple: Cast Conceal on friendly Creatures [Troll, Fly]"
+        HEAL = "Temple: Cast Heal on friendly Creatures [Orc, Spider]"
+        REBOUND = "Temple: Cast Rebound on friendly Creatures [Dark Mistress, Beetle]"
+        PROTECT = "Temple: Cast Protect on friendly Creatures [Bile Demon, Beetle]"
+        FLIGHT = "Temple: Cast Flight on friendly Creatures [Demon Spawn, Fly]"
 
 class KeeperFXBadTempleLocations(StrEnum):
-        FREEZE = "Temple: Cast freeze on friendly creatures [Vampire, Spider]"
-        SLOW = "Temple: Cast slow on friendly creatures [Vampire, Demonspawn]"
+        FREEZE = "Temple: Cast Freeze on friendly Creatures [Vampire, Spider]"
+        SLOW = "Temple: Cast Slow on friendly Creatures [Vampire, Demon Spawn]"
 
 class TileMode(IntEnum):
         OFF = 0
@@ -447,7 +446,7 @@ class TileOption(IntEnum):
 
 #    #---------------------------------------------------------
 #    #Filler
-#    #okay I feel like a lot of the stuff in this game could be considered filler, like you could beat the whole game without using traps or doors, or half the rooms or spells or creatures, but yeah
+#    #okay I feel like a lot of the stuff in this game could be considered filler, like you could beat the whole game without using traps or doors, or half the rooms or spells or Creatures, but yeah
 #
 #    #Do we want temporary things? I know Doom has powerups as filler, we could do the same with the normal specials.
 #    #Maybe they'd have to be spawned in on your heart when unlocked or on map start (would you have a way to hold on to them until later?)
