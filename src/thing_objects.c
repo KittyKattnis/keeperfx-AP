@@ -956,6 +956,7 @@ TbBool temple_check_for_arachnid_join_dungeon(struct Dungeon *dungeon)
             (dungeon->owned_creatures_of_model[crmodel] < 4))
         {
             SYNCLOG("Conditions to trigger arachnid met");
+            player_easter_egg_sacrifice();
             struct Room* room = pick_random_room_of_role(dungeon->owner, RoRoF_CrPoolSpawn);
             if (room_is_invalid(room))
             {
@@ -976,7 +977,7 @@ long process_temple_special(struct Thing *thing, long sacowner)
     if (object_is_mature_food(thing))
     {
         dungeon->chickens_sacrificed++;
-        if (temple_check_for_arachnid_join_dungeon(dungeon) && (game.easter_eggs_enabled == true))
+        if (game.easter_eggs_enabled && temple_check_for_arachnid_join_dungeon(dungeon))
             return true;
     } else
     {
@@ -995,14 +996,15 @@ void process_object_sacrifice(struct Thing *thing, long sacowner)
     if (object_is_mature_food(thing))
     {
         process_temple_special(thing, sacowner);
-        kill_all_players_chickens(thing->owner);
+        kill_all_players_chickens(thing->owner, true);
         if (is_my_player_number(sacowner))
             output_message(SMsg_SacrificePunish, 0);
     } else
-    if (object_is_gold_pile(thing))
+    if (object_is_gold_pile(thing) || (thing->model == ObjMdl_SpinningCoin)) //Spinning coins are what is dropped from hand. Gold piles are not truly dropped.
     {
         if (thing->valuable.gold_stored > 0)
         {
+            player_wish_well(thing->valuable.gold_stored);
             process_temple_special(thing, sacowner);
             int num_allies = 0;
             PlayerNumber plyr_idx;

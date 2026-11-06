@@ -43,6 +43,11 @@ function BoxLocations.Total()
     if APSettings.TempleLocations then
         total = total + recipe_location_count
     end
+    if APSettings.SecretLevels then
+        total = total + 26
+    else
+        total = total + 20
+    end
     return total
 end
 

@@ -166,6 +166,7 @@ class DungeonKeeperWorld(World):
             "KeeperFXDoors": self.options.KeeperFXDoors.value,
             "KeeperFXSpells": self.options.KeeperFXSpells.value,
             "KeeperFXTraps": self.options.KeeperFXTraps.value,
+            "PositiveRecipes": self.options.PositiveRecipes.value,
             "NegativeRecipes": self.options.NegativeRecipes.value,
             "KeeperFXRecipes": self.options.KeeperFXRecipes.value,
             "AddHeroes": self.options.AddHeroes.value,
