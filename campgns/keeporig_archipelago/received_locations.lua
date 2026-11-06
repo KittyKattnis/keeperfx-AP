@@ -119,33 +119,33 @@ ChecksTable = {
 --   --Not sure:
 --       100: Sphere 2/3? not sure, doable with extreme care in possession, or still pretty handily with a cap of level 7. If you have certain spells and rooms you can cheese it way earlier.
 --       102: not sure, requires a way to kill imps en masse, e.g. cave-in, a transferred creature, placeable boulder traps
-    [501] = {id=501, internal_name="",                    name="1",                            string="202",       thing="",       text="Level 1 Unlocked"},
-    [502] = {id=502, internal_name="",                    name="2",                            string="203",       thing="",       text="Level 2 Unlocked"},
-    [503] = {id=503, internal_name="",                    name="3",                            string="204",       thing="",       text="Level 3 Unlocked"},
-    [504] = {id=504, internal_name="",                    name="4",                            string="205",       thing="",       text="Level 4 Unlocked"},
-    [505] = {id=505, internal_name="",                    name="5",                            string="206",       thing="",       text="Level 5 Unlocked"},
-    [506] = {id=506, internal_name="",                    name="6",                            string="207",       thing="",       text="Level 6 Unlocked"},
-    [507] = {id=507, internal_name="",                    name="7",                            string="208",       thing="",       text="Level 7 Unlocked"},
-    [508] = {id=508, internal_name="",                    name="8",                            string="209",       thing="",       text="Level 8 Unlocked"},
-    [509] = {id=509, internal_name="",                    name="9",                            string="210",       thing="",       text="Level 9 Unlocked"},
-    [510] = {id=510, internal_name="",                    name="10",                           string="211",       thing="",       text="Level 10 Unlocked"},
-    [511] = {id=511, internal_name="",                    name="11",                           string="212",       thing="",       text="Level 11 Unlocked"},
-    [512] = {id=512, internal_name="",                    name="12",                           string="213",       thing="",       text="Level 12 Unlocked"},
-    [513] = {id=513, internal_name="",                    name="13",                           string="214",       thing="",       text="Level 13 Unlocked"},
-    [514] = {id=514, internal_name="",                    name="14",                           string="215",       thing="",       text="Level 14 Unlocked"},
-    [515] = {id=515, internal_name="",                    name="15",                           string="216",       thing="",       text="Level 15 Unlocked"},
-    [516] = {id=516, internal_name="",                    name="16",                           string="217",       thing="",       text="Level 16 Unlocked"},
-    [517] = {id=517, internal_name="",                    name="17",                           string="218",       thing="",       text="Level 17 Unlocked"},
-    [518] = {id=518, internal_name="",                    name="18",                           string="219",       thing="",       text="Level 18 Unlocked"},
-    [519] = {id=519, internal_name="",                    name="19",                           string="220",       thing="",       text="Level 19 Unlocked"},
-    [520] = {id=520, internal_name="",                    name="20",                           string="221",       thing="",       text="Level 20 Unlocked"},
+    [501] = {id=501, internal_name="",                    name="1",                            string="202",       thing="",       text="Eversmile (Level 1) Unlocked"},
+    [502] = {id=502, internal_name="",                    name="2",                            string="203",       thing="",       text="Cosyton (Level 2) Unlocked"},
+    [503] = {id=503, internal_name="",                    name="3",                            string="204",       thing="",       text="Waterdream Warm (Level 3) Unlocked"},
+    [504] = {id=504, internal_name="",                    name="4",                            string="205",       thing="",       text="Flowerhat (Level 4) Unlocked"},
+    [505] = {id=505, internal_name="",                    name="5",                            string="206",       thing="",       text="Lushmeadow-on-Down (Level 5) Unlocked"},
+    [506] = {id=506, internal_name="",                    name="6",                            string="207",       thing="",       text="Snuggledell (Level 6) Unlocked"},
+    [507] = {id=507, internal_name="",                    name="7",                            string="208",       thing="",       text="Wishvale (Level 7) Unlocked"},
+    [508] = {id=508, internal_name="",                    name="8",                            string="209",       thing="",       text="Tickle (Level 8) Unlocked"},
+    [509] = {id=509, internal_name="",                    name="9",                            string="210",       thing="",       text="Moonbrush Wood (Level 9) Unlocked"},
+    [510] = {id=510, internal_name="",                    name="10",                           string="211",       thing="",       text="Nevergrim (Level 10) Unlocked"},
+    [511] = {id=511, internal_name="",                    name="11",                           string="212",       thing="",       text="Hearth (Level 11) Unlocked"},
+    [512] = {id=512, internal_name="",                    name="12",                           string="213",       thing="",       text="Elf's Dance (Level 12) Unlocked"},
+    [513] = {id=513, internal_name="",                    name="13",                           string="214",       thing="",       text="Buffy Oak (Level 13) Unlocked"},
+    [514] = {id=514, internal_name="",                    name="14",                           string="215",       thing="",       text="Sleepiburgh (Level 14) Unlocked"},
+    [515] = {id=515, internal_name="",                    name="15",                           string="216",       thing="",       text="Woodly Rhyme (Level 15) Unlocked"},
+    [516] = {id=516, internal_name="",                    name="16",                           string="217",       thing="",       text="Tulipscent (Level 16) Unlocked"},
+    [517] = {id=517, internal_name="",                    name="17",                           string="218",       thing="",       text="Mirthshire (Level 17) Unlocked"},
+    [518] = {id=518, internal_name="",                    name="18",                           string="219",       thing="",       text="Blaise End (Level 18) Unlocked"},
+    [519] = {id=519, internal_name="",                    name="19",                           string="220",       thing="",       text="Mistle (Level 19) Unlocked"},
+    [520] = {id=520, internal_name="",                    name="20",                           string="221",       thing="",       text="Skybird Trill (Level 20) Unlocked"},
 --BonusLevels
-    [521] = {id=521, internal_name="",                    name="100",                          string="430",       thing="",       text="Level 100 Unlocked"}, --string is just "Bonus"
-    [522] = {id=522, internal_name="",                    name="101",                          string="430",       thing="",       text="Level 101 Unlocked"}, --string is just "Bonus"
-    [523] = {id=523, internal_name="",                    name="102",                          string="430",       thing="",       text="Level 102 Unlocked"}, --string is just "Bonus"
-    [524] = {id=524, internal_name="",                    name="103",                          string="430",       thing="",       text="Level 103 Unlocked"}, --string is just "Bonus"
-    [525] = {id=525, internal_name="",                    name="104",                          string="430",       thing="",       text="Level 104 Unlocked"}, --string is just "Bonus"
-    [526] = {id=526, internal_name="",                    name="105",                          string="430",       thing="",       text="Level 105 Unlocked"}, --string is just "Bonus"
+    [521] = {id=521, internal_name="",                    name="100",                          string="430",       thing="",       text="Secret 1 (Level 100) Unlocked"}, --string is just "Bonus"
+    [522] = {id=522, internal_name="",                    name="101",                          string="430",       thing="",       text="Secret 2 (Level 101) Unlocked"}, --string is just "Bonus"
+    [523] = {id=523, internal_name="",                    name="102",                          string="430",       thing="",       text="Secret 3 (Level 102) Unlocked"}, --string is just "Bonus"
+    [524] = {id=524, internal_name="",                    name="103",                          string="430",       thing="",       text="Secret 4 (Level 103) Unlocked"}, --string is just "Bonus"
+    [525] = {id=525, internal_name="",                    name="104",                          string="430",       thing="",       text="Secret 5 (Level 104) Unlocked"}, --string is just "Bonus"
+    [526] = {id=526, internal_name="",                    name="105",                          string="430",       thing="",       text="Secret 6 (Level 105) Unlocked"}, --string is just "Bonus"
 -- RECIPES --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     [601] = {id=601, internal_name="PosUniqFunc,CHEAPER_IMPS,IMP",                    name="Cheaper Imps",                 string="",       thing="IMP_DANCE_DUMMY",       text="Cheaper Imps Recipe Unlocked"},
     [602] = {id=602, internal_name="PosUniqFunc,COMPLETE_MANUFACTR,BUG,BUG",          name="Complete Manufacturing",       string="",       thing="SPELLBOOK_DUMMY",       text="Complete Manufacturing Recipe Unlocked"},
@@ -156,11 +156,11 @@ ChecksTable = {
     [607] = {id=607, internal_name="MkCreature,HORNY,TROLL,BILE_DEMON,DARK_MISTRESS", name="Horned Reaper",                string="",       thing="LAIR_HORNY",       text="Horned Reaper Recipe Unlocked"},
 --NegativeRecipes
     -- 608 is wishing well
-    [609] = {id=609, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die 1",           string="",       thing="CHICKEN_DIE_DUMMY",       text="All chickens die 1 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [609] = {id=609, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All Chickens die",           string="",       thing="CHICKEN_DIE_DUMMY",       text="All Chickens Die Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     --[610] = {id=610, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,CHICKEN",           name="All chickens die 2",           string="",       thing="CHICKEN_DIE_DUMMY",       text="All chickens die 2 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [611] = {id=611, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       thing="FLIES_DUMMY",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [612] = {id=612, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       thing="ANGRY_HORNY_DUMMY",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [613] = {id=613, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       thing="CHICKEN_DUMMY",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [611] = {id=611, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease Creatures",            string="",       thing="FLIES_DUMMY",       text="Disease Creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [612] = {id=612, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All Creatures angry",          string="",       thing="ANGRY_HORNY_DUMMY",       text="All Creatures Angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [613] = {id=613, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken Creatures",            string="",       thing="CHICKEN_DUMMY",       text="Chicken Creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     -- 614 is spider easter egg
 --FXRecipes
     [615] = {id=615, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good Skeleton",                string="",       thing="LAIR_SKELT",       text="Good Skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
@@ -510,7 +510,7 @@ function CheckForMiscUnlocks()
     end
     if slot_data.NegativeRecipes == 2 then
         print("NegativeRecipes set to ON, giving all negative recipes automatically.")
-        for itemid = 609, 613 do
+        for _, itemid in ipairs({609, 611, 612, 613}) do
             RunDKScriptCommand("SET_SACRIFICE_RECIPE(" .. ChecksTable[itemid].internal_name .. ")")
         end
     end

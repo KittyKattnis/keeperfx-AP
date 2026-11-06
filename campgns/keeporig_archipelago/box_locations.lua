@@ -40,7 +40,7 @@ function BoxLocations.Total()
             total = total + #location_ids
         end
     end
-    if APSettings.temple_locations then
+    if APSettings.TempleLocations then
         total = total + recipe_location_count
     end
     return total

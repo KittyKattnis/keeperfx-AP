@@ -36,7 +36,7 @@ void OnSwapWaterAndLava(int val);
 void OnRemoveNeutralRooms(int val);
 void OnCrueltyMode(int val);
 void OnSecretLevels(int val);
-void OnTempleRecipes(int val);
+void OnTempleLocations(int val);
 void OnPositiveRecipes(int val);
 void OnFlatTempleGuardPost(int val);
 

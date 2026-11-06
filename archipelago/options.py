@@ -35,7 +35,7 @@ class KeeperFXDoors(Toggle):
 #                KeeperFXRecipes: on (don't include in pool, just unlock them)/off (don't include in pool, remove locations)/unlock (same as current)
 # need some sort of safety here i.e. don't include locations if not in pool at all.
 
-class temple_locations(Toggle):
+class TempleLocations(Toggle):
     """Choose if you want Temple recipes to complete checks in the game."""
     display_name = "Temple Recipes as Locations"
 
@@ -246,7 +246,7 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     KeeperFXDoors: KeeperFXDoors
     KeeperFXSpells: KeeperFXSpells
     KeeperFXTraps: KeeperFXTraps
-    temple_locations: temple_locations
+    TempleLocations: TempleLocations
     PositiveRecipes: PositiveRecipes
     NegativeRecipes: NegativeRecipes
     KeeperFXRecipes: KeeperFXRecipes
@@ -284,7 +284,7 @@ option_groups = [
         KeeperFXTraps,
     ]),
     OptionGroup("Temple Recipes", [
-        temple_locations,
+        TempleLocations,
         PositiveRecipes,
         NegativeRecipes,
         KeeperFXRecipes,

@@ -46,7 +46,7 @@ def create_all_regions(world: DungeonKeeperWorld) -> None:
     world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_019.value, world.player, world.multiworld)]
     world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_020.value, world.player, world.multiworld)]
 
-    if world.options.temple_locations:
+    if world.options.TempleLocations:
         world.multiworld.regions += [Region(enums.KeeperRoomName.TEMPLE.value, world.player, world.multiworld)]
 
     if world.options.secret_levels:
@@ -109,7 +109,7 @@ def connect_regions(world: DungeonKeeperWorld) -> None:
     overworld.connect(mistle, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_019.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_019.value, world.player))
     overworld.connect(skybirdtrill, f"{enums.OVERWORLD} to {enums.KeeperLevelName.LEVEL_020.value}", lambda state: state.has(enums.KeeperLevelName.LEVEL_020.value, world.player) & (state.count(enums.KeeperProgressiveName.PROGRESSIVE_LEVEL_CAP.value, world.player) >= 5) & state.has_group("Creatures", world.player, count=10))
 
-    if world.options.temple_locations:
+    if world.options.TempleLocations:
         temple = world.get_region(enums.KeeperRoomName.TEMPLE.value)
         overworld.connect(temple, f"{enums.OVERWORLD} to {enums.KeeperRoomName.TEMPLE.value}", lambda state: state.has_all({enums.KeeperRoomName.TEMPLE.value, enums.KeeperRoomName.RESEARCH.value}, world.player))
 
