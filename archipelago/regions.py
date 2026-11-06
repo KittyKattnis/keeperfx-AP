@@ -47,7 +47,7 @@ def create_all_regions(world: DungeonKeeperWorld) -> None:
     world.multiworld.regions += [Region(enums.KeeperLevelName.LEVEL_020.value, world.player, world.multiworld)]
 
     if world.options.temple_locations:
-        world.multiworld.regions += [Region(enums.KeeperRoomName.TEMPLE.value.value, world.player, world.multiworld)]
+        world.multiworld.regions += [Region(enums.KeeperRoomName.TEMPLE.value, world.player, world.multiworld)]
 
     if world.options.secret_levels:
         world.multiworld.regions += [

@@ -116,13 +116,14 @@ class TilesetMode(Choice):
 
 class TilesetChoices(Choice):
     """Decide what level tilesets can be chosen amongst"""
+    display_name = "Tileset Choice"
     option_Original = TileOption.Original
     option_DeeperDungeon = TileOption.DeeperDungeon
     option_OriginalAndDeeper = TileOption.OriginalAndDeeper
     option_NewOnly = TileOption.NewOnly
     option_ALL = TileOption.ALL
 
-    default = option_Original
+    default = option_ALL
 
 class ChangePlayerColour(Choice):
     """Choose if you want to change the player colour."""
@@ -166,7 +167,7 @@ class CrueltyMode(Toggle):
 
 class FlatTempleGuardPost(Toggle):
     """Choose if you want to flatten Guard Posts and Temples so you can't use them to block off water and lava."""
-    display_name = "FlatTempleGuardPost"        
+    display_name = "Flat Temple and Guard Post"        
 
 
 # option for temple recipes unlocked/unlockable/removed
