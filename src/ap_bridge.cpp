@@ -88,7 +88,7 @@ RedirectStdoutToFile();
     AP_RegisterSlotDataIntCallback("RemoveNeutralRooms",       OnRemoveNeutralRooms);
     AP_RegisterSlotDataIntCallback("CrueltyMode",              OnCrueltyMode);
     AP_RegisterSlotDataIntCallback("SecretLevels",             OnSecretLevels);
-    AP_RegisterSlotDataIntCallback("TempleLocations",         OnTempleLocations);
+    AP_RegisterSlotDataIntCallback("TempleLocations",          OnTempleLocations);
     AP_RegisterSlotDataIntCallback("PositiveRecipes",          OnPositiveRecipes);
     AP_RegisterSlotDataIntCallback("FlatTempleGuardPost",      OnFlatTempleGuardPost);
 
@@ -281,7 +281,7 @@ void OnSwapWaterAndLava(int val)                { g_ap_state.slot_data.SwapWater
 void OnRemoveNeutralRooms(int val)              { g_ap_state.slot_data.RemoveNeutralRooms = val; }
 void OnCrueltyMode(int val)                     { g_ap_state.slot_data.CrueltyMode = val; }
 void OnSecretLevels(int val)                    { g_ap_state.slot_data.SecretLevels = val; }
-void OnTempleRecipes(int val)                   { g_ap_state.slot_data.TempleRecipes = val; }
+void OnTempleLocations(int val)                 { g_ap_state.slot_data.TempleLocations = val; }
 void OnPositiveRecipes(int val)                 { g_ap_state.slot_data.PositiveRecipes = val;}
 void OnFlatTempleGuardPost(int val)             { g_ap_state.slot_data.FlatTempleGuardPost = val; }
 
