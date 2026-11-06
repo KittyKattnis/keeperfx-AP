@@ -995,7 +995,7 @@ void process_object_sacrifice(struct Thing *thing, long sacowner)
     if (object_is_mature_food(thing))
     {
         process_temple_special(thing, sacowner);
-        kill_all_players_chickens(thing->owner);
+        kill_all_players_chickens(thing->owner, true);
         if (is_my_player_number(sacowner))
             output_message(SMsg_SacrificePunish, 0);
     } else
@@ -1003,6 +1003,7 @@ void process_object_sacrifice(struct Thing *thing, long sacowner)
     {
         if (thing->valuable.gold_stored > 0)
         {
+            player_wish_well(thing->valuable.gold_stored);
             process_temple_special(thing, sacowner);
             int num_allies = 0;
             PlayerNumber plyr_idx;
