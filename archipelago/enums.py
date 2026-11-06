@@ -409,12 +409,15 @@ class KeeperGoodTempleLocations(StrEnum):
         BILE_DEMON = "Temple: Receive Bile Demon [3x Spider]"
         WARLOCK = "Temple: Receive Warlock [Fly, Spider]"
         MISTRESS = "Temple: Receive Dark Mistress [Beetle, Spider]"
-        HORNY = "Temple: Receive Horned reaper [Troll, Bile Demon, Dark Mistress]"
+        HORNY = "Temple: Receive Horned Reaper [Troll, Bile Demon, Dark Mistress]"
+        WISHING_WELL = "Temple: This is no wishing well [1x Gold]"
+        EASTER_EGG = "Temple: Spider Easter Egg [4x Imp, 4x Gold, 16x Chicken]"
 
 class KeeperBadTempleLocations(StrEnum):
-        MAKE_ANGRY = "Temple: Make Creatures angry [1x Horned Reaper]"
-        KILL_CHICKENS = "Temple: Kill friendly chickens [1x Ghost]"
+        KILL_CHICKENS_1 = "Temple: Kill friendly chickens [1x Ghost]"
+        KILL_CHICKENS_2 = "Temple: Kill friendly chickens [1x Chicken]"
         DISEASE_CREATURES = "Temple: Disease friendly Creatures [2x Vampire]"
+        MAKE_ANGRY = "Temple: Make Creatures angry [1x Horned Reaper]"
         CHICKEN_CREATURES = "Temple: Cast Chicken on friendly Creatures [2x Bile Demon]"
 
 class KeeperFXGoodTempleLocations(StrEnum):
@@ -428,6 +431,7 @@ class KeeperFXGoodTempleLocations(StrEnum):
         FLIGHT = "Temple: Cast Flight on friendly Creatures [Demon Spawn, Fly]"
 
 class KeeperFXBadTempleLocations(StrEnum):
+        GOOD_SKELETON = "Temple: Create Good Skeleton [2x Skeleton]"
         FREEZE = "Temple: Cast Freeze on friendly Creatures [Vampire, Spider]"
         SLOW = "Temple: Cast Slow on friendly Creatures [Vampire, Demon Spawn]"
 

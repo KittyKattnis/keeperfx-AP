@@ -6,13 +6,13 @@ return setmetatable({
     ["SORCEROR#19 26"] = 11005,
     ["DARK_MISTRESS#24 26"] = 11006,
     ["HORNY#16 22 20"] = 11007,
-    --Wishing well recipe (11008) requires dropping gold, see below.
+    --["WishWell#1"] = 11008 --Wishing well recipe (11008) requires dropping gold, see below.
     ["KillChickens#28"] = 11009,
     ["KillChickens"] = 11010, -- If no creatures, it was a chicken.
     ["SPELL_DISEASE#25 25"] = 11011,
     ["MakeAngry#14"] = 11012,
     ["SPELL_CHICKEN#22 22"] = 11013,
-    --["EasterEgg"] = 11014, -- Spider easter-egg, doesn't exist in AP Data.
+    ["EasterEgg"] = 11014, -- Spider easter-egg, doesn't exist in AP Data.
     ["SKELETON#15 15"] = 11015, -- Good skeleton punishment
     ["TENTACLE#16 26"] = 11016,
     ["HELL_HOUND#19 17"] = 11017,
