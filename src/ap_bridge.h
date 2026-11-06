@@ -16,6 +16,7 @@ void OnKeeperFXCreaturesReceived(int val);
 void OnKeeperFXDoorsReceived(int val);
 void OnKeeperFXSpellsReceived(int val);
 void OnKeeperFXTrapsReceived(int val);
+void OnPositiveRecipesReceived(int val);
 void OnNegativeRecipesReceived(int val);
 void OnKeeperFXRecipesReceived(int val);
 void OnAddHeroesReceived(int val);

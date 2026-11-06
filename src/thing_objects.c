@@ -956,6 +956,7 @@ TbBool temple_check_for_arachnid_join_dungeon(struct Dungeon *dungeon)
             (dungeon->owned_creatures_of_model[crmodel] < 4))
         {
             SYNCLOG("Conditions to trigger arachnid met");
+            player_easter_egg_sacrifice();
             struct Room* room = pick_random_room_of_role(dungeon->owner, RoRoF_CrPoolSpawn);
             if (room_is_invalid(room))
             {
@@ -976,7 +977,7 @@ long process_temple_special(struct Thing *thing, long sacowner)
     if (object_is_mature_food(thing))
     {
         dungeon->chickens_sacrificed++;
-        if (temple_check_for_arachnid_join_dungeon(dungeon) && (game.easter_eggs_enabled == true))
+        if (game.easter_eggs_enabled && temple_check_for_arachnid_join_dungeon(dungeon))
             return true;
     } else
     {

@@ -20,6 +20,7 @@
 #include "keeperfx.hpp"
 #include "lvl_script_lib.h"
 #include "post_inc.h"
+#include "lua_triggers.h"
 
 void ap_location_info_callback(std::vector<AP_NetworkItem> locations);
 void ap_receive(AP_NetworkItem,bool);
@@ -70,6 +71,7 @@ RedirectStdoutToFile();
     AP_RegisterSlotDataIntCallback("KeeperFXDoors",            OnKeeperFXDoorsReceived);
     AP_RegisterSlotDataIntCallback("KeeperFXSpells",           OnKeeperFXSpellsReceived);
     AP_RegisterSlotDataIntCallback("KeeperFXTraps",            OnKeeperFXTrapsReceived);
+    AP_RegisterSlotDataIntCallback("PositiveRecipes",          OnPositiveRecipesReceived);
     AP_RegisterSlotDataIntCallback("NegativeRecipes",          OnNegativeRecipesReceived);
     AP_RegisterSlotDataIntCallback("KeeperFXRecipes",          OnKeeperFXRecipesReceived);
     AP_RegisterSlotDataIntCallback("AddHeroes",                OnAddHeroesReceived);
@@ -254,6 +256,7 @@ void OnKeeperFXCreaturesReceived(int val)       { g_ap_state.slot_data.KeeperFXC
 void OnKeeperFXDoorsReceived(int val)           { g_ap_state.slot_data.KeeperFXDoors = val; }
 void OnKeeperFXSpellsReceived(int val)          { g_ap_state.slot_data.KeeperFXSpells = val; }
 void OnKeeperFXTrapsReceived(int val)           { g_ap_state.slot_data.KeeperFXTraps = val; }
+void OnPositiveRecipesReceived(int val)         { g_ap_state.slot_data.PositiveRecipes = val; }
 void OnNegativeRecipesReceived(int val)         { g_ap_state.slot_data.NegativeRecipes = val; }
 void OnKeeperFXRecipesReceived(int val)         { g_ap_state.slot_data.KeeperFXRecipes = val; }
 void OnAddHeroesReceived(int val)               { g_ap_state.slot_data.AddHeroes = val; }
@@ -262,8 +265,8 @@ void OnIncludeImpsInPoolReceived(int val)       { g_ap_state.slot_data.IncludeIm
 void OnIncludeTunnellersInPoolReceived(int val) { g_ap_state.slot_data.IncludeTunnellersInPool = val; }
 void OnIncludeKnightsInPoolReceived(int val)    { g_ap_state.slot_data.IncludeKnightsInPool = val; }
 void OnIncludeAvatarsInPoolReceived(int val)    { g_ap_state.slot_data.IncludeAvatarsInPool = val; }
-void OnChangePlayerColour(int val)    { g_ap_state.slot_data.ChangePlayerColour = val; }
-void OnTilesetMode(int val) { g_ap_state.slot_data.TilesetMode = val; }
+void OnChangePlayerColour(int val)              { g_ap_state.slot_data.ChangePlayerColour = val; }
+void OnTilesetMode(int val)                     { g_ap_state.slot_data.TilesetMode = val; }
 void OnTilesetChoices(std::map<int, int> val) 
 { 
     g_ap_state.slot_data.TilesetCount = 0;
@@ -273,14 +276,14 @@ void OnTilesetChoices(std::map<int, int> val)
         g_ap_state.slot_data.TilesetCount++;
     }
 }
-void OnChangeNeutrals(int val)    { g_ap_state.slot_data.ChangeNeutrals = val; }
-void OnSwapWaterAndLava(int val)    { g_ap_state.slot_data.SwapWaterAndLava = val; }
-void OnRemoveNeutralRooms(int val)    { g_ap_state.slot_data.RemoveNeutralRooms = val; }
-void OnCrueltyMode(int val)    { g_ap_state.slot_data.CrueltyMode = val; }
-void OnSecretLevels(int val)    { g_ap_state.slot_data.SecretLevels = val; }
-void OnTempleRecipes(int val)    { g_ap_state.slot_data.TempleRecipes = val; }
-void OnPositiveRecipes(int val)    { g_ap_state.slot_data.PositiveRecipes = val;}
-void OnFlatTempleGuardPost(int val)    { g_ap_state.slot_data.FlatTempleGuardPost = val; }
+void OnChangeNeutrals(int val)                  { g_ap_state.slot_data.ChangeNeutrals = val; }
+void OnSwapWaterAndLava(int val)                { g_ap_state.slot_data.SwapWaterAndLava = val; }
+void OnRemoveNeutralRooms(int val)              { g_ap_state.slot_data.RemoveNeutralRooms = val; }
+void OnCrueltyMode(int val)                     { g_ap_state.slot_data.CrueltyMode = val; }
+void OnSecretLevels(int val)                    { g_ap_state.slot_data.SecretLevels = val; }
+void OnTempleRecipes(int val)                   { g_ap_state.slot_data.TempleRecipes = val; }
+void OnPositiveRecipes(int val)                 { g_ap_state.slot_data.PositiveRecipes = val;}
+void OnFlatTempleGuardPost(int val)             { g_ap_state.slot_data.FlatTempleGuardPost = val; }
 
 // Functions below are run through the C compiler so that lua/console can call them
 
@@ -327,14 +330,13 @@ void ap_process_sacrifice_recipe(struct SacrificeRecipe *sac)
         case SacA_MkGoodHero:
         case SacA_MkCreature:
         {
-            const char* creature_name = creature_code_name(sac->param);
-            snprintf(recipe_name, sizeof(recipe_name), "Recipe %s", creature_name);
+            strcpy(recipe_name, creature_code_name(sac->param));
             break;
         }
         case SacA_NegSpellAll:
-        case SacA_PosSpellAll:{
-            const char* spell_name = spell_code_name(sac->param);        
-            snprintf(recipe_name, sizeof(recipe_name), "Recipe %s", spell_name);
+        case SacA_PosSpellAll:
+        {
+            strcpy(recipe_name, spell_code_name(sac->param));
             break;
         }
         case SacA_NegUniqFunc:
@@ -342,44 +344,66 @@ void ap_process_sacrifice_recipe(struct SacrificeRecipe *sac)
             switch (sac->param)
             {
                 case UnqF_MkAllAngry:
-                    strcpy(recipe_name, "Recipe Make Angry");
+                    strcpy(recipe_name, "MakeAngry");
                     break;
                 case UnqF_MkAllVerAngry:
-                    strcpy(recipe_name, "Recipe Make Very Angry");
+                    strcpy(recipe_name, "MakeVeryAngry");
                     break;
                 case UnqF_ComplResrch:
-                    strcpy(recipe_name, "Recipe Complete Research");
+                    strcpy(recipe_name, "CompleteResearch");
                     break;
                 case UnqF_ComplManufc:
-                    strcpy(recipe_name, "Recipe Complete Manufacture");
+                    strcpy(recipe_name, "CompleteManufacture");
                     break;
                 case UnqF_KillChickns:
-                    strcpy(recipe_name, "Recipe Kill Chickens");
+                    strcpy(recipe_name, "KillChickens");
                     break;
-                case UnqF_CheaperImp:                    
-                    strcpy(recipe_name, "Recipe Cheaper Imps");
+                case UnqF_CheaperImp:
+                    strcpy(recipe_name, "CheaperImps");
                     break;
                 case UnqF_CostlierImp:
-                    strcpy(recipe_name, "Recipe Costlier Imps");
+                    strcpy(recipe_name, "CostlierImps");
                     break;
                 case UnqF_MkAllHappy:
-                    strcpy(recipe_name, "Recipe Make Happy");
+                    strcpy(recipe_name, "MakeHappy");
                     break;
                 default:
                     break;
             }
-        case SacA_CustomReward:
             break;
-        case SacA_CustomPunish:
+        case SacA_WishWell:
+        {
+            strcpy(recipe_name, "WishWell");
             break;
-    }
-    if (recipe_name[0] != '\0') {
-        const AP_LocationInfo* info = ap_location_info_get_by_name(recipe_name);
-        if(info != NULL && ap_location_is_missing(&g_ap_state, info->location)){
-            AP_SendItem(info->location);
         }
-    }                       
+        case SacA_MkEasterEgg:
+        {
+            strcpy(recipe_name, "EasterEgg");
+            break;
+        }
+        case SacA_CustomReward:
+        {
+            snprintf(recipe_name, sizeof(recipe_name), "Reward#%d", sac->param);
+            break;
+        }
+        case SacA_CustomPunish:
+        {
+            snprintf(recipe_name, sizeof(recipe_name), "Punish#%d", sac->param);
+            break;
+        }
+    }
 
+    int length = strlen(recipe_name);
+    bool has_victims = false;
+    for (ThingModel victim : sac->victims)
+    {
+        if (victim == 0) continue; // Skip non-existant creatures.
+        int remaining = sizeof(recipe_name) - length;
+        length += snprintf(recipe_name + length, remaining, !has_victims ? "#%d" : "%d", victim);
+        has_victims = true;
+    }
+
+    lua_on_temple_recipe(recipe_name);
 }
 
 #ifdef __cplusplus

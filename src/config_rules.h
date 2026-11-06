@@ -41,6 +41,8 @@ enum SacrificeAction {
     SacA_PosUniqFunc,
     SacA_CustomReward,
     SacA_CustomPunish,
+    SacA_WishWell,
+    SacA_MkEasterEgg,
 };
 
 enum UniqueFunctions {
