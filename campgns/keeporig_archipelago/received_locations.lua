@@ -156,11 +156,11 @@ ChecksTable = {
     [607] = {id=607, internal_name="MkCreature,HORNY,TROLL,BILE_DEMON,DARK_MISTRESS", name="Horned Reaper",                string="",       thing="LAIR_HORNY",       text="Horned Reaper Recipe Unlocked"},
 --NegativeRecipes
     -- 608 is wishing well
-    [609] = {id=609, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All chickens die 1",           string="",       thing="CHICKEN_DIE_DUMMY",       text="All chickens die 1 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [609] = {id=609, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,GHOST",             name="All Chickens die",           string="",       thing="CHICKEN_DIE_DUMMY",       text="All chickens die 1 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     --[610] = {id=610, internal_name="NegUniqFunc,KILL_ALL_CHICKENS,CHICKEN",           name="All chickens die 2",           string="",       thing="CHICKEN_DIE_DUMMY",       text="All chickens die 2 Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [611] = {id=611, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease creatures",            string="",       thing="FLIES_DUMMY",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [612] = {id=612, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All creatures angry",          string="",       thing="ANGRY_HORNY_DUMMY",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
-    [613] = {id=613, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken creatures",            string="",       thing="CHICKEN_DUMMY",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [611] = {id=611, internal_name="NegSpellAll,SPELL_DISEASE,VAMPIRE,VAMPIRE",       name="Disease Creatures",            string="",       thing="FLIES_DUMMY",       text="Disease creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [612] = {id=612, internal_name="NegUniqFunc,ALL_CREATRS_ANGRY,HORNY",             name="All Creatures angry",          string="",       thing="ANGRY_HORNY_DUMMY",       text="All creatures angry Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
+    [613] = {id=613, internal_name="NegSpellAll,SPELL_CHICKEN,BILE_DEMON,BILE_DEMON", name="Chicken Creatures",            string="",       thing="CHICKEN_DUMMY",       text="Chicken creatures Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
     -- 614 is spider easter egg
 --FXRecipes
     [615] = {id=615, internal_name="MkGoodHero,SKELETON,SKELETON,SKELETON",           name="Good Skeleton",                string="",       thing="LAIR_SKELT",       text="Good Skeleton Recipe Unlocked"}, --default, unlock would probably be stupid to include outside of a Templesanity
@@ -510,7 +510,7 @@ function CheckForMiscUnlocks()
     end
     if slot_data.NegativeRecipes == 2 then
         print("NegativeRecipes set to ON, giving all negative recipes automatically.")
-        for itemid = 609, 613 do
+        for _, itemid in ipairs({609, 611, 612, 613}) do
             RunDKScriptCommand("SET_SACRIFICE_RECIPE(" .. ChecksTable[itemid].internal_name .. ")")
         end
     end

@@ -45,6 +45,8 @@ function Startup()
     end, 17, true)
 end
 
+local slot_data = GetAPSlotData()
+
 function SlabToCentreSubtile(slab_coord)
     local centresubtile_coord = 3*slab_coord+1
     return centresubtile_coord
@@ -218,7 +220,7 @@ function ItemStatus()
     local creature_id_max = 16
     if APSettings.KeeperFXCreatures then creature_id_max = 18 end
     for itemid = 1, id_width_limit do
-        local item_subtile_x = 88 + 9*(itemid)
+        local item_subtile_x = 88 + 9*(itemid % 100)
         local item_subtile_y = 88
         if itemid <= creature_id_max then
             --if itemid > 16  then
@@ -273,8 +275,8 @@ function ItemStatus()
     else
         local heroes_id_max = 10
         for itemid = 801, 800 + heroes_id_max do
-            local item_subtile_x = 88 + 9*(itemid)
-            local item_subtile_y = 88
+            local item_subtile_x = 88 + 9*(itemid % 100)
+            local item_subtile_y = 115
             if itemid <= heroes_id_max then
                 --if itemid > 16  then
                 --    item_subtile_x = 169 + 12*(itemid-16)
@@ -427,8 +429,6 @@ function ItemStatus()
     end
     --501 is Levels
     --recipes
-    
-    --todo: recipes
     if not APSettings.temple_locations then
         for slab_x = 23,24 do
             for slab_y = 10,60 do
@@ -436,10 +436,10 @@ function ItemStatus()
             end
         end
     end
-    if not APSettings.PositiveRecipes then
+    if slot_data.PositiveRecipes == 0 then
         for slab_x = 10,24 do
             for slab_y = 10,23 do
-                ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove green "done recipe" flame
+                ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove positive recipes
             end
         end
     else
@@ -448,7 +448,7 @@ function ItemStatus()
             local item_subtile_y = 28 + 6*(itemid % 100)
             if ChecksTable[itemid] then
                 AddObjectToLevelAtPos(ChecksTable[itemid].thing,item_subtile_x,item_subtile_y,1,"PLAYER_NEUTRAL",0)
-                if ReceivedLocationsTable.Has(itemid) then
+                if ReceivedLocationsTable.Has(itemid) or slot_data.NegativeRecipes == 2 then
                     AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
                     AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
                 end
@@ -463,14 +463,14 @@ function ItemStatus()
             end
         end
     end
-    if not APSettings.NegativeRecipes then
+    if slot_data.NegativeRecipes == 0 then
         for slab_x = 10,24 do
             for slab_y = 25,32 do
-                ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove green "done recipe" flame
+                ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove negative recipes
             end
         end
     else
-        for itemid=608, 614 do
+        for _, itemid in ipairs({609, 611, 612, 613}) do
             local item_subtile_x = 34
             local item_subtile_y = 28 + 6*(itemid % 100)
             if itemid == 609 then --stupid workaround because i was too lazy to reorder recipes ids based on good/bad/fx
@@ -481,7 +481,7 @@ function ItemStatus()
             end
             if ChecksTable[itemid] then
                 AddObjectToLevelAtPos(ChecksTable[itemid].thing,item_subtile_x,item_subtile_y,1,"PLAYER_NEUTRAL",0)
-                if ReceivedLocationsTable.Has(itemid) then
+                if ReceivedLocationsTable.Has(itemid) or slot_data.NegativeRecipes == 2 then
                     AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
                     AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
                 end
@@ -496,19 +496,24 @@ function ItemStatus()
             end
         end
     end
-    if not APSettings.KeeperFXRecipes then
+    if slot_data.NegativeRecipes == 0 and slot_data.PositiveRecipes == 0 then
+        for slab_x = 10,24 do
+            ChangeSlabType(slab_x, 24, "ABYSS", "NONE") -- remove sliver of middle floor
+        end
+    end
+    if slot_data.KeeperFXRecipes == 0 then
         for slab_x = 10,24 do
             for slab_y = 33,54 do
-                ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove green "done recipe" flame
+                ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove fx recipes
             end
         end
     else
         for itemid=615, 625 do
             local item_subtile_x = 34
-            local item_subtile_y = 28 + 6*((itemid - 2)% 100)
+            local item_subtile_y = 28 + 6*((itemid - 3)% 100) --because 608,610 and 614 are all missing
             if ChecksTable[itemid] then
                 AddObjectToLevelAtPos(ChecksTable[itemid].thing,item_subtile_x,item_subtile_y,1,"PLAYER_NEUTRAL",0)
-                if ReceivedLocationsTable.Has(itemid) then
+                if ReceivedLocationsTable.Has(itemid) or slot_data.NegativeRecipes == 2 then
                     AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
                     AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
                 end
@@ -526,7 +531,7 @@ function ItemStatus()
     --not used atm, remove this
     for slab_x = 10,24 do
         for slab_y = 55,60 do
-            ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove green "done recipe" flame
+            ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove other recipes involving gold or chickens or easter eggs
         end
     end
 

@@ -414,7 +414,7 @@ class KeeperGoodTempleLocations(StrEnum):
 class KeeperBadTempleLocations(StrEnum):
         MAKE_ANGRY = "Temple: Make Creatures angry [1x Horned Reaper]"
         KILL_CHICKENS = "Temple: Kill friendly chickens [1x Ghost]"
-        DISEASE_CREATURES = "Temple: Disease friendly Creatures [1x Vampire]"
+        DISEASE_CREATURES = "Temple: Disease friendly Creatures [2x Vampire]"
         CHICKEN_CREATURES = "Temple: Cast Chicken on friendly Creatures [2x Bile Demon]"
 
 class KeeperFXGoodTempleLocations(StrEnum):
