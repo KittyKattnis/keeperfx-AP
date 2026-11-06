@@ -999,7 +999,7 @@ void process_object_sacrifice(struct Thing *thing, long sacowner)
         if (is_my_player_number(sacowner))
             output_message(SMsg_SacrificePunish, 0);
     } else
-    if (object_is_gold_pile(thing))
+    if (object_is_gold_pile(thing) || (thing->model == ObjMdl_SpinningCoin)) //Spinning coins are what is dropped from hand. Gold piles are not truly dropped.
     {
         if (thing->valuable.gold_stored > 0)
         {
