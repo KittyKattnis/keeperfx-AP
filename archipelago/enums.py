@@ -267,7 +267,7 @@ class KeeperRecipeName(StrEnum):
         RECIPE_SORCEROR = "Warlock Recipe"
         RECIPE_DARK_MISTRESS = "Mistress Recipe"
         RECIPE_HORNY = "Horned Reaper Recipe"
-#       RECIPE_SPIDER_EASTER_EGG = "Spider easter egg Recipe" #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
+        RECIPE_SPIDER_EASTER_EGG = "Spider easter egg Recipe" #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 
 class KeeperRecipe(IntEnum):
         RECIPE_CHEAPER_IMPS = 601
@@ -277,20 +277,20 @@ class KeeperRecipe(IntEnum):
         RECIPE_SORCEROR = 605
         RECIPE_DARK_MISTRESS = 606
         RECIPE_HORNY = 607
-#       RECIPE_SPIDER_EASTER_EGG = 614 #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
+        RECIPE_SPIDER_EASTER_EGG = 614 #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 
 class NegativeRecipeName(StrEnum):
-#       RECIPE_WISHING_WELL = "Wishing Well Recipe" #default, might be hardcoded, would probably be stupid to include
-       RECIPE_KILL_CHICKENS_1 = "Kill Chickens Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_WISHING_WELL = "Wishing Well Recipe" #default, might be hardcoded, would probably be stupid to include
+       RECIPE_KILL_CHICKENS_1 = "Kill Chickens Recipe 1" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_2 = "Kill Chickens Recipe 2" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_DISEASE = "Disease Creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_ANGRY = "All Creatures angry Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_CHICKEN = "Chicken Creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
 
 class NegativeRecipe(IntEnum):
-#       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
+       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
        RECIPE_KILL_CHICKENS_1 = 609 #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_DISEASE = 611 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_ANGRY = 612 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_CHICKEN = 613 #default, unlock would probably be stupid to include outside of a Templesanity
