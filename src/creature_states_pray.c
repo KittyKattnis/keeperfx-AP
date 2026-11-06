@@ -417,7 +417,15 @@ void player_wish_well(int gold_amount)
     ap_process_sacrifice_recipe(&sac);
 }
 
-void kill_all_players_chickens(PlayerNumber plyr_idx, bool was_chicken)
+void player_sacrifice_chicken()
+{
+    struct SacrificeRecipe sac = {};
+    sac.action = SacA_NegUniqFunc;
+    sac.param = UnqF_KillChickns;
+    ap_process_sacrifice_recipe(&sac);
+}
+
+void kill_all_players_chickens(PlayerNumber plyr_idx)
 {
     SYNCDBG(18,"Starting");
     const struct StructureList* slist = get_list_for_thing_class(TCls_Object);
@@ -447,14 +455,6 @@ void kill_all_players_chickens(PlayerNumber plyr_idx, bool was_chicken)
     }
     // Force leave or kill normal creatures and special diggers
     do_to_players_all_creatures_of_model(plyr_idx, CREATURE_ANY, kill_creature_if_under_chicken_spell);
-
-    if (was_chicken && is_my_player_number(plyr_idx))
-    {
-        struct SacrificeRecipe sac = {};
-        sac.action = SacA_NegUniqFunc;
-        sac.param = UnqF_KillChickns;
-        ap_process_sacrifice_recipe(&sac);
-    }
 }
 
 // This is state-process function of a creature
@@ -527,7 +527,7 @@ long create_sacrifice_unique_award(struct Coord3d *pos, PlayerNumber plyr_idx, l
       force_complete_current_manufacturing(plyr_idx);
       return SacR_Awarded;
   case UnqF_KillChickns:
-      kill_all_players_chickens(plyr_idx, false);
+      kill_all_players_chickens(plyr_idx);
       return SacR_Punished;
   case UnqF_CheaperImp:
       tally_sacrificed_imps(plyr_idx,1);

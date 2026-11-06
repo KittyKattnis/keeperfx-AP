@@ -46,7 +46,8 @@ short creature_being_summoned(struct Thing *thing);
 
 void player_easter_egg_sacrifice();
 void player_wish_well(int gold_amount);
-void kill_all_players_chickens(PlayerNumber plyr_idx, bool was_chickens);
+void player_sacrifice_chicken();
+void kill_all_players_chickens(PlayerNumber plyr_idx);
 void apply_spell_effect_to_players_creatures(PlayerNumber plyr_idx, ThingModel crmodel, long spl_idx, CrtrExpLevel overchrg);
 TbBool add_anger_to_all_creatures_of_player(PlayerNumber plyr_idx, short percentage);
 
