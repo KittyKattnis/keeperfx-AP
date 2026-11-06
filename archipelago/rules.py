@@ -346,7 +346,7 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
 
 
 # temple recipes
-    if world.options.temple_locations:
+    if world.options.TempleLocations:
         can_access_temple = HasAny(get_val(KeeperRoomName.TEMPLE), get_val(KeeperLevelName.LEVEL_009), get_val(KeeperLevelName.LEVEL_010), get_val(KeeperLevelName.LEVEL_020))
         can_get_fly = HasAny(get_val(KeeperCreatureName.FLY), get_val(KeeperLevelName.LEVEL_010), get_val(KeeperLevelName.LEVEL_020))
         can_get_beetle = HasAny(get_val(KeeperCreatureName.BUG), get_val(KeeperLevelName.LEVEL_020))

@@ -485,7 +485,7 @@ def create_regular_locations(world: DungeonKeeperWorld) -> None:
     )
     skybirdtrill.add_locations(skybirdtrill_locations, DungeonKeeperLocation)
 
-    if world.options.temple_locations:
+    if world.options.TempleLocations:
         create_temple_locations(world)
 
     if world.options.secret_levels:

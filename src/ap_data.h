@@ -44,7 +44,7 @@ int SwapWaterAndLava;
 int RemoveNeutralRooms;
 int CrueltyMode;
 int SecretLevels;
-int TempleRecipes;
+int TempleLocations;
 int PositiveRecipes;
 int FlatTempleGuardPost;
 };

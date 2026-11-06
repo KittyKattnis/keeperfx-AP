@@ -333,8 +333,8 @@ static int lua_ap_get_slot_data(lua_State *L)
     lua_pushinteger(L, slot_data.FlatTempleGuardPost);
     lua_setfield(L, -2, "FlatTempleGuardPost");
 
-    lua_pushinteger(L, slot_data.TempleRecipes);
-    lua_setfield(L, -2, "TempleRecipes");
+    lua_pushinteger(L, slot_data.TempleLocations);
+    lua_setfield(L, -2, "TempleLocations");
 
     lua_pushinteger(L, slot_data.PositiveRecipes);
     lua_setfield(L, -2, "PositiveRecipes");

@@ -65,7 +65,7 @@ RedirectStdoutToFile();
     AP_SetHintCallback(ap_hint_message);
     AP_SetPrintCallback(ap_print);
     AP_SetCmdResultCallback(ap_command_result);
-//  Sslot info setup callbacks
+//  Slot info setup callbacks
     AP_RegisterSlotDataIntCallback("KeeperFXCreatures",        OnKeeperFXCreaturesReceived);
     AP_RegisterSlotDataIntCallback("KeeperFXDoors",            OnKeeperFXDoorsReceived);
     AP_RegisterSlotDataIntCallback("KeeperFXSpells",           OnKeeperFXSpellsReceived);
@@ -86,7 +86,7 @@ RedirectStdoutToFile();
     AP_RegisterSlotDataIntCallback("RemoveNeutralRooms",       OnRemoveNeutralRooms);
     AP_RegisterSlotDataIntCallback("CrueltyMode",              OnCrueltyMode);
     AP_RegisterSlotDataIntCallback("SecretLevels",             OnSecretLevels);
-    AP_RegisterSlotDataIntCallback("temple_locations",            OnTempleRecipes);
+    AP_RegisterSlotDataIntCallback("TempleLocations",         OnTempleLocations);
     AP_RegisterSlotDataIntCallback("PositiveRecipes",          OnPositiveRecipes);
     AP_RegisterSlotDataIntCallback("FlatTempleGuardPost",      OnFlatTempleGuardPost);
 
@@ -278,7 +278,7 @@ void OnSwapWaterAndLava(int val)    { g_ap_state.slot_data.SwapWaterAndLava = va
 void OnRemoveNeutralRooms(int val)    { g_ap_state.slot_data.RemoveNeutralRooms = val; }
 void OnCrueltyMode(int val)    { g_ap_state.slot_data.CrueltyMode = val; }
 void OnSecretLevels(int val)    { g_ap_state.slot_data.SecretLevels = val; }
-void OnTempleRecipes(int val)    { g_ap_state.slot_data.TempleRecipes = val; }
+void OnTempleLocations(int val)    { g_ap_state.slot_data.TempleLocations = val; }
 void OnPositiveRecipes(int val)    { g_ap_state.slot_data.PositiveRecipes = val;}
 void OnFlatTempleGuardPost(int val)    { g_ap_state.slot_data.FlatTempleGuardPost = val; }
 

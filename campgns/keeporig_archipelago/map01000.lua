@@ -429,7 +429,7 @@ function ItemStatus()
     end
     --501 is Levels
     --recipes
-    if not APSettings.temple_locations then
+    if not APSettings.TempleLocations then
         for slab_x = 23,24 do
             for slab_y = 10,60 do
                 ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE") --remove green "done recipe" flame
@@ -452,7 +452,7 @@ function ItemStatus()
                     AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
                     AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
                 end
-                if SentLocations.Has(11000+(itemid % 100)) and APSettings.temple_locations then --check this is the id we will use for having done a recipe
+                if SentLocations.Has(11000+(itemid % 100)) and APSettings.TempleLocations then --check this is the id we will use for having done a recipe
                     AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
                 end
             else
@@ -485,7 +485,7 @@ function ItemStatus()
                     AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
                     AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
                 end
-                if SentLocations.Has(11000+(itemid % 100)) and APSettings.temple_locations then --check this is the id we will use for having done a recipe
+                if SentLocations.Has(11000+(itemid % 100)) and APSettings.TempleLocations then --check this is the id we will use for having done a recipe
                     AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
                 end
             elseif itemid ~= 608 and itemid ~= 610 and itemid ~= 614 then
@@ -517,7 +517,7 @@ function ItemStatus()
                     AddObjectToLevelAtPos("HEARTFLAME_RED", item_subtile_x+24, item_subtile_y, 0) --unlocked
                     AddObjectToLevelAtPos("HEARTFLAME_BLUE", item_subtile_x+30, item_subtile_y, 0) --active
                 end
-                if SentLocations.Has(11000+(itemid % 100)) and APSettings.temple_locations then --check this is the id we will use for having done a recipe
+                if SentLocations.Has(11000+(itemid % 100)) and APSettings.TempleLocations then --check this is the id we will use for having done a recipe
                     AddObjectToLevelAtPos("HEARTFLAME_GREEN", item_subtile_x+36, item_subtile_y, 0) --sent
                 end
             else

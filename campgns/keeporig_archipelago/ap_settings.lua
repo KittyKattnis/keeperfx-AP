@@ -6,7 +6,7 @@ APSettings = {
     KeeperFXSpells = false,
     KeeperFXTraps = false,
     KeeperFXDoors = false,
-    temple_locations = true,
+    TempleLocations = true,
     PositiveRecipes = 1,
     NegativeRecipes = 1,
     KeeperFXRecipes = 0,
@@ -81,8 +81,8 @@ else
     print("KeeperFXTraps:            " .. tostring(APSettings.KeeperFXTraps) .. " (" .. tostring(slot_data.KeeperFXTraps) .. ")")
     APSettings.KeeperFXDoors = IsValueTrue(slot_data.KeeperFXDoors)
     print("KeeperFXDoors:            " .. tostring(APSettings.KeeperFXDoors) .. " (" .. tostring(slot_data.KeeperFXDoors) .. ")")
-    APSettings.temple_locations = IsValueTrue(slot_data.temple_locations)
-    print("temple_locations:         " .. tostring(APSettings.temple_locations) .. " (" .. tostring(slot_data.temple_locations) .. ")")
+    APSettings.TempleLocations = IsValueTrue(slot_data.TempleLocations)
+    print("TempleLocations:         " .. tostring(APSettings.TempleLocations) .. " (" .. tostring(slot_data.TempleLocations) .. ")")
     APSettings.PositiveRecipes = IsValueTrue(slot_data.PositiveRecipes)
     print("PositiveRecipes:          " .. tostring(APSettings.PositiveRecipes) .. " (" .. tostring(slot_data.PositiveRecipes) .. ")")
     APSettings.NegativeRecipes = IsValueTrue(slot_data.NegativeRecipes)
