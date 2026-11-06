@@ -448,7 +448,7 @@ void kill_all_players_chickens(PlayerNumber plyr_idx, bool was_chicken)
     // Force leave or kill normal creatures and special diggers
     do_to_players_all_creatures_of_model(plyr_idx, CREATURE_ANY, kill_creature_if_under_chicken_spell);
 
-    if (was_chicken)
+    if (was_chicken && is_my_player_number(plyr_idx))
     {
         struct SacrificeRecipe sac = {};
         sac.action = SacA_NegUniqFunc;
