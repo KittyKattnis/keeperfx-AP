@@ -116,15 +116,10 @@ void ap_room_update()
 
 void ap_refresh_missing()
 {    
-    AP_SendLocationScouts(AP_GetCheckedLocations(),0);
+    AP_SendLocationScouts(AP_GetServerLocations(),0);
+    g_ap_state.total_location_count = AP_GetServerLocations().size();
     for (int64_t loc : AP_GetCheckedLocations()) {
         ap_state_update_locations(&g_ap_state, (int)loc);
-    }
-    
-    AP_SendLocationScouts(AP_GetMissingLocations(),0);
-    ap_missing_init(&g_ap_state);
-    for (int64_t loc : AP_GetMissingLocations()) {
-        ap_state_update_missing_locations(&g_ap_state, (int)loc);
     }
 }
 
@@ -298,8 +293,16 @@ void ap_bridge_connect(char* ip, char* slot, char* password)
 
 void ap_bridge_location_check(int id)
 {
-    AP_SendItem(id);
-    ap_state_update_locations(&g_ap_state, id);
+    if (!ap_location_exists(id))
+    {
+        ERRORLOG("Attempted to send locationID '%d' which is an unknown multiworld id", id);
+        return;
+    }
+    if (ap_location_is_missing(&g_ap_state, id))
+    {
+        AP_SendItem(id);
+        ap_state_update_locations(&g_ap_state, id);
+    }
 }
 
 bool ap_bridge_connection_status(void)

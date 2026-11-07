@@ -347,7 +347,7 @@ static int lua_ap_get_slot_data(lua_State *L)
 
 static int lua_ap_checked_locations(lua_State *L)
 {
-    int location_count = g_ap_state.locations_count;
+    int location_count = g_ap_state.checked_count;
     int *locations = g_ap_state.checked_locations;
 
     lua_newtable(L);
@@ -358,6 +358,13 @@ static int lua_ap_checked_locations(lua_State *L)
     }
 
     return 1; 
+}
+
+static int lua_ap_get_location_counts(lua_State* L)
+{
+    lua_pushinteger(L, g_ap_state.checked_count);
+    lua_pushinteger(L, g_ap_state.total_location_count);
+    return 2;
 }
 
 static int lua_ap_set_level_box_remain(lua_State *L)
@@ -2979,6 +2986,7 @@ static const luaL_Reg global_methods[] = {
     {"RoomAvailableById",                lua_Room_available_id}, 
     {"GetAPItems",                       lua_ap_get_items}, 
     {"GetAPCheckedLocations",            lua_ap_checked_locations},
+    {"GetAPLocationCounts",              lua_ap_get_location_counts},
     {"GetAPLocationInfo",                lua_ap_get_location_info},
     {"APScoutLocations",                 lua_ap_bridge_scout_locations},    
     {"SetAPLvlBoxRemain",                lua_ap_set_level_box_remain},      
