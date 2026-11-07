@@ -360,6 +360,12 @@ static int lua_ap_checked_locations(lua_State *L)
     return 1; 
 }
 
+static int lua_ap_get_item_counts(lua_State* L)
+{
+    lua_pushinteger(L, g_ap_state.items_count);
+    return 1;
+}
+
 static int lua_ap_get_location_counts(lua_State* L)
 {
     lua_pushinteger(L, g_ap_state.checked_count);
@@ -2985,6 +2991,7 @@ static const luaL_Reg global_methods[] = {
     {"SendLocation",                     lua_send_location},  
     {"RoomAvailableById",                lua_Room_available_id}, 
     {"GetAPItems",                       lua_ap_get_items}, 
+    {"GetAPItemCount",                   lua_ap_get_item_counts},
     {"GetAPCheckedLocations",            lua_ap_checked_locations},
     {"GetAPLocationCounts",              lua_ap_get_location_counts},
     {"GetAPLocationInfo",                lua_ap_get_location_info},
