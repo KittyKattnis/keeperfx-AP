@@ -595,6 +595,45 @@ void creature_reject_sacrifice(PlayerNumber player, ThingModel model)
     dungeon->creature_sacrifice_exp[model] = 0;
 }
 
+void set_special_sacrifice(enum SpecialSacrifice rule,TbBool mode)
+{
+    switch (rule)
+    {
+    case Special_Chicken:
+        game.conf.rules[0].special_sacrifices.prevent_sacrifice_chickens = mode;
+        break;
+    case Special_Gold:
+        game.conf.rules[0].special_sacrifices.prevent_wishing_well = mode;
+        break;
+    case Special_Easter_Egg:
+        game.conf.rules[0].special_sacrifices.prevent_easter_egg = mode;
+        break;
+    default:
+        ERRORLOG("Unsupported special sacrifice option");
+        break;
+    }
+}
+
+TbBool can_special_sacrifice(enum SpecialSacrifice rule)
+{
+    switch (rule)
+    {
+        case Special_Chicken:
+            return game.conf.rules[0].special_sacrifices.prevent_sacrifice_chickens;
+            break;
+        case Special_Gold:
+            return game.conf.rules[0].special_sacrifices.prevent_wishing_well;
+            break;
+        case Special_Easter_Egg:
+            return game.conf.rules[0].special_sacrifices.prevent_easter_egg;
+            break;
+        default:
+            ERRORLOG("Unsupported special sacrifice option");
+            break;
+    }
+    return false;
+}
+
 static long sacrifice_victim_model_count(struct SacrificeRecipe *sac, ThingModel model)
 {
     long k = 0;

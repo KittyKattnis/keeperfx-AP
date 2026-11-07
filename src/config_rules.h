@@ -31,6 +31,12 @@
 extern "C" {
 #endif
 /******************************************************************************/
+enum SpecialSacrifice {
+    Special_Chicken,
+    Special_Gold,
+    Special_Easter_Egg
+};
+
 enum SacrificeAction {
     SacA_None = 0,
     SacA_MkCreature,
@@ -191,6 +197,13 @@ struct SacrificesRulesConfig {
     /** The creature model used for determining amount of sacrifices which decrease digger cost. */
     ThingModel cheaper_diggers_sacrifice_model;
 };
+
+struct SpecialSacrificeRules {
+    TbBool prevent_sacrifice_chickens;
+    TbBool prevent_wishing_well;
+    TbBool prevent_easter_egg;
+};
+
 struct RulesConfig {
     struct GameRulesConfig gameplay;
     struct ComputerRulesConfig computer;
@@ -200,6 +213,7 @@ struct RulesConfig {
     struct WorkersRulesConfig workers;
     struct HealthRulesConfig health;
     struct SacrificesRulesConfig sacrifices;
+    struct SpecialSacrificeRules special_sacrifices;
 };
 /******************************************************************************/
 extern const struct ConfigFileData keeper_rules_file_data;

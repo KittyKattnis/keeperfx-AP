@@ -1707,19 +1707,60 @@ static int lua_Remove_sacrifice_recipe(lua_State *L)
 
 }
 
-//Manipulating Creature stats
-
-
-static int lua_Set_creature_instance(lua_State *L)
+static int lua_Modify_special_recipe(lua_State* L)
 {
-    ThingModel crmodel = luaL_checkNamedCommand(L,1,creature_desc);
+    if (lua_gettop(L) < 2)
+    {
+        return luaL_error(L, "Not enough arguments! (String, Bool)");
+    }
+    if (!lua_isstring(L, 1))
+    {
+        return luaL_error(L, "First argument must be a string");
+    }
+    if (!lua_isboolean(L, 2))
+    {
+        return luaL_error(L, "Second argument must be a boolean (true/false)");
+    }
+    const char* target_recipe = luaL_checkstring(L, 1);
+    enum SpecialSacrifice target_special;
+
+    if (strcasecmp(target_recipe, "chicken") == 0)
+    {
+        target_special = Special_Chicken;
+    }
+    else if (strcasecmp(target_recipe, "gold") == 0)
+    {
+        target_special = Special_Gold;
+    }
+    else if (strcasecmp(target_recipe, "easteregg") == 0)
+    {
+        target_special = Special_Easter_Egg;
+    }
+    else
+    {
+        return luaL_argerror(L, 1, lua_pushfstring(L, "Invalid option '%s'. Expected (Chicken/Gold/EasterEgg)", target_recipe));
+    }
+    int recipe_state = lua_toboolean(L, 2);
+    
+    JUSTLOG("Special sacrifice '%s' is now: %s", target_recipe, recipe_state? "on" : "off");
+
+    set_special_sacrifice(target_special, recipe_state);
+
+    return 0;
+}
+
+static int lua_Set_creature_instance(lua_State* L)
+{
+    ThingModel crmodel = luaL_checkNamedCommand(L, 1, creature_desc);
     int slot = luaL_checkinteger(L, 2);
-    int instance = luaL_checkNamedCommand(L, 3,instance_desc);
+    int instance = luaL_checkNamedCommand(L, 3, instance_desc);
     unsigned char level = luaL_checkinteger(L, 4);
 
     script_set_creature_instance(crmodel, slot, instance, level);
     return 0;
 }
+
+//Manipulating Creature stats
 
 static int lua_Set_creature_max_level(lua_State *L)
 {
@@ -2860,6 +2901,7 @@ static const luaL_Reg global_methods[] = {
     {"SwapCreature",                         lua_Swap_creature                   },
     {"SetSacrificeRecipe",                   lua_Set_sacrifice_recipe            },
     {"RemoveSacrificeRecipe",                lua_Remove_sacrifice_recipe         },
+    {"AllowSpecialRecipe",                   lua_Modify_special_recipe           },
 
 //Manipulating Creature stats
    {"SetCreatureInstance",                 lua_Set_creature_instance           },
@@ -2936,7 +2978,7 @@ static const luaL_Reg global_methods[] = {
     {"SendLocation",                     lua_send_location},  
     {"RoomAvailableById",                lua_Room_available_id}, 
     {"GetAPItems",                       lua_ap_get_items}, 
-    {"GetAPCheckedLocations",            lua_ap_checked_locations}, 
+    {"GetAPCheckedLocations",            lua_ap_checked_locations},
     {"GetAPLocationInfo",                lua_ap_get_location_info},
     {"APScoutLocations",                 lua_ap_bridge_scout_locations},    
     {"SetAPLvlBoxRemain",                lua_ap_set_level_box_remain},      

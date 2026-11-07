@@ -973,6 +973,7 @@ TbBool temple_check_for_arachnid_join_dungeon(struct Dungeon *dungeon)
 
 long process_temple_special(struct Thing *thing, long sacowner)
 {
+    if (!can_special_sacrifice(Special_Easter_Egg)) return false;
     struct Dungeon* dungeon = get_dungeon(sacowner);
     if (object_is_mature_food(thing))
     {
@@ -993,21 +994,22 @@ void process_object_sacrifice(struct Thing *thing, long sacowner)
         struct SlabMap* slb = get_slabmap_thing_is_on(thing);
         slbowner = slabmap_owner(slb);
     }
-    if (object_is_mature_food(thing))
+    bool owner_is_player = is_my_player_number(sacowner);
+    if (can_special_sacrifice(Special_Chicken) && object_is_mature_food(thing))
     {
         process_temple_special(thing, sacowner);
         kill_all_players_chickens(thing->owner);
-        if (is_my_player_number(sacowner))
+        if (owner_is_player)
         {
             player_sacrifice_chicken();
             output_message(SMsg_SacrificePunish, 0);
         }
     } else
-    if (object_is_gold_pile(thing) || (thing->model == ObjMdl_SpinningCoin)) //Spinning coins are what is dropped from hand. Gold piles are not truly dropped.
+    if (can_special_sacrifice(Special_Gold) && (object_is_gold_pile(thing) || (thing->model == ObjMdl_SpinningCoin))) //Spinning coins are what is dropped from hand. Gold piles are not truly dropped.
     {
         if (thing->valuable.gold_stored > 0)
         {
-            if (is_my_player_number(sacowner)) player_wish_well(thing->valuable.gold_stored);
+            if (owner_is_player) player_wish_well(thing->valuable.gold_stored);
             process_temple_special(thing, sacowner);
             int num_allies = 0;
             PlayerNumber plyr_idx;
@@ -1030,7 +1032,7 @@ void process_object_sacrifice(struct Thing *thing, long sacowner)
                 }
             } else
             {
-                if (is_my_player_number(sacowner))
+                if (owner_is_player)
                     output_message(SMsg_SacrificeWishing, 0);
             }
         }

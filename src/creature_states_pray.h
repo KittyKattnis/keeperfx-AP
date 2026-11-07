@@ -44,6 +44,8 @@ short creature_being_sacrificed(struct Thing *thing);
 short creature_sacrifice(struct Thing *thing);
 short creature_being_summoned(struct Thing *thing);
 
+void set_special_sacrifice(enum SpecialSacrifice rule, TbBool mode);
+TbBool can_special_sacrifice(enum SpecialSacrifice rule);
 void player_easter_egg_sacrifice();
 void player_wish_well(int gold_amount);
 void player_sacrifice_chicken();
