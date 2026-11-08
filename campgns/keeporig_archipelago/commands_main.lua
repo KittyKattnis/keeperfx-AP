@@ -1,3 +1,5 @@
+TempleRecipes = require("temple_recipe_table")
+
 --Commands to be run and saved/loaded in every level.
 CommandsMain = {}
 
@@ -84,6 +86,13 @@ function OnItemReceived(itemid)
             QuickMessage("Total AP Items Received: " .. rec_total .. "/" .. check_total .. ".", "ARCHIPELAGO_ICON")
             print("QuickMessage: Total AP Items Received: " .. rec_total .. "/" .. check_total)
       end
+end
+
+function OnTempleRecipe(recipe)
+    local temple_location = TempleRecipes[recipe]
+    if temple_location ~= -1 then
+        SendLocation(temple_location)
+    end
 end
 
 function ActivateItems()

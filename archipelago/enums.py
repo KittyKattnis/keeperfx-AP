@@ -200,26 +200,26 @@ class KeeperFXPower(IntEnum):
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
 
 class KeeperLevelName(StrEnum):
-        LEVEL_001 = "Eversmile (Level 1)"
-        LEVEL_002 = "Cosyton (Level 2)"
-        LEVEL_003 = "Waterdream Warm (Level 3)"
-        LEVEL_004 = "Flowerhat (Level 4)"
-        LEVEL_005 = "Lushmeadow-on-Down (Level 5)"
-        LEVEL_006 = "Snuggledell (Level 6)"
-        LEVEL_007 = "Wishvale (Level 7)"
-        LEVEL_008 = "Tickle (Level 8)"
-        LEVEL_009 = "Moonbrush Wood (Level 9)"
-        LEVEL_010 = "Nevergrim (Level 10)"
-        LEVEL_011 = "Hearth (Level 11)"
-        LEVEL_012 = "Elf's Dance (Level 12)"
-        LEVEL_013 = "Buffy Oak (Level 13)"
-        LEVEL_014 = "Sleepiburgh (Level 14)"
-        LEVEL_015 = "Woodly Rhyme (Level 15)"
-        LEVEL_016 = "Tulipscent (Level 16)"
-        LEVEL_017 = "Mirthshire (Level 17)"
-        LEVEL_018 = "Blaise End (Level 18)"
-        LEVEL_019 = "Mistle (Level 19)"
-        LEVEL_020 = "Skybird Trill (Level 20)"
+        LEVEL_001 = "Eversmile"
+        LEVEL_002 = "Cosyton"
+        LEVEL_003 = "Waterdream Warm"
+        LEVEL_004 = "Flowerhat"
+        LEVEL_005 = "Lushmeadow-on-Down"
+        LEVEL_006 = "Snuggledell"
+        LEVEL_007 = "Wishvale"
+        LEVEL_008 = "Tickle"
+        LEVEL_009 = "Moonbrush Wood"
+        LEVEL_010 = "Nevergrim"
+        LEVEL_011 = "Hearth"
+        LEVEL_012 = "Elf's Dance"
+        LEVEL_013 = "Buffy Oak"
+        LEVEL_014 = "Sleepiburgh"
+        LEVEL_015 = "Woodly Rhyme"
+        LEVEL_016 = "Tulipscent"
+        LEVEL_017 = "Mirthshire"
+        LEVEL_018 = "Blaise End"
+        LEVEL_019 = "Mistle"
+        LEVEL_020 = "Skybird Trill"
 
 class KeeperLevel(IntEnum):
         LEVEL_001 = 501
@@ -267,7 +267,7 @@ class KeeperRecipeName(StrEnum):
         RECIPE_SORCEROR = "Warlock Recipe"
         RECIPE_DARK_MISTRESS = "Mistress Recipe"
         RECIPE_HORNY = "Horned Reaper Recipe"
-#       RECIPE_SPIDER_EASTER_EGG = "Spider easter egg Recipe" #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
+        RECIPE_SPIDER_EASTER_EGG = "Spider easter egg Recipe" #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 
 class KeeperRecipe(IntEnum):
         RECIPE_CHEAPER_IMPS = 601
@@ -277,20 +277,20 @@ class KeeperRecipe(IntEnum):
         RECIPE_SORCEROR = 605
         RECIPE_DARK_MISTRESS = 606
         RECIPE_HORNY = 607
-#       RECIPE_SPIDER_EASTER_EGG = 614 #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
+        RECIPE_SPIDER_EASTER_EGG = 614 #default, hardcoded easter egg and not really a recipe, would probably be stupid to include
 
 class NegativeRecipeName(StrEnum):
-#       RECIPE_WISHING_WELL = "Wishing Well Recipe" #default, might be hardcoded, would probably be stupid to include
-       RECIPE_KILL_CHICKENS_1 = "Kill Chickens Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_KILL_CHICKENS_2 = "All chickens die 2 Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_WISHING_WELL = "Wishing Well Recipe" #default, might be hardcoded, would probably be stupid to include
+       RECIPE_KILL_CHICKENS_1 = "Kill Chickens Recipe 1" #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_2 = "Kill Chickens Recipe 2" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_DISEASE = "Disease Creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_ANGRY = "All Creatures angry Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_CHICKEN = "Chicken Creatures Recipe" #default, unlock would probably be stupid to include outside of a Templesanity
 
 class NegativeRecipe(IntEnum):
-#       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
+       RECIPE_WISHING_WELL = 608 #default, might be hardcoded, would probably be stupid to include
        RECIPE_KILL_CHICKENS_1 = 609 #default, unlock would probably be stupid to include outside of a Templesanity
-#       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
+       RECIPE_KILL_CHICKENS_2 = 610 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_DISEASE = 611 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_ANGRY = 612 #default, unlock would probably be stupid to include outside of a Templesanity
        RECIPE_CHICKEN = 613 #default, unlock would probably be stupid to include outside of a Templesanity
@@ -409,12 +409,15 @@ class KeeperGoodTempleLocations(StrEnum):
         BILE_DEMON = "Temple: Receive Bile Demon [3x Spider]"
         WARLOCK = "Temple: Receive Warlock [Fly, Spider]"
         MISTRESS = "Temple: Receive Dark Mistress [Beetle, Spider]"
-        HORNY = "Temple: Receive Horned reaper [Troll, Bile Demon, Dark Mistress]"
+        HORNY = "Temple: Receive Horned Reaper [Troll, Bile Demon, Dark Mistress]"
+        WISHING_WELL = "Temple: This is no wishing well [1x Gold]"
+        EASTER_EGG = "Temple: Spider Easter Egg [4x Imp, 4x Gold, 16x Chicken]"
 
 class KeeperBadTempleLocations(StrEnum):
-        MAKE_ANGRY = "Temple: Make Creatures angry [1x Horned Reaper]"
-        KILL_CHICKENS = "Temple: Kill friendly chickens [1x Ghost]"
+        KILL_CHICKENS_1 = "Temple: Kill friendly chickens [1x Ghost]"
+        KILL_CHICKENS_2 = "Temple: Kill friendly chickens [1x Chicken]"
         DISEASE_CREATURES = "Temple: Disease friendly Creatures [2x Vampire]"
+        MAKE_ANGRY = "Temple: Make Creatures angry [1x Horned Reaper]"
         CHICKEN_CREATURES = "Temple: Cast Chicken on friendly Creatures [2x Bile Demon]"
 
 class KeeperFXGoodTempleLocations(StrEnum):
@@ -428,6 +431,7 @@ class KeeperFXGoodTempleLocations(StrEnum):
         FLIGHT = "Temple: Cast Flight on friendly Creatures [Demon Spawn, Fly]"
 
 class KeeperFXBadTempleLocations(StrEnum):
+        GOOD_SKELETON = "Temple: Create Good Skeleton [2x Skeleton]"
         FREEZE = "Temple: Cast Freeze on friendly Creatures [Vampire, Spider]"
         SLOW = "Temple: Cast Slow on friendly Creatures [Vampire, Demon Spawn]"
 

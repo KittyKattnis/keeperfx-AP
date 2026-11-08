@@ -13,21 +13,11 @@ void ap_state_init(struct APState* ap)
     if (!ap) return;
 
     ap->items_count = 0;
-    ap->locations_count = 0;
-    ap->missing_locations_count = 0;
+    ap->checked_count = 0;
+    ap->total_location_count = 0;
     for (int i = 0; i < AP_LOCATION_NO; i++) {
         ap->checked_locations[i] = 0;
-        ap->missing_locations[i] = 0; 
         memset(&ap->items_received[i], 0, sizeof(ap->items_received[i]));
-    }
-}
-
-void ap_missing_init(struct APState* ap)
-{
-    if (!ap) return;
-    ap->missing_locations_count = 0;
-    for (int i = 0; i < AP_LOCATION_NO; i++) {
-        ap->missing_locations[i] = 0; 
     }
 }
 
@@ -54,7 +44,7 @@ void ap_state_update_items(struct APState* ap, long long item,
 
 void ap_state_update_locations(struct APState* ap, int locationid)
 {
-    int location_count = ap->locations_count;
+    int location_count = ap->checked_count;
 
     for (int i = 0; i < location_count ; i++)
     {
@@ -65,37 +55,20 @@ void ap_state_update_locations(struct APState* ap, int locationid)
     }
 
     ap->checked_locations[location_count] = locationid;
-    ap->locations_count++;
-    
-}
-
-void ap_state_update_missing_locations(struct APState* ap, int locationid)
-{
-    int missing_locations_count = ap->missing_locations_count;
-
-    for (int i = 0; i < missing_locations_count ; i++)
-    {
-        if (locationid == ap->missing_locations[i])
-        {
-            return;
-        }        
-    }
-
-    ap->missing_locations[missing_locations_count] = locationid;
-    ap->missing_locations_count++;
+    ap->checked_count++;
     
 }
 
 bool ap_location_is_missing(struct APState* ap, int locationid)
 {
-    for (int i = 0; i < ap->missing_locations_count ; i++)
+    for (int i = 0; i < ap->checked_count; i++)
     {
-        if (locationid == ap->missing_locations[i])
+        if (locationid == ap->checked_locations[i])
         {
-            return true;
-        }        
+            return false;
+        }
     }
-    return false;
+    return true;
 }
 
 void ap_location_info_init(void)
@@ -113,6 +86,18 @@ void ap_location_info_init(void)
         ap_location_info[i].location_name[0] = '\0';
         ap_location_info[i].player_name[0] = '\0';
     }
+}
+
+bool ap_location_exists(int locationID)
+{
+    for (int i = 0; i < ap_location_info_count; i++)
+    {
+        if (ap_location_info[i].location == locationID)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 void ap_location_info_update(long long item, long long location, int player, int flags,

@@ -67,7 +67,11 @@ class DungeonKeeperWorld(World):
         "Progressives": {entry.value for entry in enums.KeeperProgressiveName},
         "Heroes": {entry.value for entry in enums.KeeperHeroName},
         "FX Heroes": {entry.value for entry in enums.KeeperFXHeroName},
-        "Filler": {entry.value for entry in enums.KeeperFillerName}
+        "Filler": {entry.value for entry in enums.KeeperFillerName},
+        **{
+            f"Level {i}": {getattr(items.KeeperLevelName, f"LEVEL_{i:03d}").value}
+            for i in range(1, 21)
+        }
     }
     item_name_groups["All Levels"] = item_name_groups["Levels"] | item_name_groups["Bonus Levels"]
     item_name_groups["Creatures"].update(enums.KeeperImpName.IMP.value)
@@ -166,6 +170,7 @@ class DungeonKeeperWorld(World):
             "KeeperFXDoors": self.options.KeeperFXDoors.value,
             "KeeperFXSpells": self.options.KeeperFXSpells.value,
             "KeeperFXTraps": self.options.KeeperFXTraps.value,
+            "PositiveRecipes": self.options.PositiveRecipes.value,
             "NegativeRecipes": self.options.NegativeRecipes.value,
             "KeeperFXRecipes": self.options.KeeperFXRecipes.value,
             "AddHeroes": self.options.AddHeroes.value,

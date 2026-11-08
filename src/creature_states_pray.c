@@ -402,6 +402,29 @@ TbBool kill_creature_if_under_chicken_spell(struct Thing *thing)
     return false;
 }
 
+void player_easter_egg_sacrifice()
+{
+    struct SacrificeRecipe sac = {};
+    sac.action = SacA_MkEasterEgg;
+    ap_process_sacrifice_recipe(&sac);
+}
+
+void player_wish_well(int gold_amount)
+{
+    struct SacrificeRecipe sac = {};
+    sac.action = SacA_WishWell;
+    sac.victims[0] = gold_amount;
+    ap_process_sacrifice_recipe(&sac);
+}
+
+void player_sacrifice_chicken()
+{
+    struct SacrificeRecipe sac = {};
+    sac.action = SacA_NegUniqFunc;
+    sac.param = UnqF_KillChickns;
+    ap_process_sacrifice_recipe(&sac);
+}
+
 void kill_all_players_chickens(PlayerNumber plyr_idx)
 {
     SYNCDBG(18,"Starting");
@@ -554,6 +577,63 @@ void creature_sacrifice_reset(struct Dungeon *dungeon, struct SacrificeRecipe *s
   }
 }
 
+void creature_reject_sacrifice(PlayerNumber player, ThingModel model)
+{
+    struct Dungeon *dungeon;
+    dungeon = get_players_num_dungeon(player);
+    if (dungeon_invalid(dungeon))
+    {
+        ERRORLOG("Invalid dungeon during rejection");
+        return;
+    }
+    if (!model)
+    {
+        ERRORLOG("Invalid creature model.");
+        return;
+    }
+    dungeon->creature_sacrifice[model] = 0;
+    dungeon->creature_sacrifice_exp[model] = 0;
+}
+
+void set_special_sacrifice(enum SpecialSacrifice rule,TbBool mode)
+{
+    switch (rule)
+    {
+    case Special_Chicken:
+        game.conf.rules[0].special_sacrifices.prevent_sacrifice_chickens = mode;
+        break;
+    case Special_Gold:
+        game.conf.rules[0].special_sacrifices.prevent_wishing_well = mode;
+        break;
+    case Special_Easter_Egg:
+        game.conf.rules[0].special_sacrifices.prevent_easter_egg = mode;
+        break;
+    default:
+        ERRORLOG("Unsupported special sacrifice option");
+        break;
+    }
+}
+
+TbBool can_special_sacrifice(enum SpecialSacrifice rule)
+{
+    switch (rule)
+    {
+        case Special_Chicken:
+            return game.conf.rules[0].special_sacrifices.prevent_sacrifice_chickens;
+            break;
+        case Special_Gold:
+            return game.conf.rules[0].special_sacrifices.prevent_wishing_well;
+            break;
+        case Special_Easter_Egg:
+            return game.conf.rules[0].special_sacrifices.prevent_easter_egg;
+            break;
+        default:
+            ERRORLOG("Unsupported special sacrifice option");
+            break;
+    }
+    return false;
+}
+
 static long sacrifice_victim_model_count(struct SacrificeRecipe *sac, ThingModel model)
 {
     long k = 0;
@@ -668,7 +748,7 @@ long process_sacrifice_award(struct Coord3d *pos, ThingModel model, PlayerNumber
             break;
         }
         if ((ret != SacR_Pleased) && (ret != SacR_AngryWarn))
-          creature_sacrifice_reset(dungeon, sac);
+            creature_sacrifice_reset(dungeon, sac);
         return ret;
       }
     }
@@ -677,7 +757,7 @@ long process_sacrifice_award(struct Coord3d *pos, ThingModel model, PlayerNumber
   return ret;
 }
 
-void process_sacrifice_creature(struct Coord3d *pos, ThingModel model, PlayerNumber owner, TbBool partial)
+long process_sacrifice_creature(struct Coord3d *pos, ThingModel model, PlayerNumber owner, TbBool partial)
 {
     long award = process_sacrifice_award(pos, model, owner);
     if (is_my_player_number(owner))
@@ -713,6 +793,7 @@ void process_sacrifice_creature(struct Coord3d *pos, ThingModel model, PlayerNum
           break;
       }
     }
+    return award;
 }
 
 // This is state-process function of a creature
@@ -741,7 +822,11 @@ short creature_being_sacrificed(struct Thing *thing)
     memcpy(&game.triggered_object_location, &pos, sizeof(struct Coord3d));
 
     kill_creature(thing, INVALID_THING, -1, CrDed_NoEffects|CrDed_NotReallyDying);
-    process_sacrifice_creature(&pos, model, owner, true);
+    long result = process_sacrifice_creature(&pos, model, owner, true);
+    if (result == SacR_DontCare)
+    {
+        creature_reject_sacrifice(owner, model);
+    }
     return -1;
 }
 

@@ -424,3 +424,20 @@ void lua_on_shot_hit(struct Thing *shot, struct Thing *shooter, struct Thing *ta
 		lua_pop(Lvl_script, 1);
 	} 
 }
+
+void lua_on_temple_recipe(char* recipe)
+{
+    SYNCDBG(6, "Starting");
+    lua_getglobal(Lvl_script, "OnTempleRecipe");
+
+    if (lua_isfunction(Lvl_script, -1))
+    {
+        lua_pushstring(Lvl_script, recipe);
+
+        CheckLua(Lvl_script, lua_pcall(Lvl_script, 1, 0, 0), "OnTempleRecipe");
+    }
+    else
+    {
+        lua_pop(Lvl_script, 1);
+    }
+}
