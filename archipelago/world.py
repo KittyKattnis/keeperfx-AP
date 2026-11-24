@@ -197,7 +197,7 @@ class DungeonKeeperWorld(World):
 
 def determine_tileset_values(tileset_option: int) -> tuple[int, int]:
     min_tileset = 0
-    max_tileset = 13
+    max_tileset = 14
     if tileset_option == enums.TileOption.Original:
         max_tileset = 3
     if tileset_option == enums.TileOption.DeeperDungeon:
