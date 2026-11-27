@@ -498,7 +498,7 @@ def create_regular_locations(world: DungeonKeeperWorld) -> None:
         room_region = world.get_region(label)
         region_list = [label]
         if room == enums.KeeperRoomName.LAIR:
-            region_list.extend(f"{enums.ATTRACT}{creature.value}" for creature in enums.KeeperCreatureName if creature.value != enums.KeeperImpName and world.options.CreatureType in (0, 2)) #creature or both
+            region_list.extend(f"{enums.ATTRACT}{creature.value}" for creature in enums.KeeperCreatureName if world.options.CreatureType in (0, 2)) #creature or both
             region_list.extend(f"{enums.ATTRACT}{creature.value}" for creature in enums.KeeperHeroName if world.options.CreatureType in (1, 2)) #heroes or both
             region_list.extend(f"{enums.ATTRACT}{creature.value}" for creature in enums.KeeperFXCreatureName if world.options.KeeperFXCreatures)
             region_list.extend(f"{enums.ATTRACT}{creature.value}" for creature in enums.KeeperFXHeroName if world.options.KeeperFXHeroes)

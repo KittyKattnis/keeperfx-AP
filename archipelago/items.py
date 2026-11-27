@@ -387,12 +387,9 @@ def create_all_items(world):
     if world.options.KeeperFXRecipes == 1:
         enabled_items.update(KEEPERFX_RECIPES)
 
-    if world.options.CreatureType == 0:  # Creatures
+    if world.options.CreatureType != 1:  # Creatures are included (0 or 2+)
         enabled_items.update(CREATURES)
-    elif world.options.CreatureType == 1:  # Heroes
-        enabled_items.update(HEROES)
-    elif world.options.CreatureType == 2:  # Both
-        enabled_items.update(CREATURES)
+    if world.options.CreatureType != 0: # Heros are included (1 or 2+)
         enabled_items.update(HEROES)
         
     if world.options.KeeperFXCreatures:
