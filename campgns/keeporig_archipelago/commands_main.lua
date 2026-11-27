@@ -130,14 +130,52 @@ function CommandsMain.MainSetup()
 end
 
 function OnCreatureFromPortal(creature)
-      local owner = creature.owner ~= nil and creature.owner or "Unknown"
-      local msg = creature.name .. " arrives! owned by: " .. tostring(owner)
-      local id = ItemLocationTables.CreatureLocations[creature.name]
+      --local owner = creature.owner ~= nil and creature.owner or "Unknown"
+      --local msg = creature.name .. " arrives! owned by: " .. tostring(owner)
+      --print(msg)
+      --QuickMessage(msg)
+      local location_id = ItemLocationTables.CreatureLocations[creature.name]
+      if creature.owner == PLAYER0 and not SentLocations.Has(location_id) then
+            local location_msg = "Attracted " .. creature.name .. " for the first time!"
+            SendLocation(location_id)
+            print(location_msg)
+            QuickMessage(location_msg, "ARCHIPELAGO_ICON")
+            local checked = GetAPCheckedLocations() or {}
+            for index, id in pairs(checked) do
+                  print(tostring(index) .. " = " .. tostring(id))
+            end
+      end
+end
+
+function OnBuildRoom(room)
+      --local owner = room.owner ~= nil and room.owner or "Unknown"
+      --local msg = "Room built! owned by: " .. tostring(owner)
+      --print(msg)
+      --QuickMessage(msg)
+      --This is technically "per tile". Very spammy!
+      local location_id = ItemLocationTables.RoomLocations[room.name]
+      if room.owner == PLAYER0 and not SentLocations.Has(location_id) then
+            local location_msg = "Built " .. room.name .. " for the first time!"
+            SendLocation(location_id)
+            print(location_msg)
+            QuickMessage(location_msg, "ARCHIPELAGO_ICON")
+            local checked = GetAPCheckedLocations() or {}
+            for index, id in pairs(checked) do
+                  print(tostring(index) .. " = " .. tostring(id))
+            end
+      end
+end
+
+function OnResearchCompleted(player, research, research_type)
+      local thing = research_type == 1 and "Spell" or research_type == 2 and "Room" or research_type == 3 and "Creature" or "Unknown"
+      local msg = "Research of '" .. research .. "' which is type '" .. thing .. "' completed by PLAYER" .. player.playerId
       print(msg)
       QuickMessage(msg)
-      if creature.owner == PLAYER0 and not SentLocations.Has(id) then
-            local location_msg = "Attracted " .. creature.name .. " for the first time!"
-            SendLocation(id)
+      print("Player: " .. tostring(player)", Research: " .. research)
+      local location_id = ItemLocationTables.RoomLocations[research]
+      if player == PLAYER0 and research_type == 1 and not SentLocations.Has(location_id) then
+            local location_msg = "Researched " .. research .. " for the first time!"
+            SendLocation(location_id)
             print(location_msg)
             QuickMessage(location_msg, "ARCHIPELAGO_ICON")
             local checked = GetAPCheckedLocations() or {}
@@ -149,21 +187,6 @@ end
 
 --[[
 Examples of new trigger functions
-
-function OnCreatureFromPortal(creature)
-    local owner = creature.owner ~= nil and creature.owner or "Unknown"
-    local msg = creature.name .. " arrives! owned by: " .. tostring(owner)
-    print(msg)
-    QuickMessage(msg)
-end
-
-function OnBuildRoom(room)
-    local owner = room.owner ~= nil and room.owner or "Unknown"
-    local msg = "Room built! owned by: " .. tostring(owner)
-    print(msg)
-    QuickMessage(msg)
-    --This is technically "per tile". Very spammy!
-end
 
 function OnResearchCompleted(player, research, research_type)
     local thing = research_type == 1 and "Spell" or research_type == 2 and "Room" or research_type == 3 and "Creature" or "Unknown"
