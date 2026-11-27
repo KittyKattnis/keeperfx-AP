@@ -216,7 +216,7 @@ end
 
 function ItemStatus()
     local id_width_limit = 21 -- as in, width on the map itself before it starts digging into the rock.
-    --Creatures
+    --Creatures, to update so it removes them if playing heroes only.
     local creature_id_max = 16
     if APSettings.KeeperFXCreatures then creature_id_max = 18 end
     for itemid = 1, id_width_limit do
@@ -266,7 +266,8 @@ function ItemStatus()
         end
     end
     --Heroes
-    if not APSettings.AddHeroes then
+    if APSettings.CreatureType == "Creatures" then
+    --i.e. not "Heroes" or "Both"
         for slab_x = 32, 59 do
             for slab_y = 38, 43 do
                 ChangeSlabType(slab_x, slab_y, "ABYSS", "NONE")

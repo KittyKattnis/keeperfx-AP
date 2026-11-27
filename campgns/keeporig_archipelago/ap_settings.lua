@@ -10,7 +10,7 @@ APSettings = {
     PositiveRecipes = 1,
     NegativeRecipes = 1,
     KeeperFXRecipes = 0,
-    AddHeroes = false,
+    CreatureType = 0,
     KeeperFXHeroes = false,
     IncludeImpsInPool = false,
     IncludeTunnellersInPool = false,
@@ -37,6 +37,12 @@ local tilesetToID = {
     ["ANCIENT"] = 2,
     ["WINTER"] = 3,
     ["SNAKE_KEY"] = 4
+}
+
+local creatureTypeNames = {
+    [0] = "Creatures",
+    [1] = "Heroes",
+    [2] = "Both"
 }
 
 function APSettings.CalculateTileset()
@@ -89,8 +95,8 @@ else
     print("NegativeRecipes:          " .. tostring(APSettings.NegativeRecipes) .. " (" .. tostring(slot_data.NegativeRecipes) .. ")")
     APSettings.KeeperFXRecipes = IsValueTrue(slot_data.KeeperFXRecipes)
     print("KeeperFXRecipes:          " .. tostring(APSettings.KeeperFXRecipes) .. " (" .. tostring(slot_data.KeeperFXRecipes) .. ")")
-    APSettings.AddHeroes = IsValueTrue(slot_data.AddHeroes)
-    print("AddHeroes:                " .. tostring(APSettings.AddHeroes) .. " (" .. tostring(slot_data.AddHeroes) .. ")")
+    APSettings.CreatureType = creatureTypeNames[slot_data.CreatureType]
+    print("CreatureType:                " .. tostring(APSettings.CreatureType) .. " (" .. tostring(slot_data.CreatureType) .. ")")
     APSettings.KeeperFXHeroes = IsValueTrue(slot_data.KeeperFXHeroes)
     print("KeeperFXHeroes:           " .. tostring(APSettings.KeeperFXHeroes) .. " (" .. tostring(slot_data.KeeperFXHeroes) .. ")")
     APSettings.IncludeImpsInPool = IsValueTrue(slot_data.IncludeImpsInPool)

@@ -32,7 +32,7 @@ int KeeperFXSpells;
 int KeeperFXTraps;
 int NegativeRecipes;
 int KeeperFXRecipes;
-int AddHeroes;
+int CreatureType;
 int KeeperFXHeroes;
 int IncludeImpsInPool;
 int IncludeTunnellersInPool;

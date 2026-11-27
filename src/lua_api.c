@@ -350,8 +350,8 @@ static int lua_ap_get_slot_data(lua_State *L)
     lua_pushinteger(L, slot_data.KeeperFXRecipes);
     lua_setfield(L, -2, "KeeperFXRecipes");
 
-    lua_pushinteger(L, slot_data.AddHeroes);
-    lua_setfield(L, -2, "AddHeroes");
+    lua_pushinteger(L, slot_data.CreatureType);
+    lua_setfield(L, -2, "CreatureType");
 
     lua_pushinteger(L, slot_data.KeeperFXHeroes);
     lua_setfield(L, -2, "KeeperFXHeroes");

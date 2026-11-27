@@ -3,9 +3,9 @@ from typing import Dict
 
 from Options import OptionGroup, ItemDict, Toggle, Choice, ItemSet, Range, Visibility
 from worlds.AutoWorld import PerGameCommonOptions
-from .items import CREATURES, ROOMS, SPELLS, LEVELS, POSITIVE_RECIPES
-from .enums import (KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName, KeeperRecipe, TileMode,
-                    TileOption)
+from .items import CREATURES, ROOMS, SPELLS, LEVELS, POSITIVE_RECIPES, SECRET_LEVELS, HEROES, KEEPERFX_CREATURES, KEEPERFX_HEROES, KEEPERFX_SPELLS
+from .enums import (KeeperLevelName, KeeperPowerName, KeeperRoomName, KeeperCreatureName, KeeperRecipe, KeeperImpName, KeeperTunnellerName, KeeperKnightName, KeeperAvatarName,
+                    TileMode, TileOption)
 
 def get_val(key):
     return key.value if hasattr(key, "value") else str(key)
@@ -13,10 +13,6 @@ def get_val(key):
 class secret_levels(Toggle):
     """Choose if you want secret levels to be available in the game."""
     display_name = "Secret Levels"
-
-class KeeperFXCreatures(Toggle):
-    """Choose if you want KeeperFX Creatures to be available in the game."""
-    display_name = "KeeperFX Creatures"
 
 class KeeperFXSpells(Toggle):
     """Choose if you want KeeperFX Spells to be available in the game."""
@@ -77,9 +73,19 @@ class KeeperFXRecipes(Choice):
 #      if "both", get all 26.
 #      if "mixed",get 16 distinct creatures/heroes randomly from the entire list.
 
-class AddHeroes(Toggle):
-    """Choose if you want to attract Heroes."""
-    display_name = "Attract Heroes"
+
+class CreatureType(Choice):
+    """Choose if you want evil creatures, heroes or both."""
+    display_name = "Creature Type to Attract"
+    option_creatures = 0
+    option_heroes = 1
+    option_both = 2
+
+    default = 0
+
+class KeeperFXCreatures(Toggle):
+    """Choose if you want KeeperFX Creatures to be available in the game."""
+    display_name = "KeeperFX Creatures"
 
 class KeeperFXHeroes(Toggle):
     """Choose if you want to attract Keeper FX Heroes."""
@@ -186,7 +192,9 @@ class StartingLevels(ItemSet):
         get_val(KeeperLevelName.LEVEL_002),
         get_val(KeeperLevelName.LEVEL_003),
     }
-    valid_keys = set(get_val(k) for k in LEVELS.keys())
+    valid_keys = (set(get_val(k) for k in LEVELS.keys())
+        | set(get_val(k) for k in SECRET_LEVELS.keys())
+    )
 
 class StartingLevelCount(Range):
     """Maximum number of levels unlocked at the start."""
@@ -206,7 +214,9 @@ class StartingSpells(ItemDict):
         get_val(KeeperPowerName.POWER_POSSESS): 1,
         get_val(KeeperPowerName.POWER_IMP): 1,
     }
-    valid_keys = set(get_val(k) for k in SPELLS.keys())
+    valid_keys = (set(get_val(k) for k in SPELLS.keys())
+        | set(get_val(k) for k in KEEPERFX_SPELLS.keys())
+    )
 
 #add traps and doors maybe? And heroes.
 
@@ -220,7 +230,12 @@ class StartingCreatures(ItemDict):
         get_val(KeeperCreatureName.BUG): 1,
         get_val(KeeperCreatureName.SPIDER): 1,
     }
-    valid_keys = set(get_val(k) for k in CREATURES.keys())
+    valid_keys = (set(get_val(k) for k in CREATURES.keys())
+        | set(get_val(k) for k in HEROES.keys())
+        | set(get_val(k) for k in KEEPERFX_CREATURES.keys())
+        | set(get_val(k) for k in KEEPERFX_HEROES.keys())
+        | {KeeperImpName, KeeperTunnellerName, KeeperKnightName, KeeperAvatarName,}
+    )
 
 class StartingRooms(ItemDict):
     """Rooms available at the start of the game (min. 1, max. 5)."""
@@ -246,6 +261,7 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     starting_spells: StartingSpells
     starting_rooms: StartingRooms
     starting_creatures: StartingCreatures
+    CreatureType: CreatureType
     KeeperFXCreatures: KeeperFXCreatures
     KeeperFXDoors: KeeperFXDoors
     KeeperFXSpells: KeeperFXSpells
@@ -254,7 +270,6 @@ class DungeonKeeperOptions(PerGameCommonOptions):
     PositiveRecipes: PositiveRecipes
     NegativeRecipes: NegativeRecipes
     KeeperFXRecipes: KeeperFXRecipes
-    AddHeroes: AddHeroes
     KeeperFXHeroes: KeeperFXHeroes
     IncludeImpsInPool: IncludeImpsInPool
     IncludeTunnellersInPool: IncludeTunnellersInPool
@@ -275,8 +290,8 @@ option_groups = [
         secret_levels,
     ]),
     OptionGroup("Creature Pool", [
+        CreatureType,
         KeeperFXCreatures,
-        AddHeroes,
         KeeperFXHeroes,
         IncludeImpsInPool,
         IncludeTunnellersInPool,
