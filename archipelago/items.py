@@ -389,7 +389,7 @@ def create_all_items(world):
 
     if world.options.CreatureType != 1:  # Creatures are included (0 or 2+)
         enabled_items.update(CREATURES)
-    if world.options.CreatureType != 0: # Heros are included (1 or 2+)
+    if world.options.CreatureType != 0: # Heroes are included (1 or 2+)
         enabled_items.update(HEROES)
         
     if world.options.KeeperFXCreatures:

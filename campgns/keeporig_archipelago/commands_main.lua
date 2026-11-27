@@ -35,6 +35,7 @@ LOCATION_NAME_TO_ID[Attract Time Mage] = 12033
 ]]
 
 TempleRecipes = require("temple_recipe_table")
+ItemLocationTables = require("item_location_tables")
 
 --Commands to be run and saved/loaded in every level.
 CommandsMain = {}
@@ -125,6 +126,24 @@ function CommandsMain.MainSetup()
       Setup()
       if Map.map_number ~= 1000 then
             SetupTriggers()
+      end
+end
+
+function OnCreatureFromPortal(creature)
+      local owner = creature.owner ~= nil and creature.owner or "Unknown"
+      local msg = creature.name .. " arrives! owned by: " .. tostring(owner)
+      local id = ItemLocationTables.CreatureLocations[creature.name]
+      print(msg)
+      QuickMessage(msg)
+      if creature.owner == PLAYER0 and not SentLocations.Has(id) then
+            local location_msg = "Attracted " .. creature.name .. " for the first time!"
+            SendLocation(id)
+            print(location_msg)
+            QuickMessage(location_msg, "ARCHIPELAGO_ICON")
+            local checked = GetAPCheckedLocations() or {}
+            for index, id in pairs(checked) do
+                  print(tostring(index) .. " = " .. tostring(id))
+            end
       end
 end
 

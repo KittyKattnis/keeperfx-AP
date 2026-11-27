@@ -208,9 +208,7 @@ class KeeperFXPowerName(StrEnum):
     POWER_TUNNELLER = "Recruit Tunneller"
     POWER_CLEANSE = "Cleanse"
 
-
 #   could optionally split POWER_HAND up into POWER_PICKUP_CREATURE, POWER_PICKUP_GOLD, POWER_PICKUP_FOOD
-
 
 class KeeperFXPower(IntEnum):
     POWER_TIME_BOMB = 419
