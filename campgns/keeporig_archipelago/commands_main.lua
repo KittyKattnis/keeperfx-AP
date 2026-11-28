@@ -167,10 +167,10 @@ function OnBuildRoom(room)
 end
 
 function OnResearchCompleted(player, research, research_type)
-      local thing = research_type == 1 and "Spell" or research_type == 2 and "Room" or research_type == 3 and "Creature" or "Unknown"
-      local msg = "Research of '" .. research .. "' which is type '" .. thing .. "' completed by PLAYER" .. player.playerId
-      print(msg)
-      QuickMessage(msg)
+      --local thing = research_type == 1 and "Spell" or research_type == 2 and "Room" or research_type == 3 and "Creature" or "Unknown"
+      --local msg = "Research of '" .. research .. "' which is type '" .. thing .. "' completed by PLAYER" .. player.playerId
+      --print(msg)
+      --QuickMessage(msg)
       print("Player: " .. tostring(player)", Research: " .. research)
       local location_id = ItemLocationTables.RoomLocations[research]
       if player == PLAYER0 and research_type == 1 and not SentLocations.Has(location_id) then
@@ -185,23 +185,60 @@ function OnResearchCompleted(player, research, research_type)
       end
 end
 
+function OnItemManufactured(item, item_type)
+      --local owner = item.owner ~= nil and item.owner or "Unknown"
+      --local thing = item_type == 1 and "Trap" or item_type == 2 and "Door" or "Unknown/Special"
+      --local msg = "A " .. thing .. " was manufactured owned by: " .. tostring(owner)
+      --print(msg)
+      --QuickMessage(msg)
+      local location_id
+      if item_type == 1 then
+            location_id = ItemLocationTables.TrapLocations[item]
+      elseif item_type == 2 then
+            location_id = ItemLocationTables.DoorLocations[item]
+      end
+      if item.owner == PLAYER0 and not SentLocations.Has(location_id) then
+            local location_msg = "Manufactured " .. item .. " for the first time!"
+            SendLocation(location_id)
+            print(location_msg)
+            QuickMessage(location_msg, "ARCHIPELAGO_ICON")
+            local checked = GetAPCheckedLocations() or {}
+            for index, id in pairs(checked) do
+                  print(tostring(index) .. " = " .. tostring(id))
+            end
+      end
+end
+
+function OnGoldVeinMined(player, x, y)
+      if player == PLAYER0 then
+            GoldSlabsMinedByPlayer = GoldSlabsMinedByPlayer + 1 or 1
+            print("Gold slabs mined by PLAYER0: " .. GoldSlabsMinedByPlayer)
+      end
+end
+
+--[[
+function GoldMiningItemSending()
+      if GoldSlabsMinedByPlayer >= 50 then
+            SendLocation(20001)
+      end
+      if GoldSlabsMinedByPlayer >= 200 then
+            SendLocation(20002)
+      end
+      if GoldSlabsMinedByPlayer >= 500 then
+            SendLocation(20003)
+      end
+      if GoldSlabsMinedByPlayer >= 1000 then
+            SendLocation(20004)
+      end
+      if GoldSlabsMinedByPlayer >= 2500 then
+            SendLocation(20005)
+      end
+end
+]]
+--(50k/200k/500k/1M/2.5M)
+
 --[[
 Examples of new trigger functions
-
-function OnResearchCompleted(player, research, research_type)
-    local thing = research_type == 1 and "Spell" or research_type == 2 and "Room" or research_type == 3 and "Creature" or "Unknown"
-    local msg = "Research of '" .. research .. "' which is type '" .. thing .. "' completed by PLAYER" .. player.playerId
-    print(msg)
-    QuickMessage(msg)
-end
-
-function OnItemManufactured(item, item_type)
-    local owner = item.owner ~= nil and item.owner or "Unknown"
-    local thing = item_type == 1 and "Trap" or item_type == 2 and "Door" or "Unknown/Special"
-    local msg = "A " .. thing .. " was manufactured owned by: " .. tostring(owner)
-    print(msg)
-    QuickMessage(msg)
-end
 
 function OnRaiseUndead(creature)
     local owner = creature.owner ~= nil and creature.owner or "Unknown"
