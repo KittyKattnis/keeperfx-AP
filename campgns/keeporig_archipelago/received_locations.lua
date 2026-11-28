@@ -443,6 +443,20 @@ function IncreaseHandSize()
     end
 end
 
+function IncreaseEfficiency()
+    local efficiencycount = ReceivedLocationsTable.Count(706)
+    local efficiency = 256 + (efficiencycount * 32)
+    RunDKScriptCommand("SET_GAME_RULE(TrainEfficiency," .. efficiency .. ",PLAYER0)")
+    RunDKScriptCommand("SET_GAME_RULE(WorkEfficiency," .. efficiency .. ",PLAYER0)")
+    RunDKScriptCommand("SET_GAME_RULE(ResearchEfficiency," .. efficiency .. ",PLAYER0)")
+    RunDKScriptCommand("SET_GAME_RULE(ScavengeEfficiency," .. efficiency .. ",PLAYER0)")
+    if efficiencycount > 0 then
+        print("Efficiency Boost " .. efficiencycount .. " (" .. 100+12.5*efficiencycount.. "%) Unlocked")
+    end
+end
+
+--Starting imps
+
 function UnlockHero(itemid)
       print("Hero " .. itemid .. " (" .. ChecksTable[itemid].name .. ") Unlocked")
       CreatureAvailable("PLAYER0",ChecksTable[itemid].internal_name,true,0)
