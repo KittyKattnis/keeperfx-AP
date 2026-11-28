@@ -20,6 +20,8 @@
 #include "keeperfx.hpp"
 #include "lvl_script_lib.h"
 #include "post_inc.h"
+#include "player_data.h"
+#include "bflib_sprfnt.h"
 
 void ap_location_info_callback(std::vector<AP_NetworkItem> locations);
 void ap_receive(AP_NetworkItem,bool);
@@ -175,11 +177,66 @@ void ap_location_info_callback(std::vector<AP_NetworkItem> locations)
     }
 }
 
-void add_message(const char* text){
-    short id = 0;
-    char type = 0;
-    get_chat_icon_from_value("ARCHIPELAGO_ICON", &id, &type);
-    message_add(type, id, text);
+
+#define MESSAGE_PIXEL_MAX (444 + 16) // Arbituary based on max typable W's, plus one more.
+#define MAX_AP_LENGTH (PLAYER_MP_MESSAGE_LEN * GUI_MESSAGES_COUNT)
+#define MESSAGE_MAX (PLAYER_MP_MESSAGE_LEN - 1)
+
+void add_message(std::string_view sender, std::string_view message)
+{
+    LbTextSetFont(winfont);
+    char chat_msg[GUI_MESSAGES_COUNT][PLAYER_MP_MESSAGE_LEN];
+    char raw_msg[MAX_AP_LENGTH];
+    int16_t raw_len = snprintf(raw_msg, sizeof(raw_msg), "%.*s: %.*s", static_cast<int16_t>(sender.size()), sender.data(), static_cast<int16_t>(message.size()), message.data());
+    if (raw_len >= MAX_AP_LENGTH)
+    {
+        raw_len = MAX_AP_LENGTH - 1;
+    }
+    int16_t cursor = 0;
+    int16_t line_count = 0;
+    while (line_count < GUI_MESSAGES_COUNT && cursor < raw_len)
+    {
+        int16_t remaining = raw_len - cursor;
+        int16_t slice_size = remaining;
+        if (slice_size > MESSAGE_MAX) // If it goes beyond the max, assume we need to word-wrap.
+        {
+            slice_size = MESSAGE_MAX;
+            snprintf(chat_msg[line_count], PLAYER_MP_MESSAGE_LEN, "%.*s", static_cast<int>(slice_size), raw_msg + cursor);
+            while (slice_size > 0 && (LbTextStringWidth(chat_msg[line_count]) >= MESSAGE_PIXEL_MAX || raw_msg[cursor + slice_size] != ' '))
+            {
+                chat_msg[line_count][--slice_size] = '\0';
+            }
+            if (slice_size < 1)
+            {
+                slice_size = MESSAGE_MAX;
+                slice_size = snprintf(chat_msg[line_count], PLAYER_MP_MESSAGE_LEN, "%.*s", static_cast<int>(slice_size), raw_msg + cursor);
+            }
+            line_count++;
+        }
+        else
+        {
+            snprintf(chat_msg[line_count++], PLAYER_MP_MESSAGE_LEN, "%.*s", static_cast<int>(slice_size), raw_msg + cursor);
+        }
+        cursor += slice_size;
+        while (cursor < raw_len && raw_msg[cursor] == ' ')
+        {
+            cursor++;
+        }
+    }
+    while (line_count > 0)
+    {
+        if (line_count == 1)
+        {
+            short id = 0;
+            char type = 0;
+            get_chat_icon_from_value("ARCHIPELAGO_ICON", &id, &type);
+            message_add(type, id, chat_msg[--line_count]);
+        }
+        else
+        {
+            message_add(MsgType_Blank, 0, chat_msg[--line_count]);
+        }
+    }
 }
 
 void ap_hint_message(AP_HintMessage msg)
@@ -201,12 +258,15 @@ void ap_print(std::string text)
 
 void ap_server_chat_message(AP_ServerChatMessage msg)
 { 
-    add_message(msg.message.c_str());
+    add_message("Server", msg.message);
 }
 
 void ap_chat_message(AP_ChatMessage msg)
-{    
-    add_message(msg.message.c_str());
+{
+    if (msg.message[0] != '!')
+    {
+        add_message(msg.player, msg.message);
+    }
 }
 
 void ap_send_message(std::string msg)
