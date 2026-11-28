@@ -10,6 +10,7 @@
 #include "globals.h"
 #include "thing_data.h"
 #include "config_translation.h"
+#include "config_keeperfx.h"
 #include "creature_states.h"
 #include "creature_states_pray.h"
 #include "gui_msgs.h"
@@ -460,7 +461,10 @@ static int lua_ap_goal(lua_State *L)
 static int lua_ap_send_message(lua_State *L)
 {
     const char* message   = lua_tostring(L,  1);
-    ap_bridge_send_message(message);
+    if (message[0] != cmd_char)
+    {
+        ap_bridge_send_message(message);
+    }
     return 0;
 }
 
