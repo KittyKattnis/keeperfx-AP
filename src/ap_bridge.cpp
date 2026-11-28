@@ -77,7 +77,7 @@ RedirectStdoutToFile();
     AP_RegisterSlotDataIntCallback("PositiveRecipes",          OnPositiveRecipesReceived);
     AP_RegisterSlotDataIntCallback("NegativeRecipes",          OnNegativeRecipesReceived);
     AP_RegisterSlotDataIntCallback("KeeperFXRecipes",          OnKeeperFXRecipesReceived);
-    AP_RegisterSlotDataIntCallback("AddHeroes",                OnAddHeroesReceived);
+    AP_RegisterSlotDataIntCallback("CreatureType",             OnCreatureTypeReceived);
     AP_RegisterSlotDataIntCallback("KeeperFXHeroes",           OnKeeperFXHeroesReceived);
     AP_RegisterSlotDataIntCallback("IncludeImpsInPool",        OnIncludeImpsInPoolReceived);
     AP_RegisterSlotDataIntCallback("IncludeTunnellersInPool",  OnIncludeTunnellersInPoolReceived);
@@ -328,7 +328,7 @@ void OnKeeperFXTrapsReceived(int val)           { g_ap_state.slot_data.KeeperFXT
 void OnPositiveRecipesReceived(int val)         { g_ap_state.slot_data.PositiveRecipes = val; }
 void OnNegativeRecipesReceived(int val)         { g_ap_state.slot_data.NegativeRecipes = val; }
 void OnKeeperFXRecipesReceived(int val)         { g_ap_state.slot_data.KeeperFXRecipes = val; }
-void OnAddHeroesReceived(int val)               { g_ap_state.slot_data.AddHeroes = val; }
+void OnCreatureTypeReceived(int val)            { g_ap_state.slot_data.CreatureType = val; }
 void OnKeeperFXHeroesReceived(int val)          { g_ap_state.slot_data.KeeperFXHeroes = val; }
 void OnIncludeImpsInPoolReceived(int val)       { g_ap_state.slot_data.IncludeImpsInPool = val; }
 void OnIncludeTunnellersInPoolReceived(int val) { g_ap_state.slot_data.IncludeTunnellersInPool = val; }

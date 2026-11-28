@@ -361,7 +361,6 @@ def create_all_items(world):
     precollected_names = [item.name for item in world.multiworld.precollected_items[world.player]]
 
     enabled_items = {
-        **CREATURES,
         **ROOMS,
         **TRAPS,
         **DOORS,
@@ -372,8 +371,6 @@ def create_all_items(world):
 
     if world.options.secret_levels:
         enabled_items.update(SECRET_LEVELS)
-    if world.options.KeeperFXCreatures:
-        enabled_items.update(KEEPERFX_CREATURES)
     if world.options.KeeperFXSpells:
         enabled_items.update(KEEPERFX_SPELLS)
     if world.options.KeeperFXTraps:
@@ -389,8 +386,14 @@ def create_all_items(world):
     #if it's 0 it's disabled, if it's 2, it's all on. 1 is "needs to be unlocked"
     if world.options.KeeperFXRecipes == 1:
         enabled_items.update(KEEPERFX_RECIPES)
-    if world.options.AddHeroes:
+
+    if world.options.CreatureType != 1:  # Creatures are included (0 or 2+)
+        enabled_items.update(CREATURES)
+    if world.options.CreatureType != 0: # Heroes are included (1 or 2+)
         enabled_items.update(HEROES)
+        
+    if world.options.KeeperFXCreatures:
+        enabled_items.update(KEEPERFX_CREATURES)
     if world.options.KeeperFXHeroes:
         enabled_items.update(KEEPERFX_HEROES)
     if world.options.IncludeImpsInPool:

@@ -178,15 +178,16 @@ def set_all_rules(world: DungeonKeeperWorld) -> None:
     location_rules[f"{get_val(KeeperLevelName.LEVEL_020)} Hero Fortress Centre"] = Has(get_val(KeeperRoomName.TRAINING)) # would be awful having to fight level 10 Tentacles with level 1 creatures
     location_rules[f"{get_val(KeeperLevelName.LEVEL_020)} Hero Fortress West"] = Has(get_val(KeeperRoomName.TRAINING)) # would be awful having to fight level 10 Tentacles with level 1 creatures
 
-    for creature in KeeperCreatureName:
-        location_rules[f"{ATTRACT}{get_val(creature)}"] = lambda state, thing = creature: (can_use_creature(state, world.player, thing))
+    if world.options.CreatureType in (0, 2):
+        for creature in KeeperCreatureName:
+            location_rules[f"{ATTRACT}{get_val(creature)}"] = lambda state, thing = creature: (can_use_creature(state, world.player, thing))
+
+    if world.options.CreatureType in (1, 2):
+        for creature in KeeperHeroName:
+            location_rules[f"{ATTRACT}{get_val(creature)}"] = lambda state, thing = creature: (can_use_creature(state, world.player, thing))
 
     if world.options.KeeperFXCreatures:
         for creature in KeeperFXCreatureName:
-            location_rules[f"{ATTRACT}{get_val(creature)}"] = lambda state, thing = creature: (can_use_creature(state, world.player, thing))
-
-    if world.options.AddHeroes:
-        for creature in KeeperHeroName:
             location_rules[f"{ATTRACT}{get_val(creature)}"] = lambda state, thing = creature: (can_use_creature(state, world.player, thing))
 
     if world.options.IncludeImpsInPool:

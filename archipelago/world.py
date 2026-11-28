@@ -184,14 +184,15 @@ class DungeonKeeperWorld(World):
             min_tile, max_tile = determine_tileset_values(self.options.tileset_choice.value)
             selected_tiles = {0: min_tile, 1: max_tile}
         return {
-            "KeeperFXCreatures": self.options.KeeperFXCreatures.value,
+
             "KeeperFXDoors": self.options.KeeperFXDoors.value,
             "KeeperFXSpells": self.options.KeeperFXSpells.value,
             "KeeperFXTraps": self.options.KeeperFXTraps.value,
             "PositiveRecipes": self.options.PositiveRecipes.value,
             "NegativeRecipes": self.options.NegativeRecipes.value,
             "KeeperFXRecipes": self.options.KeeperFXRecipes.value,
-            "AddHeroes": self.options.AddHeroes.value,
+            "KeeperFXCreatures": self.options.KeeperFXCreatures.value,
+            "CreatureType": self.options.CreatureType.value,
             "KeeperFXHeroes": self.options.KeeperFXHeroes.value,
             "IncludeImpsInPool": self.options.IncludeImpsInPool.value,
             "IncludeTunnellersInPool": self.options.IncludeTunnellersInPool.value,
