@@ -201,7 +201,9 @@ void add_message(std::string_view sender, std::string_view message)
         if (slice_size > MESSAGE_MAX) // If it goes beyond the max, assume we need to word-wrap.
         {
             slice_size = MESSAGE_MAX;
-            snprintf(chat_msg[line_count], PLAYER_MP_MESSAGE_LEN, "%.*s", static_cast<int>(slice_size), raw_msg + cursor);
+            memcpy(chat_msg[line_count], raw_msg + cursor, static_cast<size_t>(slice_size));
+            chat_msg[line_count][slice_size] = '\0';
+            //snprintf(chat_msg[line_count], PLAYER_MP_MESSAGE_LEN, "%.*s", static_cast<int>(slice_size), raw_msg + cursor);
             while (slice_size > 0 && (LbTextStringWidth(chat_msg[line_count]) >= MESSAGE_PIXEL_MAX || raw_msg[cursor + slice_size] != ' '))
             {
                 chat_msg[line_count][--slice_size] = '\0';
@@ -209,19 +211,21 @@ void add_message(std::string_view sender, std::string_view message)
             if (slice_size < 1)
             {
                 slice_size = MESSAGE_MAX;
-                slice_size = snprintf(chat_msg[line_count], PLAYER_MP_MESSAGE_LEN, "%.*s", static_cast<int>(slice_size), raw_msg + cursor);
+                memcpy(chat_msg[line_count], raw_msg + cursor, static_cast<size_t>(slice_size));
+                chat_msg[line_count][slice_size] = '\0';
             }
-            line_count++;
         }
         else
         {
-            snprintf(chat_msg[line_count++], PLAYER_MP_MESSAGE_LEN, "%.*s", static_cast<int>(slice_size), raw_msg + cursor);
+            memcpy(chat_msg[line_count], raw_msg + cursor, static_cast<size_t>(slice_size));
+            chat_msg[line_count][slice_size] = '\0';
         }
         cursor += slice_size;
         while (cursor < raw_len && raw_msg[cursor] == ' ')
         {
             cursor++;
         }
+        line_count++;
     }
     while (line_count > 0)
     {
